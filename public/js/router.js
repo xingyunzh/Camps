@@ -2,7 +2,7 @@
  * Created by brillwill on 16/9/14.
  */
 app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.when("", "/idea");
+    $urlRouterProvider.when("", "/nav/idea");
     $stateProvider.state("nav", {
         url:"/nav",
         templateUrl:"/modules/nav/nav.html",
@@ -38,7 +38,7 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             url : "/login",
             templateUrl : "/modules/login/login.html",
             controller: "loginController"
-        })
+        });
 
 
 }]);
