@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top r-nav-mainbar" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
         <button class="navbar-toggle" type="button" ng-init="navCollapsed=true" ng-click="navCollapsed=!navCollapsed">
             <span class="sr-only">Toggle navigation</span>
@@ -12,25 +12,26 @@
 
     <div uib-collapse="navCollapsed" class="collapse navbar-collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">创意</a></li>
+            <li class="active"><a href="#">创意</a></li>
             <li><a href="#">团队</a></li>
             <li><a href="#">项目</a></li>
             <li><a href="#">教练</a></li>
             <li><a href="#">组件</a></li>
             <li ng-hide="true">
-                <a id="r-nav-id-name" ui-sref="updateprofile">你好, {{currentUser.name}}</a>
+                <a id="r-nav-id-name" ui-sref="updateprofile">你好, xyzh.comcccccccc</a>
             </li>
 
-            <li><button class="btn btn-primary navbar-btn r-nav-navbar-button" type="button" ng-show="true" ng-click="login()">登录</button></li>
-            <li><botton class="btn btn-primary navbar-btn r-nav-navbar-button" type="button" ng-hide="true" ng-click="logout()">退出登录</button></li>
+            <li><button class="btn btn-primary navbar-btn" type="button" ng-show="true" ng-click="login()">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
         </ul>
     </div>
     <!-- </div> -->
 </nav>
 
+<div class="camps-navbar-height"></div>
+
 <ui-view></ui-view>
 
-<footer class="r-nav-footer">
+<footer class="camps-nav-footer">
     <div class="container">
         <div class="row">
             <p>©2016 武汉星云智慧科技有限公司</p>
