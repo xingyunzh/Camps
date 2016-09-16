@@ -1,0 +1,38 @@
+<div class="bg-primary container-fluid camps-head-strip">
+    <div class="camps-parent-width">
+        <h1 class="text-center">创意 让世界变得更美好 </h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="camps-bordered">
+                浏览大家提交的创意,有些已经在项目实现中哦。
+            </div>
+            <button class="btn btn-primary center-block camps-idea-submit">提交你的创意</button>
+        </div>
+        <div class="col-md-6">
+            <div class="media camps-media-card" ng-repeat="item in ideas">
+                <a href="#" class="media-left">
+                    <img src="images/stars_logo.jpg" alt="Img">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        {{item.title}}
+                    </h4>
+                    {{item.detail}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <input type="text" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div><!-- /input-group -->
+        </div>
+    </div>
+
+</div>
