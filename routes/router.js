@@ -1,8 +1,6 @@
-
-var demoController = require('../controllers/demoController');
+var userController = require('../controllers/userController.js');
 
 module.exports = function(app){
-	app.get('/demo', demoController.demo);
-	app.post('/addDemo', demoController.addDemo);
+
 
 };
