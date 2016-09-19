@@ -19,7 +19,9 @@ var projectSchema = Schema({
 		soThat:String
 	}],
 
-	sprints:[]
+	sprints:[{
+		backlog:[]
+	}]
 });
 
 var Project = mongoose.model("Project", projectSchema);
