@@ -19,6 +19,11 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             templateUrl:"/modules/project/project.html",
             controller : "projectController"
         })
+        .state("nav.team", {
+            url:"/team",
+            templateUrl:"/modules/team/team.html",
+            controller : "teamController"
+        })
         .state("nav.coach", {
             url:"/coach",
             templateUrl:"/modules/coach/coach.html",

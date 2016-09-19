@@ -3,4 +3,5 @@
  */
 app.controller("navController", ["$scope", "$rootScope", function($scope, $rootScope){
 
+
 }]);

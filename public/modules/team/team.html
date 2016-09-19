@@ -1,16 +1,16 @@
 <div class="bg-primary container-fluid camps-head-strip">
     <div class="camps-parent-width">
-        <h1 class="text-center">项目 让我们动手来让这些创新落地 </h1>
+        <h1 class="text-center">团队 真正的teamwork </h1>
     </div>
 </div>
 
 <div class="container">
     <div class="row" class="camps-team-submit-panel">
         <div class="col-md-3">
-            <h3 class="center-block">项目列表</h3>
+            <h3 class="center-block">团队列表</h3>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary center-block camps-team-submit">创建项目</button>
+            <button class="btn btn-primary center-block camps-team-submit">创建团队</button>
         </div>
         <div class="col-md-3">
             <div class="input-group">
@@ -25,20 +25,14 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div class="media camps-media-card" ng-repeat="project in projects">
-                <a href="#" class="media-left">
-                    <img src="images/stars_logo.jpg" alt="Img">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        {{project.title}}
-                    </h4>
-                    {{project.detail}}
+        <div ng-repeat="team in teams">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="http://img3.redocn.com/20120407/Redocn_2012040706593740.jpg" alt="TEAM">
+                    <h4>{{team.name}}</h4>
+                    <p>{{team.desc}}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3"></div>
     </div>
 </div>

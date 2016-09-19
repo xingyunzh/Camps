@@ -12,11 +12,11 @@
 
     <div uib-collapse="navCollapsed" class="collapse navbar-collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#">创意</a></li>
-            <li><a href="#">团队</a></li>
-            <li><a href="#">项目</a></li>
-            <li><a href="#">教练</a></li>
-            <li><a href="#">组件</a></li>
+            <li ng-class="{active:$state.name.endsWith('idea')}"><a ui-sref="nav.idea">创意</a></li>
+            <li ng-class="{active:$state.name.endsWith('team')}"><a ui-sref="nav.team">团队</a></li>
+            <li ng-class="{active:$state.name.endsWith('project')}"><a ui-sref="nav.project">项目</a></li>
+            <li ng-class="{active:$state.name.endsWith('coach')}"><a ui-sref="nav.coach">教练</a></li>
+            <li ng-class="{active:$state.name.endsWith('asset')}"><a ui-sref="nav.asset">组件</a></li>
             <li ng-hide="true">
                 <a id="r-nav-id-name" ui-sref="updateprofile">你好, xyzh.comcccccccc</a>
             </li>
