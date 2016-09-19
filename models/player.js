@@ -9,7 +9,9 @@ var playerSchema = Schema({
 
 	points:Number,
 
-	level:Number
+	level:Number,
+
+	history:String
 });
 
 var Player = mongoose.model("Player", playerSchema);

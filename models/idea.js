@@ -9,9 +9,14 @@ var ideaSchema = Schema({
 	creator:{
 		type:Schema.Type.ObjectId,
 		ref:'Player'
-	}
+	},
 
-	deadline:Date
+	deadline:Date,
+
+	coach:{
+		type:Schema.Type.ObjectId,
+		ref:'Coach'
+	}
 });
 
 var Idea = mongoose.model('Idea', ideaSchema);

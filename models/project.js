@@ -9,7 +9,17 @@ var projectSchema = Schema({
 	team:{
 		type:Schema.Type.ObjectId,
 		ref:'Team'
-	}
+	},
+
+	backlog:[{
+		as:String,
+
+		do:String,
+
+		soThat:String
+	}],
+
+	sprints:[]
 });
 
 var Project = mongoose.model("Project", projectSchema);
