@@ -3,10 +3,10 @@ var Item = require('../models/item');
 exports.demo = function(req, res){
 	Item.find(function(err, data){
 		if (err) {
-			res.json({code:-1, body:err});
+			res.json({status:"E", body:err});
 		}
 		else {
-			res.json({code:0, body:data});
+			res.json({status:"S", body:data});
 		}
 	});
 }
@@ -21,10 +21,10 @@ exports.addDemo = function(req, res){
 
 	item.save(function(err, data) {
 		if (err) {
-			res.json({code:-2, body:err});
+			res.json({status:"E", body:err});
 		}
 		else {
-			res.json({code:0, body:data});
+			res.json({status:"S", body:data});
 		}
 	});
 }
