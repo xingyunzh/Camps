@@ -1,6 +1,38 @@
 var http = require('http');
 var queryString = require('querystring');
 
+exports.loginByWechat = function(code,callback) {
+	postUID('/clduser/login/wechat',{'code':code},callback);
+}
+
+exports.loginByEmail = function(email,password,callback){
+	postUID('/clduser/login/email',{email:email,password:password},callback);
+}
+
+// exports.registerByEmail = function(email,password,callback){
+// 	postUID('/clduser/register',{email:email,password:password},callback);
+// }
+
+exports.getProfile = function(token,callback){
+	postUID('/clduser/api/profile',{token:token},callback);
+}
+
+// exports.checkEmailActivated = function(token,callback){
+// 	postUID('/clduser/api/activated/email',{token:token},callback);
+// }
+
+// exports.activateEmail = function(code,token,callback){
+// 	postUID('/clduser/api/activate/email',{activateCode:code,token:token},callback);
+// }
+
+// exports.updatePassword = function(password,token,callback){
+// 	postUID('/clduser/api/activate/email',{password:password,token:token},callback);
+// }
+
+// exports.resetPassword = function(email,callback){
+// 	postUID('/clduser/reset/password',{email:email,token:token},callback);
+// }
+
 var postUID = function(path,body,callback){
 	var postData = queryString.stringify(body);
 
@@ -38,13 +70,7 @@ var postUID = function(path,body,callback){
 	req.end();
 }
 
-exports.loginByWechat = function(code,callback) {
-	postUID('/clduser/login/wechat',{'code':code},callback);
-}
 
-exports.loginByEmail = function(email,password,callback){
-	postUID('/clduser/login/email',{email:email,password:password},callback);
-}
 
 
 

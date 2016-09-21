@@ -1,4 +1,4 @@
-var userController = require("../controllers/user-controller");
+var userController = require("../controllers/userController");
 
 
 
