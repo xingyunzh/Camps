@@ -23,4 +23,12 @@
     </table>
 
     <div class="alert-danger" ng-show="isError">Error occur!</div>
+    <button class="btn btn-default" ng-click="onTest()">TestConfirmStep</button>
+    <div class="alert-info">{{result}}</div>
+    <button class="btn btn-primary" ng-click="onModalInputTest()">TestModal</button>
+    <div class="alert-danger">{{inputText}}</div>
+    <div class="form-group">
+        <button class="btn btn-default" ng-click="toasterPop()">popToaster</button>
+        <button class="btn btn-default" ng-click="toasterClear()">clearToaster</button>
+    </div>
 </div>
