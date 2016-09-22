@@ -5,6 +5,8 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     function($scope, $rootScope, httpHelper, util, toaster){
     $scope.items = [];
     $scope.isError = false;
+    $scope.isDatePickerOpen = false;
+    $scope.dt = new Date();
 
     $scope.onRefresh = function () {
         httpHelper.sendRequest("GET", "/demo").then(function success(data) {
@@ -44,5 +46,11 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     $scope.toasterClear = function () {
         toaster.clear();
     }
+
+    $scope.onClickDatePicker = function () {
+        $scope.isDatePickerOpen = !$scope.isDatePickerOpen;
+        console.log("dt=" + $scope.dt);
+    }
+
 
 }]);

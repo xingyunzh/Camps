@@ -5,6 +5,14 @@ var app = angular.module("app", ["ui.router", "ui.bootstrap", "toaster", "ngAnim
 .run(["$rootScope", "$state", "$stateParams", function($rootScope, $state, $stateParams){
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+    $rootScope.gOptions = {
+        datePicker: {
+            formatYear: 'yy',
+            maxDate: new Date(2020, 12, 31),
+            minDate: new Date(1940,1,1),
+            startingDay: 1
+        }
+    }
 
     $rootScope.back = function () {
         /* body... */
