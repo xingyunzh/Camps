@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var router = require('./routes/router');
 
-var contextRoot = "/campro";
+var contextRoot = "/";  //Not set any contextRoot at the moment, but let's make it as easy to config
 
 // cfenv provides access to your Cloud Foundry environment
 // for more info, see: https://www.npmjs.com/package/cfenv

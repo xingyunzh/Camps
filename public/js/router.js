@@ -39,7 +39,7 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             templateUrl:"./modules/asset/asset.html",
             controller : "assetController"
         })
-        .state("login", {
+        .state("nav.login", {
             url : "/login",
             templateUrl : "./modules/login/login.html",
             controller: "loginController"
