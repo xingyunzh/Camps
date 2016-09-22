@@ -12,6 +12,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var router = require('./routes/router');
 
+var contextRoot = "/campro";
+
 // cfenv provides access to your Cloud Foundry environment
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
@@ -35,7 +37,7 @@ mongoose.connect(mongoURL, function(err) {
 var app = express();
 
 // serve the files out of ./public as our main files
-app.use(express.static(__dirname + '/public'));
+app.use(contextRoot, express.static(__dirname + '/public'));
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
@@ -46,7 +48,7 @@ app.use(bodyParser.urlencoded({
 // get the app environment from Cloud Foundry
 // var appEnv = cfenv.getAppEnv();
 
-router(app);
+router(app, contextRoot);
 
 // start server on the specified port and binding host
 // app.listen(appEnv.port, '0.0.0.0', function() {

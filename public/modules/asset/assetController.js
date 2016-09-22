@@ -9,7 +9,7 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     $scope.dt = new Date();
 
     $scope.onRefresh = function () {
-        httpHelper.sendRequest("GET", "/demo").then(function success(data) {
+        httpHelper.sendRequest("GET", "./demo").then(function success(data) {
             $scope.items = data;
             $scope.isError = false;
         },function fail(){

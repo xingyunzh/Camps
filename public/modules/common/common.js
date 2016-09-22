@@ -1,5 +1,5 @@
-var kConfirmationHTML = "modules/common/confirmation.html";
-var kModalInputTextHTML = "modules/common/modal-text-input.html";
+var kConfirmationHTML = "./modules/common/confirmation.html";
+var kModalInputTextHTML = "./modules/common/modal-text-input.html";
 var kConfirmationController = 'commonModalController';
 
 app.controller(kConfirmationController, function ($scope, $uibModalInstance, title, content) {
