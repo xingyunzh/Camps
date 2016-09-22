@@ -16,7 +16,8 @@
 
 <div ui-view=""></div>
 
-<toaster-container></toaster-container>
+<toaster-container toaster-options="{'position-class':'toast-center', 'time-out':{'toast-wait':0, 'toast-error':5000, 'toast-success':3000, 'toast-info':3000}}">
+</toaster-container>
 
 <script src="/lib/angular/angular.js"></script>
 <script src="/lib/angular-ui-router/release/angular-ui-router.js"></script>

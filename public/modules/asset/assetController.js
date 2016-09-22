@@ -34,10 +34,10 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     
     $scope.toasterPop = function () {
         toaster.pop({
-            type:'success',
+            type:'info',
             title:'title',
             body:'bodyTextContent',
-            timeout:0
+            // timeout:0
         });
     }
     
