@@ -1,5 +1,7 @@
 var userController = require('../controllers/userController.js');
 
-module.exports = function(app){
-	router.post('/profile',userController.getFullProfile);
-};
+var router = require('express').router();
+
+router.post('/profile',userController.getProfile);
+
+module.exports = router;

@@ -1,11 +1,13 @@
 var userController = require("../controllers/userController");
 
+var router = require('express').router();
 
 
-module.exports = function(app){
-	router.post('/register',userController.createUser);
+router.post('/register',userController.createUser);
 
-	router.post('/login/wechat',userController.loginByWechat);
+router.post('/login/wechat',userController.loginByWechat);
 
-	router.post('/login/email',userController.loginByEmail);
-};
+router.post('/login/email',userController.loginByEmail);
+
+
+module.exports = router;

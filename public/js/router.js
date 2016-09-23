@@ -5,43 +5,43 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
     $urlRouterProvider.when("", "/nav/idea");
     $stateProvider.state("nav", {
         url:"/nav",
-        templateUrl:"/modules/nav/nav.html",
+        templateUrl:"./modules/nav/nav.html",
         controller:"navController",
         abstract:true,
     })
         .state("nav.idea", {
             url:"/idea",
-            templateUrl:"/modules/idea/idea.html",
+            templateUrl:"./modules/idea/idea.html",
             controller : "ideaController"
         })
         .state("nav.project", {
             url:"/project",
-            templateUrl:"/modules/project/project.html",
+            templateUrl:"./modules/project/project.html",
             controller : "projectController"
         })
         .state("nav.team", {
             url:"/team",
-            templateUrl:"/modules/team/team.html",
+            templateUrl:"./modules/team/team.html",
             controller : "teamController"
         })
         .state("nav.coach", {
             url:"/coach",
-            templateUrl:"/modules/coach/coach.html",
+            templateUrl:"./modules/coach/coach.html",
             controller : "coachController"
         })
         .state("nav.player", {
             url:"/player",
-            templateUrl:"/modules/player/player.html",
+            templateUrl:"./modules/player/player.html",
             controller : "playerController"
         })
         .state("nav.asset", {
             url:"/asset",
-            templateUrl:"/modules/asset/asset.html",
+            templateUrl:"./modules/asset/asset.html",
             controller : "assetController"
         })
-        .state("login", {
+        .state("nav.login", {
             url : "/login",
-            templateUrl : "/modules/login/login.html",
+            templateUrl : "./modules/login/login.html",
             controller: "loginController"
         });
 
