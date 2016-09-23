@@ -1,10 +1,10 @@
 
 var jwt = require('jsonwebtoken');
 
-var XINGYUNZH_UNIVERSAL_SECRET = "xingyunzh-universal-secret";
+var secret = "xingyunzh-campro-secret";
 
 module.exports.verify = function(tokenString,callback){
-	jwt.verify(tokenString,XINGYUNZH_UNIVERSAL_SECRET,callback);
+	jwt.verify(tokenString,secret,callback);
 }
 
 module.exports.create = function(userId,callback){

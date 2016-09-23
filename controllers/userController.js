@@ -3,13 +3,12 @@ var http = require('http');
 var uidHelper = require('../util/uidHelper');
 var util = require('../util/util.js');
 var queryString = require('querystring');
+var tokenHelper = require('../util/shared/tokenHelper.js');
 
 
 exports.loginByEmail = function(req,res){
 	var email = null;
 	var password = null;
-	// var loginResult = null;
-	// var latestUser = null;
 
 	const STATE_CHECK_PARAM = 1;
 	const STATE_LOGIN = 2;
@@ -82,6 +81,8 @@ function login(req,res,type){
 	var code = null;
 	var loginResult = null;
 	var latestUser = null;
+	var latestProfile = null;
+	var token = null;
 
 	const STATE_LOGIN_WECHAT = 1;
 	const STATE_LOGIN_EMAIL = 2;
@@ -128,7 +129,7 @@ function login(req,res,type){
 					});
 				break;
 				case STATE_IS_FRIST_TIME:
-					User.findById(loginResult.userId,function(err,userResult){
+					User.find({uid:loginResult.userId},function(err,userResult){
 						latestUser = userResult;
 						if(userResult == null){
 							stateMachine(err,STATE_GET_PROFILE);
@@ -138,14 +139,34 @@ function login(req,res,type){
 					});
 				break;
 				case STATE_GET_PROFILE:
-
+					uidHelper.getProfile(loginResult.token,function(err,profile){
+						latestProfile = profile;
+						stateMachine(err,STATE_CREATE_USER);
+					})
 				break;
 				case STATE_CREATE_USER:
+					var user = new User();
+					user.nickname = latestProfile.nickname;
+					user.uid = loginResult.userId;
+
+					user
+					.save(function(err,result){
+						latestUser = result;
+						stateMachine(err,STATE_CREATE_TOKEN);
+					})
 				break;
 				case STATE_CREATE_TOKEN:
+					tokenHelper.create(latestUser._id,function(err,newToken){
+						token = newToken;
+						stateMachine(err,STATE_SEND_RESPONSE);
+					})
 				break;
 				case STATE_SEND_RESPONSE:
-					res.send(util.wrapBody({result:result}));
+					var responseBody = {
+						token:token,
+						nickname:latestUser.nickname
+					}
+					res.send(util.wrapBody(responseBody));
 				break;
 				default:
 					console.log('Invalid State');
