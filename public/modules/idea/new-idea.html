@@ -1,0 +1,51 @@
+<div class="container">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <h3 class="col-md-offset-2 col-md-10">创新点</h3>
+        </div>
+        <div class="form-group">
+            <label for="id-camps-create-idea-name" class="col-md-2 control-label ">名字:</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="id-camps-create-idea-name" placeholder="名字" ng-model="form.name">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="id-camps-create-idea-background" class="control-label col-md-2">背景:</label>
+            <div class="col-md-10">
+                <textarea class='form-control col-md-10' id="id-camps-create-idea-background" cols="30" rows="10" ng-model="form.background" placeholder="创意背景"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="id-camps-create-idea-problem" class="control-label col-md-2">解决的问题:</label>
+            <div class="col-md-10">
+                <textarea class='form-control col-md-10' id="id-camps-create-idea-problem" cols="30" rows="3" ng-model="form.problem" placeholder="要解决的问题描述"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="id-camps-create-idea-solution" class="control-label col-md-2">解决方案:</label>
+            <div class="col-md-10">
+                <textarea class='form-control col-md-10' id="id-camps-create-idea-solution" cols="30" rows="20" ng-model="form.solution" placeholder="解决方案"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <labbel>
+                        <input type="checkbox" ng-model="form.accepted"> 我理解并遵守 <a href="#">创新点协议</a>的内容
+                    </labbel>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-default" ng-click="onSaveButton()">保存草稿</button>
+                &nbsp;
+                <button class="btn btn-primary" ng-click="onSubmitButton()">提交创意</button>
+            </div>
+        </div>
+    </form>
+</div>
+
