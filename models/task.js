@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var taskSchema = Schema({
 	description:String,
 
-	duration:Number,
+	duedate:Date,
 
 	assignee:{
 		type:Schema.Type.ObjectId,
@@ -12,6 +12,6 @@ var taskSchema = Schema({
 	}
 });
 
-var Team = mongoose.model("Team", teamSchema);
+var Task = mongoose.model("Task", taskSchema);
 
-module.exports = Team;
+module.exports = Task;

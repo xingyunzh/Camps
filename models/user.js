@@ -6,7 +6,11 @@ var userSchema = Schema({
 
 	uid:String,
 
-	birthday:Date
+	roles:String,
+
+	skills:[String],
+
+	sector:String
 });
 
 var User = mongoose.model("User", userSchema);

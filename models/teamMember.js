@@ -10,22 +10,13 @@ var teamMemberSchema = Schema({
 		ref:'Team'
 	},
 
-	player:{
+	user:{
 		type:Schema.Type.ObjectId,
-		ref:'Player'
+		ref:'User'
 	},
 
-	state:{
-		type:String,
-		enum:states
-	}
+	isLeader:Boolean,
 
-	role:{
-		type:String,
-		enum:roles
-	},
-
-	joinDate:Date
 });
 
 var TeamMember = mongoose.model("TeamMember", temMemberSchema);

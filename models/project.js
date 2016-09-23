@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var projectSchema = Schema({
 	name:String,
 
-	description:String,
+	scope:String,
 
 	team:{
 		type:Schema.Type.ObjectId,
@@ -12,15 +12,13 @@ var projectSchema = Schema({
 	},
 
 	backlog:[{
-		as:String,
-
-		do:String,
-
-		soThat:String
+		type:Schema.Type.ObjectId,
+		ref:'UserStory'
 	}],
 
 	sprints:[{
-		backlog:[]
+		type:Schema.Type.ObjectId,
+		ref:'Sprint'
 	}]
 });
 

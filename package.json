@@ -7,11 +7,7 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-<<<<<<< HEAD
-=======
-    "cfenv": "1.0.x",
     "debug": "^2.2.0",
->>>>>>> master
     "express": "^4.13.4",
     "mongoose": "^4.6.0",
     "morgan": "^1.7.0",

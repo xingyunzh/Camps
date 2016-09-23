@@ -1,9 +1,6 @@
 var userController = require("../controllers/userController");
 
-var router = require('express').router();
-
-
-router.post('/register',userController.createUser);
+var router = require('express').Router();
 
 router.post('/login/wechat',userController.loginByWechat);
 

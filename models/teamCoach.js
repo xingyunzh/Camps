@@ -12,7 +12,9 @@ var teamCoachSchema = Schema({
 		ref:'Coach'
 	},
 
-	startDate:Date
+	startDate:Date,
+
+	endDate:Date
 });
 
 var TeamCoach = mongoose.model("TeamCoach", teamCoachSchema);
