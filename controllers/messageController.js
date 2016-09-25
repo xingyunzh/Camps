@@ -1,21 +1,5 @@
 var Message = require('../models/message');
 
-exports.demo = function(req, res) {
-    Message.find(function(err, data) {
-        if (err) {
-            res.json({
-                status: "E",
-                body: err
-            });
-        } else {
-            res.json({
-                status: "S",
-                body: data
-            });
-        }
-    });
-}
-
 exports.sendMessage = function(req, res) {
     var fromId = req.body.fromId;
     var toId = req.body.toId;
@@ -45,7 +29,7 @@ exports.sendMessage = function(req, res) {
     });
 }
 
-exports.message = function(req, res) {
+exports.getMessage = function(req, res) {
     var user = req.body.user;
     var selection = req.body.selection; // "all", "read", "unread"
 
