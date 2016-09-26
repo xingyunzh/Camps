@@ -8,7 +8,7 @@ var taskSchema = Schema({
 
 	assignee:{
 		type:Schema.Types.ObjectId,
-		ref:'TeamMember'
+		ref:'User'
 	},
 
 	userStory:{

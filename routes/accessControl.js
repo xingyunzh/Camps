@@ -1,4 +1,4 @@
-var tokenHelper = require('../util/shared/tokenHelper.js');
+var tokenHelper = require('../authenticate/tokenHelper.js');
 var util = require('../util/util.js');
 
 var router = require('express').Router();

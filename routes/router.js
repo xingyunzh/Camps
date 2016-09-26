@@ -18,7 +18,7 @@ module.exports = function(app, contextRoot) {
     rootRouter.get('/message', messageController.message);
     rootRouter.post('/sendMessage', messageController.sendMessage);
 
-    rootRouter.use('/',accessControl);
+    //rootRouter.use('/',accessControl);
     
 	rootRouter.use("/public", publicAPI);
 

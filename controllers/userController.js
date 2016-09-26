@@ -3,7 +3,7 @@ var http = require('http');
 var uidHelper = require('../util/uidHelper');
 var util = require('../util/util.js');
 var queryString = require('querystring');
-var tokenHelper = require('../util/shared/tokenHelper.js');
+var tokenHelper = require('../authenticate/tokenHelper.js');
 
 
 exports.loginByEmail = function(req,res){
