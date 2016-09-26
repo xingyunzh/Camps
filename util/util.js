@@ -8,7 +8,7 @@
 	util.checkParam = function(body,params,callback){
 		for(var param in params){
 			if (body[param] == undefined) {
-				var err = new Error('Invalide Parameter');
+				var err = new Error('Invalid Parameter');
 				callback(err);
 				return;
 			}

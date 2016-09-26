@@ -4,22 +4,22 @@ var Schema = mongoose.Schema;
 var coachSchema = Schema({
 
 	user:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'User'
 	},
 
 	ideas:[{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Idea'
 	}],
 
 	team:[{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Team'
 	}],
 
 	assets:[{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Asset'
 	}]
 });

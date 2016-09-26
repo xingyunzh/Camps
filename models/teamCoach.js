@@ -3,12 +3,12 @@ var Schema = mongoose.Schema;
 
 var teamCoachSchema = Schema({
 	team:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Team'
 	},
 
 	coach:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Coach'
 	},
 

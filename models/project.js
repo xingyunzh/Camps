@@ -7,17 +7,17 @@ var projectSchema = Schema({
 	scope:String,
 
 	team:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Team'
 	},
 
 	backlog:[{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'UserStory'
 	}],
 
 	sprints:[{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Sprint'
 	}]
 });

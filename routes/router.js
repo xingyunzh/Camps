@@ -1,6 +1,7 @@
 
 var userAPI = require('./userAPI.js');
 var publicAPI = require('./publicAPI.js');
+var accessControl = require('./accessControl.js');
 
 var rootRouter = require("express").Router();
 
@@ -13,7 +14,8 @@ module.exports = function(app, contextRoot){
 	rootRouter.post('/addDemo', demoController.addDemo);
 
     //Please make any business router under the rootRouter, so that it will be easy for contextRoot config.
-
+    rootRouter.use('/',accessControl);
+    
 	rootRouter.use("/public", publicAPI);
 
 	rootRouter.use('/api/user',userAPI);

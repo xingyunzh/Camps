@@ -6,12 +6,12 @@ var states = 'working study'.split(' ');
 
 var teamMemberSchema = Schema({
 	team:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Team'
 	},
 
 	user:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'User'
 	},
 

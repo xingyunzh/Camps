@@ -7,71 +7,26 @@ var tokenHelper = require('../util/shared/tokenHelper.js');
 
 
 exports.loginByEmail = function(req,res){
-	var email = null;
-	var password = null;
 
-	const STATE_CHECK_PARAM = 1;
-	const STATE_LOGIN = 2;
-
-	stateMachine(null,STATE_CHECK_PARAM);
-
-	function stateMachine(err,toState){
-		console.log('state:',toState);
-
+	util.checkParam(req.body,['email,password'],function(err){
 		if (err) {
-			
-			console.log('error:',err);
+			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
 		}else{
-			switch(toState){
-				case STATE_CHECK_PARAM:
-					util.checkParam(req.body,['email,password'],function(err){
-						stateMachine(err,STATE_LOGIN_EMAIL);
-					});
-				break;
-				case STATE_LOGIN:
-					login(req,res,'email');
-				break;
-				default:
-					console.log('Invalid State');
-					res.send(util.wrapBody('Internal Error','E'));
-			}
+			login(req,res,'email');
 		}
-	}	
+	});	
 }
 
 exports.loginByWechat = function(req,res){
-	var code = null;
-	//var loginResult = null;
-
-	const STATE_CHECK_PARAM = 1;
-	const STATE_LOGIN = 2;
-
-	stateMachine(null,STATE_CHECK_PARAM);
-
-	function stateMachine(err,toState){
-		console.log('state:',toState);
-
+	util.checkParam(req.body,['code'],function(err){
 		if (err) {
-			
-			console.log('error:',err);
+			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
 		}else{
-			switch(toState){
-				case STATE_CHECK_PARAM:
-					util.checkParam(req.body,['code'],function(err){
-						stateMachine(err,STATE_LOGIN_EMAIL);
-					});
-				break;
-				case STATE_LOGIN:
-					login(req,res,'wechat');
-				break;
-				default:
-					console.log('Invalid State');
-					res.send(util.wrapBody('Internal Error','E'));
-			}
+			login(req,res,'wechat');
 		}
-	}
+	});	
 }
 
 function login(req,res,type){
@@ -116,7 +71,7 @@ function login(req,res,type){
 
 					uidHelper.loginByWechat(code,function(err,result){
 						loginResult = result;
-						stateMachine(err,STATE_SEND_RESPONSE);
+						stateMachine(err,STATE_IS_FRIST_TIME);
 					});
 				break;
 				case STATE_LOGIN_EMAIL:
@@ -125,7 +80,7 @@ function login(req,res,type){
 
 					uidHelper.loginByEmail(email,password,function(err,result){
 						loginResult = result;
-						stateMachine(err,STATE_SEND_RESPONSE);
+						stateMachine(err,STATE_IS_FRIST_TIME);
 					});
 				break;
 				case STATE_IS_FRIST_TIME:

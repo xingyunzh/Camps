@@ -7,8 +7,13 @@ var taskSchema = Schema({
 	duedate:Date,
 
 	assignee:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'TeamMember'
+	},
+
+	userStory:{
+		type:Schema.Types.ObjectId,
+		ref:'UserStory'
 	}
 });
 

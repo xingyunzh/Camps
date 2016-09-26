@@ -7,8 +7,8 @@ var ideaSchema = Schema({
 	background:String,
 
 	innovator:{
-		type:Schema.Type.ObjectId,
-		ref:'Player'
+		type:Schema.Types.ObjectId,
+		ref:'User'
 	},
 
 	deadline:Date,
@@ -20,7 +20,7 @@ var ideaSchema = Schema({
 	hrRequirement:String,
 
 	relatedAssets:[{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Asset'
 	}]
 });
