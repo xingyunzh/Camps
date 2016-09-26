@@ -1,0 +1,27 @@
+<div class="bg-primary container-fluid camps-head-strip">
+    <div class="camps-parent-width">
+        <h1 class="text-center">私信测试页面 </h1>
+    </div>
+</div>
+
+<div class="container">
+    <input class="form-control" type="text" name="sendtext" value="" placeholder="Text">
+    <br>
+    <button class="btn btn-default" type="button" name="sendbutton" ng-click="sendMessage()">Send message</button>
+    <br><br>
+    <button class="btn btn-default" type="button" name="getbutton" ng-click="getMessage()">Get messages</button>
+    <br><br>
+    <table class="table table-bordered">
+        <thead>
+            <th>Title</th>
+            <th>From</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="msg in msgs">
+                <td>{{msg.title}}</td>
+                <td>{{msg.from}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
