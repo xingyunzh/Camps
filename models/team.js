@@ -11,7 +11,7 @@ var teamSchema = Schema({
 	isActive:Boolean,
 
 	project:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Project'
 	},
 

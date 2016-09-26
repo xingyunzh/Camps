@@ -3,7 +3,7 @@ var http = require('http');
 var uidHelper = require('../util/uidHelper');
 var util = require('../util/util.js');
 var queryString = require('querystring');
-var tokenHelper = require('../authenticate/tokenHelper.js');
+var authenticator = require('../authenticate/authenticator.js');
 
 
 exports.loginByEmail = function(req,res){
@@ -111,7 +111,7 @@ function login(req,res,type){
 					})
 				break;
 				case STATE_CREATE_TOKEN:
-					tokenHelper.create(latestUser._id,function(err,newToken){
+					authenticator.create(latestUser._id,function(err,newToken){
 						token = newToken;
 						stateMachine(err,STATE_SEND_RESPONSE);
 					})

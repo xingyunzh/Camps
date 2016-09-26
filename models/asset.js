@@ -16,7 +16,7 @@ var assetSchema = Schema({
 	demo:String,
 
 	maintainer:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'User'
 	}
 });

@@ -1,7 +1,7 @@
 
 var userAPI = require('./userAPI.js');
 var publicAPI = require('./publicAPI.js');
-var accessControl = require('./accessControl.js');
+var authenticator = require('../authenticate/authenticator.js');
 
 var rootRouter = require("express").Router();
 
@@ -18,7 +18,7 @@ module.exports = function(app, contextRoot) {
     rootRouter.get('/message', messageController.message);
     rootRouter.post('/sendMessage', messageController.sendMessage);
 
-    //rootRouter.use('/',accessControl);
+    //rootRouter.use('/',authenticator.authenticate);
     
 	rootRouter.use("/public", publicAPI);
 
