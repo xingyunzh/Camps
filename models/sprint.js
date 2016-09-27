@@ -17,7 +17,7 @@ var sprintSchema = Schema({
 	},
 
 	deliverables:{
-
+		//To Do
 	}
 });
 

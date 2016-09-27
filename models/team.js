@@ -15,8 +15,6 @@ var teamSchema = Schema({
 		ref:'Project'
 	},
 
-	createdDate:Date,
-
 	deactiveDate:Date,
 
 	activeDate:Date
