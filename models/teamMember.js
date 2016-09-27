@@ -6,26 +6,17 @@ var states = 'working study'.split(' ');
 
 var teamMemberSchema = Schema({
 	team:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Team'
 	},
 
-	player:{
-		type:Schema.Type.ObjectId,
-		ref:'Player'
+	user:{
+		type:Schema.Types.ObjectId,
+		ref:'User'
 	},
 
-	state:{
-		type:String,
-		enum:states
-	}
+	isLeader:Boolean,
 
-	role:{
-		type:String,
-		enum:roles
-	},
-
-	joinDate:Date
 });
 
 var TeamMember = mongoose.model("TeamMember", temMemberSchema);

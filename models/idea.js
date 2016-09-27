@@ -4,19 +4,25 @@ var Schema = mongoose.Schema;
 var ideaSchema = Schema({
 	name:String,
 
-	content:String,
+	background:String,
 
-	creator:{
-		type:Schema.Type.ObjectId,
-		ref:'Player'
+	innovator:{
+		type:Schema.Types.ObjectId,
+		ref:'User'
 	},
 
 	deadline:Date,
 
-	coach:{
-		type:Schema.Type.ObjectId,
-		ref:'Coach'
-	}
+	painpoint:String,
+
+	solution:String,
+
+	hrRequirement:String,
+
+	relatedAssets:[{
+		type:Schema.Types.ObjectId,
+		ref:'Asset'
+	}]
 });
 
 var Idea = mongoose.model('Idea', ideaSchema);

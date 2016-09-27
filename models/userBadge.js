@@ -1,20 +1,18 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var teamCoachSchema = Schema({
-	team:{
+var userBadgeSchema = Schema({
+	user:{
 		type:Schema.Types.ObjectId,
-		ref:'Team'
+		ref:'User'
+	}
+
+	badge:{
+		type:Schema.Types.ObjectId,
+		ref:'Badge'
 	},
 
-	coach:{
-		type:Schema.Types.ObjectId,
-		ref:'Coach'
-	},
-
-	startDate:Date,
-
-	endDate:Date
+	obtainDate:Date
 });
 
 var TeamCoach = mongoose.model("TeamCoach", teamCoachSchema);

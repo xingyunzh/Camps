@@ -4,7 +4,20 @@ var Schema = mongoose.Schema;
 var teamSchema = Schema({
 	name:String,
 
-	createdDate:Date
+	description:String,
+
+	teamId:String,
+
+	isActive:Boolean,
+
+	project:{
+		type:Schema.Types.ObjectId,
+		ref:'Project'
+	},
+
+	deactiveDate:Date,
+
+	activeDate:Date
 });
 
 var Team = mongoose.model("Team", teamSchema);
