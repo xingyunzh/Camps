@@ -1,0 +1,47 @@
+<div class="bg-primary container-fluid camps-head-strip">
+    <div class="camps-parent-width">
+        <h1 class="text-center">创意  {{theIdea.name}}</h1>
+        <h4 class="text-center">提交人: {{theIdea.innovator.name}}</h4>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-1">&nbsp;标题&nbsp;</th>
+                <th class="text-center col-md-11">内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>背景</td>
+                <td>{{theIdea.background}}</td>
+            </tr>
+            <tr>
+                <td>解决的问题</td>
+                <td>{{theIdea.painpoint}}</td>
+            </tr>
+            <tr>
+                <td>解决方案</td>
+                <td>{{theIdea.solution}}</td>
+            </tr>
+            <tr>
+                <td>人力资源</td>
+                <td>{{theIdea.hrRequirement}}</td>
+            </tr>
+            <tr>
+                <td>重用组件</td>
+                <td>{{theIdea.relatedAssets}}</td>
+            </tr>
+            <tr>
+                <td>截止日期</td>
+                <td>{{theIdea.deadline | date:"yyyy-MM-dd"}}</td>
+            </tr>
+            <tr>
+                <td>关联项目</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
