@@ -34,6 +34,16 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             templateUrl: "./modules/team/team.html",
             controller: "teamController"
         })
+        .state("nav.createTeam", {
+            url:"/createTeam",
+            templateUrl:"./modules/team/new-team.html",
+            controller:"newTeamController"
+        })
+        .state("nav.team-detail", {
+            url: "/tdetail",
+            templateUrl:"./modules/team/team-detail.html",
+            controller: "teamDetailController"
+        })
         .state("nav.coach", {
             url: "/coach",
             templateUrl: "./modules/coach/coach.html",

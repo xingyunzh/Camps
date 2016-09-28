@@ -10,7 +10,7 @@
             <h3 class="center-block">团队列表</h3>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary center-block camps-team-submit">创建团队</button>
+            <button class="btn btn-primary center-block camps-team-submit" ui-sref="nav.createTeam">创建团队</button>
         </div>
         <div class="col-md-3">
             <div class="input-group">
@@ -26,13 +26,15 @@
 <div class="container">
     <div class="row">
         <div ng-repeat="team in teams">
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="http://img3.redocn.com/20120407/Redocn_2012040706593740.jpg" alt="TEAM">
-                    <h4>{{team.name}}</h4>
-                    <p>{{team.desc}}</p>
+            <a class="col-md-4">
+                <div ng-click="onTeamClicked(team)">
+                    <div class="thumbnail">
+                        <img src="http://img3.redocn.com/20120407/Redocn_2012040706593740.jpg" alt="TEAM">
+                        <h4>{{team.name}}</h4>
+                        <p>{{team.description}}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
