@@ -3,14 +3,14 @@ var Schema = mongoose.Schema;
 
 var discussMinutesSchema = Schema({
 	creator:{
-		type:Schema.types.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'user'
 	},
 
 	communicationMethod:String,
 
 	participant:[{
-		type:Schema.types.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'user'
 	}],
 

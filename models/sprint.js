@@ -11,10 +11,10 @@ var sprintSchema = Schema({
 		ref:'UserStory'
 	}],
 
-	task:{
+	task:[{
 		type:Schema.Types.ObjectId,
 		ref:'Task'
-	},
+	}],
 
 	deliverables:{
 		//To Do

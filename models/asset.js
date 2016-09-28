@@ -6,10 +6,9 @@ var assetSchema = Schema({
 
 	category:String,
 
-	version:{
-		no:Number,
-		date:Date
-	},
+	version:String,
+
+	editDate:Date,
 
 	guide:String,
 
