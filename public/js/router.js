@@ -19,6 +19,11 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             templateUrl: "./modules/idea/new-idea.html",
             controller: "newIdeaController"
         })
+        .state("nav.idea-detail", {
+            url:"/idetail",
+            templateUrl:"./modules/idea/idea-detail.html",
+            controller:"ideaDetailController"
+        })
         .state("nav.project", {
             url:"/project",
             templateUrl:"./modules/project/project.html",
