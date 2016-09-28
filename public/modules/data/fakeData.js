@@ -190,3 +190,147 @@ var ideaData = [
         imageUrl:"./images/stars_logo.jpg"
     },
 ];
+
+var teamData = [
+    {
+        name:"天马座",
+        description:"天马座是由华中科技大学本科生自发组织的学习团队",
+        teamId:"20160701001",
+        isActive:true,
+        project:{
+            name:"基于web的会议议程助手系统界面",
+            scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
+            team:null,
+            backlog:null,
+            sprints:null,
+        },
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"人马座",
+        description:"人马座是由武汉大学本科生自发组织的学习团队",
+        teamId:"20160901001",
+        isActive:true,
+        project:null,
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"天马座",
+        description:"天马座是由华中科技大学本科生自发组织的学习团队",
+        teamId:"20160701001",
+        isActive:true,
+        project:{
+            name:"基于web的会议议程助手系统界面",
+            scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
+            team:null,
+            backlog:null,
+            sprints:null,
+        },
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"人马座",
+        description:"人马座是由武汉大学本科生自发组织的学习团队",
+        teamId:"20160901001",
+        isActive:true,
+        project:null,
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"天马座",
+        description:"天马座是由华中科技大学本科生自发组织的学习团队",
+        teamId:"20160701001",
+        isActive:true,
+        project:{
+            name:"基于web的会议议程助手系统界面",
+            scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
+            team:null,
+            backlog:null,
+            sprints:null,
+        },
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"人马座",
+        description:"人马座是由武汉大学本科生自发组织的学习团队",
+        teamId:"20160901001",
+        isActive:true,
+        project:null,
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"天马座",
+        description:"天马座是由华中科技大学本科生自发组织的学习团队",
+        teamId:"20160701001",
+        isActive:true,
+        project:{
+            name:"基于web的会议议程助手系统界面",
+            scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
+            team:null,
+            backlog:null,
+            sprints:null,
+        },
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"人马座",
+        description:"人马座是由武汉大学本科生自发组织的学习团队",
+        teamId:"20160901001",
+        isActive:true,
+        project:null,
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"天马座",
+        description:"天马座是由华中科技大学本科生自发组织的学习团队",
+        teamId:"20160701001",
+        isActive:true,
+        project:{
+            name:"基于web的会议议程助手系统界面",
+            scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
+            team:null,
+            backlog:null,
+            sprints:null,
+        },
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+    {
+        name:"人马座",
+        description:"人马座是由武汉大学本科生自发组织的学习团队",
+        teamId:"20160901001",
+        isActive:true,
+        project:null,
+        deactiveDate:null,
+        activeDate:new Date("2016-07-01")
+    },
+];
+
+// var projectSchema = Schema({
+//     name:String,
+//
+//     scope:String,
+//
+//     team:{
+//         type:Schema.Types.ObjectId,
+//         ref:'Team'
+//     },
+//
+//     backlog:[{
+//         type:Schema.Types.ObjectId,
+//         ref:'UserStory'
+//     }],
+//
+//     sprints:[{
+//         type:Schema.Types.ObjectId,
+//         ref:'Sprint'
+//     }]
+// });
