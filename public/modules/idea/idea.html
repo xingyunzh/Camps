@@ -13,15 +13,18 @@
             <button class="btn btn-primary center-block camps-idea-submit" ui-sref="nav.createIdea">提交你的创意</button>
         </div>
         <div class="col-md-6">
-            <div class="media camps-media-card" ng-repeat="item in ideas">
-                <a href="#" class="media-left">
-                    <img src="images/stars_logo.jpg" alt="Img">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        {{item.title}}
-                    </h4>
-                    {{item.detail}}
+            <div class="" ng-repeat="item in ideas">
+                <div class="media camps-media-card" ng-click="handleItemClick(item)">
+                    <a href="#" class="media-left">
+                        <img ng-src="{{item.imageUrl}}" alt="Img">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            {{item.name}}
+                        </h4>
+                        <h5>- {{item.innovator.name}}</h5>
+                        {{item.solution}}
+                    </div>
                 </div>
             </div>
         </div>

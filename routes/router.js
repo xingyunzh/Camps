@@ -1,3 +1,8 @@
+
+var userAPI = require('./userAPI.js');
+var publicAPI = require('./publicAPI.js');
+var authenticator = require('../authenticate/authenticator.js');
+
 var rootRouter = require("express").Router();
 var messageRouter = require("./messageRouter");
 
@@ -10,5 +15,17 @@ module.exports = function(app, contextRoot) {
     rootRouter.post('/addDemo', demoController.addDemo);
 
     //Please make any business router under the rootRouter, so that it will be easy for contextRoot config.
+<<<<<<< HEAD
     rootRouter.use('/message', messageRouter);
+=======
+    rootRouter.get('/message', messageController.message);
+    rootRouter.post('/sendMessage', messageController.sendMessage);
+
+    //rootRouter.use('/',authenticator.authenticate);
+    
+	rootRouter.use("/public", publicAPI);
+
+	rootRouter.use('/api/user',userAPI);
+>>>>>>> master
 };
+

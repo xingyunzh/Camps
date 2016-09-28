@@ -4,11 +4,21 @@ var Schema = mongoose.Schema;
 var assetSchema = Schema({
 	name:String,
 
-	content:String,
+	category:String,
 
-	createDate:Date,
+	version:{
+		no:Number,
+		date:Date
+	},
 
-	lastEditDate:Date
+	guide:String,
+
+	demo:String,
+
+	maintainer:{
+		type:Schema.Types.ObjectId,
+		ref:'User'
+	}
 });
 
 var Asset = mongoose.model("Asset", assetSchema);

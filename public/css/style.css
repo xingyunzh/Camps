@@ -36,4 +36,8 @@
 .camps-media-card {
     margin-top: 35px;
     margin-bottom: 35px;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
 }

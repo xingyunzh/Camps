@@ -4,14 +4,19 @@ var Schema = mongoose.Schema;
 var taskSchema = Schema({
 	description:String,
 
-	duration:Number,
+	duedate:Date,
 
 	assignee:{
-		type:Schema.Type.ObjectId,
-		ref:'TeamMember'
+		type:Schema.Types.ObjectId,
+		ref:'User'
+	},
+
+	userStory:{
+		type:Schema.Types.ObjectId,
+		ref:'UserStory'
 	}
 });
 
-var Team = mongoose.model("Team", teamSchema);
+var Task = mongoose.model("Task", taskSchema);
 
-module.exports = Team;
+module.exports = Task;

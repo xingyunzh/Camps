@@ -4,22 +4,22 @@ var Schema = mongoose.Schema;
 var projectSchema = Schema({
 	name:String,
 
-	description:String,
+	scope:String,
 
 	team:{
-		type:Schema.Type.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'Team'
 	},
 
 	backlog:[{
-		as:String,
-
-		do:String,
-
-		soThat:String
+		type:Schema.Types.ObjectId,
+		ref:'UserStory'
 	}],
 
-	sprints:[]
+	sprints:[{
+		type:Schema.Types.ObjectId,
+		ref:'Sprint'
+	}]
 });
 
 var Project = mongoose.model("Project", projectSchema);
