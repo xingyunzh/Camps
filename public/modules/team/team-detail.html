@@ -6,30 +6,54 @@
 </div>
 
 <div class="container">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th class="col-md-1">&nbsp;标题&nbsp;</th>
-            <th class="text-center col-md-11">内容</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>团队描述</td>
-            <td>{{theTeam.description}}</td>
-        </tr>
-        <tr>
-            <td>团队成员</td>
-            <td> <span ng-repeat="user in theTeam.members"><button class="btn btn-primary" >{{user.name}}</button>&nbsp;</span> </td>
-        </tr>
-        <tr>
-            <td>项目运作</td>
-            <td>{{theTeam.project.name}}</td>
-        </tr>
-        <tr>
-            <td>成立时间</td>
-            <td>{{theTeam.birthday}}</td>
-        </tr>
-        </tbody>
-    </table>
+    <row>
+        <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">{{isEditing ? "保存修改" : "编辑基本信息"}}</button>
+    </row>
+
+    <row>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="col-md-1">&nbsp;标题&nbsp;</th>
+                <th class="text-center col-md-11">内容</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>团队名称</td>
+                <td>
+                    <span ng-hide="isEditing">{{theTeam.name}}</span>
+                    <span ng-show="isEditing"><input type="text" class="form-control" ng-model="form.name"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>团队描述</td>
+                <td>
+                    <span ng-hide="isEditing">{{theTeam.description}}</span>
+                    <span ng-show="isEditing"><textarea class='form-control' cols="30" rows="5" ng-model="form.description"></textarea></span>
+                </td>
+            </tr>
+            <tr>
+                <td>队长</td>
+                <td>
+                    <span ng-hide="isEditing">{{theTeam.leader.name}}</span>
+                    <span ng-show="isEditing"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>团队成员</td>
+                <td> <span ng-repeat="user in theTeam.members"><button class="btn btn-primary" >{{user.name}}</button>&nbsp;</span> </td>
+            </tr>
+            <tr>
+                <td>项目运作</td>
+                <td>{{theTeam.project.name}}</td>
+            </tr>
+            <tr>
+                <td>成立时间</td>
+                <td>{{theTeam.birthday | date:"yyyy-MM-dd"}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </row>
+
 </div>
