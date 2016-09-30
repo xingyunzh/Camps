@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var teamSchema = Schema({
+var activeTeamSchema = Schema({
 	name:{
 		type:String,
 		index:true,
@@ -15,20 +15,16 @@ var teamSchema = Schema({
 		type:String,
 		required:true,
 		index:true
-	}
-
-	isActive:Boolean,
+	},
 
 	project:{
 		type:Schema.Types.ObjectId,
 		ref:'Project'
 	},
 
-	deactiveDate:Date,
-
 	activeDate:Date
 });
 
-var Team = mongoose.model("Team", teamSchema);
+var ActiveTeam = mongoose.model("ActiveTeam", activeTeamSchema);
 
-module.exports = Team;
+module.exports = ActiveTeam;
