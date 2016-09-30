@@ -1,4 +1,4 @@
-var User = require('../models/user.js');
+var userRepository = require('./repositories/userRepository');
 var http = require('http');
 var uidHelper = require('../util/uidHelper');
 var util = require('../util/util.js');
@@ -84,7 +84,7 @@ function login(req,res,type){
 					});
 				break;
 				case STATE_IS_FRIST_TIME:
-					User.find({uid:loginResult.userId},function(err,userResult){
+					userRepository.findByUid(loginResult.userId,function(err,userResult){
 						latestUser = userResult;
 						if(userResult == null){
 							stateMachine(err,STATE_GET_PROFILE);
@@ -100,12 +100,11 @@ function login(req,res,type){
 					})
 				break;
 				case STATE_CREATE_USER:
-					var user = new User();
+					var user = {};
 					user.nickname = latestProfile.nickname;
 					user.uid = loginResult.userId;
 
-					user
-					.save(function(err,result){
+					userRepository.create(user,function(err,result){
 						latestUser = result;
 						stateMachine(err,STATE_CREATE_TOKEN);
 					})

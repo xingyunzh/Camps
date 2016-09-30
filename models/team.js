@@ -2,11 +2,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var teamSchema = Schema({
-	name:String,
+	name:{
+		type:String,
+		index:true,
+		required:true,
+		unique:true
+	},
 
 	description:String,
 
-	teamId:String,
+	teamId:{
+		type:String,
+		required:true,
+		index:true
+	}
 
 	isActive:Boolean,
 

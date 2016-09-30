@@ -5,7 +5,8 @@ var coachSchema = Schema({
 
 	user:{
 		type:Schema.Types.ObjectId,
-		ref:'User'
+		ref:'User',
+		required:true
 	},
 
 	ideas:[{
@@ -21,7 +22,9 @@ var coachSchema = Schema({
 	assets:[{
 		type:Schema.Types.ObjectId,
 		ref:'Asset'
-	}]
+	}],
+
+	sector:String
 });
 
 var Coach = mongoose.model('Coach', coachSchema);

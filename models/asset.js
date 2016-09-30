@@ -2,13 +2,33 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var assetSchema = Schema({
-	name:String,
+	name:{
+		tpye:String,
+		index:true,
+		required:true
+	},
 
-	category:String,
+	assetId:{
+		type:String,
+		index:true,
+		required:true
+	},
 
-	version:String,
+	category:{
+		type:String,
+		index:true,
+		required:true
+	},
 
-	editDate:Date,
+	version:{
+		type:String,
+		required:true
+	},
+
+	editDate:{
+		type:Date,
+		required:true
+	},
 
 	guide:String,
 
@@ -16,7 +36,9 @@ var assetSchema = Schema({
 
 	maintainer:{
 		type:Schema.Types.ObjectId,
-		ref:'User'
+		ref:'User',
+		index:true,
+		required:true
 	}
 });
 
