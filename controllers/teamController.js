@@ -1,9 +1,9 @@
-var Team = require('../models/team');
+var teamRepository = require('./repositories/teamRepository');
 
 exports.createTeam = function(req,res){
 	var team = req.body.team;
 
-	Team.create(team,function(err,result){
+	teamRepository.create(team,function(err,result){
 		if (err) {
 			console.log(err);
 			res.send(util.wrapBody('Internal Err','E'));
@@ -14,5 +14,5 @@ exports.createTeam = function(req,res){
 }
 
 exports.updateTeam = function(req,res){
-	
+	//to do
 }
