@@ -1,68 +1,106 @@
 var Message = require('../models/message');
-
-exports.demo = function(req, res) {
-    Message.find(function(err, data) {
-        if (err) {
-            res.json({
-                status: "E",
-                body: err
-            });
-        } else {
-            res.json({
-                status: "S",
-                body: data
-            });
-        }
-    });
-}
+var User = require('../models/user');
 
 exports.sendMessage = function(req, res) {
-    var fromId = req.body.fromId;
-    var toId = req.body.toId;
+    console.log(req.body);
+    var fromId;
+    var toId;
     var msgTitle = req.body.msgTitle;
     var msgContent = req.body.msgContent;
 
-    var message = new Message();
-    message.title = msgTitle;
-    message.content = msgContent;
-    message.from = fromId;
-    message.to = toId;
-    message.createDate = new Date();
-    message.isRead = false;
-
-    message.save(function(err, data) {
+    User.findOne({
+        name: req.body.from
+    }, function(err, fromUser) {
         if (err) {
             res.json({
                 status: "E",
                 body: err
             });
         } else {
-            res.json({
-                status: "S",
-                body: data
+            User.findOne({
+                name: req.body.to
+            }, function(err, toUser) {
+                if (err) {
+                    res.json({
+                        status: "E",
+                        body: err
+                    });
+                } else {
+                    var message = new Message();
+                    message.title = msgTitle;
+                    message.content = msgContent;
+                    message.from = fromUser._id;
+                    message.to = toUser._id;
+                    message.createDate = new Date();
+                    message.isRead = false;
+                    message.isDeleted = false;
+
+                    message.save(function(err, data) {
+                        if (err) {
+                            res.json({
+                                status: "E",
+                                body: err
+                            });
+                        } else {
+                            res.json({
+                                status: "S",
+                                body: data
+                            });
+                        }
+                    });
+                }
             });
         }
     });
 }
 
-exports.message = function(req, res) {
+exports.getMessage = function(req, res) {
     var user = req.body.user;
     var selection = req.body.selection; // "all", "read", "unread"
 
-    Message.find({
-        to: user,
-        selection: selection
-    }, function(err, data) {
+    User.findOne({
+        name: req.body.user
+    }, function(err, currentUser) {
         if (err) {
             res.json({
                 status: "E",
                 body: err
             });
         } else {
-            res.json({
-                status: "S",
-                body: data
-            });
+            if (selection == "all") {
+                Message.find({
+                    to: currentUser._id
+                }, function(err, data) {
+                    if (err) {
+                        res.json({
+                            status: "E",
+                            body: err
+                        });
+                    } else {
+                        res.json({
+                            status: "S",
+                            body: data
+                        });
+                    }
+                })
+            } else {
+                Message.find({
+                    to: currentUser._id,
+                    isRead: (selection == "read" ? true : false)
+                }, function(err, data) {
+                    if (err) {
+                        res.json({
+                            status: "E",
+                            body: err
+                        });
+                    } else {
+                        res.json({
+                            status: "S",
+                            body: data
+                        });
+                    }
+                })
+            }
         }
     })
 }

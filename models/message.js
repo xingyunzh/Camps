@@ -13,7 +13,8 @@ var messageSchema = Schema({
         ref: 'User'
     },
     createDate: Date,
-    selection: String // "all", "read", "unread"
+    isRead: Boolean,
+    isDeleted: Boolean
 });
 
 var Message = mongoose.model("Message", messageSchema);
