@@ -16,8 +16,40 @@ var sprintSchema = Schema({
 		ref:'Task'
 	}],
 
+	discussMinutes:[{
+		type:Schema.Types.ObjectId,
+		ref:'discussMinutes'
+	}]
+
 	deliverables:{
-		//To Do
+		snapShot:[{
+			url:String,
+			user:{
+				type:Schema.Types.ObjectId,
+				ref:'User'
+			},
+			date:Date
+		}],
+
+		evaluate:String,
+
+		demo:{
+			url:String,
+			user:{
+				type:Schema.Types.ObjectId,
+				ref:'User'
+			},
+			date:Date
+		},
+
+		git:{
+			url:String,
+			user:{
+				type:Schema.Types.ObjectId,
+				ref:'User'
+			},
+			date:Date
+		}
 	}
 });
 

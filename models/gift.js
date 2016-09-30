@@ -4,12 +4,12 @@ var Schema = mongoose.Schema;
 var giftSchema = Schema({
 	from:{
 		type:Schema.Types.ObjectId,
-		ref:'user'
+		ref:'User'
 	},
 
 	to:{
 		type:Schema.Types.ObjectId,
-		ref:'user'
+		ref:'User'
 	},
 
 	content:String,
