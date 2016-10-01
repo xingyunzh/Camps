@@ -438,6 +438,57 @@ var teamData = [
     },
 ];
 
+var userData = [
+    {
+        name:"Jim Green",
+        email:"jimgreen@test.com",
+        uid:1,
+        roles:"player",
+        skills:[],
+        sector:"Student"
+    },
+    {
+        name:"Kate Green",
+        email:"kategreen@test.com",
+        uid:2,
+        roles:"player",
+        skills:[],
+        sector:"Student"
+    },
+    {
+        name:"Han Mei Mei",
+        email:"hmmgreen@test.com",
+        uid:3,
+        roles:"player",
+        skills:[],
+        sector:"Student"
+    },
+    {
+        name:"Steve Cooper",
+        email:"stevecgreen@test.com",
+        uid:4,
+        roles:"coach",
+        skills:[],
+        sector:"Student"
+    },
+    {
+        name:"Bob Palmer",
+        email:"bobp@test.com",
+        uid:5,
+        roles:"coach",
+        skills:[],
+        sector:"Student"
+    },
+    {
+        name:"Cherry Palmer",
+        email:"cherrypal@test.com",
+        uid:6,
+        roles:"player",
+        skills:[],
+        sector:"Student"
+    },
+];
+
 // var projectSchema = Schema({
 //     name:String,
 //
