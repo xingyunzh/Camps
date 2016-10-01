@@ -23,7 +23,8 @@ app.component('userTypehead', {
 
         $scope.handleAddButton = function () {
             if (typeof $scope.selectedUser != 'string') {
-                $scope.$ctrl.notifySelected({user:$scope.selectedUser});
+                $scope.$ctrl.notifySelected({user:angular.copy($scope.selectedUser)});
+                $scope.selectedUser = null;
             }
         }
     }

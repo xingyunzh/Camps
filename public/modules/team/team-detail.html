@@ -1,12 +1,14 @@
 <div class="bg-primary container-fluid camps-head-strip">
     <div class="camps-parent-width">
-        <h1 class="text-center">团队:  {{theTeam.name}}</h1>
-        <h4 class="text-center">队长: {{theTeam.leader.name}}</h4>
+        <h1 class="text-center">团队:  {{form.name}}</h1>
+        <h4 class="text-center">队长: {{form.leader.name}}</h4>
     </div>
 </div>
 
 <div class="container">
     <row>
+        <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
+        &nbsp;&nbsp;
         <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">{{isEditing ? "保存修改" : "编辑基本信息"}}</button>
     </row>
 
@@ -22,27 +24,34 @@
             <tr>
                 <td>团队名称</td>
                 <td>
-                    <span ng-hide="isEditing">{{theTeam.name}}</span>
+                    <span ng-hide="isEditing">{{form.name}}</span>
                     <span ng-show="isEditing"><input type="text" class="form-control" ng-model="form.name"></span>
                 </td>
             </tr>
             <tr>
                 <td>团队描述</td>
                 <td>
-                    <span ng-hide="isEditing">{{theTeam.description}}</span>
+                    <span ng-hide="isEditing">{{form.description}}</span>
                     <span ng-show="isEditing"><textarea class='form-control' cols="30" rows="5" ng-model="form.description"></textarea></span>
                 </td>
             </tr>
             <tr>
                 <td>队长</td>
                 <td>
-                    <span ng-hide="isEditing">{{theTeam.leader.name}}</span>
-                    <span ng-show="isEditing"></span>
+                    <span>{{form.leader.name}}</span>
+                    <span ng-show="isEditing"><user-typehead on-selected="form.leader = user;"></user-typehead></span>
                 </td>
             </tr>
             <tr>
                 <td>团队成员</td>
-                <td> <span ng-repeat="user in theTeam.members"><button class="btn btn-primary" >{{user.name}}</button>&nbsp;</span> </td>
+                <td> <span ng-repeat="user in form.members">
+                        <span class="label label-info" >{{user.name}}
+                               <span class="btn glyphicon glyphicon-remove" ng-show="isEditing" ng-click="form.members.splice($index, 1)"></span>
+                        </span>
+                    &nbsp;
+                    </span>
+                    <span ng-show="isEditing"><user-typehead on-selected="onAddMemeberToForm(user)"></user-typehead></span>
+                </td>
             </tr>
             <tr>
                 <td>项目运作</td>
