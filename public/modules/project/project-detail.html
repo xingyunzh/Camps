@@ -1,0 +1,49 @@
+<div class="bg-primary container-fluid camps-head-strip">
+    <div class="camps-parent-width">
+        <h1 class="text-center">项目名:  {{form.name}}</h1>
+    </div>
+</div>
+
+<div class="container">
+    <row>
+        <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
+        &nbsp;&nbsp;
+        <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">{{isEditing ? "保存修改" : "编辑基本信息"}}</button>
+    </row>
+
+    <row>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="col-md-1">&nbsp;标题&nbsp;</th>
+                <th class="text-center col-md-11">内容</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>项目名称</td>
+                <td>
+                    <span ng-hide="isEditing">{{form.name}}</span>
+                    <span ng-show="isEditing"><input type="text" class="form-control" ng-model="form.name"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>项目范围</td>
+                <td>
+                    <span ng-hide="isEditing">{{form.scope}}</span>
+                    <span ng-show="isEditing"><textarea class='form-control' cols="30" rows="5" ng-model="form.scope"></textarea></span>
+                </td>
+            </tr>
+            <tr>
+                <td>团队</td>
+                <td>
+                    <span>{{theProject.team.name}}</span>
+                    <!--<span ng-show="isEditing"><user-typehead on-selected="form.leader = user;"></user-typehead></span>-->
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </row>
+
+</div>

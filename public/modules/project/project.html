@@ -10,7 +10,7 @@
             <h3 class="center-block">项目列表</h3>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary center-block camps-team-submit">创建项目</button>
+            <button class="btn btn-primary center-block camps-team-submit" ui-sref="nav.createProject">创建项目</button>
         </div>
         <div class="col-md-3">
             <div class="input-group">
@@ -27,16 +27,20 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <div class="media camps-media-card" ng-repeat="project in projects">
-                <a href="#" class="media-left">
-                    <img src="images/stars_logo.jpg" alt="Img">
+            <div ng-repeat="project in projects">
+                <a ng-click="handleProjectClicked(project)">
+                    <div class="media camps-media-card" >
+                        <div class="media-left">
+                            <img src="images/stars_logo.jpg" alt="Img">
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                {{project.name}}
+                            </h4>
+                            {{project.scope}}
+                        </div>
+                    </div>
                 </a>
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        {{project.title}}
-                    </h4>
-                    {{project.detail}}
-                </div>
             </div>
         </div>
         <div class="col-md-3"></div>

@@ -57,4 +57,8 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
         $scope.selectedUser = user;
     }
 
+    $scope.updateSelectedIdea = function (idea) {
+        $scope.selectedIdea = idea;
+    }
+
 }]);
