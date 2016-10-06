@@ -61,4 +61,12 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
         $scope.selectedIdea = idea;
     }
 
+    $scope.updateSelectedProject = function (project){
+        $scope.selectedProject = project;
+    }
+
+    $scope.updateSelectedTeam = function (team) {
+        $scope.selectedTeam = team;
+    }
+
 }]);

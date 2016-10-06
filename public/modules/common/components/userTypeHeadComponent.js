@@ -2,7 +2,7 @@
  * Created by brillwill on 16/10/1.
  */
 app.component('userTypehead', {
-    templateUrl: "./modules/common/user-type-head-input.html",
+    templateUrl: "./modules/common/components/user-type-head-input.html",
     bindings: {
         whichRole: "=",
         notifySelected:"&onSelected"
@@ -22,7 +22,7 @@ app.component('userTypehead', {
         }
 
         $scope.handleAddButton = function () {
-            if (typeof $scope.selectedUser != 'string') {
+            if ($scope.selectedUser!= null && typeof $scope.selectedUser != 'string') {
                 $scope.$ctrl.notifySelected({user:angular.copy($scope.selectedUser)});
                 $scope.selectedUser = null;
             }

@@ -1,0 +1,17 @@
+<div class="input-group">
+    <input type="text" ng-model="selectedTeam" placeholder="输入团队名称查找"
+           uib-typeahead="team as team.name for team in getTeams($viewValue)"
+           typeahead-loading="loadingTeams"
+           typeahead-no-results="noResults"
+           typeahead-on-select="handleSelected($item, $model, $label, $event)"
+           class="form-control">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="handleAddButton()"><i class="glyphicon glyphicon-plus"></i></button>
+    </span>
+</div>
+
+<i ng-show="loadingTeams" class="glyphicon glyphicon-refresh"></i>
+<div ng-show="noResults">
+    <i class="glyphicon glyphicon-remove"></i> No Results Found
+</div>
+

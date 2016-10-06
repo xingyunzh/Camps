@@ -504,7 +504,7 @@ var projectData = [
     {
         id : 1,
         idea:1,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用1",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -636,7 +636,7 @@ var projectData = [
     {
         id : 2,
         idea:2,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用2",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -768,7 +768,7 @@ var projectData = [
     {
         id : 3,
         idea:3,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用3",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -899,7 +899,7 @@ var projectData = [
     },
     {
         id : 4,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用4",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -1030,7 +1030,7 @@ var projectData = [
     },
     {
         id : 5,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用5",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -1161,7 +1161,7 @@ var projectData = [
     },
     {
         id : 6,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用6",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -1292,7 +1292,7 @@ var projectData = [
     },
     {
         id : 7,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用7",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -1423,7 +1423,7 @@ var projectData = [
     },
     {
         id : 8,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用8",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -1554,7 +1554,7 @@ var projectData = [
     },
     {
         id : 9,
-        name:"基于MEAN框架的会议议程助手应用",
+        name:"基于MEAN框架的会议议程助手应用9",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",

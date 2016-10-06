@@ -2,7 +2,7 @@
  * Created by brillwill on 16/10/5.
  */
 app.component('ideaTypehead', {
-    templateUrl: "./modules/common/idea-type-head-input.html",
+    templateUrl: "./modules/common/components/idea-type-head-input.html",
     bindings: {
         whichRole: "=",
         notifySelected:"&onSelected"
@@ -19,7 +19,7 @@ app.component('ideaTypehead', {
         }
 
         $scope.handleAddButton = function () {
-            if (typeof $scope.selectedIdea != 'string') {
+            if ($scope.selectedIdea != null && typeof $scope.selectedIdea != 'string') {
                 $scope.$ctrl.notifySelected({idea:angular.copy($scope.selectedIdea)});
                 $scope.selectedIdea = null;
             }
