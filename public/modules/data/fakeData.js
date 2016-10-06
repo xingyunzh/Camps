@@ -18,7 +18,32 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        },
+        projects: [
+            {
+                id: 1,
+                name: "基于MEAN框架的会议议程助手应用1-Backend",
+                scope: "实现后台REST风格接口功能",
+            },
+            {
+                id: 2,
+                name: "基于MEAN框架的会议议程助手应用2-GUI",
+                scope: "实现GUI",
+            },
+            {
+                id: 3,
+                name: "基于MEAN框架的会议议程助手应用3-iOS",
+                scope: "实现iOS",
+            }
+        ]
     },
     {
         id:2,
@@ -36,7 +61,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:3,
@@ -54,7 +87,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:4,
@@ -72,7 +113,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:5,
@@ -90,7 +139,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:6,
@@ -108,7 +165,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:7,
@@ -126,7 +191,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:8,
@@ -144,7 +217,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:9,
@@ -162,7 +243,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:10,
@@ -180,7 +269,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
     {
         id:11,
@@ -198,7 +295,15 @@ var ideaData = [
         solution:"通过一个大家协同的工具,来提醒主持人议程时间,记录关建问题,并实现提问,投票,会议记录等多种会议功能的互联网应用,来帮助会议提效率。",
         hrRequirement:"3位开发人员的team,1位设计师",
         relatedAssets:[],
-        imageUrl:"./images/stars_logo.jpg"
+        imageUrl:"./images/stars_logo.jpg",
+        consultant:{
+            name:"Bob Palmer",
+            email:"bobp@test.com",
+            uid:5,
+            roles:"coach",
+            skills:[],
+            sector:"Traffic"
+        }
     },
 ];
 
@@ -243,6 +348,14 @@ var teamData = [
             skills:[],
             sector:"Student"
         },
+        coach:{
+            name:"Steve Cooper",
+            email:"stevecgreen@test.com",
+            uid:4,
+            roles:"coach",
+            skills:[],
+            sector:"Student"
+        }
     },
     {
         name:"人马座",
@@ -286,6 +399,14 @@ var teamData = [
             skills:[],
             sector:"Student"
         },
+        coach:{
+            name:"Steve Cooper",
+            email:"stevecgreen@test.com",
+            uid:4,
+            roles:"coach",
+            skills:[],
+            sector:"Student"
+        }
     },
     {
         name:"天马座",
@@ -309,6 +430,14 @@ var teamData = [
             skills:[],
             sector:"Student"
         },
+        coach:{
+            name:"Steve Cooper",
+            email:"stevecgreen@test.com",
+            uid:4,
+            roles:"coach",
+            skills:[],
+            sector:"Student"
+        }
     },
     {
         name:"人马座",
@@ -488,7 +617,7 @@ var userData = [
         uid:5,
         roles:"coach",
         skills:[],
-        sector:"Student"
+        sector:"Traffic"
     },
     {
         name:"Cherry Palmer",

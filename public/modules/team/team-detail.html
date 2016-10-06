@@ -36,10 +36,17 @@
                 </td>
             </tr>
             <tr>
+                <td>教练</td>
+                <td>
+                    <span>{{form.coach.name}}</span>
+                    <span ng-show="isEditing"><user-typehead which-role="coach" on-selected="form.coach = user;"></span>
+                </td>
+            </tr>
+            <tr>
                 <td>队长</td>
                 <td>
                     <span>{{form.leader.name}}</span>
-                    <span ng-show="isEditing"><user-typehead on-selected="form.leader = user;"></user-typehead></span>
+                    <span ng-show="isEditing"><user-typehead which-role="player" on-selected="form.leader = user;"></user-typehead></span>
                 </td>
             </tr>
             <tr>

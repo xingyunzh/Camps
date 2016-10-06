@@ -38,8 +38,9 @@ app.controller("teamDetailController", ["$scope", "$rootScope", "util", function
         return {
             name:$rootScope.theTeam.name,
             description:$rootScope.theTeam.description,
-            leader:$rootScope.theTeam.leader,
-            members:$rootScope.theTeam.members.slice()
+            leader:angular.copy($rootScope.theTeam.leader),
+            members:$rootScope.theTeam.members.slice(),
+            coach:angular.copy($rootScope.theTeam.coach),
         };
     }
 
