@@ -13,12 +13,7 @@
             <button class="btn btn-primary center-block camps-team-submit" ui-sref="nav.createProject">创建项目</button>
         </div>
         <div class="col-md-3">
-            <div class="input-group">
-                <input type="text" class="form-control">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+            <project-typehead glyphicon-class="glyphicon-search" on-selected="handleProjectClicked(project)"></project-typehead>
         </div>
     </div>
 </div>

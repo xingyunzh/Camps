@@ -4,6 +4,7 @@
 app.component('userTypehead', {
     templateUrl: "./modules/common/components/user-type-head-input.html",
     bindings: {
+        glyphiconClass:"=",
         whichRole: "=",
         notifySelected:"&onSelected"
     },
@@ -16,6 +17,7 @@ app.component('userTypehead', {
         };
         
         $scope.selectedUser = null;
+        $scope.iconClass = $attrs.glyphiconClass == null ? "glyphicon glyphicon-plus" : "glyphicon " + $attrs.glyphiconClass;
 
         $scope.handleSelected = function ($item, $model, $label, $event) {
             // $scope.$ctrl.notifySelected({user:$model});
