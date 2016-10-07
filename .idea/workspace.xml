@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e7b0e76-3f1c-444b-b672-037a03ef2253" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/asset/asset.html" afterPath="$PROJECT_DIR$/public/modules/asset/asset.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/components/idea-type-head-input.html" afterPath="$PROJECT_DIR$/public/modules/common/components/idea-type-head-input.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/components/ideaTypeHeadComponent.js" afterPath="$PROJECT_DIR$/public/modules/common/components/ideaTypeHeadComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/components/project-type-head-input.html" afterPath="$PROJECT_DIR$/public/modules/common/components/project-type-head-input.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/components/projectTypeHeadComponent.js" afterPath="$PROJECT_DIR$/public/modules/common/components/projectTypeHeadComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/components/team-type-head-input.html" afterPath="$PROJECT_DIR$/public/modules/common/components/team-type-head-input.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/components/teamTypeHeadComponent.js" afterPath="$PROJECT_DIR$/public/modules/common/components/teamTypeHeadComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/components/user-type-head-input.html" afterPath="$PROJECT_DIR$/public/modules/common/components/user-type-head-input.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/components/userTypeHeadComponent.js" afterPath="$PROJECT_DIR$/public/modules/common/components/userTypeHeadComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/idea/idea.html" afterPath="$PROJECT_DIR$/public/modules/idea/idea.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/idea/ideaController.js" afterPath="$PROJECT_DIR$/public/modules/idea/ideaController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/project/project.html" afterPath="$PROJECT_DIR$/public/modules/project/project.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/team/team.html" afterPath="$PROJECT_DIR$/public/modules/team/team.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/common/common.js" afterPath="$PROJECT_DIR$/public/modules/common/common.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/data/fakeData.js" afterPath="$PROJECT_DIR$/public/modules/data/fakeData.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/idea/ideaService.js" afterPath="$PROJECT_DIR$/public/modules/idea/ideaService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/project/new-project.html" afterPath="$PROJECT_DIR$/public/modules/project/new-project.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/project/project-detail.html" afterPath="$PROJECT_DIR$/public/modules/project/project-detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/project/projectDetailController.js" afterPath="$PROJECT_DIR$/public/modules/project/projectDetailController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/project/projectService.js" afterPath="$PROJECT_DIR$/public/modules/project/projectService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/team/team-detail.html" afterPath="$PROJECT_DIR$/public/modules/team/team-detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/team/teamDetailController.js" afterPath="$PROJECT_DIR$/public/modules/team/teamDetailController.js" />
     </list>
     <ignored path="Camps.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,21 +33,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="idea-type-head-input.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/common/components/idea-type-head-input.html">
+      <file leaf-file-name="fakeData.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/modules/data/fakeData.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="286">
+              <caret line="410" column="6" selection-start-line="410" selection-start-column="6" selection-end-line="410" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#43#0" expanded="false" />
+                <element signature="e#65#1335#0" expanded="false" />
+                <element signature="e#1341#2171#0" expanded="false" />
+                <element signature="e#2177#3008#0" expanded="false" />
+                <element signature="e#3014#3845#0" expanded="false" />
+                <element signature="e#3851#4682#0" expanded="false" />
+                <element signature="e#4688#5519#0" expanded="false" />
+                <element signature="e#5525#6356#0" expanded="false" />
+                <element signature="e#6362#7193#0" expanded="false" />
+                <element signature="e#7199#8030#0" expanded="false" />
+                <element signature="e#8036#8868#0" expanded="false" />
+                <element signature="e#8874#9707#0" expanded="false" />
+                <element signature="e#9734#10902#0" expanded="false" />
+                <element signature="e#10908#12091#0" expanded="false" />
+                <element signature="e#12097#12901#0" expanded="false" />
+                <element signature="e#12907#13322#0" expanded="false" />
+                <element signature="e#13328#13933#0" expanded="false" />
+                <element signature="e#13939#14354#0" expanded="false" />
+                <element signature="e#14360#14965#0" expanded="false" />
+                <element signature="e#14971#15386#0" expanded="false" />
+                <element signature="e#15392#15997#0" expanded="false" />
+                <element signature="e#16003#16418#0" expanded="false" />
+                <element signature="e#16439#17394#0" expanded="false" />
+                <element signature="e#17421#21040#0" expanded="false" />
+                <element signature="e#17536#18663#0" expanded="false" />
+                <element signature="e#21046#29516#0" expanded="false" />
+                <element signature="e#21153#22511#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="teamController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/team/teamController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ideaTypeHeadComponent.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/common/components/ideaTypeHeadComponent.js">
+      <file leaf-file-name="projectDetailController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/project/projectDetailController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+            <state relative-caret-position="765">
+              <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -57,11 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="teamTypeHeadComponent.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/common/components/teamTypeHeadComponent.js">
+      <file leaf-file-name="teamDetailController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/team/teamDetailController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+            <state relative-caret-position="465">
+              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newProjectController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/project/newProjectController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -69,31 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="team.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/team/team.html">
+      <file leaf-file-name="projectService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/project/projectService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="97" selection-start-line="15" selection-start-column="97" selection-end-line="15" selection-end-column="97" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="project.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/modules/project/project.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="25" column="60" selection-start-line="25" selection-start-column="60" selection-end-line="25" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userTypeHeadComponent.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/common/components/userTypeHeadComponent.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+            <state relative-caret-position="391">
+              <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -101,43 +127,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="projectTypeHeadComponent.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/common/components/projectTypeHeadComponent.js">
+      <file leaf-file-name="team-detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/team/team-detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#43#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="idea.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/idea/idea.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="14" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+            <state relative-caret-position="510">
+              <caret line="70" column="50" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ideaController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/idea/ideaController.js">
+      <file leaf-file-name="new-project.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/project/new-project.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="project-detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/project/project-detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="projectController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/project/projectController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="asset.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/asset/asset.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -161,7 +185,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/public/js/app.js" />
-        <option value="$PROJECT_DIR$/public/modules/common/common.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/public/modules/nav/navController.js" />
         <option value="$PROJECT_DIR$/public/modules/idea/create-new-idea.html" />
@@ -169,9 +192,7 @@
         <option value="$PROJECT_DIR$/routes/router.js" />
         <option value="$PROJECT_DIR$/public/modules/data/ideaData.js" />
         <option value="$PROJECT_DIR$/public/modules/idea/idea.css" />
-        <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/public/modules/nav/nav.html" />
-        <option value="$PROJECT_DIR$/public/modules/team/teamController.js" />
         <option value="$PROJECT_DIR$/public/modules/team/new-team.html" />
         <option value="$PROJECT_DIR$/public/modules/team/team.css" />
         <option value="$PROJECT_DIR$/public/modules/coach/coachService.js" />
@@ -179,25 +200,16 @@
         <option value="$PROJECT_DIR$/public/modules/common/user-type-head-input.html" />
         <option value="$PROJECT_DIR$/public/modules/common/userTypeHeadComponent.js" />
         <option value="$PROJECT_DIR$/public/modules/team/newTeamController.js" />
-        <option value="$PROJECT_DIR$/public/modules/project/new-project.html" />
-        <option value="$PROJECT_DIR$/public/js/router.js" />
         <option value="$PROJECT_DIR$/public/modules/project/newProjectController.js" />
         <option value="$PROJECT_DIR$/public/modules/project/projectController.js" />
-        <option value="$PROJECT_DIR$/public/modules/project/project-detail.html" />
-        <option value="$PROJECT_DIR$/public/modules/project/projectDetailController.js" />
         <option value="$PROJECT_DIR$/public/modules/common/ideaTypeHeadComponent.js" />
-        <option value="$PROJECT_DIR$/public/modules/idea/ideaService.js" />
         <option value="$PROJECT_DIR$/public/modules/common/idea-type-head-input.html" />
         <option value="$PROJECT_DIR$/public/modules/asset/assetController.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/public/modules/team/teamService.js" />
-        <option value="$PROJECT_DIR$/public/modules/project/projectService.js" />
-        <option value="$PROJECT_DIR$/public/modules/team/teamDetailController.js" />
-        <option value="$PROJECT_DIR$/public/modules/team/team-detail.html" />
         <option value="$PROJECT_DIR$/public/modules/idea/new-idea.html" />
         <option value="$PROJECT_DIR$/public/modules/idea/ideaDetailController.js" />
         <option value="$PROJECT_DIR$/public/modules/idea/idea-detail.html" />
-        <option value="$PROJECT_DIR$/public/modules/data/fakeData.js" />
         <option value="$PROJECT_DIR$/public/modules/common/components/user-type-head-input.html" />
         <option value="$PROJECT_DIR$/public/modules/asset/asset.html" />
         <option value="$PROJECT_DIR$/public/modules/common/components/team-type-head-input.html" />
@@ -211,6 +223,18 @@
         <option value="$PROJECT_DIR$/public/modules/idea/idea.html" />
         <option value="$PROJECT_DIR$/public/modules/team/team.html" />
         <option value="$PROJECT_DIR$/public/modules/project/project.html" />
+        <option value="$PROJECT_DIR$/public/modules/common/common.js" />
+        <option value="$PROJECT_DIR$/public/css/style.css" />
+        <option value="$PROJECT_DIR$/public/modules/idea/ideaService.js" />
+        <option value="$PROJECT_DIR$/public/modules/project/project-detail.html" />
+        <option value="$PROJECT_DIR$/public/js/router.js" />
+        <option value="$PROJECT_DIR$/public/modules/project/projectDetailController.js" />
+        <option value="$PROJECT_DIR$/public/modules/team/teamController.js" />
+        <option value="$PROJECT_DIR$/public/modules/project/new-project.html" />
+        <option value="$PROJECT_DIR$/public/modules/data/fakeData.js" />
+        <option value="$PROJECT_DIR$/public/modules/team/team-detail.html" />
+        <option value="$PROJECT_DIR$/public/modules/project/projectService.js" />
+        <option value="$PROJECT_DIR$/public/modules/team/teamDetailController.js" />
       </list>
     </option>
   </component>
@@ -223,8 +247,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-41" />
-    <option name="y" value="23" />
+    <option name="x" value="-81" />
+    <option name="y" value="32" />
     <option name="width" value="1558" />
     <option name="height" value="834" />
   </component>
@@ -573,20 +597,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Camps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Camps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -697,18 +707,18 @@
       <workItem from="1474953707732" duration="661000" />
       <workItem from="1474960465520" duration="4434000" />
       <workItem from="1475066603835" duration="5637000" />
-      <workItem from="1475106113973" duration="39647000" />
+      <workItem from="1475106113973" duration="54243000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114274000" />
+    <option name="totallyTimeSpent" value="128870000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-41" y="23" width="1558" height="834" extended-state="0" />
-    <editor active="false" />
+    <frame x="-81" y="32" width="1558" height="834" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23106547" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23106547" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -740,30 +750,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/models/idea.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="25" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/team.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="20" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/team/teamController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -866,14 +861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/project/new-project.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/team/new-team.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -892,56 +879,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/project/newProjectController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/project/projectController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/project/projectDetailController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/player/playerService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/idea/ideaService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="12" selection-end-column="4" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
@@ -956,28 +897,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/project/projectService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/coach/coach.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/team/team-detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="53" column="59" selection-start-line="53" selection-start-column="59" selection-end-line="53" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -1000,22 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/asset/assetController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/project/project-detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="11" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/team/teamService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1023,14 +930,6 @@
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/team/teamDetailController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="24" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1049,35 +948,6 @@
         <state relative-caret-position="1445">
           <caret line="85" column="46" selection-start-line="85" selection-start-column="46" selection-end-line="85" selection-end-column="46" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/data/fakeData.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-            <element signature="e#9728#16331#0" expanded="false" />
-            <element signature="e#16349#17304#0" expanded="false" />
-            <element signature="e#17331#20950#0" expanded="false" />
-            <element signature="e#17446#18573#0" expanded="false" />
-            <element signature="e#21071#22198#0" expanded="false" />
-            <element signature="e#24581#28200#0" expanded="false" />
-            <element signature="e#24696#25823#0" expanded="false" />
-            <element signature="e#28206#31809#0" expanded="false" />
-            <element signature="e#28305#29432#0" expanded="false" />
-            <element signature="e#31815#35418#0" expanded="false" />
-            <element signature="e#31914#33041#0" expanded="false" />
-            <element signature="e#35424#39027#0" expanded="false" />
-            <element signature="e#35523#36650#0" expanded="false" />
-            <element signature="e#39033#42636#0" expanded="false" />
-            <element signature="e#39132#40259#0" expanded="false" />
-            <element signature="e#42642#46245#0" expanded="false" />
-            <element signature="e#42741#43868#0" expanded="false" />
-            <element signature="e#46251#49854#0" expanded="false" />
-            <element signature="e#46350#47477#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1101,24 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/asset/asset.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -1187,19 +1039,185 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/team/team.html">
+    <entry file="file://$PROJECT_DIR$/public/modules/project/project.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="97" selection-start-line="15" selection-start-column="97" selection-end-line="15" selection-end-column="97" />
+        <state relative-caret-position="507">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/project/project.html">
+    <entry file="file://$PROJECT_DIR$/public/modules/asset/asset.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
-          <caret line="25" column="60" selection-start-line="25" selection-start-column="60" selection-end-line="25" selection-end-column="60" />
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="41" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/asset/assetController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/common/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="51" column="14" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/idea/ideaService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/team/team.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="51" column="25" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/project/projectController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/team/team-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="70" column="50" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/team/teamController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/project/projectService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/team/teamDetailController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/project/newProjectController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/project/new-project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/project/projectDetailController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/project/project-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/data/fakeData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="410" column="6" selection-start-line="410" selection-start-column="6" selection-end-line="410" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+            <element signature="e#65#1335#0" expanded="false" />
+            <element signature="e#1341#2171#0" expanded="false" />
+            <element signature="e#2177#3008#0" expanded="false" />
+            <element signature="e#3014#3845#0" expanded="false" />
+            <element signature="e#3851#4682#0" expanded="false" />
+            <element signature="e#4688#5519#0" expanded="false" />
+            <element signature="e#5525#6356#0" expanded="false" />
+            <element signature="e#6362#7193#0" expanded="false" />
+            <element signature="e#7199#8030#0" expanded="false" />
+            <element signature="e#8036#8868#0" expanded="false" />
+            <element signature="e#8874#9707#0" expanded="false" />
+            <element signature="e#9734#10902#0" expanded="false" />
+            <element signature="e#10908#12091#0" expanded="false" />
+            <element signature="e#12097#12901#0" expanded="false" />
+            <element signature="e#12907#13322#0" expanded="false" />
+            <element signature="e#13328#13933#0" expanded="false" />
+            <element signature="e#13939#14354#0" expanded="false" />
+            <element signature="e#14360#14965#0" expanded="false" />
+            <element signature="e#14971#15386#0" expanded="false" />
+            <element signature="e#15392#15997#0" expanded="false" />
+            <element signature="e#16003#16418#0" expanded="false" />
+            <element signature="e#16439#17394#0" expanded="false" />
+            <element signature="e#17421#21040#0" expanded="false" />
+            <element signature="e#17536#18663#0" expanded="false" />
+            <element signature="e#21046#29516#0" expanded="false" />
+            <element signature="e#21153#22511#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

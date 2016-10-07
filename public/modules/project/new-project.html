@@ -18,6 +18,14 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2">关联创意:</label>
+            <div class="col-md-10">
+                <span>{{ideaName}}</span>
+                <idea-typehead on-selected="form.idea = idea.id;ideaName=idea.name"></idea-typehead>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div class="checkbox">
                     <labbel>

@@ -10,4 +10,18 @@ app.service("ideaService", ["util", "$q", function (util, $q) {
 
         return deferred.promise;
     }
+
+    this.getIdeaById = function (id) {
+        var deferred = $q.defer();
+        setTimeout(function(){
+            var idea = null;
+            _.forEach(ideaData,function(item){
+               item.id == id;
+                idea = item;
+            });
+            deferred.resolve(idea);
+        });
+
+        return deferred.promise;
+    }
 }]);

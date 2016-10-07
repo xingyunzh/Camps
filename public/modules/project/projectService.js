@@ -9,5 +9,20 @@ app.service("projectService", ["util", "$q", function (util, $q) {
         }, 0);
 
         return deferred.promise;
+    };
+
+    this.getProjectById = function (id){
+        var deferred = $q.defer();
+        setTimeout(function () {
+            var project = null;
+            _.forEach(projectData, function (p) {
+                if(p.id === id){
+                    project = p;
+                }
+            });
+            deferred.resolve(project);
+        });
+
+        return deferred.promise;
     }
 }]);

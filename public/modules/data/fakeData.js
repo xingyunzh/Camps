@@ -315,6 +315,7 @@ var teamData = [
         isActive:true,
         birthday:new Date("2015-12-12"),
         project:{
+            id:1,
             name:"基于web的会议议程助手系统界面",
             scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
             team:null,
@@ -415,6 +416,7 @@ var teamData = [
         isActive:true,
         birthday:new Date("2015-12-12"),
         project:{
+            id:2,
             name:"基于web的会议议程助手系统界面",
             scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
             team:null,
@@ -463,6 +465,7 @@ var teamData = [
         isActive:true,
         birthday:new Date("2015-12-12"),
         project:{
+            id:2,
             name:"基于web的会议议程助手系统界面",
             scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
             team:null,
@@ -503,6 +506,7 @@ var teamData = [
         isActive:true,
         birthday:new Date("2015-12-12"),
         project:{
+            id:1,
             name:"基于web的会议议程助手系统界面",
             scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
             team:null,
@@ -543,6 +547,7 @@ var teamData = [
         isActive:true,
         birthday:new Date("2015-12-12"),
         project:{
+            id:1,
             name:"基于web的会议议程助手系统界面",
             scope:"实现会议议程助手系统主要功能的UI页面,是用假数据作为填充",
             team:null,
@@ -765,7 +770,7 @@ var projectData = [
     {
         id : 2,
         idea:2,
-        name:"基于MEAN框架的会议议程助手应用2",
+        name:"点我看项目详情页面2",
         scope:"实现后台REST风格接口功能",
         team: {
             name:"天马座",
@@ -807,6 +812,14 @@ var projectData = [
                 skills:[],
                 sector:"Student"
             },
+            coach:{
+                name:"Steve Cooper",
+                email:"stevecgreen@test.com",
+                uid:4,
+                roles:"coach",
+                skills:[],
+                sector:"Student"
+            }
         },
         backlog:[
             {
@@ -836,6 +849,7 @@ var projectData = [
         ],
         sprints:[
             {
+                id:301,
                 startDate:new Date("2016-10-1"),
                 endDate:new Date("2016-10-15"),
                 userStories:[{
@@ -849,6 +863,40 @@ var projectData = [
                         do:"能够使用email和密码直接登录系统",
                         then:"快速的登录和开始工作",
                         id:2
+                    },
+                ]
+            },
+            {   id:302,
+                startDate:new Date("2016-9-15"),
+                endDate:new Date("2016-9-30"),
+                userStories:[{
+                    as:"新用户",
+                    do:"能够使用kacha直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:3
+                },
+                    {
+                        as:"新用户",
+                        do:"能够使用cake和密码直接登录系统",
+                        then:"快速的登录和开始工作",
+                        id:4
+                    },
+                ]
+            },
+            {   id:303,
+                startDate:new Date("2016-9-1"),
+                endDate:new Date("2016-9-15"),
+                userStories:[{
+                    as:"新用户",
+                    do:"能够使用kacha直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:3
+                },
+                    {
+                        as:"新用户",
+                        do:"能够使用cake和密码直接登录系统",
+                        then:"快速的登录和开始工作",
+                        id:4
                     },
                 ]
             }
@@ -890,6 +938,123 @@ var projectData = [
                     do:"能够使用微信直接登录系统",
                     then:"快速的登录和开始工作",
                     id:1
+                }
+            },
+            {
+                id:3,
+                description:"设计并实现本系统的用户模块",
+                dueDate:new Date("2016-10-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用email和密码直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:2
+                }
+            },
+            {
+                id:4,
+                description:"设计并实现本系统的用户模块",
+                dueDate:new Date("2016-10-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用email和密码直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:2
+                }
+            },
+
+
+
+            {
+                id:5,
+                description:"基层微信第三方开发环境",
+                dueDate:new Date("2016-10-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用微信直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:3
+                }
+            },
+            {
+                id:6,
+                description:"设计并实现本系统的用户模块",
+                dueDate:new Date("2016-10-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用微信直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:3
+                }
+            },
+            {
+                id:7,
+                description:"设计并实现本系统的用户模块",
+                dueDate:new Date("2016-10-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用email和密码直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:3
+                }
+            },
+            {
+                id:8,
+                description:"设计并实现本系统的用户模块",
+                dueDate:new Date("2016-10-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用email和密码直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:4
                 }
             },
         ]
@@ -939,6 +1104,14 @@ var projectData = [
                 skills:[],
                 sector:"Student"
             },
+            coach:{
+                name:"Steve Cooper",
+                email:"stevecgreen@test.com",
+                uid:4,
+                roles:"coach",
+                skills:[],
+                sector:"Student"
+            }
         },
         backlog:[
             {
@@ -968,6 +1141,7 @@ var projectData = [
         ],
         sprints:[
             {
+                id:301,
                 startDate:new Date("2016-10-1"),
                 endDate:new Date("2016-10-15"),
                 userStories:[{
@@ -983,13 +1157,30 @@ var projectData = [
                         id:2
                     },
                 ]
+            },
+            {   id:302,
+                startDate:new Date("2016-11-1"),
+                endDate:new Date("2016-11-15"),
+                userStories:[{
+                    as:"新用户",
+                    do:"能够使用kacha直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:3
+                },
+                    {
+                        as:"新用户",
+                        do:"能够使用cake和密码直接登录系统",
+                        then:"快速的登录和开始工作",
+                        id:4
+                    },
+                ]
             }
         ],
         tasks:[
             {
                 id:1,
                 description:"基层微信第三方开发环境",
-                dueDate:new Date("2016-10-7"),
+                dueDate:new Date("2016-11-7"),
                 assignee:{
                     name:"Jim Green",
                     email:"jimgreen@test.com",
@@ -1008,7 +1199,7 @@ var projectData = [
             {
                 id:2,
                 description:"设计并实现本系统的用户模块",
-                dueDate:new Date("2016-10-7"),
+                dueDate:new Date("2016-11-7"),
                 assignee:{
                     name:"Jim Green",
                     email:"jimgreen@test.com",
@@ -1021,7 +1212,83 @@ var projectData = [
                     as:"新用户",
                     do:"能够使用微信直接登录系统",
                     then:"快速的登录和开始工作",
-                    id:1
+                    id:2
+                }
+            },
+            {
+                id:3,
+                description:"基层微信第三方开发环境",
+                dueDate:new Date("2016-11-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用微信直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:2
+                }
+            },
+            {
+                id:4,
+                description:"设计并实现本系统的用户模块",
+                dueDate:new Date("2016-11-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用微信直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:2
+                }
+            },
+            {
+                id:5,
+                description:"基层微信第三方开发环境",
+                dueDate:new Date("2016-11-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用微信直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:3
+                }
+            },
+            {
+                id:6,
+                description:"设计并实现本系统的用户模块",
+                dueDate:new Date("2016-11-7"),
+                assignee:{
+                    name:"Jim Green",
+                    email:"jimgreen@test.com",
+                    uid:1,
+                    roles:"player",
+                    skills:[],
+                    sector:"Student"
+                },
+                userStory:{
+                    as:"新用户",
+                    do:"能够使用微信直接登录系统",
+                    then:"快速的登录和开始工作",
+                    id:4
                 }
             },
         ]
@@ -1070,6 +1337,14 @@ var projectData = [
                 skills:[],
                 sector:"Student"
             },
+            coach:{
+                name:"Steve Cooper",
+                email:"stevecgreen@test.com",
+                uid:4,
+                roles:"coach",
+                skills:[],
+                sector:"Student"
+            }
         },
         backlog:[
             {
@@ -1201,6 +1476,14 @@ var projectData = [
                 skills:[],
                 sector:"Student"
             },
+            coach:{
+                name:"Steve Cooper",
+                email:"stevecgreen@test.com",
+                uid:4,
+                roles:"coach",
+                skills:[],
+                sector:"Student"
+            }
         },
         backlog:[
             {
@@ -1332,6 +1615,14 @@ var projectData = [
                 skills:[],
                 sector:"Student"
             },
+            coach:{
+                name:"Steve Cooper",
+                email:"stevecgreen@test.com",
+                uid:4,
+                roles:"coach",
+                skills:[],
+                sector:"Student"
+            }
         },
         backlog:[
             {
@@ -1463,6 +1754,14 @@ var projectData = [
                 skills:[],
                 sector:"Student"
             },
+            coach:{
+                name:"Steve Cooper",
+                email:"stevecgreen@test.com",
+                uid:4,
+                roles:"coach",
+                skills:[],
+                sector:"Student"
+            }
         },
         backlog:[
             {
@@ -1594,6 +1893,14 @@ var projectData = [
                 skills:[],
                 sector:"Student"
             },
+            coach:{
+                name:"Steve Cooper",
+                email:"stevecgreen@test.com",
+                uid:4,
+                roles:"coach",
+                skills:[],
+                sector:"Student"
+            }
         },
         backlog:[
             {
@@ -1725,6 +2032,14 @@ var projectData = [
                 skills:[],
                 sector:"Student"
             },
+            coach:{
+                name:"Steve Cooper",
+                email:"stevecgreen@test.com",
+                uid:4,
+                roles:"coach",
+                skills:[],
+                sector:"Student"
+            }
         },
         backlog:[
             {
