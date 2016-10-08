@@ -5,7 +5,7 @@ app.controller("teamController", ["$scope", "$rootScope", function($scope, $root
     $scope.teams = teamData;
 
     $scope.onTeamClicked = function(team){
-        $rootScope.theTeam = team;
+        $rootScope.theTeam = teamData[0];
 
         $rootScope.$state.go("nav.team-detail");
     }

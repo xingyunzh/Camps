@@ -13,12 +13,7 @@
             <button class="btn btn-primary center-block camps-team-submit" ui-sref="nav.createTeam">创建团队</button>
         </div>
         <div class="col-md-3">
-            <div class="input-group">
-                <input type="text" class="form-control">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+            <team-typehead glyphicon-class="glyphicon-search" on-selected="onTeamClicked(team)"></team-typehead>
         </div>
     </div>
 </div>

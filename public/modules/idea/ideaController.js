@@ -8,7 +8,7 @@ app.controller("ideaController", ["$scope", "$rootScope", function($scope, $root
         $rootScope.theIdea = idea;
         $rootScope.$state.go("nav.idea-detail");
     }
-
+    
 }]);
 
 

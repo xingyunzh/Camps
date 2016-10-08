@@ -1,0 +1,223 @@
+<div class="bg-primary container-fluid camps-head-strip">
+    <div class="camps-parent-width">
+        <h1 class="text-center">项目名:  {{form.name}}</h1>
+    </div>
+</div>
+
+<div class="container">
+    <row>
+        <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
+        &nbsp;&nbsp;
+        <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">{{isEditing ? "保存修改" : "编辑基本信息"}}</button>
+    </row>
+
+    <row>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="col-md-1">&nbsp;标题&nbsp;</th>
+                <th class="text-center col-md-11">内容</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>项目名称</td>
+                <td>
+                    <span ng-hide="isEditing">{{form.name}}</span>
+                    <span ng-show="isEditing"><input type="text" class="form-control" ng-model="form.name"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>项目范围</td>
+                <td>
+                    <span ng-hide="isEditing">{{form.scope}}</span>
+                    <span ng-show="isEditing"><textarea class='form-control' cols="30" rows="5" ng-model="form.scope"></textarea></span>
+                </td>
+            </tr>
+            <tr>
+                <td>创意</td>
+                <td>
+                    <a ng-click="handleIdeaLink()">{{idea.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>团队</td>
+                <td>
+                    <a ng-click="handleTeamLink()">{{theProject.team.name}}</a>
+                    <!--<span ng-show="isEditing"><user-typehead on-selected="form.leader = user;"></user-typehead></span>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </row>
+</div>
+
+<div class="container">
+    <uib-accordion close-others="false">
+        <div uib-accordion-group class="panel-default" is-open="agileBoard.isBacklogOpen" is-disable="agileBoard.isBacklogDisabled">
+            <uib-accordion-heading>
+                    Product Backlog
+            </uib-accordion-heading>
+
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>As</th>
+                    <th>I want</th>
+                    <th>so that</th>
+                    <th>points</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="us in form.backlog">
+                    <td>{{$index + 1}}</td>
+                    <td>
+                        <span ng-hide="isEditing">{{us.as}}</span>
+                        <span ng-show="isEditing"> <input type="text" class="form-control" ng-model="us.as"></span>
+                    </td>
+                    <td>
+                        <span ng-hide="isEditing">{{us.do}}</span>
+                        <span ng-show="isEditing"> <textarea class="form-control" rows="2" ng-model="us.do"></textarea></span>
+                    </td>
+                    <td>
+                        <span ng-hide="isEditing">{{us.then}}</span>
+                        <span ng-show="isEditing"> <textarea class="form-control" rows="2" ng-model="us.then"></textarea></span>
+                    </td>
+                    <td>
+                        <span ng-hide="isEditing">{{temp.x}}</span>
+                        <span ng-show="isEditing"> <input type="text" class="form-control" ng-model="temp.x"></span>
+                    </td>
+                </tbody>
+            </table>
+        </div>
+
+        <div uib-accordion-group class="panel-default" is-open="agileBoard.isSprintsOpen" is-disable="agileBoard.isSprintsDisabled">
+            <uib-accordion-heading>
+                SprintX
+            </uib-accordion-heading>
+
+            <ul class="list-group">
+                <li ng-class="{'list-group-item':true, 'list-group-item-info':$index==0}" ng-repeat="sprint in form.sprints | orderBy:endDate:reverse">
+                    <div class="alert alert-success">
+                        <span>Sprint {{form.sprints.length - $index}} <i ng-if="$index!=0">&nbsp;&nbsp;&nbsp;&nbsp;成绩&nbsp;&nbsp;(执行:90,质量:80,沟通:60,分享:80,足迹:80)</i> </span>
+                        <span class="pull-right">
+                            <span class="form-inline">
+                                开始时间: <span ng-hide="isEditing && $index == 0">{{sprint.startDate | date:"yyyy-MM-dd"}}</span>
+                                <span class="input-group camps-datepicker" ng-show="isEditing" ng-if="$index == 0">
+                                    <input type="text" class="form-control" uib-datepicker-popup ng-model="sprint.startDate" datepicker-options="gOptions.datePicker"
+                                           ng-required="true" is-open="isDatePickerOpen1" close-text="关闭"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="isDatePickerOpen1 = !isDatePickerOpen1"><i class="glyphicon glyphicon-calendar"></i> </button>
+                                    </span>
+                                </span>
+                            </span>
+                            <span>&nbsp;&nbsp;</span>
+                            <span class="form-inline">
+                                结束时间:<span ng-hide="isEditing && $index == 0">{{sprint.endDate | date:"yyyy-MM-dd"}}</span>
+                                <span class="input-group camps-datepicker" ng-show="isEditing" ng-if="$index == 0">
+                                    <input type="text" class="form-control" uib-datepicker-popup ng-model="sprint.endDate" datepicker-options="gOptions.datePicker"
+                                           ng-required="true" is-open="isDatePickerOpen2" close-text="关闭"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="isDatePickerOpen2 = !isDatePickerOpen2"><i class="glyphicon glyphicon-calendar"></i> </button>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+
+                    </div>
+                    <div ng-if="$index == 0">
+                        <div ng-repeat="us in sprint.userStories">
+                            <button class="btn btn-warning" ng-click="usCollapsed = !usCollapsed">{{us | nameOfStory}}</button>
+                            <div uib-collapse="usCollapsed">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>任务内容</th>
+                                        <th>截止时间</th>
+                                        <th>责任人</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="task in tasksOfStory(form.tasks, us) track by task.id">
+                                        <td>{{$index + 1}}</td>
+                                        <td>
+                                            <span ng-hide="isEditing">{{task.description}}</span>
+                                            <textarea ng-show="isEditing" rows="2" class="form-control" ng-model="task.description"></textarea>
+                                        </td>
+                                        <td>
+                                            <span ng-hide="isEditing">{{task.dueDate | date:"yyyy-MM-dd"}}</span>
+                                            <span class="input-group camps-datepicker" ng-show="isEditing">
+                                                <input type="text" class="form-control" uib-datepicker-popup ng-model="task.dueDate" datepicker-options="gOptions.datePicker"
+                                                       ng-required="true" is-open="isDatePickerOpen3" close-text="关闭"/>
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="isDatePickerOpen3 = !isDatePickerOpen3"><i class="glyphicon glyphicon-calendar"></i> </button>
+                                                </span>
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <span>{{task.assignee.name}}</span>
+                                            <user-typehead ng-show="isEditing"
+                                                           which-role="player"
+                                                           on-selected="task.assignee = user"
+                                                           glyphicon-class="glyphicon-ok">
+
+                                            </user-typehead>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="$index != 0">
+                        <div ng-repeat="us in sprint.userStories">
+                            <button class="btn btn-warning" ng-click="usCollapsed = !usCollapsed">{{us | nameOfStory}}</button>
+                            <div uib-collapse="!usCollapsed">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>任务内容</th>
+                                        <th>截止时间</th>
+                                        <th>责任人</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="task in tasksOfStory(form.tasks, us) track by task.id">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{task.description}}</td>
+                                        <td>{{task.dueDate | date:"yyyy-MM-dd"}}</td>
+                                        <td>{{task.assignee.name}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </uib-accordion>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

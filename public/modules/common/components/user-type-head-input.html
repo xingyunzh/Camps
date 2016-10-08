@@ -1,0 +1,17 @@
+<div class="input-group">
+    <input type="text" ng-model="selectedUser" placeholder="输入姓名查找"
+           uib-typeahead="user as user.name for user in getUsers($viewValue)"
+           typeahead-loading="loadingUsers"
+           typeahead-no-results="noResults"
+           typeahead-on-select="handleSelected($item, $model, $label, $event)"
+           class="form-control">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="handleAddButton()"><i ng-class="iconClass"></i></button>
+    </span>
+</div>
+
+<i ng-show="loadingUsers" class="glyphicon glyphicon-refresh"></i>
+<div ng-show="noResults">
+    <i class="glyphicon glyphicon-remove"></i> No Results Found
+</div>
+
