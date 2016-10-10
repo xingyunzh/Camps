@@ -30,7 +30,6 @@ exports.loginByWechat = function(req,res){
 }
 
 function login(req,res,type){
-	var type = null;
 	var email = null;
 	var password = null;
 	var code = null;
@@ -47,12 +46,12 @@ function login(req,res,type){
 	const STATE_CREATE_TOKEN = 6;
 	const STATE_SEND_RESPONSE = 0;
 
-	if (tpye == 'email') {
+	if (type == 'email') {
 		stateMachine(null,STATE_LOGIN_EMAIL);
 	}else if (type == 'wechat') {
 		stateMachine(null,STATE_LOGIN_WECHAT);
 	}else{
-		console.log('Invalide Type:');
+		console.log('Invalid Type:',type);
 		res.send(util.wrapBody('Internal Error','E'));
 	}
 	

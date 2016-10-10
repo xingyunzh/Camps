@@ -12,7 +12,7 @@ module.exports.create = function(userId,callback){
 	
 	jwt.sign({
 		userId:userId
-	},XINGYUNZH_UNIVERSAL_SECRET,{
+	},secret,{
 		expiresIn:3600
 	},callback);
 }
