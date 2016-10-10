@@ -16,3 +16,11 @@ exports.createTeam = function(req,res){
 exports.updateTeam = function(req,res){
 	//to do
 }
+
+exports.removeMember = function(req,res){
+
+}
+
+exports.addMember = function(req,res){
+	
+}
