@@ -6,46 +6,57 @@ app.controller("loginController", ["$scope", "$rootScope", function($scope, $roo
 		console.log('onload');
 	}
 
-	var queryString = getQueryString();
+	$scope.$on('$routeChangeSuccess', function(next, current) {
+		onInit();
+	});
 
-	if(queryString.state !== undefined){
-		if(queryString.code !== undefined){
+	onInit();
 
-			httpHelper.sendRequest("POST", "./login/wechat",{
-				code:queryString.code
-			}).then(function success(data) {
-				if (data.isAuthenticated) {
-					$rootScope.token = data.token;
-	            	$rootScope.currentUser = data.user;
-				} else {
-					$scope.fail = 'Login fail';
-				}
-	            
-	        },function fail(err){
-	            $scope.fail = 'Login fail';
-	        });
+	function onInit(){
+		var queryString = getQueryString();
+
+		if(queryString.state !== undefined){
+			if(queryString.code !== undefined){
+
+				httpHelper.sendRequest("POST", "./login/wechat",{
+					code:queryString.code
+				}).then(function success(data) {
+					if (data.isAuthenticated) {
+						$rootScope.token = data.token;
+		            	$rootScope.currentUser = data.user;
+					} else {
+						$scope.fail = 'Login fail';
+					}
+		            
+		        },function fail(err){
+		            $scope.fail = 'Login fail';
+		        });
+			}
+		}else{
+			var currentURL = window.location.href;
+			var universalAPI = window.location.href.split('#')[0] + '#/nav/login';
+			// var universalAPI = '';
+			// if (currentURL.indexOf('loginB') > -1) {
+			// 	universalAPI = window.location.href.split('#')[0] + '#/nav/login';
+			// } else {
+		 // 		universalAPI = window.location.href.split('#')[0] + '#/nav/loginB';
+			// }
+			
+
+			var obj = new WxLogin({
+			  id:"wechatCode", 
+			  appid: "wx5ce7696222e79ca5", 
+			  scope: "snsapi_login", 
+			  //redirect_uri: "http%3A%2F%2Fwww.xingyunzh.com",
+			  redirect_uri: encodeURIComponent(universalAPI),
+			  state: "345",
+			  style: "",
+			  href: ""
+			});
 		}
-	}else{
-		var currentURL = window.location.href;
-		var universalAPI = '';
-		if (currentURL.indexOf('loginB') > -1) {
-			universalAPI = window.location.href.split('#')[0] + '#/nav/login';
-		} else {
-	 		universalAPI = window.location.href.split('#')[0] + '#/nav/loginB';
-		}
-		
-
-		var obj = new WxLogin({
-		  id:"wechatCode", 
-		  appid: "wx5ce7696222e79ca5", 
-		  scope: "snsapi_login", 
-		  //redirect_uri: "http%3A%2F%2Fwww.xingyunzh.com",
-		  redirect_uri: encodeURIComponent(universalAPI),
-		  state: "345",
-		  style: "",
-		  href: ""
-		});
 	}
+
+
 
 	function getQueryString(){
 	  	// This function is anonymous, is executed immediately and 
