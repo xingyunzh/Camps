@@ -1,0 +1,17 @@
+<div class="input-group">
+    <input type="text" ng-model="selectedProject" placeholder="输入项目名查找"
+           uib-typeahead="project as project.name for project in getProjects($viewValue)"
+           typeahead-loading="loadingProjects"
+           typeahead-no-results="noResults"
+           typeahead-on-select="handleSelected($item, $model, $label, $event)"
+           class="form-control">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="handleAddButton()"><i ng-class="iconClass"></i></button>
+    </span>
+</div>
+
+<i ng-show="loadingProjects" class="glyphicon glyphicon-refresh"></i>
+<div ng-show="noResults">
+    <i class="glyphicon glyphicon-remove"></i> No Results Found
+</div>
+

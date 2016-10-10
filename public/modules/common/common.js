@@ -46,6 +46,13 @@ app.service('httpHelper', function ($http, $q, $rootScope) {
 
 });
 
+
+app.filter("nameOfStory",function () {
+	return function(us){
+		return "US:"+ us.as + ',' + us.do + ',' + us.then;
+	}
+});
+
 app.service('util', function ($q, $uibModal) {
 	this.indexOfObject = function (array, object, equlFunc) {
 		 var i = 0;

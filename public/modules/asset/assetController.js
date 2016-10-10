@@ -7,6 +7,7 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     $scope.isError = false;
     $scope.isDatePickerOpen = false;
     $scope.dt = new Date();
+    $scope.selectedUser = null;
 
     $scope.onRefresh = function () {
         httpHelper.sendRequest("GET", "./demo").then(function success(data) {
@@ -52,5 +53,20 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
         console.log("dt=" + $scope.dt);
     }
 
+    $scope.updateSelectedUser = function (user) {
+        $scope.selectedUser = user;
+    }
+
+    $scope.updateSelectedIdea = function (idea) {
+        $scope.selectedIdea = idea;
+    }
+
+    $scope.updateSelectedProject = function (project){
+        $scope.selectedProject = project;
+    }
+
+    $scope.updateSelectedTeam = function (team) {
+        $scope.selectedTeam = team;
+    }
 
 }]);
