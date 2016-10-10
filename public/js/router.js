@@ -80,7 +80,7 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             controller: "loginController"
         })
         .state("nav.loginB", {
-            url: "/login",
+            url: "/loginB",
             templateUrl: "./modules/login/login.html",
             controller: "loginController"
         });
