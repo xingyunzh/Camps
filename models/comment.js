@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var commentSchema = Schema({
 	user:{
-		type:Schema.types.ObjectId,
+		type:Schema.Types.ObjectId,
 		ref:'user'
 	},
 

@@ -4,12 +4,12 @@ var Schema = mongoose.Schema;
 var thanksLetterSchema = Schema({
 	from:{
 		type:Schema.types.ObjectId,
-		ref:'user'
+		ref:'User'
 	},
 
 	to:{
 		type:Schema.types.ObjectId,
-		ref:'user'
+		ref:'User'
 	},
 
 	content:String,

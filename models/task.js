@@ -6,6 +6,8 @@ var taskSchema = Schema({
 
 	duedate:Date,
 
+	effort:String,
+
 	assignee:{
 		type:Schema.Types.ObjectId,
 		ref:'User'

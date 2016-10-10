@@ -2,14 +2,30 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ideaSchema = Schema({
-	name:String,
+	name:{
+		type:String,
+		required:true,
+		index:true,
+		unique:true
+	},
 
 	background:String,
 
 	innovator:{
 		type:Schema.Types.ObjectId,
-		ref:'User'
+		ref:'User',
+		required:true,
+		index:true,
 	},
+
+	createDate:{
+		type:Date,
+		default:new Date()
+	},
+
+	editDate:Date,
+
+	sector:String,
 
 	deadline:Date,
 

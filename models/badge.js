@@ -2,7 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var badgeSchema = Schema({
-	name:String,
+	name:{
+		type:String,
+		index:true,
+		required:true
+	},
 	
 	content:String
 });

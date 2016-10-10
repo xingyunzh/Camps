@@ -1,4 +1,7 @@
-var userAPI = require('./userAPI.js');
+
+var userAPI = require('./userAPI');
+var ideaAPI = require('./ideaAPI');
+
 var publicAPI = require('./publicAPI.js');
 var authenticator = require('../authenticate/authenticator.js');
 
@@ -18,9 +21,10 @@ module.exports = function(app, contextRoot) {
     rootRouter.use('/message', messageRouter);
 
     //rootRouter.use('/',authenticator.authenticate);
-
     rootRouter.use("/public", publicAPI);
 
-    rootRouter.use('/api/user', userAPI);
+	rootRouter.use('/api/user',userAPI);
+
+	rootRouter.use('/api/idea',ideaAPI);
 
 };

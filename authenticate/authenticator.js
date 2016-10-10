@@ -20,7 +20,7 @@ module.exports.create = function(userId,callback){
 module.exports.authenticate = function(req, res, next) {
 	console.log('inside authenticate');
 
-	var tokenString = req.get('authentication');
+	var tokenString = req.get('x-access-token');
 
 	if (tokenString == undefined || tokenString == null) {
 		res.send(util.wrapBody('Invalid token','E'));
