@@ -6,7 +6,7 @@ app.controller("loginController", ["$scope","$rootScope", function($scope,$rootS
 		console.log('onload');
 	}
 
-	$scope.$on('$routeChangeSuccess', function(event, current) {
+	$scope.$on('$stateChangeSuccess', function(event, current) {
 		onInit();
 	});
 
