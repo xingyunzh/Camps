@@ -26,8 +26,14 @@ app.controller("loginController", ["$scope", "$rootScope", function($scope, $roo
 	        });
 		}
 	}else{
-
-		var universalAPI = window.location.href.split('#')[0] + '#/nav/login';
+		var currentURL = window.location.href;
+		var universalAPI = '';
+		if (currentURL.indexOf('loginB') > -1) {
+			universalAPI = window.location.href.split('#')[0] + '#/nav/login';
+		} else {
+	 		universalAPI = window.location.href.split('#')[0] + '#/nav/loginB';
+		}
+		
 
 		var obj = new WxLogin({
 		  id:"wechatCode", 
