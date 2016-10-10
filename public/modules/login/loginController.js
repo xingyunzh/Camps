@@ -19,7 +19,7 @@ app.controller("loginController", ["$scope","httpHelper","$rootScope"
 		if(queryString.state !== undefined){
 			if(queryString.code !== undefined){
 
-				httpHelper.sendRequest("POST", "./login/wechat",{
+				httpHelper.sendRequest("POST", "./public/login/wechat",{
 					code:queryString.code
 				}).then(function success(data) {
 					if (data.isAuthenticated) {
