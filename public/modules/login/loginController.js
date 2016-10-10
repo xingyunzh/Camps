@@ -10,7 +10,7 @@ app.controller("loginController", ["$scope", "$rootScope", function($scope, $roo
 		onInit();
 	});
 
-	onInit();
+	//onInit();
 
 	function onInit(){
 		var queryString = getQueryString();
@@ -34,13 +34,13 @@ app.controller("loginController", ["$scope", "$rootScope", function($scope, $roo
 			}
 		}else{
 			var currentURL = window.location.href;
-			var universalAPI = window.location.href.split('#')[0] + '#/nav/login';
-			// var universalAPI = '';
-			// if (currentURL.indexOf('loginB') > -1) {
-			// 	universalAPI = window.location.href.split('#')[0] + '#/nav/login';
-			// } else {
-		 // 		universalAPI = window.location.href.split('#')[0] + '#/nav/loginB';
-			// }
+			//var universalAPI = window.location.href.split('#')[0] + '#/nav/login';
+			var universalAPI = '';
+			if (currentURL.indexOf('loginB') > -1) {
+				universalAPI = window.location.href.split('#')[0] + '#/nav/login';
+			} else {
+		 		universalAPI = window.location.href.split('#')[0] + '#/nav/loginB';
+			}
 			
 
 			var obj = new WxLogin({
