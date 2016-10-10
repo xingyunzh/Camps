@@ -23,7 +23,7 @@ app.controller("loginController", ["$scope", "$rootScope", function($scope, $roo
 		}
 	}else{
 
-		var universalAPI = window.location.href;
+		var universalAPI = window.location + '#/nav/login';
 
 		var obj = new WxLogin({
 		  id:"wechatCode", 
