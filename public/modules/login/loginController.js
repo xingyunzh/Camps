@@ -1,12 +1,12 @@
 /**
  * Created by brillwill on 16/9/14.
  */
-app.controller("loginController", ["$scope", "$rootScope", function($scope, $rootScope){
+app.controller("loginController", ["$scope", "$rootScope", function($scope,$route, $rootScope){
 	$scope.onLoad = function(){
 		console.log('onload');
 	}
 
-	$scope.$on('$routeChangeSuccess', function(next, current) {
+	$scope.$on('$routeChangeSuccess', function(event, current) {
 		onInit();
 	});
 
