@@ -19,7 +19,7 @@ var sprintSchema = Schema({
 	discussMinutes:[{
 		type:Schema.Types.ObjectId,
 		ref:'discussMinutes'
-	}]
+	}],
 
 	deliverables:{
 		snapShot:[{

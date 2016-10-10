@@ -118,7 +118,7 @@ function login(req,res,type){
 				case STATE_SEND_RESPONSE:
 					var responseBody = {
 						token:token,
-						nickname:latestUser.nickname
+						user:latestUser
 					}
 					res.send(util.wrapBody(responseBody));
 				break;
