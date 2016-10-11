@@ -129,3 +129,23 @@ app.service('util', function ($q, $uibModal) {
 		return deferred.promise;
 	};
 });
+
+app.service("ossFileService", ["httpHelper", "$q", function (httpHelper, $q) {
+    this.uploadFile = function (file, name) {
+         return httpHelper.sendRequest("GET", "./aliyun")
+                .then(function ok(data) {
+                    var accessKeyId = data.accessKeyId;
+                    var accessKeySecret = data.accessKeySecret;
+                    var client = new OSS.Wrapper({
+                        region: 'oss-cn-shanghai',
+                        accessKeyId: accessKeyId,
+                        accessKeySecret: accessKeySecret,
+                        bucket: 'campro'
+                    });
+
+                    return client.multipartUpload(name,file);
+                }, function fail(error){
+                    console.log("get access fail");
+                });
+    }
+}]);

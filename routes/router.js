@@ -15,6 +15,7 @@ module.exports = function(app, contextRoot) {
 
     rootRouter.get('/demo', demoController.demo);
     rootRouter.post('/addDemo', demoController.addDemo);
+    rootRouter.get('/aliyun', demoController.getAliyunAccess);
 
     //Please make any business router under the rootRouter, so that it will be easy for contextRoot config.
 
