@@ -5,9 +5,9 @@
 }(this, function () { 
 	var util = {};
 
-	util.checkParam = function(body,params,callback){
+	util.checkParam = function(container,params,callback){
 		for(var param in params){
-			if (body[param] == undefined) {
+			if (!container[param]) {
 				var err = new Error('Invalid Parameter');
 				callback(err);
 				return;

@@ -3,13 +3,13 @@ var Schema = mongoose.Schema;
 
 var giftSchema = Schema({
 	from:{
-		type:Schema.types.ObjectId,
-		ref:'user'
+		type:Schema.Types.ObjectId,
+		ref:'User'
 	},
 
 	to:{
-		type:Schema.types.ObjectId,
-		ref:'user'
+		type:Schema.Types.ObjectId,
+		ref:'User'
 	},
 
 	content:String,
