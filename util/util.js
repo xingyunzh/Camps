@@ -6,12 +6,12 @@
 	var util = {};
 
 	util.checkParam = function(container,params,callback){
-		for(var param in params){
-			if (!container[param]) {
+		for (var i = params.length - 1; i >= 0; i--) {
+			if (!container[params[i]]) {
 				var err = new Error('Invalid Parameter');
 				callback(err);
 				return;
-			}
+			}		
 		}
 		callback(null);
 	}

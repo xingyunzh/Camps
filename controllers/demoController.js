@@ -1,4 +1,7 @@
 var Item = require('../models/item');
+var util = require('../util/util.js');
+var fs = require('fs');
+var oss = require('ali-oss');
 
 exports.demo = function(req, res){
 	Item.find(function(err, data){
@@ -28,3 +31,4 @@ exports.addDemo = function(req, res){
 		}
 	});
 }
+
