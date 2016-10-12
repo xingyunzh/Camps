@@ -71,8 +71,9 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     }
 
     $scope.handleUpload = function () {
-
-        ossFileService.uploadFile(document.getElementById("uploadTestId").files[0], "test.jpg").then(function (data) {
+        var file = document.getElementById("uploadTestId").files[0];
+        var gFilename = util.globalNameForFile(file.name, $rootScope.currentUser);
+        ossFileService.uploadFile(gFilename,file).then(function (data) {
             console.log("upload data = " + data.url);
         }, function fail(error){
             console.log("upload fail data = " + error);

@@ -128,24 +128,32 @@ app.service('util', function ($q, $uibModal) {
 
 		return deferred.promise;
 	};
+
+    this.globalNameForFile = function (filename, user) {
+        if (user) {
+            return 'u'+user.uid+'_'+filename;
+        }
+        return 'g'+'_'+filename;
+    }
 });
 
 app.service("ossFileService", ["httpHelper", "$q", function (httpHelper, $q) {
-    this.uploadFile = function (file, name) {
-         return httpHelper.sendRequest("GET", "./aliyun")
-                .then(function ok(data) {
-                    var accessKeyId = data.accessKeyId;
-                    var accessKeySecret = data.accessKeySecret;
-                    var client = new OSS.Wrapper({
-                        region: 'oss-cn-shanghai',
-                        accessKeyId: accessKeyId,
-                        accessKeySecret: accessKeySecret,
-                        bucket: 'campro'
-                    });
+    this.uploadFile = function (name, file) {
+         if (file == null){
+             var deferred = $q.defer();
+             setTimeout(function () {
+                 deferred.reject("file is undefined!");
+             }, 0);
 
-                    return client.multipartUpload(name,file);
-                }, function fail(error){
-                    console.log("get access fail");
-                });
+             return deferred.promise;
+         }
+        else {
+             return httpHelper.sendRequest("GET", "./system/oss")
+                 .then(function ok(data) {
+                     var client = new OSS.Wrapper(data);
+
+                     return client.multipartUpload(name,file);
+                 });
+         }
     }
 }]);
