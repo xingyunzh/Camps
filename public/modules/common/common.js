@@ -155,8 +155,23 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
     }
 }]);
 
+
 app.service("ossFileService", ["httpHelper", "$q", "util", function (httpHelper, $q, util) {
-    this.uploadFile = function (name, file) {
+    //This is for oss requirement. bt..
+    function progressFuncMaker(func){
+        if(func == null){
+            return null;
+        }
+
+        return function (p) {
+            return function (done){
+                func(p);
+                done();
+            }
+        }
+    }
+
+    this.uploadFile = function (name, file, progressFunc) {
          if (file == null){
              return util.promiseWithReject("file is undefined!");
          }
@@ -165,10 +180,17 @@ app.service("ossFileService", ["httpHelper", "$q", "util", function (httpHelper,
                  .then(function ok(data) {
                      var client = new OSS.Wrapper(data);
 
-                     return client.multipartUpload(name,file);
+                     return client.multipartUpload(name,file, {progress:progressFuncMaker(progressFunc)}).then(function ok(data){
+                         //bug fix for oss sdk: sometimes it misses the "url" property
+                         if (data.url == null){
+                             data.url = data.res.requestUrls[0].split('?')[0];
+                         }
+                         return util.promiseWithResolve(data);
+                     });
                  });
          }
     }
+
 }]);
 
 app.service("uniqueId", ["httpHelper", "$q", function (httpHelper, $q) {
