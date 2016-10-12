@@ -53,7 +53,7 @@ app.filter("nameOfStory",function () {
 	}
 });
 
-app.service('util', function ($q, $uibModal) {
+app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 	this.indexOfObject = function (array, object, equlFunc) {
 		 var i = 0;
 		 for (i = array.length - 1; i >= 0; i--) {
@@ -134,18 +134,31 @@ app.service('util', function ($q, $uibModal) {
             return 'u'+user.uid+'_'+filename;
         }
         return 'g'+'_'+filename;
-    }
-});
+    };
 
-app.service("ossFileService", ["httpHelper", "$q", function (httpHelper, $q) {
+    this.promiseWithReject = function(data) {
+        var deferred = $q.defer();
+        setTimeout(function () {
+            deferred.reject(data);
+        }, 0);
+
+        return deferred.promise;
+    };
+
+    this.promiseWithResolve = function (data) {
+        var deferred = $q.defer();
+        setTimeout(function () {
+            deferred.resolve(data);
+        }, 0);
+
+        return deferred.promise;
+    }
+}]);
+
+app.service("ossFileService", ["httpHelper", "$q", "util", function (httpHelper, $q, util) {
     this.uploadFile = function (name, file) {
          if (file == null){
-             var deferred = $q.defer();
-             setTimeout(function () {
-                 deferred.reject("file is undefined!");
-             }, 0);
-
-             return deferred.promise;
+             return util.promiseWithReject("file is undefined!");
          }
         else {
              return httpHelper.sendRequest("GET", "./system/oss")
@@ -157,3 +170,9 @@ app.service("ossFileService", ["httpHelper", "$q", function (httpHelper, $q) {
          }
     }
 }]);
+
+app.service("uniqueId", ["httpHelper", "$q", function (httpHelper, $q) {
+    this.generateShortId = function(){
+        return httpHelper.sendRequest("GET", "./system/shortid");
+    }
+}])

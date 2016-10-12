@@ -7,5 +7,6 @@ var router = require('express').Router();
 
 //router.post('/profile',userController.getProfile);
 router.get('/oss', systemConfigController.getOSSConfig);
+router.get('/shortid', systemConfigController.getShortID);
 
 module.exports = router;

@@ -13,7 +13,8 @@
     "fs": "0.0.1-security",
     "jsonwebtoken": "^7.1.7",
     "mongoose": "^4.6.0",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "shortid": "^2.2.6"
   },
   "repository": {},
   "engines": {
