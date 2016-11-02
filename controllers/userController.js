@@ -44,6 +44,7 @@ function login(req,res,type){
 	const STATE_GET_PROFILE = 4;
 	const STATE_CREATE_USER = 5;
 	const STATE_CREATE_TOKEN = 6;
+	const STATE_INVALID_CREDENTIALS = 7;
 	const STATE_SEND_RESPONSE = 0;
 
 	if (type == 'email') {
@@ -79,12 +80,18 @@ function login(req,res,type){
 					password = req.body.password;
 
 					uidHelper.loginByEmail(email,password,function(err,result){
-						loginResult = result;
-						stateMachine(err,STATE_IS_FRIST_TIME);
+						if (!result.token) {
+							loginResult = result;
+							stateMachine(err,STATE_INVALID_CREDENTIALS);
+						} else {
+							loginResult = result;
+							stateMachine(err,STATE_IS_FRIST_TIME);
+						}
+						
 					});
 				break;
 				case STATE_IS_FRIST_TIME:
-					userRepository.findByUid(loginResult.userId,function(err,userResult){
+					userRepository.findByUid(loginResult.user.userId,function(err,userResult){
 						latestUser = userResult;
 						console.log('latestUser',latestUser);
 						if(userResult == null){
@@ -124,6 +131,10 @@ function login(req,res,type){
 					};
 					console.log("resbody:",responseBody);
 					res.send(util.wrapBody(responseBody));
+				break;
+				case STATE_INVALID_CREDENTIALS:
+					token = null;
+					stateMachine(null,STATE_SEND_RESPONSE);
 				break;
 				default:
 					console.log('Invalid State');
