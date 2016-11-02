@@ -24,7 +24,7 @@ app.controller("loginController", ["$scope","loginService","$rootScope",function
 		if(queryString.state !== undefined){
 			if(queryString.code !== undefined){
 
-				loginService.loginByWechat(QueryString.code,function(err,data){
+				loginService.loginByWechat(queryString.code,function(err,data){
 					if (err) {
 
 					} else {
