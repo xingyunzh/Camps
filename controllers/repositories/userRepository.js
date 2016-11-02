@@ -1,7 +1,7 @@
 var User = require('../../models/user.js');
 
 exports.findByUid = function(uid,callback) {
-	User.find({uid:uid},callback);
+	User.findOne({uid:uid},callback);
 }
 
 exports.findById = function(id,callback){
