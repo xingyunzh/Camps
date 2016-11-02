@@ -2,7 +2,13 @@
  * Created by brillwill on 16/9/14.
  */
 app.controller("loginController", ["$scope","loginService","$rootScope"
-	, function($scope,httpHelper,$rootScope){
+	,function($scope,httpHelper,$rootScope){
+		$scope.token = '';
+		$scope.user = {
+			nickname:''
+		};
+
+
 	$scope.onLoad = function(){
 		console.log('onload');
 	};
