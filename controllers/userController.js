@@ -104,6 +104,7 @@ function login(req,res,type){
 					user.uid = loginResult.userId;
 
 					userRepository.create(user,function(err,result){
+						console.log("latestUser:",result);
 						latestUser = result;
 						stateMachine(err,STATE_CREATE_TOKEN);
 					})
@@ -118,7 +119,8 @@ function login(req,res,type){
 					var responseBody = {
 						token:token,
 						user:latestUser
-					}
+					};
+					console.log("resbody:",responseBody);
 					res.send(util.wrapBody(responseBody));
 				break;
 				default:
