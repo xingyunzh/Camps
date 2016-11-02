@@ -51,11 +51,13 @@ var postUID = function(path,body,callback){
 		res.setEncoding('utf8');
 		
 		res.on('data', function(chunk){
-		  	console.log('chunk',chunk);
-		  	if (chunk.status == 'E'){
-		  		callback(new Error(chunk.body));
+		  	console.log('chunk type', typeof chunk);
+		  	console.log('chunk', chunk);
+		  	var resJSON = JSON.parse(chunk);
+		  	if (resJSON.status == 'E'){
+		  		callback(new Error(resJSON.body));
 		  	}else{
-		  		callback(null,chunk.body);
+		  		callback(null,resJSON.body);
 		  	}
 		  	
 		});
