@@ -1,7 +1,7 @@
 /**
  * Created by brillwill on 16/9/14.
  */
-app.controller("loginController", ["$scope","loginService","$rootScope",function($scope,httpHelper,$rootScope){
+app.controller("loginController", ["$scope","loginService","$rootScope",function($scope,loginService,$rootScope){
 		$scope.token = '';
 		$scope.user = {
 			nickname:''
