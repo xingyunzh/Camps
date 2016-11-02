@@ -7,6 +7,7 @@ var authenticator = require('../authenticate/authenticator.js');
 
 var rootRouter = require("express").Router();
 var messageRouter = require("./messageRouter");
+var systemConfigRouter = require("./systemConfigRouter");
 
 var demoController = require('../controllers/demoController');
 
@@ -20,7 +21,9 @@ module.exports = function(app, contextRoot) {
 
     rootRouter.use('/message', messageRouter);
 
+    rootRouter.use('/system', systemConfigRouter);
     //rootRouter.use('/',authenticator.authenticate);
+
     rootRouter.use("/public", publicAPI);
 
 	rootRouter.use('/api/user',userAPI);

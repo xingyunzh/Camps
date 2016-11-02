@@ -53,7 +53,7 @@ app.filter("nameOfStory",function () {
 	}
 });
 
-app.service('util', function ($q, $uibModal) {
+app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 	this.indexOfObject = function (array, object, equlFunc) {
 		 var i = 0;
 		 for (i = array.length - 1; i >= 0; i--) {
@@ -128,4 +128,73 @@ app.service('util', function ($q, $uibModal) {
 
 		return deferred.promise;
 	};
-});
+
+    this.globalNameForFile = function (filename, user) {
+        if (user) {
+            return 'u'+user.uid+'_'+filename;
+        }
+        return 'g'+'_'+filename;
+    };
+
+    this.promiseWithReject = function(data) {
+        var deferred = $q.defer();
+        setTimeout(function () {
+            deferred.reject(data);
+        }, 0);
+
+        return deferred.promise;
+    };
+
+    this.promiseWithResolve = function (data) {
+        var deferred = $q.defer();
+        setTimeout(function () {
+            deferred.resolve(data);
+        }, 0);
+
+        return deferred.promise;
+    }
+}]);
+
+
+app.service("ossFileService", ["httpHelper", "$q", "util", function (httpHelper, $q, util) {
+    //This is for oss requirement. bt..
+    function progressFuncMaker(func){
+        if(func == null){
+            return null;
+        }
+
+        return function (p) {
+            return function (done){
+                func(p);
+                done();
+            }
+        }
+    }
+
+    this.uploadFile = function (name, file, progressFunc) {
+         if (file == null){
+             return util.promiseWithReject("file is undefined!");
+         }
+        else {
+             return httpHelper.sendRequest("GET", "./system/oss")
+                 .then(function ok(data) {
+                     var client = new OSS.Wrapper(data);
+
+                     return client.multipartUpload(name,file, {progress:progressFuncMaker(progressFunc)}).then(function ok(data){
+                         //bug fix for oss sdk: sometimes it misses the "url" property
+                         if (data.url == null){
+                             data.url = data.res.requestUrls[0].split('?')[0];
+                         }
+                         return util.promiseWithResolve(data);
+                     });
+                 });
+         }
+    }
+
+}]);
+
+app.service("uniqueId", ["httpHelper", "$q", function (httpHelper, $q) {
+    this.generateShortId = function(){
+        return httpHelper.sendRequest("GET", "./system/shortid");
+    }
+}])

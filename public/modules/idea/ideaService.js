@@ -3,25 +3,16 @@
  */
 app.service("ideaService", ["util", "$q", function (util, $q) {
     this.ideaSource = function () {
-        var deferred = $q.defer();
-        setTimeout(function () {
-            deferred.resolve(ideaData);
-        }, 0);
-
-        return deferred.promise;
+        return util.promiseWithResolve(ideaData);
     }
 
     this.getIdeaById = function (id) {
-        var deferred = $q.defer();
-        setTimeout(function(){
-            var idea = null;
-            _.forEach(ideaData,function(item){
-               item.id == id;
-                idea = item;
-            });
-            deferred.resolve(idea);
+        var idea = null;
+        _.forEach(ideaData,function(item){
+            item.id == id;
+            idea = item;
         });
 
-        return deferred.promise;
+        return util.promiseWithResolve(idea);
     }
 }]);

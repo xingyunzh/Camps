@@ -1,13 +1,14 @@
 /**
  * Created by brillwill on 16/9/14.
  */
-app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util", "toaster",
-    function($scope, $rootScope, httpHelper, util, toaster){
+app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util", "toaster", "ossFileService",
+    function($scope, $rootScope, httpHelper, util, toaster, ossFileService){
     $scope.items = [];
     $scope.isError = false;
     $scope.isDatePickerOpen = false;
     $scope.dt = new Date();
     $scope.selectedUser = null;
+    $scope.file = null;
 
     $scope.onRefresh = function () {
         httpHelper.sendRequest("GET", "./demo").then(function success(data) {
@@ -30,7 +31,7 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     $scope.onModalInputTest = function(){
         util.modalTextInputStep("Input your idea","Placeholder").then(function ok(data) {
             $scope.inputText = data;
-        }, function cancel(data) {
+        }, function cancel() {
             $scope.inputText = "";
         })
     }
@@ -68,5 +69,22 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     $scope.updateSelectedTeam = function (team) {
         $scope.selectedTeam = team;
     }
+
+    $scope.handleUpload = function () {
+        var file = document.getElementById("uploadTestId").files[0];
+        if (file == null){
+            return;
+        }
+
+        var gFilename = util.globalNameForFile(file.name, $rootScope.currentUser);
+        ossFileService.uploadFile(gFilename, file, function (p) {
+            console.log("file progress " + p * 100 + "%");
+        }).then(function (data) {
+            console.log("upload data = " + data.url);
+        }, function fail(error){
+            console.log("upload fail data = " + error);
+        });
+
+   }
 
 }]);

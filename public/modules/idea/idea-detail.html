@@ -27,7 +27,7 @@
                 <td>
                     <span ng-hide="isEditing">{{form.background}}</span>
                     <span ng-show="isEditing">
-                        <textarea class='form-control' cols="30" rows="10" ng-model="form.background"></textarea>
+                        <summernote class='form-control' height="200" ng-model="form.background"></summernote>
                     </span>
                 </td>
             </tr>
@@ -36,7 +36,7 @@
                 <td>
                     <span ng-hide="isEditing">{{form.painpoint}}</span>
                     <span ng-show="isEditing">
-                        <textarea class='form-control' cols="30" rows="3" ng-model="form.painpoint" ></textarea>
+                        <summernote class='form-control' height="200" ng-model="form.painpoint" ></summernote>
                     </span>
                 </td>
             </tr>
@@ -45,7 +45,7 @@
                 <td>
                     <span ng-hide="isEditing">{{form.solution}}</span>
                     <span ng-show="isEditing">
-                        <textarea class='form-control' cols="30" rows="20" ng-model="form.solution" ></textarea>
+                        <summernote class='form-control' height="300" ng-model="form.solution" ></summernote>
                     </span>
                 </td>
             </tr>
