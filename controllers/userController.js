@@ -116,13 +116,13 @@ function login(req,res,type){
 						console.log("latestUser:",result);
 						latestUser = result;
 						stateMachine(err,STATE_CREATE_TOKEN);
-					})
+					});
 				break;
 				case STATE_CREATE_TOKEN:
 					authenticator.create(latestUser._id,function(err,newToken){
 						token = newToken;
 						stateMachine(err,STATE_SEND_RESPONSE);
-					})
+					});
 				break;
 				case STATE_SEND_RESPONSE:
 					var responseBody = {

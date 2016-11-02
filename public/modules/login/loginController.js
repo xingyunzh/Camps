@@ -9,7 +9,7 @@ app.controller("loginController", ["$scope","loginService","$rootScope",function
 
 
 	$scope.onLoad = function(){
-		console.log('onload');
+		//console.log('onload');
 	};
 
 	$scope.$on('$stateChangeSuccess', function(event, current) {
