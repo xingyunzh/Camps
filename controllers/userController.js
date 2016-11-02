@@ -70,6 +70,7 @@ function login(req,res,type){
 
 					uidHelper.loginByWechat(code,function(err,result){
 						loginResult = result;
+						console.log('loginResult',loginResult);
 						stateMachine(err,STATE_IS_FRIST_TIME);
 					});
 				break;
@@ -85,6 +86,7 @@ function login(req,res,type){
 				case STATE_IS_FRIST_TIME:
 					userRepository.findByUid(loginResult.userId,function(err,userResult){
 						latestUser = userResult;
+						console.log('latestUser',latestUser);
 						if(userResult == null){
 							stateMachine(err,STATE_GET_PROFILE);
 						}else{
@@ -96,7 +98,7 @@ function login(req,res,type){
 					uidHelper.getProfile(loginResult.token,function(err,profile){
 						latestProfile = profile;
 						stateMachine(err,STATE_CREATE_USER);
-					})
+					});
 				break;
 				case STATE_CREATE_USER:
 					var user = {};
