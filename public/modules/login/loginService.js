@@ -3,7 +3,7 @@ app.service("loginService", ['httpHelper', function (httpHelper) {
         httpHelper.sendRequest("POST", "./public/login/wechat",{
 			code:code
 		}).then(function success(data) {
-			if (data.isAuthenticated) {
+			if (data.user != null) {
 				callback(null,data);
 			} else {
 				callback(new Error('Invalid Credentials'));
