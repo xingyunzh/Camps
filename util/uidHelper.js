@@ -55,7 +55,7 @@ var postUID = function(path,body,callback){
 		  	if (chunk.status == 'E'){
 		  		callback(new Error(chunk.body));
 		  	}else{
-		  		callback(null,chunk);
+		  		callback(null,chunk.body);
 		  	}
 		  	
 		});
