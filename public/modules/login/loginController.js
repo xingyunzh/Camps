@@ -28,7 +28,7 @@ app.controller("loginController", ["$scope","loginService","$rootScope",function
 					if (err) {
 
 					} else {
-						$scope.token = token;
+						$scope.token = data.token;
 						$scope.user = data.user;
 
 						$rootScope.currentUser = data.user;
