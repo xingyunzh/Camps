@@ -8,7 +8,7 @@ var authenticator = require('../authenticate/authenticator.js');
 
 exports.loginByEmail = function(req,res){
 
-	util.checkParam(req.body,['email,password'],function(err){
+	util.checkParam(req.body,['email','password'],function(err){
 		if (err) {
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
