@@ -1,5 +1,5 @@
 var http = require('http');
-var queryString = require('querystring');
+//var queryString = require('querystring');
 
 exports.loginByWechat = function(code,callback) {
 	postUID('/clduser/login/wechat',{'code':code},callback);
@@ -34,7 +34,7 @@ exports.getProfile = function(token,callback){
 // }
 
 var postUID = function(path,body,callback){
-	var postData = queryString.stringify(body);
+	var postData = JSON.stringify(body);
 
 	var options = {
 		hostname: 'www.xingyunzh.com',
@@ -42,7 +42,7 @@ var postUID = function(path,body,callback){
 		  	path: path,
 		  	method: 'POST',
 		  	headers: {
-		  	  'Content-Type': 'application/x-www-form-urlencoded'
+		  	  'Content-Type': 'application/json'
 		  	}
 	}
 
@@ -51,8 +51,15 @@ var postUID = function(path,body,callback){
 		res.setEncoding('utf8');
 		
 		res.on('data', function(chunk){
-		  	console.log('chunk',chunk);
-		  	callback(null,chunk);
+		  	console.log('chunk type', typeof chunk);
+		  	console.log('chunk', chunk);
+		  	var resJSON = JSON.parse(chunk);
+		  	if (resJSON.status == 'E'){
+		  		callback(new Error(resJSON.body));
+		  	}else{
+		  		callback(null,resJSON.body);
+		  	}
+		  	
 		});
 		  
 		res.on('end', function(){

@@ -1,11 +1,16 @@
 /**
  * Created by brillwill on 16/9/14.
  */
-app.controller("loginController", ["$scope","httpHelper","$rootScope"
-	, function($scope,httpHelper,$rootScope){
+app.controller("loginController", ["$scope","loginService","$rootScope",function($scope,loginService,$rootScope){
+		$scope.token = '';
+		$scope.user = {
+			nickname:''
+		};
+
+
 	$scope.onLoad = function(){
-		console.log('onload');
-	}
+		//console.log('onload');
+	};
 
 	$scope.$on('$stateChangeSuccess', function(event, current) {
 		onInit();
@@ -19,19 +24,17 @@ app.controller("loginController", ["$scope","httpHelper","$rootScope"
 		if(queryString.state !== undefined){
 			if(queryString.code !== undefined){
 
-				httpHelper.sendRequest("POST", "./public/login/wechat",{
-					code:queryString.code
-				}).then(function success(data) {
-					if (data.isAuthenticated) {
-						$rootScope.token = data.token;
-		            	$rootScope.currentUser = data.user;
+				loginService.loginByWechat(queryString.code,function(err,data){
+					if (err) {
+
 					} else {
-						$scope.fail = 'Login fail';
+						$scope.token = data.token;
+						$scope.user = data.user;
+
+						$rootScope.currentUser = data.user;
+						$rootScope.token = data.token;
 					}
-		            
-		        },function fail(err){
-		            $scope.fail = 'Login fail';
-		        });
+				});
 			}
 		}else{
 			var currentURL = window.location.href;

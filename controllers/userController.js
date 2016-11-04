@@ -44,6 +44,7 @@ function login(req,res,type){
 	const STATE_GET_PROFILE = 4;
 	const STATE_CREATE_USER = 5;
 	const STATE_CREATE_TOKEN = 6;
+	const STATE_INVALID_CREDENTIALS = 7;
 	const STATE_SEND_RESPONSE = 0;
 
 	if (type == 'email') {
@@ -70,6 +71,7 @@ function login(req,res,type){
 
 					uidHelper.loginByWechat(code,function(err,result){
 						loginResult = result;
+						console.log('loginResult',loginResult);
 						stateMachine(err,STATE_IS_FRIST_TIME);
 					});
 				break;
@@ -78,13 +80,20 @@ function login(req,res,type){
 					password = req.body.password;
 
 					uidHelper.loginByEmail(email,password,function(err,result){
-						loginResult = result;
-						stateMachine(err,STATE_IS_FRIST_TIME);
+						if (!result.token) {
+							loginResult = result;
+							stateMachine(err,STATE_INVALID_CREDENTIALS);
+						} else {
+							loginResult = result;
+							stateMachine(err,STATE_IS_FRIST_TIME);
+						}
+						
 					});
 				break;
 				case STATE_IS_FRIST_TIME:
-					userRepository.findByUid(loginResult.userId,function(err,userResult){
+					userRepository.findByUid(loginResult.user.userId,function(err,userResult){
 						latestUser = userResult;
+						console.log('latestUser',latestUser);
 						if(userResult == null){
 							stateMachine(err,STATE_GET_PROFILE);
 						}else{
@@ -96,7 +105,7 @@ function login(req,res,type){
 					uidHelper.getProfile(loginResult.token,function(err,profile){
 						latestProfile = profile;
 						stateMachine(err,STATE_CREATE_USER);
-					})
+					});
 				break;
 				case STATE_CREATE_USER:
 					var user = {};
@@ -104,22 +113,28 @@ function login(req,res,type){
 					user.uid = loginResult.userId;
 
 					userRepository.create(user,function(err,result){
+						console.log("latestUser:",result);
 						latestUser = result;
 						stateMachine(err,STATE_CREATE_TOKEN);
-					})
+					});
 				break;
 				case STATE_CREATE_TOKEN:
 					authenticator.create(latestUser._id,function(err,newToken){
 						token = newToken;
 						stateMachine(err,STATE_SEND_RESPONSE);
-					})
+					});
 				break;
 				case STATE_SEND_RESPONSE:
 					var responseBody = {
 						token:token,
 						user:latestUser
-					}
+					};
+					console.log("resbody:",responseBody);
 					res.send(util.wrapBody(responseBody));
+				break;
+				case STATE_INVALID_CREDENTIALS:
+					token = null;
+					stateMachine(null,STATE_SEND_RESPONSE);
 				break;
 				default:
 					console.log('Invalid State');
