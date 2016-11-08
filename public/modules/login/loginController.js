@@ -1,61 +1,86 @@
 /**
  * Created by brillwill on 16/9/14.
  */
-app.controller("loginController", ["$scope","httpHelper","$rootScope"
-	, function($scope,httpHelper,$rootScope){
-	$scope.onLoad = function(){
-		console.log('onload');
-	}
+app.controller("loginController", ["$scope","loginService","$rootScope",function($scope,loginService,$rootScope){
+	$scope.form = {
+		email:'',
+		password:'',
+		prompt:''
+	};
+	$scope.hasWechatInit = false;
+	$scope.token = '';
+	$scope.user = {
+		nickname:''
+	};
 
-	$scope.$on('$stateChangeSuccess', function(event, current) {
-		onInit();
+	$scope.$on('$locationChangeSuccess', function(event, current) {
+		if ($scope.hasWechatInit) {
+			loginByWechat();
+		}
 	});
 
-	//onInit();
+	$scope.loginByEmail = function(){
 
-	function onInit(){
+		if (!$scope.form.email) {
+			$scope.form.prompt = "email没填";
+			return;
+		}
+
+		if (!$scope.form.password) {
+			$scope.form.prompt = "密码没填";
+			return;
+		}
+
+		loginService.loginByEmail($scope.form.email,$scope.form.password,checkAuth);
+	};
+
+	function loginByWechat(){
 		var queryString = getQueryString();
 
-		if(queryString.state !== undefined){
-			if(queryString.code !== undefined){
+		if(queryString.state !== undefined && queryString.code !== undefined){
 
-				httpHelper.sendRequest("POST", "./public/login/wechat",{
-					code:queryString.code
-				}).then(function success(data) {
-					if (data.isAuthenticated) {
-						$rootScope.token = data.token;
-		            	$rootScope.currentUser = data.user;
-					} else {
-						$scope.fail = 'Login fail';
-					}
-		            
-		        },function fail(err){
-		            $scope.fail = 'Login fail';
-		        });
-			}
-		}else{
-			var currentURL = window.location.href;
-			//var universalAPI = window.location.href.split('#')[0] + '#/nav/login';
-			var universalAPI = '';
-			if (currentURL.indexOf('loginB') > -1) {
-				universalAPI = window.location.href.split('#')[0] + '#/nav/login';
-			} else {
-		 		universalAPI = window.location.href.split('#')[0] + '#/nav/loginB';
-			}
+			loginService.loginByWechat(queryString.code,checkAuth);
 			
-
-			var obj = new WxLogin({
-			  id:"wechatCode", 
-			  appid: "wx5ce7696222e79ca5", 
-			  scope: "snsapi_login", 
-			  //redirect_uri: "http%3A%2F%2Fwww.xingyunzh.com",
-			  redirect_uri: encodeURIComponent(universalAPI),
-			  state: "345",
-			  style: "",
-			  href: ""
-			});
 		}
 	}
+
+	function checkAuth(err,data){
+		if (err) {
+			$scope.form.prompt = err.message;
+		}else{
+			$scope.token = data.token;
+			$scope.user = data.user;
+
+			$rootScope.currentUser = data.user;
+			$rootScope.token = data.token;
+		}
+	}
+
+	$scope.wechatInit = function(){
+		var currentURL = window.location.href;
+		var universalAPI = window.location.href.split('#')[0] + '#/nav/login';
+		// var universalAPI = '';
+		// if (currentURL.indexOf('loginB') > -1) {
+		// 	universalAPI = window.location.href.split('#')[0] + '#/nav/login';
+		// } else {
+	 	// 		universalAPI = window.location.href.split('#')[0] + '#/nav/loginB';
+		// }
+		
+
+		var obj = new WxLogin({
+		  id:"wechatCode", 
+		  appid: "wx5ce7696222e79ca5", 
+		  scope: "snsapi_login", 
+		  //redirect_uri: "http%3A%2F%2Fwww.xingyunzh.com",
+		  redirect_uri: encodeURIComponent(universalAPI),
+		  state: "345",
+		  style: "",
+		  href: ""
+		});
+
+		$scope.hasWechatInit = true;
+
+	};
 
 
 
