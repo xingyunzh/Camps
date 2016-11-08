@@ -4,6 +4,7 @@
            typeahead-loading="loadingUsers"
            typeahead-no-results="noResults"
            typeahead-on-select="handleSelected($item, $model, $label, $event)"
+           typeahead-template-url="./modules/common/components/userSelectCell.html"
            class="form-control">
     <span class="input-group-btn">
         <button class="btn btn-default" type="button" ng-click="handleAddButton()"><i ng-class="iconClass"></i></button>
