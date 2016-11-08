@@ -1,11 +1,12 @@
 
 var jwt = require('jsonwebtoken');
+var config = require('./config');
 
-var secret = "xingyunzh-campro-secret";
+var secret = config.secret;
 
 module.exports.verify = function(tokenString,callback){
 	jwt.verify(tokenString,secret,callback);
-}
+};
 
 module.exports.create = function(userId,callback){
 	console.log('userId',userId);
@@ -15,17 +16,17 @@ module.exports.create = function(userId,callback){
 	},secret,{
 		expiresIn:3600
 	},callback);
-}
+};
 
 module.exports.authenticate = function(req, res, next) {
 	console.log('inside authenticate');
 
 	var tokenString = req.get('x-access-token');
 
-	if (tokenString == undefined || tokenString == null) {
+	if (tokenString === undefined || tokenString == null) {
 		res.send(util.wrapBody('Invalid token','E'));
 	}else{
-		tokenHelper.verify(tokenString,function(err,tokenObject){
+		jwt.verify(tokenString,secret,function(err,tokenObject){
 			if (err) {
 				res.send(util.wrapBody('Invalid token','E'));
 			}else{
@@ -33,6 +34,6 @@ module.exports.authenticate = function(req, res, next) {
 				console.log('token',tokenObject);
 				next();
 			}
-		})
+		});
 	}
-}
+};

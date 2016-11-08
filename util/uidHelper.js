@@ -2,11 +2,11 @@ var http = require('http');
 //var queryString = require('querystring');
 
 exports.loginByWechat = function(code,callback) {
-	postUID('/clduser/login/wechat',{'code':code},callback);
+	postUID('/clduser/login/wechat',{'code':code},null,callback);
 }
 
 exports.loginByEmail = function(email,password,callback){
-	postUID('/clduser/login/email',{email:email,password:password},callback);
+	postUID('/clduser/login/email',{email:email,password:password},null,callback);
 }
 
 // exports.registerByEmail = function(email,password,callback){
@@ -14,7 +14,7 @@ exports.loginByEmail = function(email,password,callback){
 // }
 
 exports.getProfile = function(token,callback){
-	postUID('/clduser/api/profile',{token:token},callback);
+	postUID('/clduser/api/profile',{},token,callback);
 }
 
 // exports.checkEmailActivated = function(token,callback){
@@ -33,9 +33,11 @@ exports.getProfile = function(token,callback){
 // 	postUID('/clduser/reset/password',{email:email,token:token},callback);
 // }
 
-var postUID = function(path,body,callback){
-	var postData = JSON.stringify(body);
+var postUID = function(path,body,token,callback){
+	
 
+	var postData = JSON.stringify(body);
+	console.log('postData',postData);
 	var options = {
 		hostname: 'www.xingyunzh.com',
 		  	port: 5566,
@@ -44,15 +46,17 @@ var postUID = function(path,body,callback){
 		  	headers: {
 		  	  'Content-Type': 'application/json'
 		  	}
-	}
+	};
 
+	if (!!token) {
+		options.headers['x-access-token'] = token;
+	}
 
 	var req = http.request(options, function(res){
 		res.setEncoding('utf8');
 		
 		res.on('data', function(chunk){
-		  	console.log('chunk type', typeof chunk);
-		  	console.log('chunk', chunk);
+
 		  	var resJSON = JSON.parse(chunk);
 		  	if (resJSON.status == 'E'){
 		  		callback(new Error(resJSON.body));

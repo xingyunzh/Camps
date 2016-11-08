@@ -1,13 +1,28 @@
-<div ng-init="onLoad()">
-<div>Login</div>
+<div>
+	<div>Login</div>
+
+	<div>Result:</div>
+	<div>{{token}}</div>
+	<div>{{user.nickname}}</div>
+
+	<uib-tabset>
+		<uib-tab index="0" heading="邮箱">
+			Email:<input type="text" ng-model="form.email"/><br/>
+			Password:<input type="password" ng-model="form.password"/>
+			{{form.prompt}}
+			<button class="btn btn-primary" ng-click="loginByEmail()">登录</button>
+		</uib-tab>
+
+	    <uib-tab index="1" heading="微信" select="wechatInit()">
+	    	<div id="wechatCode"></div>
+
+	    </uib-tab>
+	    <uib-tab index="2" heading="QQ" disable="true">
+	     
+	    </uib-tab>
+	</uib-tabset>
 
 
-
-<div id="wechatCode"></div>
-
-<div>Result:</div>
-<div>{{token}}</div>
-<div>{{user.nickname}}</div>
 </div>
 
 
