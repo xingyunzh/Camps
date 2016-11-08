@@ -18,11 +18,11 @@
             <li ng-class="{active:$state.name.endsWith('coach')}"><a ui-sref="nav.coach">教练</a></li>
             <li ng-class="{active:$state.name.endsWith('asset')}"><a ui-sref="nav.asset">组件</a></li>
             <li ng-class="{active:$state.name.endsWith('message')}"><a ui-sref="nav.message">私信</a></li>
-            <li ng-hide="true">
-                <a id="r-nav-id-name" ui-sref="updateprofile">你好, xyzh.comcccccccc</a>
+            <li ng-hide="!hasLoggedIn">
+                <a id="r-nav-id-name" ui-sref="nav.profile">你好, {{showing.nickname}}</a>
             </li>
 
-            <li><button class="btn btn-primary navbar-btn" type="button" ng-show="true" ng-click="goLogin()">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><button class="btn btn-primary navbar-btn" type="button" ng-show="!hasLoggedIn" ng-click="goLogin()">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary navbar-btn" type="button" ng-show="hasLoggedIn" ng-click="logOut()">登出</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
         </ul>
     </div>
     <!-- </div> -->

@@ -53,6 +53,8 @@ app.controller("loginController", ["$scope","loginService","$rootScope",function
 
 			$rootScope.currentUser = data.user;
 			$rootScope.token = data.token;
+
+			$rootScope.$emit('loggedIn');
 		}
 	}
 

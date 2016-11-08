@@ -4,9 +4,13 @@ var scr = require('../controllers/repositories/systemConfigRepository');
 
 var secret = getSecret();
 
+getSecret();
+
 function getSecret(){
-	scr.getOSSConfig.then(function(data){
-		return data.secret;
+	scr
+	.getTokenSecret()
+	.then(function(data){
+		secret = data.secret;
 	});
 }
 
@@ -15,7 +19,6 @@ module.exports.verify = function(tokenString,callback){
 };
 
 module.exports.create = function(userId,callback){
-	console.log('userId',userId);
 	
 	jwt.sign({
 		userId:userId

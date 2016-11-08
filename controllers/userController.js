@@ -100,8 +100,8 @@ function login(req,res,type){
 					}
 				break;
 				case STATE_GET_PROFILE:
-					uidHelper.getProfile(loginResult.token,function(err,profile){
-						latestProfile = profile;
+					uidHelper.getProfile(loginResult.token,function(err,data){
+						latestProfile = data.profile;
 						stateMachine(err,STATE_CREATE_USER);
 					});
 				break;
@@ -119,6 +119,7 @@ function login(req,res,type){
 				case STATE_CREATE_TOKEN:
 					authenticator.create(latestUser._id,function(err,newToken){
 						token = newToken;
+						console.log('token',newToken);
 						stateMachine(err,STATE_SEND_RESPONSE);
 					});
 				break;
