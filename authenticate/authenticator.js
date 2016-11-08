@@ -1,8 +1,14 @@
 
 var jwt = require('jsonwebtoken');
-var config = require('./config');
+var scr = require('../controllers/repositories/systemConfigRepository');
 
-var secret = config.secret;
+var secret = getSecret();
+
+function getSecret(){
+	scr.getOSSConfig.then(function(data){
+		return data.secret;
+	});
+}
 
 module.exports.verify = function(tokenString,callback){
 	jwt.verify(tokenString,secret,callback);

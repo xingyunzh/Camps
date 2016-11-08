@@ -20,3 +20,17 @@ exports.getOSSConfig = function(){
 
     return deferred.promise;
 }
+
+exports.getTokenSecret = function(){
+    var deferred = q.defer();
+    fs.readFile("/root/keys/camproKeys.json", "utf8", function(err, data){
+        if (err) {
+            deferred.reject(err);
+        }
+        else {
+            var jwt = JSON.parse(data).jwt;
+            deferred.resolve(jwt);
+        }
+    });
+    return deferred.promise;
+}
