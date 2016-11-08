@@ -4,15 +4,13 @@
 var util = require('../util/util.js');
 var fs = require('fs');
 var shortID = require('shortid');
+var systemConfigRepository = require('./repositories/systemConfigRepository');
 
 exports.getOSSConfig = function(req, res){
-    fs.readFile("/root/keys/camproKeys.json", "utf8", function(err, data){
-        if (err) {
-            res.json(util.wrapBody(err, 'E'));
-        }
-        var aliyunOSS = JSON.parse(data).aliyunOSS;
-
-        res.json(util.wrapBody(aliyunOSS));
+    systemConfigRepository.getOSSConfig().then(function(data){
+        res.json(util.wrapBody(data));
+    }).catch(function(err){
+        res.json(util.wrapBody(err, "E"));
     });
 }
 
