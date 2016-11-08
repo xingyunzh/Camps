@@ -80,26 +80,24 @@ function login(req,res,type){
 					password = req.body.password;
 
 					uidHelper.loginByEmail(email,password,function(err,result){
-						if (!result.token) {
-							loginResult = result;
-							stateMachine(err,STATE_INVALID_CREDENTIALS);
-						} else {
-							loginResult = result;
-							stateMachine(err,STATE_IS_FRIST_TIME);
-						}
-						
+						loginResult = result;
+						stateMachine(err,STATE_IS_FRIST_TIME);
 					});
 				break;
 				case STATE_IS_FRIST_TIME:
-					userRepository.findByUid(loginResult.user.userId,function(err,userResult){
-						latestUser = userResult;
-						console.log('latestUser',latestUser);
-						if(userResult == null){
-							stateMachine(err,STATE_GET_PROFILE);
-						}else{
-							stateMachine(err,STATE_CREATE_TOKEN);
-						}
-					});
+					if (!loginResult.token) {
+						stateMachine(null,STATE_INVALID_CREDENTIALS);
+					}else{
+						userRepository.findByUid(loginResult.user.userId,function(err,userResult){
+							latestUser = userResult;
+							console.log('latestUser',latestUser);
+							if(userResult == null){
+								stateMachine(err,STATE_GET_PROFILE);
+							}else{
+								stateMachine(err,STATE_CREATE_TOKEN);
+							}
+						});
+					}
 				break;
 				case STATE_GET_PROFILE:
 					uidHelper.getProfile(loginResult.token,function(err,profile){
