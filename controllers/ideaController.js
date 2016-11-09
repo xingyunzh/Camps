@@ -75,27 +75,41 @@ exports.deleteIdea = function(req,res){
 };
 
 exports.listIdea = function(req,res){
-	util.checkParam(req.body,['pageSize','pageNum'],function(err){
+	var options = {
+		pageNum:req.body.pageNum,
+		pageSize:req.body.pageSize
+	};
+
+	ideaRepostory.query(options,function(err,result){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Invalid Parameter','E'));
+			res.send(util.wrapBody('Internal Error','E'));
 		} else {
-
-			var options = {
-				pageNum:req.body.pageNum,
-				pageSize:req.body.pageSize
-			};
-
-			ideaRepostory.query(options,function(err,result){
-				if (err) {
-					console.log(err);
-					res.send(util.wrapBody('Internal Error','E'));
-				} else {
-					res.send(util.wrapBody(result));
-				}
-			});
+			res.send(util.wrapBody(result));
 		}
 	});
+
+	// util.checkParam(req.body,['pageSize','pageNum'],function(err){
+	// 	if (err) {
+	// 		console.log(err);
+	// 		res.send(util.wrapBody('Invalid Parameter','E'));
+	// 	} else {
+
+	// 		var options = {
+	// 			pageNum:req.body.pageNum,
+	// 			pageSize:req.body.pageSize
+	// 		};
+
+	// 		ideaRepostory.query(options,function(err,result){
+	// 			if (err) {
+	// 				console.log(err);
+	// 				res.send(util.wrapBody('Internal Error','E'));
+	// 			} else {
+	// 				res.send(util.wrapBody(result));
+	// 			}
+	// 		});
+	// 	}
+	// });
 
 };
 
@@ -146,8 +160,9 @@ exports.updateIdea = function(req,res){
 					if (!result) {
 						console.log('Invalid innovator');
 						res.send(util.wrapBody('Invalid innovator','E'));
+					}else{
+						res.send(util.wrapBody({idea:result}));
 					}
-					res.send(util.wrapBody({success:true}));
 				}
 			});
 		}

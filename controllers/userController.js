@@ -30,16 +30,16 @@ exports.loginByWechat = function(req,res){
 }
 
 exports.update = function(req,res){
-	util.checkParam(req.body,['name','nickname'],function(err){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Invalid Parameter','E'));
-			return;
-		}
-	});
+	// util.checkParam(req.body,['name','nickname'],function(err){
+	// 	if (err) {
+	// 		console.log(err);
+	// 		res.send(util.wrapBody('Invalid Parameter','E'));
+	// 		return;
+	// 	}
+	// });
 
 	var id = req.token.userId;
-	
+
 	var user = {
 		name:req.body.name,
 		nickname:req.body.nickname,
@@ -57,9 +57,9 @@ exports.update = function(req,res){
 	});
 }
 
-exports.getMyProfile = function(req,res){
+exports.getProfileById = function(req,res){
 
-	var id = req.token.userId;
+	var id = req.params.id;
 
 	userRepository.findById(id,function(err,result){
 		if (err) {
@@ -68,6 +68,28 @@ exports.getMyProfile = function(req,res){
 		}else{
 			var responseBody = {
 				user:result
+			};
+
+			res.send(util.wrapBody(responseBody));
+		}
+	});
+}
+
+exports.listUser = function(req,res){
+	var conditions = {
+		keyword:req.body.keyword,
+		role:req.body.role,
+		pageSize:req.body.pageSize,
+		pageNum:req.body.pageNum
+	};
+
+	userRepository.query(conditions,function(err,result){
+		if (err) {
+			console.log(err);
+			res.send(util.wrapBody('Internal Error','E'));
+		}else{
+			var responseBody = {
+				users:result
 			};
 
 			res.send(util.wrapBody(responseBody));

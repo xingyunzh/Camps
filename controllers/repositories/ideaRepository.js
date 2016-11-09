@@ -24,9 +24,10 @@ exports.update = function(ideaId,userId,data,callback){
 		_id:ideaId,
 		innovator:userId
 	},data,{
-		new:true,
-		upsert:false
-	},callback);
+		new:true
+	})
+	.populate('innovator')
+	.exec(callback);
 };
 
 exports.create = function(data,callback){
