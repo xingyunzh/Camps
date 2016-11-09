@@ -3,7 +3,7 @@ var util = require('../util/util');
 
 exports.createIdea = function(req,res){
 
-	var requires = ['name'];
+	var requires = [];
 
 	var idea = {
 		state:'unPublished'
@@ -101,7 +101,7 @@ exports.listIdea = function(req,res){
 
 
 exports.updateIdea = function(req,res){
-	var requires = ['id','name'];
+	var requires = ['id'];
 
 	var idea = {
 		state:'unPublished'
@@ -119,7 +119,7 @@ exports.updateIdea = function(req,res){
 			res.send(util.wrapBody('Invalid Parameter','E'));
 		} else {
 			var userId = req.token.userId;
-			var id = req.body.id;
+			var ideaId = req.body.id;
 
 			idea = {
 				name:req.body.name,
@@ -128,7 +128,8 @@ exports.updateIdea = function(req,res){
 				painPoint:req.body.painPoint,
 				sector:req.body.sector,
 				solution:req.body.solution,
-				hrRequirement:req.body.hrRequirement
+				hrRequirement:req.body.hrRequirement,
+				consultant:req.body.consultant
 			};
 
 			if (!req.body.relatedAssets) {
@@ -137,11 +138,15 @@ exports.updateIdea = function(req,res){
 				idea.relatedAssets = req.body.relatedAssets;
 			}
 
-			ideaRepostory.update(ideaId,userId,idea,function(err){
+			ideaRepostory.update(ideaId,userId,idea,function(err,result){
 				if (err) {
 					console.log(err);
-					res.send(util.wrapBody('Internal Err','E'));
+					res.send(util.wrapBody('Internal Error','E'));
 				} else {
+					if (!result) {
+						console.log('Invalid innovator');
+						res.send(util.wrapBody('Invalid innovator','E'));
+					}
 					res.send(util.wrapBody({success:true}));
 				}
 			});

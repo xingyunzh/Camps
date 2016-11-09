@@ -13,6 +13,8 @@ exports.create = function(data,callback){
 }
 
 exports.updateById = function(id,data,callback){
+	data.editDate = new Date();
+	
 	User.findByIdAndUpdate(id,data,{
 		new:true,
 		upsert:false

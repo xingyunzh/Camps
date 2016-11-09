@@ -17,7 +17,13 @@ var ideaSchema = Schema({
 		type:Schema.Types.ObjectId,
 		ref:'User',
 		required:true,
-		index:true,
+		index:true
+	},
+
+	consultant:{
+		type:Schema.Types.ObjectId,
+		ref:'User',
+		index:true
 	},
 
 	createDate:{
