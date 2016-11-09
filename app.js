@@ -11,7 +11,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var router = require('./routes/router');
-var scr = require('../controllers/repositories/systemConfigRepository');
+var scr = require('./controllers/repositories/systemConfigRepository');
 
 
 var contextRoot = "/";  //Not set any contextRoot at the moment, but let's make it as easy to config
@@ -23,7 +23,7 @@ scr.getMongoCredentials().then(function(data){
 					'@' + data.host + 
 					':' + data.port + 
 					'/' + data.db;
-					
+
 	mongoose.connect(mongoURL, function(err) {
 		if (err) {
 			console.log("could not connect mongodb with error message "+ err);
