@@ -21,6 +21,21 @@ exports.getOSSConfig = function(){
     return deferred.promise;
 }
 
+exports.getMongoCredentials = function(){
+    var deferred = q.defer();
+    fs.readFile("/root/keys/camproKeys.json", "utf8", function(err, data){
+        if (err) {
+            deferred.reject(err);
+        }
+        else {
+            var mongodb = JSON.parse(data).mongodb;
+            deferred.resolve(mongodb);
+        }
+    });
+
+    return deferred.promise;
+}
+
 exports.getTokenSecret = function(){
     var deferred = q.defer();
     fs.readFile("/root/keys/camproKeys.json", "utf8", function(err, data){
