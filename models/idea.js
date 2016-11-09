@@ -9,6 +9,8 @@ var ideaSchema = Schema({
 		unique:true
 	},
 
+	state:String,
+
 	background:String,
 
 	innovator:{
@@ -23,13 +25,16 @@ var ideaSchema = Schema({
 		default:new Date()
 	},
 
-	editDate:Date,
+	editDate:{
+		type:Date,
+		default:new Date()
+	},
 
 	sector:String,
 
 	deadline:Date,
 
-	painpoint:String,
+	painPoint:String,
 
 	solution:String,
 

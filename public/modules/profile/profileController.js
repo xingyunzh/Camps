@@ -1,13 +1,14 @@
 /**
  * Created by Ray on 16/11/8.
  */
-app.controller("profileController", ["$scope","$rootScope",function($scope,$rootScope){
+app.controller("profileController", ["$scope","$rootScope","httpHelper",function($scope,$rootScope,$httpHelper){
 	$scope.form = {
-		email:'',
-		password:'',
-		prompt:''
+		nickname:'',
+		name:''
 	};
 
-
+	function initData(){
+		
+	}
 
 }]);

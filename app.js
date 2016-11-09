@@ -16,7 +16,7 @@ var router = require('./routes/router');
 var contextRoot = "/";  //Not set any contextRoot at the moment, but let's make it as easy to config
 
 
-var	mongoURL = 'mongodb://127.0.0.1:27017/camps';
+var	mongoURL = 'mongodb://xyzh:xyzh@www.xingyunzh.com:27017/camps';
 
 mongoose.connect(mongoURL, function(err) {
 	if (err) {

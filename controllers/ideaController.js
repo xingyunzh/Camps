@@ -2,26 +2,66 @@ var ideaRepostory= require('./repositories/ideaRepository');
 var util = require('../util/util');
 
 exports.createIdea = function(req,res){
-	var idea = req.body.idea;
 
-	ideaRepostory.create(idea,function(err){
+	var requires = ['name'];
+
+	var idea = {
+		state:'unPublished'
+	};
+
+	if (!!req.body.state && req.body.state == 'published') {
+		idea.state = 'published';
+		requires = ['name','background','deadline','painPoint',
+					'sector','solution','hrRequirement'];
+	}
+
+	util.checkParam(req.body,requires,function(err){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+			res.send(util.wrapBody('Invalid Parameter','E'));
 		} else {
-			res.send(util.wrapBody({success:true}));
+			var userId = req.token.userId;
+
+			idea = {
+				name:req.body.name,
+				background:req.body.background,
+				innovator:userId,
+				deadline:req.body.deadline,
+				painPoint:req.body.painPoint,
+				sector:req.body.sector,
+				solution:req.body.solution,
+				hrRequirement:req.body.hrRequirement
+			};
+
+			if (!req.body.relatedAssets) {
+				idea.relatedAssets = [];
+			}else{
+				idea.relatedAssets = req.body.relatedAssets;
+			}
+
+			ideaRepostory.create(idea,function(err){
+				if (err) {
+					console.log(err);
+					res.send(util.wrapBody('Internal Err','E'));
+				} else {
+					res.send(util.wrapBody({success:true}));
+				}
+			});
 		}
 	});
-}
+
+};
 
 exports.deleteIdea = function(req,res){
-	var ideaId = req.params.id;
+	
 
-	util.checkParams(req.params,['id'],function(err){
+	util.checkParam(req.params,['id'],function(err){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+			res.send(util.wrapBody('Invalid Parameter','E'));
 		} else {
+			var ideaId = req.params.id;
+
 			ideaRepostory.deleteById(ideaId,function(err){
 				if (err) {
 					console.log(err);
@@ -29,49 +69,82 @@ exports.deleteIdea = function(req,res){
 				} else {
 					res.send(util.wrapBody({success:true}));
 				}
-			})
+			});
 		}
-	})
-
-}
+	});
+};
 
 exports.listIdea = function(req,res){
-	util.checkParams(req.body,['pageSize','pageNum'],function(err){
+	util.checkParam(req.body,['pageSize','pageNum'],function(err){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+			res.send(util.wrapBody('Invalid Parameter','E'));
 		} else {
-			var pageSize = req.body.pageSize;
-			var pageNum = req.body.pageNum;
 
 			var options = {
-				pageNum:pageNum,
-				pageSize:pageSize
-			}
+				pageNum:req.body.pageNum,
+				pageSize:req.body.pageSize
+			};
 
-			ideaRepostory.queryIdea(options,function(err,result){
+			ideaRepostory.query(options,function(err,result){
 				if (err) {
 					console.log(err);
-					res.send(util.wrapBody('Internal Err','E'));
+					res.send(util.wrapBody('Internal Error','E'));
 				} else {
 					res.send(util.wrapBody(result));
 				}
 			});
 		}
-	})
+	});
 
-}
+};
 
 
 exports.updateIdea = function(req,res){
-	var idea = req.body.idea;
+	var requires = ['id','name'];
 
-	ideaRepostory.update(idea,function(err,result){
+	var idea = {
+		state:'unPublished'
+	};
+
+	if (!!req.body.state && req.body.state == 'published') {
+		idea.state = 'published';
+		requires = ['id','name','background','deadline','painPoint',
+					'sector','solution','hrRequirement'];
+	}
+
+	util.checkParam(req.body,requires,function(err){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+			res.send(util.wrapBody('Invalid Parameter','E'));
 		} else {
-			res.send(util.wrapBody({idea:result}));
+			var userId = req.token.userId;
+			var id = req.body.id;
+
+			idea = {
+				name:req.body.name,
+				background:req.body.background,
+				deadline:req.body.deadline,
+				painPoint:req.body.painPoint,
+				sector:req.body.sector,
+				solution:req.body.solution,
+				hrRequirement:req.body.hrRequirement
+			};
+
+			if (!req.body.relatedAssets) {
+				idea.relatedAssets = [];
+			}else{
+				idea.relatedAssets = req.body.relatedAssets;
+			}
+
+			ideaRepostory.update(ideaId,userId,idea,function(err){
+				if (err) {
+					console.log(err);
+					res.send(util.wrapBody('Internal Err','E'));
+				} else {
+					res.send(util.wrapBody({success:true}));
+				}
+			});
 		}
 	});
 }
@@ -79,10 +152,10 @@ exports.updateIdea = function(req,res){
 exports.checkIfNameExists= function(req,res){
 
 
-	util.checkParams(req.body,['name'],function(err){
+	util.checkParam(req.body,['name'],function(err){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+			res.send(util.wrapBody('Invalid Parameter','E'));
 		} else {
 			var ideaName = req.body.name;
 
@@ -103,10 +176,10 @@ exports.checkIfNameExists= function(req,res){
 
 exports.getIdeaById = function(req,res){
 	
-	util.checkParams(req.params,['id'],function(err){
+	util.checkParam(req.params,['id'],function(err){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+			res.send(util.wrapBody('Invalid Parameter','E'));
 		} else {
 			var ideaId = req.params.id;
 

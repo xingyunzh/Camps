@@ -3,9 +3,6 @@
  */
 app.controller("navController", ["$scope", "$rootScope", function($scope, $rootScope){
 	$scope.hasLoggedIn = false;
-	$scope.showing = {
-		nickname:'default'
-	};
 
     $scope.goLogin = function () {
         $rootScope.$state.go("nav.login");
@@ -13,7 +10,6 @@ app.controller("navController", ["$scope", "$rootScope", function($scope, $rootS
 
     $rootScope.$on('loggedIn',function(){
     	$scope.hasLoggedIn = true;
-    	$scope.showing.nickname = $rootScope.currentUser.nickname;
     });
 
     $rootScope.$on('loggedOut',function(){

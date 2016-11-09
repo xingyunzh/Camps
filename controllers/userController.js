@@ -11,7 +11,7 @@ exports.loginByEmail = function(req,res){
 	util.checkParam(req.body,['email','password'],function(err){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Internal Error','E'));
+			res.send(util.wrapBody('Invalid Parameter','E'));
 		}else{
 			login(req,res,'email');
 		}
@@ -22,12 +22,60 @@ exports.loginByWechat = function(req,res){
 	util.checkParam(req.body,['code'],function(err){
 		if (err) {
 			console.log(err);
-			res.send(util.wrapBody('Internal Error','E'));
+			res.send(util.wrapBody('Invalid Parameter','E'));
 		}else{
 			login(req,res,'wechat');
 		}
 	});	
 }
+
+exports.update = function(req,res){
+	util.checkParam(req.body,['name','nickname'],function(err){
+		if (err) {
+			console.log(err);
+			res.send(util.wrapBody('Invalid Parameter','E'));
+			return;
+		}
+	});
+
+	var id = req.token.userId;
+	
+	var user = {
+		name:req.body.name,
+		nickname:req.body.nickname,
+		skills:req.body.skills,
+		sector:req.body.sector
+	};
+
+	userRepository.updateById(id,user,function(err,result){
+		if (err) {
+			console.log(err);
+			res.send(util.wrapBody('Internal Error','E'));
+		}else{
+			res.send(util.wrapBody(result));
+		}
+	});
+}
+
+exports.getMyProfile = function(req,res){
+
+	var id = req.token.userId;
+
+	userRepository.findById(id,function(err,result){
+		if (err) {
+			console.log(err);
+			res.send(util.wrapBody('Internal Error','E'));
+		}else{
+			var responseBody = {
+				user:result
+			};
+
+			res.send(util.wrapBody(responseBody));
+		}
+	});
+}
+
+
 
 function login(req,res,type){
 	var email = null;

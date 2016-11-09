@@ -1,8 +1,9 @@
 
 var jwt = require('jsonwebtoken');
+var util = require('../util/util');
 var scr = require('../controllers/repositories/systemConfigRepository');
 
-var secret = getSecret();
+var secret = null;
 
 getSecret();
 
@@ -40,7 +41,6 @@ module.exports.authenticate = function(req, res, next) {
 				res.send(util.wrapBody('Invalid token','E'));
 			}else{
 				req.token = tokenObject;
-				console.log('token',tokenObject);
 				next();
 			}
 		});

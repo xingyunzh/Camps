@@ -5,30 +5,34 @@ exports.deleteById = function(id,callback){
 	Idea
 	.findByIdAndRemove(id)
 	.exec(callback);
-}
+};
 
 exports.count = function(conditions,callback){
 	Idea
 	.count(conditions,callback);
-}
+};
 
 exports.findById = function(id,callback){
 	Idea
 	.findById(id)
 	.exec(callback);
-}
+};
 
-exports.update = function(data,callback){
+exports.update = function(ideaId,userId,data,callback){
 	Idea
-	.findByIdAndUpdate(data._id,data,{
-		new:true
+	.findOneAndUpdate({
+		_id:ideaId,
+		innovator:userId
+	},data,{
+		new:true,
+		upsert:false
 	},callback);
-}
+};
 
 exports.create = function(data,callback){
 	Idea
-	.create(idea,callback);
-}
+	.create(data,callback);
+};
 
 /*
  #param options
@@ -38,29 +42,47 @@ exports.create = function(data,callback){
 	keywords
 */
 exports.query = function(options,callback){
-	var pageNum = options.pageNum;
-	var pageSize = options.pageSize;
-	var sector = options.sector;
-	var sort = options.sort;
+	
 
-	//TO DO
-	var keyword = options.keyword
+	var conditions = {};
 
-	var query = Idea.where('name',new RegExp('^'+keyword+'$', "i")).sort('editDate');
-	//end
-	if (sector != undefined) {
-		query = query.where('sector').eq(sector);
-	};
+	if ('keyword' in options) {
+		conditions.name = new RegExp('^'+options.keyword+'$', "i");
+	}
 
-	var totalCount = query.count();
+	if ('sector' in options) {
+		conditions.sector = options.sector;
+	}
 
-	if (!!pageNum && !!pageSize) {
-		var skipped = (pageNum - 1) * pageSize;
-		query = query.skip(skipped).limit(pageSize);
-	};
+	var totalCount = null;
 
-	query.exec(function(err,result){
-		callback(err,{total:totalCount,list:result});
+	Idea.count(conditions,function(err,result){
+		if (err) {
+			callback(err);
+		}else{
+			totalCount = result;
+
+			var pageNum = 0;
+			var pageSize = 10;
+
+			if ('pageNum' in options && 'pageSize' in options) {
+				pageNum = options.pageNum;
+				pageSize = options.pageSize;
+			}
+
+			var skipped = (pageNum - 1) * pageSize;
+
+			console.log('total',totalCount);
+
+			Idea
+			.find(conditions)
+			.skip(skipped)
+			.limit(pageSize)
+			.exec(function(err,result){
+				callback(err,{total:totalCount,list:result});
+			});
+		}
 	});
-}
+
+};
 

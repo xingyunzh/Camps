@@ -7,7 +7,7 @@
 
 	util.checkParam = function(container,params,callback){
 		for (var i = params.length - 1; i >= 0; i--) {
-			if (!container[params[i]]) {
+			if (!([params[i]] in container)) {
 				var err = new Error('Invalid Parameter');
 				callback(err);
 				return;
