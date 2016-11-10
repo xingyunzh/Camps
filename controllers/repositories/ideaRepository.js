@@ -25,10 +25,11 @@ exports.update = function(ideaId,userId,data,callback){
 	Idea
 	.findOneAndUpdate({
 		_id:ideaId,
-		innovator:userId
+		'innovator._id':userId
 	},data,{
 		new:true
 	})
+	.populate('innovator')
 	.exec(callback);
 };
 
