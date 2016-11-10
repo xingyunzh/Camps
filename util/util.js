@@ -5,6 +5,11 @@
 }(this, function () { 
 	var util = {};
 
+	util.isValidObjectId = function(id){
+		var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+		return checkForHexRegExp.test(id);
+	};
+
 	util.checkParam = function(container,params,callback){
 		for (var i = params.length - 1; i >= 0; i--) {
 			if (!([params[i]] in container)) {
@@ -14,7 +19,7 @@
 			}		
 		}
 		callback(null);
-	}
+	};
 		//convenient methods to contruct uniformat response
 	util.wrapBody = function(obj, statusCode){
 		var statusCode = arguments[1] ? arguments[1] : 'S';

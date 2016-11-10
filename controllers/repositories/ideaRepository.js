@@ -16,16 +16,14 @@ exports.count = function(conditions,callback){
 exports.findById = function(id,callback){
 	Idea
 	.findById(id)
+	.lean()
 	.exec(callback);
 };
 
-exports.update = function(ideaId,userId,data,callback){
-	console.log(ideaId + ':' + userId);
+exports.update = function(conditions,data,callback){
 
 	Idea
-	.findOneAndUpdate({
-		'innovator':new ObjectId(userId)
-	},data,{
+	.findOneAndUpdate(conditions,data,{
 		new:true
 	})
 	.populate('innovator')
@@ -50,14 +48,21 @@ exports.query = function(options,callback){
 	var conditions = {};
 
 	if ('keyword' in options) {
-		conditions.name = new RegExp('^'+options.keyword+'$', "i");
+		conditions.name = new RegExp(options.keyword, "i");
 	}
 
 	if ('sector' in options) {
 		conditions.sector = options.sector;
 	}
 
+	if ('innovator' in options) {
+		conditions.innovator = options.innovator;
+	}
+
 	var totalCount = null;
+
+	console.log(options);
+	console.log(conditions);
 
 	Idea.count(conditions,function(err,result){
 		if (err) {
@@ -75,6 +80,13 @@ exports.query = function(options,callback){
 
 			var skipped = (pageNum - 1) * pageSize;
 
+			if (pageSize >= totalCount) {
+				skipped = 0;
+			}else if (skipped >= totalCount) {
+				skipped = total - pageSize;
+			}
+
+			console.log('skip',skipped);
 			console.log('total',totalCount);
 
 			Idea

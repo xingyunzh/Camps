@@ -3,10 +3,7 @@ var Schema = mongoose.Schema;
 
 var ideaSchema = Schema({
 	name:{
-		type:String,
-		required:true,
-		index:true,
-		unique:true
+		type:String
 	},
 
 	state:String,
@@ -22,8 +19,7 @@ var ideaSchema = Schema({
 
 	consultant:{
 		type:Schema.Types.ObjectId,
-		ref:'User',
-		index:true
+		ref:'User'
 	},
 
 	createDate:{
@@ -53,5 +49,15 @@ var ideaSchema = Schema({
 });
 
 var Idea = mongoose.model('Idea', ideaSchema);
+
+ideaSchema.method('isCompleted',function() {
+	return this.name &&
+		this.background &&
+		this.solution &&
+		this.innovator &&
+		this.sector &&
+		this.painPoint &&
+		this.hrRequirement;
+});
 
 module.exports = Idea;
