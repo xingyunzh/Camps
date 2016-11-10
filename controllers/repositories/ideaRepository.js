@@ -20,6 +20,8 @@ exports.findById = function(id,callback){
 };
 
 exports.update = function(ideaId,userId,data,callback){
+	console.log(ideaId + ':' + userId);
+	
 	Idea
 	.findOneAndUpdate({
 		_id:new ObjectId(ideaId),

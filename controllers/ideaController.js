@@ -158,7 +158,7 @@ exports.updateIdea = function(req,res){
 					res.send(util.wrapBody('Internal Error','E'));
 				} else {
 					if (!result) {
-						console.log('Invalid innovator');
+						console.log('Invalid innovator',result);
 						res.send(util.wrapBody('Invalid innovator','E'));
 					}else{
 						res.send(util.wrapBody({idea:result}));
