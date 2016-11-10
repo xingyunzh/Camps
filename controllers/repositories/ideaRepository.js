@@ -24,8 +24,7 @@ exports.update = function(ideaId,userId,data,callback){
 
 	Idea
 	.findOneAndUpdate({
-		_id:ideaId,
-		'innovator._id':userId
+		'innovator':userId
 	},data,{
 		new:true
 	})
