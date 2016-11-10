@@ -1,4 +1,5 @@
 var Idea = require('../../models/idea');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.deleteById = function(id,callback){
 
@@ -21,8 +22,8 @@ exports.findById = function(id,callback){
 exports.update = function(ideaId,userId,data,callback){
 	Idea
 	.findOneAndUpdate({
-		_id:ideaId,
-		innovator:userId
+		_id:new ObjectId(ideaId),
+		innovator:new ObjectId(userId)
 	},data,{
 		new:true
 	})
