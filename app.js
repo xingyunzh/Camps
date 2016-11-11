@@ -10,29 +10,20 @@ var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var q = require('q');
 var router = require('./routes/router');
 var scr = require('./controllers/repositories/systemConfigRepository');
 
 
 var contextRoot = "/";  //Not set any contextRoot at the moment, but let's make it as easy to config
 
-
-scr.getMongoCredentials().then(function(data){
-	var	mongoURL = 'mongodb://' + data.user + 
-					":" + data.password + 
-					'@' + data.host + 
-					':' + data.port + 
-					'/' + data.db;
-
-	mongoose.connect(mongoURL, function(err) {
-		if (err) {
-			console.log("could not connect mongodb with error message "+ err);
-		}else{
-			console.log("mongodb connected");
-		}
-	});
-});
-
+mongoose.Promise = q.Promise;
+var envMongo = scr.getMongoEnv();
+var	mongoURL = 'mongodb://' + envMongo.user + 
+				":" + envMongo.password + 
+				'@' + envMongo.host + 
+				':' + envMongo.port + 
+				'/' + envMongo.db;
 
 
 
@@ -78,9 +69,18 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+mongoose
+.connect(mongoURL)
+.then(function() {
+	console.log('Mongodb connected');
+	server.listen(port);
+	server.on('error', onError);
+	server.on('listening', onListening);
+})
+.catch(function(err) {
+	console.log("Could not connect mongodb with error message "+ err);
+});
+
 
 /**
  * Normalize a port into a number, string, or false.

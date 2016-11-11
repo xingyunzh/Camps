@@ -1,38 +1,33 @@
 var Idea = require('../../models/idea');
 var ObjectId = require('mongoose').Types.ObjectId;
 
-exports.deleteById = function(id,callback){
+exports.deleteById = function(id){
 
-	Idea
+	return Idea
 	.findByIdAndRemove(id)
-	.exec(callback);
+	.exec();
 };
 
-exports.count = function(conditions,callback){
-	Idea
-	.count(conditions,callback);
+exports.count = function(conditions){
+	return Idea.count(conditions).exec();
 };
 
-exports.findById = function(id,callback){
-	Idea
-	.findById(id)
-	.lean()
-	.exec(callback);
+exports.findById = function(id){
+	return Idea.findById(id).lean().exec();
 };
 
-exports.update = function(conditions,data,callback){
+exports.update = function(conditions,data){
 
-	Idea
+	return Idea
 	.findOneAndUpdate(conditions,data,{
 		new:true
 	})
 	.populate('innovator')
-	.exec(callback);
+	.exec();
 };
 
-exports.create = function(data,callback){
-	Idea
-	.create(data,callback);
+exports.create = function(data){
+	return Idea.create(data);
 };
 
 /*
@@ -42,7 +37,7 @@ exports.create = function(data,callback){
 	sector
 	keywords
 */
-exports.query = function(options,callback){
+exports.query = function(options){
 	
 
 	var conditions = {};
@@ -64,17 +59,19 @@ exports.query = function(options,callback){
 	console.log(options);
 	console.log(conditions);
 
-	Idea.count(conditions,function(err,result){
-		if (err) {
-			callback(err);
-		}else{
+	return Idea
+		.count(conditions)
+		.then(function(result){
 			totalCount = result;
 
-			var pageNum = 0;
+			var pageNum = 1;
 			var pageSize = 10;
 
-			if ('pageNum' in options && 'pageSize' in options) {
+			if ('pageNum' in options) {
 				pageNum = options.pageNum;
+			}
+
+			if ('pageSize' in options) {
 				pageSize = options.pageSize;
 			}
 
@@ -86,18 +83,15 @@ exports.query = function(options,callback){
 				skipped = total - pageSize;
 			}
 
-			console.log('skip',skipped);
-			console.log('total',totalCount);
+			return Idea
+				.find(conditions)
+				.skip(skipped)
+				.limit(pageSize)
+				.exec();
 
-			Idea
-			.find(conditions)
-			.skip(skipped)
-			.limit(pageSize)
-			.exec(function(err,result){
-				callback(err,{total:totalCount,list:result});
-			});
-		}
-	});
+		}).then(function(result){
+			return {total:totalCount,list:result};
+		});
 
 };
 

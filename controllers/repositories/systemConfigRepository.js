@@ -21,31 +21,15 @@ exports.getOSSConfig = function(){
     return deferred.promise;
 }
 
-exports.getMongoCredentials = function(){
-    var deferred = q.defer();
-    fs.readFile("/root/keys/camproKeys.json", "utf8", function(err, data){
-        if (err) {
-            deferred.reject(err);
-        }
-        else {
-            var mongodb = JSON.parse(data).mongodb;
-            deferred.resolve(mongodb);
-        }
-    });
+exports.getMongoEnv = function(){
 
-    return deferred.promise;
+    var data = fs.readFileSync("/root/keys/camproKeys.json", "utf8");
+    var mongodb = JSON.parse(data).mongodb;
+    return mongodb;
 }
 
 exports.getTokenSecret = function(){
-    var deferred = q.defer();
-    fs.readFile("/root/keys/camproKeys.json", "utf8", function(err, data){
-        if (err) {
-            deferred.reject(err);
-        }
-        else {
-            var jwt = JSON.parse(data).jwt;
-            deferred.resolve(jwt);
-        }
-    });
-    return deferred.promise;
+    var data = fs.readFileSync("/root/keys/camproKeys.json", "utf8");
+    var jwt = JSON.parse(data).jwt;
+    return jwt;
 }
