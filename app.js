@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var q = require('q');
 var router = require('./routes/router');
-var scr = require('./controllers/repositories/systemConfigRepository');
+var scr = require('./repositories/systemConfigRepository');
 
 
 var contextRoot = "/";  //Not set any contextRoot at the moment, but let's make it as easy to config

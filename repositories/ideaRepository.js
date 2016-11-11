@@ -1,4 +1,4 @@
-var Idea = require('../../models/idea');
+var Idea = require('../models/idea');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.deleteById = function(id){

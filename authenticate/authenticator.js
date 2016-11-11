@@ -1,7 +1,7 @@
 
 var jwt = require('jsonwebtoken');
 var util = require('../util/util');
-var scr = require('../controllers/repositories/systemConfigRepository');
+var scr = require('../repositories/systemConfigRepository');
 
 var secret = null;
 

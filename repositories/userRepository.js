@@ -1,4 +1,4 @@
-var User = require('../../models/user.js');
+var User = require('../models/user.js');
 
 exports.findByUid = function(uid) {
 	return User.findOne({uid:uid}).lean().exec();
