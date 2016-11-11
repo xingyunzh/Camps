@@ -1,6 +1,6 @@
 app.service("loginService", ['httpHelper', function (httpHelper) {
     this.loginByWechat = function (code,callback) {
-        httpHelper.sendRequest("POST", "./public/login/wechat",{
+        httpHelper.sendRequest("POST", "./api/user/login/wechat",{
 			code:code
 		}).then(function success(data) {
 			if (data.user != null) {
@@ -15,7 +15,7 @@ app.service("loginService", ['httpHelper', function (httpHelper) {
     };
 
     this.loginByEmail = function (email,password,callback) {
-        httpHelper.sendRequest("POST", "./public/login/email",{
+        httpHelper.sendRequest("POST", "./api/user/login/email",{
 			email:email,
 			password:password
 		}).then(function success(data) {
