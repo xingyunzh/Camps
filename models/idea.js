@@ -50,14 +50,5 @@ var ideaSchema = Schema({
 
 var Idea = mongoose.model('Idea', ideaSchema);
 
-ideaSchema.method('isCompleted',function() {
-	return this.name &&
-		this.background &&
-		this.solution &&
-		this.innovator &&
-		this.sector &&
-		this.painPoint &&
-		this.hrRequirement;
-});
 
 module.exports = Idea;

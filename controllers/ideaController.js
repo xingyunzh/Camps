@@ -1,4 +1,4 @@
-var ideaRepostory= require('./repositories/ideaRepository');
+var ideaRepostory= require('../repositories/ideaRepository');
 var util = require('../util/util');
 var q = require('q');
 

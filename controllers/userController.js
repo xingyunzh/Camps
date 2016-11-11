@@ -1,4 +1,4 @@
-var userRepository = require('./repositories/userRepository');
+var userRepository = require('../repositories/userRepository');
 var http = require('http');
 var uidHelper = require('../util/uidHelper');
 var util = require('../util/util');
