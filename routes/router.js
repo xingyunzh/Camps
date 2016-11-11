@@ -22,7 +22,8 @@ module.exports = function(app, contextRoot) {
     rootRouter.use('/message', messageRouter);
 
     rootRouter.use('/system', systemConfigRouter);
-    //rootRouter.use('/',authenticator.authenticate);
+    
+    rootRouter.use('/api',authenticator.authenticate);
 
     rootRouter.use("/public", publicAPI);
 

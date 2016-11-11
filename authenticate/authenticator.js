@@ -1,15 +1,25 @@
 
 var jwt = require('jsonwebtoken');
-var config = require('./config');
+var util = require('../util/util');
+var scr = require('../controllers/repositories/systemConfigRepository');
 
-var secret = config.secret;
+var secret = null;
+
+getSecret();
+
+function getSecret(){
+	scr
+	.getTokenSecret()
+	.then(function(data){
+		secret = data.secret;
+	});
+}
 
 module.exports.verify = function(tokenString,callback){
 	jwt.verify(tokenString,secret,callback);
 };
 
 module.exports.create = function(userId,callback){
-	console.log('userId',userId);
 	
 	jwt.sign({
 		userId:userId
@@ -31,7 +41,6 @@ module.exports.authenticate = function(req, res, next) {
 				res.send(util.wrapBody('Invalid token','E'));
 			}else{
 				req.token = tokenObject;
-				console.log('token',tokenObject);
 				next();
 			}
 		});

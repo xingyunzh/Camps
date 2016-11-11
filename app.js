@@ -11,18 +11,30 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var router = require('./routes/router');
+var scr = require('./controllers/repositories/systemConfigRepository');
 
 
 var contextRoot = "/";  //Not set any contextRoot at the moment, but let's make it as easy to config
 
 
-var	mongoURL = 'mongodb://127.0.0.1:27017/camps';
+scr.getMongoCredentials().then(function(data){
+	var	mongoURL = 'mongodb://' + data.user + 
+					":" + data.password + 
+					'@' + data.host + 
+					':' + data.port + 
+					'/' + data.db;
 
-mongoose.connect(mongoURL, function(err) {
-	if (err) {
-		console.log("could not connect mongodb with error message "+ err)
-	}
+	mongoose.connect(mongoURL, function(err) {
+		if (err) {
+			console.log("could not connect mongodb with error message "+ err);
+		}else{
+			console.log("mongodb connected");
+		}
+	});
 });
+
+
+
 
 // create a new express server
 var app = express();

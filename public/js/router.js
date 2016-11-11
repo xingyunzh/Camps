@@ -79,10 +79,10 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             templateUrl: "./modules/login/login.html",
             controller: "loginController"
         })
-        .state("nav.loginB", {
-            url: "/loginB",
-            templateUrl: "./modules/login/login.html",
-            controller: "loginController"
+        .state("nav.profile", {
+            url: "/profile",
+            templateUrl: "./modules/profile/profile.html",
+            controller: "profileController"
         });
 
 

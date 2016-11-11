@@ -8,7 +8,7 @@ var userSchema = Schema({
 
 	uid:String,
 
-	roles:String,
+	roles:[String],
 
 	skills:[String],
 
