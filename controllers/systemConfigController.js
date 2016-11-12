@@ -4,7 +4,7 @@
 var util = require('../util/util.js');
 var fs = require('fs');
 var shortID = require('shortid');
-var systemConfigRepository = require('./repositories/systemConfigRepository');
+var systemConfigRepository = require('../repositories/systemConfigRepository');
 
 exports.getOSSConfig = function(req, res){
     systemConfigRepository.getOSSConfig().then(function(data){

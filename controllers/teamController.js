@@ -1,4 +1,4 @@
-var teamRepository = require('./repositories/teamRepository');
+var teamRepository = require('../repositories/teamRepository');
 
 exports.createTeam = function(req,res){
 	var team = req.body.team;

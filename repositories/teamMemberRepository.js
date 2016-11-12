@@ -1,4 +1,4 @@
-var TeamMember = require('../../models/teamMember');
+var TeamMember = require('../models/teamMember');
 
 exports.getTeamByUserId = function(userId,callback) {
 	TeamMember

@@ -5,20 +5,14 @@
 }(this, function () { 
 	var util = {};
 
-	util.isValidObjectId = function(id){
-		var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
-		return checkForHexRegExp.test(id);
-	};
-
-	util.checkParam = function(container,params,callback){
+	util.checkParam = function(container,params){
 		for (var i = params.length - 1; i >= 0; i--) {
-			if (!([params[i]] in container)) {
-				var err = new Error('Invalid Parameter');
-				callback(err);
-				return;
+			if (!(params[i] in container)) {
+				console.log('Miss ' + params[i]);
+				return false;
 			}		
 		}
-		callback(null);
+		return true;
 	};
 		//convenient methods to contruct uniformat response
 	util.wrapBody = function(obj, statusCode){

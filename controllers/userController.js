@@ -1,42 +1,30 @@
-var userRepository = require('./repositories/userRepository');
+var userRepository = require('../repositories/userRepository');
 var http = require('http');
 var uidHelper = require('../util/uidHelper');
-var util = require('../util/util.js');
+var util = require('../util/util');
+var stringHelper = require('../util/shared/stringHelper');
 var queryString = require('querystring');
-var authenticator = require('../authenticate/authenticator.js');
+var authenticator = require('../authenticate/authenticator');
 
 
 exports.loginByEmail = function(req,res){
 
-	util.checkParam(req.body,['email','password'],function(err){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Invalid Parameter','E'));
-		}else{
-			login(req,res,'email');
-		}
-	});	
-}
+	if (!util.checkParam(req.body,['email','password'])) {
+		res.send(util.wrapBody('Invalid Parameter','E'));
+	}else{
+		login(req,res,'email');
+	}
+};
 
 exports.loginByWechat = function(req,res){
-	util.checkParam(req.body,['code'],function(err){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Invalid Parameter','E'));
-		}else{
-			login(req,res,'wechat');
-		}
-	});	
-}
+	if (!util.checkParam(req.body,['code'])) {
+		res.send(util.wrapBody('Invalid Parameter','E'));
+	}else{
+		login(req,res,'wechat');
+	}
+};
 
 exports.update = function(req,res){
-	// util.checkParam(req.body,['name','nickname'],function(err){
-	// 	if (err) {
-	// 		console.log(err);
-	// 		res.send(util.wrapBody('Invalid Parameter','E'));
-	// 		return;
-	// 	}
-	// });
 
 	var id = req.token.userId;
 
@@ -58,7 +46,6 @@ exports.update = function(req,res){
 }
 
 exports.getProfileById = function(req,res){
-
 	var id = req.params.id;
 
 	userRepository.findById(id,function(err,result){
@@ -83,19 +70,23 @@ exports.listUser = function(req,res){
 		pageNum:req.body.pageNum
 	};
 
-	userRepository.query(conditions,function(err,result){
-		if (err) {
+	userRepository
+	.query(conditions)
+	.then(function(result){
+		var responseBody = {
+			users:result
+		};
+
+		res.send(util.wrapBody(responseBody));
+	}).catch(function(err){
+		if (typeof err == String) {
+			res.send(util.wrapBody(err,'E'));
+		} else {
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
-		}else{
-			var responseBody = {
-				users:result
-			};
-
-			res.send(util.wrapBody(responseBody));
 		}
 	});
-}
+};
 
 
 
@@ -157,13 +148,17 @@ function login(req,res,type){
 				if (!loginResult.token) {
 					stateMachine(null,STATE_INVALID_CREDENTIALS);
 				}else{
-					userRepository.findByUid(loginResult.user.userId,function(err,userResult){
+					userRepository
+					.findByUid(loginResult.user.userId)
+					.then(function(userResult){
 						latestUser = userResult;
 						if(userResult == null){
-							stateMachine(err,STATE_GET_PROFILE);
+							stateMachine(null,STATE_GET_PROFILE);
 						}else{
-							stateMachine(err,STATE_CREATE_TOKEN);
+							stateMachine(null,STATE_CREATE_TOKEN);
 						}
+					}).catch(function(err){
+						stateMachine(err,STATE_SEND_RESPONSE);
 					});
 				}
 			break;
@@ -175,7 +170,12 @@ function login(req,res,type){
 			break;
 			case STATE_CREATE_USER:
 				var user = {};
-				user.nickname = latestProfile.nickname;
+				if (!!latestProfile.nickname) {
+					user.nickname = latestProfile.nickname;
+				} else {
+					user.nickname = '新用户' + stringHelper.generate(4,'all');
+				}
+				
 				user.uid = loginResult.user.userId;
 
 				userRepository.create(user,function(err,result){

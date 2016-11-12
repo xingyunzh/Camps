@@ -14,10 +14,9 @@ app.service("profileService", ['httpHelper', function (httpHelper) {
         });
     };
 
-    this.loginByEmail = function (email,password,callback) {
-        httpHelper.sendRequest("POST", "./public/login/email",{
-			email:email,
-			password:password
+    this.getProfile = function(callback) {
+    	httpHelper.sendRequest("POST", "./api/profile",{
+			code:code
 		}).then(function success(data) {
 			if (data.user != null) {
 				callback(null,data);
@@ -28,6 +27,6 @@ app.service("profileService", ['httpHelper', function (httpHelper) {
         },function fail(err){
             callback(err);
         });
-    };
+    }
 
 }]);

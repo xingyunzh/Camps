@@ -1,5 +1,5 @@
-var ideaController = require('../controllers/ideaController.js');
-
+var ideaController = require('../controllers/ideaController');
+var authenticator = require('../authenticate/authenticator');
 var router = require('express').Router();
 
 
@@ -16,7 +16,7 @@ var router = require('express').Router();
 //		deadline:Date
 //		hrRequirement:String
 //		relatedAssets:[String] (Asset)
-router.post('/add',ideaController.createIdea);
+router.post('/add',authenticator.authenticate,ideaController.createIdea);
 
 //query parameters
 //	required:
@@ -39,7 +39,7 @@ router.get('/:id',ideaController.getIdeaById);
 //		deadline:Date
 //		hrRequirement:String
 //		relatedAssets:[String] (Asset)
-router.post('/update/:id',ideaController.updateIdea);
+router.post('/update/:id',authenticator.authenticate,ideaController.updateIdea);
 
 //query parameters
 //	required:
@@ -57,12 +57,13 @@ router.post('/update/:id',ideaController.updateIdea);
 //		deadline:Date
 //		hrRequirement:String
 //		relatedAssets:[String] (Asset)
-router.post('/publish/:id',ideaController.publishIdea);
+router.post('/publish/:id',authenticator.authenticate,ideaController.publishIdea);
 
 //query parameters
 //	required:
 //		id:String (idea)
-router.get('/delete/:id',ideaController.deleteIdea);
+//	**********INCOMPLETE!*********
+router.get('/delete/:id',authenticator.authenticate,ideaController.deleteIdea);
 
 //body parameters
 //	required:
@@ -82,11 +83,12 @@ router.post('/list',ideaController.listIdea);
 
 //body parameters
 //	required:
+// 		id:String (innovator)
 //	optional:
 //		pageNum:Number
 //		pageSize:Number
 //		keyword:String (for name)
 //		sector:String
-router.post('/list/innovator',ideaController.listIdeasByInnovator);
+router.post('/list/:id',ideaController.listIdeasByInnovator);
 
 module.exports = router;

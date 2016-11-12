@@ -2,9 +2,6 @@
 var userAPI = require('./userAPI');
 var ideaAPI = require('./ideaAPI');
 
-var publicAPI = require('./publicAPI.js');
-var authenticator = require('../authenticate/authenticator.js');
-
 var rootRouter = require("express").Router();
 var messageRouter = require("./messageRouter");
 var systemConfigRouter = require("./systemConfigRouter");
@@ -23,9 +20,7 @@ module.exports = function(app, contextRoot) {
 
     rootRouter.use('/system', systemConfigRouter);
     
-    rootRouter.use('/api',authenticator.authenticate);
-
-    rootRouter.use("/public", publicAPI);
+    //rootRouter.use('/api',authenticator.authenticate);
 
 	rootRouter.use('/api/user',userAPI);
 
