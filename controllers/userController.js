@@ -118,7 +118,7 @@ function login(req,res,type){
 	}
 
 	function stateMachine(err,toState){
-		console.log('state:',toState);
+		//console.log('state:',toState);
 
 		if (err) {
 			console.log('error:',err);
@@ -198,7 +198,7 @@ function login(req,res,type){
 					token:token,
 					user:latestUser
 				};
-				console.log("resbody:",responseBody);
+				//console.log("resbody:",responseBody);
 				res.send(util.wrapBody(responseBody));
 			break;
 			default:

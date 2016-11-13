@@ -9,7 +9,7 @@ exports.findById = function(id){
 };
 
 exports.create = function(data){
-	return User.create(data).exec();
+	return User.create(data);
 };
 
 exports.updateById = function(id,data){
