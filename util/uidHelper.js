@@ -37,7 +37,7 @@ var postUID = function(path,body,token,callback){
 	
 
 	var postData = JSON.stringify(body);
-	console.log('postData',postData);
+	//console.log('postData',postData);
 	var options = {
 		hostname: 'www.xingyunzh.com',
 		  	port: 5566,
@@ -67,7 +67,7 @@ var postUID = function(path,body,token,callback){
 		});
 		  
 		res.on('end', function(){
-		    console.log('No more data in response.');
+		    //console.log('No more data in response.');
 		});
 	});
 
