@@ -25,42 +25,29 @@ exports.loginByWechat = function(req,res){
 };
 
 exports.update = function(req,res){
-
 	var id = req.token.userId;
 
-	var user = {
-		name:req.body.name,
-		nickname:req.body.nickname,
-		skills:req.body.skills,
-		sector:req.body.sector
-	};
-
-	userRepository.updateById(id,user,function(err,result){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Internal Error','E'));
-		}else{
-			res.send(util.wrapBody(result));
-		}
-	});
+	userRepository.updateById(id, req.body).then(function(result){
+        res.send(util.wrapBody(result));
+    }).catch(function(error){
+        console.log(err);
+        res.send(util.wrapBody('Internal Error','E'));
+    });
 }
 
 exports.getProfileById = function(req,res){
 	var id = req.params.id;
 
-	userRepository.findById(id,function(err,result){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Internal Error','E'));
-		}else{
-			var responseBody = {
-				user:result
-			};
-
-			res.send(util.wrapBody(responseBody));
-		}
-	});
-};
+    userRepository.findById(id).then(function(result){
+        var responseBody = {
+            user:result
+        };
+        res.send(util.wrapBody(responseBody));
+    }).catch(function(err){
+        console.log(err);
+        res.send(util.wrapBody('Internal Error','E'));
+    });
+}
 
 exports.listUser = function(req,res){
 	var conditions = {

@@ -15,7 +15,7 @@ app.service("profileService", ['httpHelper', function (httpHelper) {
     };
 
     this.getProfile = function(callback) {
-    	httpHelper.sendRequest("POST", "./api/profile",{
+    	httpHelper.sendRequest("POST", "./api/user/profile",{
 			code:code
 		}).then(function success(data) {
 			if (data.user != null) {
@@ -28,5 +28,9 @@ app.service("profileService", ['httpHelper', function (httpHelper) {
             callback(err);
         });
     }
+
+	this.updateUser = function(updateContent) {
+		return httpHelper.sendRequest("POST", "./api/user/profile/update",updateContent);
+	}
 
 }]);
