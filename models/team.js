@@ -5,8 +5,7 @@ var teamSchema = Schema({
 	name:{
 		type:String,
 		index:true,
-		required:true,
-		unique:true
+		required:true
 	},
 
 	description:String,

@@ -60,7 +60,7 @@ exports.getProfileById = function(req,res){
 			res.send(util.wrapBody(responseBody));
 		}
 	});
-}
+};
 
 exports.listUser = function(req,res){
 	var conditions = {

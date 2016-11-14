@@ -28,7 +28,7 @@ exports.removeById = function(id){
 };
 
 exports.update = function(conditions,updates){
-	return Team.update(conditions,updates,{
+	return Team.findOneAndUpdate(conditions,updates,{
 		new:true
 	}).populate('coach').populate('member').populate('lead').exec();
 };
@@ -58,6 +58,10 @@ exports.query = function(options){
 
 	if ('lead' in options) {
 		conditions.lead = options.lead;
+	}
+
+	if ('state' in options) {
+		conditions.state = options.state;
 	}
 
 	var totalCount = null;

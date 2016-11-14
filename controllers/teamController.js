@@ -1,9 +1,10 @@
 var teamRepository = require('../repositories/teamRepository');
 var util = require('../util/util');
-var _ = require('lodash');
 
 exports.list = function(req,res){
 	var conditions = req.body;
+
+	conditions.state = 'active';
 
 	teamRepository.query(conditions).then(function(result){
 		res.send(util.wrapBody(result));
@@ -14,18 +15,24 @@ exports.list = function(req,res){
 };
 
 exports.checkNameExist = function(req,res){
-	var name = req.body.name;
 
-	checkNameExist().then(function(exist){
-		res.send(util.wrapBody({exist:exist}));
-	}).fail(function(err){
-		console.log(err);
-		res.send(util.wrapBody('Internal Error','E'));		
-	});
+	if (!!req.body.name) {
+		checkNameExist(req.body.name).then(function(exist){
+			res.send(util.wrapBody({exist:exist}));
+		}).fail(function(err){
+			console.log(err);
+			res.send(util.wrapBody('Internal Error','E'));		
+		});
+	}else{
+		res.send(util.wrapBody('Invalid Parameter','E'));
+	}
+	
 };
 
 function checkNameExist(name){
-	teamRepository.countByName(name).then(function(count){
+	var q = teamRepository.countByName(name);
+
+	return teamRepository.countByName(name).then(function(count){
 		return count>0;
 	});
 }
@@ -64,7 +71,7 @@ exports.getTeamById = function(req,res) {
 	});
 };
 
-exports.updateTeam = function(req,res){
+exports.update = function(req,res){
 	var id = req.params.id;
 	var lead = req.token.userId;
 	var updates = req.body;
@@ -87,10 +94,10 @@ exports.updateTeam = function(req,res){
 			res.send(util.wrapBody({team:team}));
 		}).fail(function(err){
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+			res.send(util.wrapBody('Internal Error','E'));
 		});
 	}else{
-		teamRepository.update(updates).then(function(result){
+		teamRepository.updateById(id,updates).then(function(result){
 			res.send(util.wrapBody({team:result}));
 		}).fail(function(err){
 			console.log(err);
@@ -102,10 +109,11 @@ exports.updateTeam = function(req,res){
 function triggerNewTeam(conditions){
 	var triggerCon = ['lead','member','coach','project'];
 
-	var intersection = _.intersection(triggerCon,conditions.keys);
-	if (intersection.length>0) {
-		return true;
-	} else {
-		return false;
+	for (var i = triggerCon.length - 1; i >= 0; i--) {
+		if(triggerCon[i] in conditions){
+			return true;
+		}
 	}
+
+	return false;
 }

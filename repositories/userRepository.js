@@ -44,7 +44,7 @@ exports.query = function(options){
 		totalCount = result;
 
 		var pageNum = 0;
-		var pageSize = 50;
+		var pageSize = 10;
 
 		if ('pageNum' in options && 'pageSize' in options) {
 			pageNum = options.pageNum;
