@@ -1,26 +1,119 @@
 var teamRepository = require('../repositories/teamRepository');
+var util = require('../util/util');
 
-exports.createTeam = function(req,res){
-	var team = req.body.team;
+exports.list = function(req,res){
+	var conditions = req.body;
 
-	teamRepository.create(team,function(err,result){
-		if (err) {
+	conditions.state = 'active';
+
+	teamRepository.query(conditions).then(function(result){
+		res.send(util.wrapBody(result));
+	}).fail(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Error','E'));
+	});
+};
+
+exports.checkNameExist = function(req,res){
+
+	if (!!req.body.name) {
+		checkNameExist(req.body.name).then(function(exist){
+			res.send(util.wrapBody({exist:exist}));
+		}).fail(function(err){
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
-		} else {
-			res.send(util.wrapBody({success:true}));
-		}
+			res.send(util.wrapBody('Internal Error','E'));		
+		});
+	}else{
+		res.send(util.wrapBody('Invalid Parameter','E'));
+	}
+	
+};
+
+function checkNameExist(name){
+	var q = teamRepository.countByName(name);
+
+	return teamRepository.countByName(name).then(function(count){
+		return count>0;
 	});
 }
 
-exports.updateTeam = function(req,res){
-	//to do
-}
+exports.create = function(req,res){
 
-exports.removeMember = function(req,res){
+	if(util.checkParam(req.body,['name'])){
+		var lead = req.token.userId;
 
-}
+		var team = req.body;
+		team.lead = lead;
+		team.createDate = new Date();
+		team.state = 'active';
 
-exports.addMember = function(req,res){
-	
+		teamRepository.create(team).then(function(result){
+			res.send(util.wrapBody({team:team}));
+		}).fail(function(err){
+			console.log(err);
+			res.send(util.wrapBody('Internal Error','E'));
+		});
+	}else{
+		res.send(util.wrapBody('Invalid Parameter','E'));
+	}
+
+
+};
+
+exports.getTeamById = function(req,res) {
+	var id = req.params.id;
+
+	teamRepository.findById(id).then(function(result){
+		res.send(util.wrapBody({team:result}));
+	}).fail(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Err','E'));
+	});
+};
+
+exports.update = function(req,res){
+	var id = req.params.id;
+	var lead = req.token.userId;
+	var updates = req.body;
+	if ('createDate' in updates) delete updates.createDate;
+	if ('name' in updates && !updates.name) {
+		res.send(util.wrapBody('Invalid Parameter','E'));
+		return;
+	}
+
+	if (triggerNewTeam(updates)) {
+		teamRepository.findById(id)
+		.then(function copyToHistory(result){
+			delete result._id;
+			result.state = 'history';
+			return teamRepository.create(result);
+		}).then(function updateCurrentTeam(){
+			updates.createDate = new Date();
+			return teamRepository.updateById(id,updates);
+		}).then(function(team){
+			res.send(util.wrapBody({team:team}));
+		}).fail(function(err){
+			console.log(err);
+			res.send(util.wrapBody('Internal Error','E'));
+		});
+	}else{
+		teamRepository.updateById(id,updates).then(function(result){
+			res.send(util.wrapBody({team:result}));
+		}).fail(function(err){
+			console.log(err);
+			res.send(util.wrapBody('Internal Err','E'));
+		});
+	}
+};
+
+function triggerNewTeam(conditions){
+	var triggerCon = ['lead','member','coach','project'];
+
+	for (var i = triggerCon.length - 1; i >= 0; i--) {
+		if(triggerCon[i] in conditions){
+			return true;
+		}
+	}
+
+	return false;
 }

@@ -19,7 +19,7 @@ exports.createIdea = function(req,res){
 	}
 
 	ideaRepostory.create(idea).then(function(result){
-		res.send(util.wrapBody({success:true}));
+		res.send(util.wrapBody({idea:idea}));
 		
 	}).catch(function(err){
 		console.log(err);

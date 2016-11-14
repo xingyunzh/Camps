@@ -56,9 +56,6 @@ exports.query = function(options){
 
 	var totalCount = null;
 
-	console.log(options);
-	console.log(conditions);
-
 	return Idea
 		.count(conditions)
 		.then(function(result){

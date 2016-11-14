@@ -42,7 +42,6 @@ exports.getProfileById = function(req,res){
         var responseBody = {
             user:result
         };
-
         res.send(util.wrapBody(responseBody));
     }).catch(function(err){
         console.log(err);

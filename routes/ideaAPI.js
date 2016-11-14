@@ -5,8 +5,8 @@ var router = require('express').Router();
 
 //body parameters
 //	required:
+// 		name:String
 //	optional:
-//		name:String
 //		background:String
 //		solution:String
 //		painPoint:String
