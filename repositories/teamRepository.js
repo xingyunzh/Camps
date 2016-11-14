@@ -1,40 +1,100 @@
-var Team = require('../models/activeTeam');
-var _ = require('ladash');
+var Team = require('../models/team');
+var uuid = require('node-uuid');
 
-exports.create = function(team,callback){
-	Team.create(team,callback);
-}
+exports.create = function(team){
+	team.teamId = uuid.v1();
+	return Team.create(team);
+};
 
-exports.getTeamById = function(id,callback){
-	Team.findById(id,callback);
-}
+exports.findById = function(id){
+	return Team.findById(id).populate('coach').populate('member').populate('lead').lean().exec();
+};
 
-exports.findActiveTeam = function(teamId,callback){
-	Team
-	.findOne({teamId:teamId})
-	.lean()
-	.exec(callback);
-}
+exports.getActiveTeam = function(teamId){
+	return Team.findOne({
+		teamId:teamId,
+		state:'active'
+	}).populate('coach').populate('member').populate('lead').lean().exec();
+};
 
-exports.removeById = function(id,callback){
-	Team.findOneAndRemove({_id:id},callback);
-}
+exports.getTeamsById = function(teamId){
+	return Team.find({
+		teamId:teamId
+	}).populate('coach').populate('member').populate('lead').lean().exec();
+};
 
-exports.update = function(updates,callback){
-	if(triggerNewTeam(updates)){
-		//to do
-	}else{
-		//to do
+exports.removeById = function(id){
+	return Team.findByIdAndRemove(id).exec();
+};
+
+exports.update = function(conditions,updates){
+	return Team.update(conditions,updates,{
+		new:true
+	}).populate('coach').populate('member').populate('lead').exec();
+};
+
+exports.updateById = function(id,updates){
+	return Team.findByIdAndUpdate(id,updates,{
+		new:true
+	}).populate('coach').populate('member').populate('lead').exec();
+};
+
+exports.countByName = function(name){
+	return Team.count({name:name});
+};
+
+exports.query = function(options){
+	
+
+	var conditions = {};
+
+	if ('keyword' in options) {
+		conditions.name = new RegExp(options.keyword, "i");
 	}
-}
 
-function triggerNewTeam(conditions){
-	var triggerCon = [];
-
-	var intersection = _.intersection(triggerCon,conditions.keys);
-	if (intersection.length>0) {
-		return true;
-	} else {
-		return false;
+	if ('member' in options) {
+		conditions.member = options.member;
 	}
-}
+
+	if ('lead' in options) {
+		conditions.lead = options.lead;
+	}
+
+	var totalCount = null;
+
+	return Team
+		.count(conditions)
+		.then(function(result){
+			totalCount = result;
+
+			var pageNum = 1;
+			var pageSize = 10;
+
+			if ('pageNum' in options) {
+				pageNum = options.pageNum;
+			}
+
+			if ('pageSize' in options) {
+				pageSize = options.pageSize;
+			}
+
+			var skipped = (pageNum - 1) * pageSize;
+
+			if (pageSize >= totalCount) {
+				skipped = 0;
+			}else if (skipped >= totalCount) {
+				skipped = total - pageSize;
+			}
+
+			return Team
+				.find(conditions)
+				.skip(skipped)
+				.limit(pageSize)
+				.populate('Coach').populate('member').populate('lead')
+				.exec();
+
+		}).then(function(result){
+			return {total:totalCount,list:result};
+		});
+
+};
