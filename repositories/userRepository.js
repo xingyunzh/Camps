@@ -43,7 +43,7 @@ exports.query = function(options){
 	return User.count(conditions).then(function(result){
 		totalCount = result;
 
-		var pageNum = 0;
+		var pageNum = 1;
 		var pageSize = 10;
 
 		if ('pageNum' in options && 'pageSize' in options) {
