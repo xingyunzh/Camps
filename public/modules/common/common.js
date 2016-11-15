@@ -53,6 +53,12 @@ app.filter("nameOfStory",function () {
 	}
 });
 
+app.filter('htmlConent', ['$sce', function($sce){
+	return function(input){
+		return $sce.trustAsHtml(input);
+	}
+}]);
+
 app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 	this.indexOfObject = function (array, object, equlFunc) {
 		 var i = 0;

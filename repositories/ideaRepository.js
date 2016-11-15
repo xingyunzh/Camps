@@ -81,7 +81,7 @@ exports.query = function(options){
 			}
 
 			return Idea
-				.find(conditions)
+				.find(conditions).populate("innovator consultant")
 				.skip(skipped)
 				.limit(pageSize)
 				.exec();
