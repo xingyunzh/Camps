@@ -48,7 +48,7 @@ exports.create = function(req,res){
 		team.state = 'active';
 
 		teamRepository.create(team).then(function(result){
-			res.send(util.wrapBody({team:team}));
+			res.send(util.wrapBody({team:result}));
 		}).fail(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));

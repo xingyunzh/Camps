@@ -60,7 +60,7 @@ exports.query = function(options){
 		.exec();
 
 	}).then(function(result){
-		return {count:totalCount,list:result};
+		return {count:totalCount,users:result};
 	});
 
 };

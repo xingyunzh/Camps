@@ -86,7 +86,7 @@ exports.query = function(options){
 				.exec();
 
 		}).then(function(result){
-			return {total:totalCount,list:result};
+			return {total:totalCount,ideas:result};
 		});
 
 };
