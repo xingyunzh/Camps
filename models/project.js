@@ -6,10 +6,22 @@ var projectSchema = Schema({
 
 	scope:String,
 
+	createDate:Date,
+
+	manager:{
+		type:Schema.Types.ObjectId,
+		ref:'User'
+	},
+
 	relatedIdea:{
 		type:Schema.Types.ObjectId,
 		ref:'Idea'
 	},
+
+	relatedAssets:[{
+		type:Schema.Types.ObjectId,
+		ref:'Asset'
+	}],
 
 	backlog:[{
 		type:Schema.Types.ObjectId,

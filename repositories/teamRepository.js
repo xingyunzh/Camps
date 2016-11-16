@@ -10,6 +10,13 @@ exports.findById = function(id){
 	return Team.findById(id).populate('coach').populate('member').populate('lead').lean().exec();
 };
 
+exports.findByProject = function(id){
+	return Team.findOne({
+		project:id,
+		state:'active'
+	}).populate('coach member lead').lean().exec();
+};
+
 exports.getActiveTeam = function(teamId){
 	return Team.findOne({
 		teamId:teamId,
@@ -71,7 +78,7 @@ exports.query = function(options){
 		.then(function(result){
 			totalCount = result;
 
-			var pageNum = 1;
+			var pageNum = 0;
 			var pageSize = 10;
 
 			if ('pageNum' in options) {
@@ -82,7 +89,7 @@ exports.query = function(options){
 				pageSize = options.pageSize;
 			}
 
-			var skipped = (pageNum - 1) * pageSize;
+			var skipped = pageNum * pageSize;
 
 			if (pageSize >= totalCount) {
 				skipped = 0;

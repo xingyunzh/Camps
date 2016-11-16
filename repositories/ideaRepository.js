@@ -60,7 +60,7 @@ exports.query = function(options){
 		.then(function(result){
 			totalCount = result;
 
-			var pageNum = 1;
+			var pageNum = 0;
 			var pageSize = 10;
 
 			if ('pageNum' in options) {
@@ -71,7 +71,7 @@ exports.query = function(options){
 				pageSize = options.pageSize;
 			}
 
-			var skipped = (pageNum - 1) * pageSize;
+			var skipped = pageNum * pageSize;
 
 			if (pageSize >= totalCount) {
 				skipped = 0;

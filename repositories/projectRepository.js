@@ -18,13 +18,28 @@ exports.findById = function(id){
 	return Project
 	.findById(id)
 	.populate({
-		path:'relatedIdea',
+		path:'relatedIdea manager',
 		populate:{
-			path:'innovator'
+			path:'innovator consultant'
 		}
+	}).lean().exec();
+};
+
+exports.getBacklog = function(id){
+	return Project.findById(id,'backlog').populate('backlog').lean().exec();
+};
+
+exports.updateById = function(id,data){
+	return Project
+	.findByIdAndUpdate(id,data,{
+		new:true
 	})
-	.populate('sprints')
-	.populate('backlog').lean().exec();
+	.populate({
+		path:'relatedIdea manager',
+		populate:{
+			path:'innovator consultant'
+		}
+	}).lean().exec();
 };
 
 exports.update = function(conditions,data){
@@ -33,10 +48,12 @@ exports.update = function(conditions,data){
 	.findOneAndUpdate(conditions,data,{
 		new:true
 	})
-	.populate('relatedIdea')
-	.populate('sprints')
-	.populate('backlog')
-	.exec();
+	.populate({
+		path:'relatedIdea',
+		populate:{
+			path:'innovator consultant'
+		}
+	}).lean().exec();
 };
 
 exports.create = function(data){
@@ -59,14 +76,6 @@ exports.query = function(options){
 		conditions.name = new RegExp(options.keyword, "i");
 	}
 
-	// if ('sector' in options) {
-	// 	conditions.sector = options.sector;
-	// }
-
-	// if ('innovator' in options) {
-	// 	conditions.innovator = options.innovator;
-	// }
-
 	var totalCount = null;
 
 	return Project
@@ -74,7 +83,7 @@ exports.query = function(options){
 		.then(function(result){
 			totalCount = result;
 
-			var pageNum = 1;
+			var pageNum = 0;
 			var pageSize = 10;
 
 			if ('pageNum' in options) {
@@ -85,7 +94,7 @@ exports.query = function(options){
 				pageSize = options.pageSize;
 			}
 
-			var skipped = (pageNum - 1) * pageSize;
+			var skipped = pageNum * pageSize;
 
 			if (pageSize >= totalCount) {
 				skipped = 0;
@@ -97,9 +106,7 @@ exports.query = function(options){
 				.find(conditions)
 				.skip(skipped)
 				.limit(pageSize)
-				.populate('relatedIdea')
-				.populate('sprints')
-				.populate('backlog')
+				.populate('relatedIdea manager')
 				.exec();
 
 		}).then(function(result){

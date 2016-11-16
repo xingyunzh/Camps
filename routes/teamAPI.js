@@ -22,13 +22,13 @@ router.get('/:id',teamController.getTeamById);
 //body parameters
 //	required:
 //	optional:
-//		pageNum:Number (default:1)
+//		pageNum:Number (default:0)
 //		pageSize:Number (default:10)
 //		keyword:String (for name)
 router.post('/list',teamController.list);
 
 
-//query parameters
+//body parameters
 //	required:
 //		name:String 
 router.post('/check/name',teamController.checkNameExist);

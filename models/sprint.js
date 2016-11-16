@@ -24,7 +24,7 @@ var sprintSchema = Schema({
 	// deliverables:{
 	// 	snapShot:[{
 	// 		url:String,
-	// 		user:{
+	// 		user:{ 
 	// 			type:Schema.Types.ObjectId,
 	// 			ref:'User'
 	// 		},
