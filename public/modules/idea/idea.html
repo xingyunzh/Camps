@@ -22,8 +22,8 @@
                         <h4 class="media-heading">
                             {{item.name}}
                         </h4>
-                        <h5>- {{item.innovator.name}}</h5>
-                        {{item.solution}}
+                        <h5>- {{item.innovator.nickname}}</h5>
+                        <span ng-bind-html="item.solution | htmlConent"></span>
                     </div>
                 </div>
             </div>

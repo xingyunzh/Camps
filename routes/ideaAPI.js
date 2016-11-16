@@ -9,7 +9,7 @@ var router = require('express').Router();
 //	optional:
 //		background:String
 //		solution:String
-//		painPoint:String
+//		painpoint:String
 //		innovator:String (User)
 //		consultant:String (User)
 //		sector:String
@@ -21,7 +21,7 @@ router.post('/add',authenticator.authenticate,ideaController.createIdea);
 //query parameters
 //	required:
 //		id:String (idea)
-router.get('/:id',ideaController.getIdeaById);
+router.get('/id/:id',ideaController.getIdeaById);
 
 //query parameters
 //	required:
@@ -32,7 +32,7 @@ router.get('/:id',ideaController.getIdeaById);
 //		name:String
 //		background:String
 //		solution:String
-//		painPoint:String
+//		painpoint:String
 //		innovator:String (User)
 //		consultant:String (User)
 //		sector:String
@@ -50,7 +50,7 @@ router.post('/update/:id',authenticator.authenticate,ideaController.updateIdea);
 //		name:String
 //		background:String
 //		solution:String
-//		painPoint:String
+//		painpoint:String
 //		innovator:String (User)
 //		consultant:String (User)
 //		sector:String

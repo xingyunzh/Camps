@@ -3,8 +3,8 @@
  */
 app.controller("loginController", ["$scope","loginService","$rootScope",function($scope,loginService,$rootScope){
 	$scope.form = {
-		email:'',
-		password:'',
+		email:'william.yu@xingyunzh.com',
+		password:'zaq12wsx',
 		prompt:''
 	};
 	$scope.hasWechatInit = false;

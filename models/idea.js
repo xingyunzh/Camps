@@ -36,7 +36,7 @@ var ideaSchema = Schema({
 
 	deadline:Date,
 
-	painPoint:String,
+	painpoint:String,
 
 	solution:String,
 
