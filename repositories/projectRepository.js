@@ -1,32 +1,46 @@
-var Idea = require('../models/idea');
+var Project = require('../models/project');
+var Sprint = require('../models/Sprint');
+var Task = require('../models/task');
+var UserStory = require('../models/userStory');
 
 exports.deleteById = function(id){
 
-	return Idea
+	return Project
 	.findByIdAndRemove(id)
 	.exec();
 };
 
 exports.count = function(conditions){
-	return Idea.count(conditions).exec();
+	return Project.count(conditions).exec();
 };
 
 exports.findById = function(id){
-	return Idea.findById(id).lean().exec();
+	return Project
+	.findById(id)
+	.populate({
+		path:'relatedIdea',
+		populate:{
+			path:'innovator'
+		}
+	})
+	.populate('sprints')
+	.populate('backlog').lean().exec();
 };
 
 exports.update = function(conditions,data){
 
-	return Idea
+	return Project
 	.findOneAndUpdate(conditions,data,{
 		new:true
 	})
-	.populate('innovator')
+	.populate('relatedIdea')
+	.populate('sprints')
+	.populate('backlog')
 	.exec();
 };
 
 exports.create = function(data){
-	return Idea.create(data);
+	return Project.create(data);
 };
 
 /*
@@ -45,17 +59,17 @@ exports.query = function(options){
 		conditions.name = new RegExp(options.keyword, "i");
 	}
 
-	if ('sector' in options) {
-		conditions.sector = options.sector;
-	}
+	// if ('sector' in options) {
+	// 	conditions.sector = options.sector;
+	// }
 
-	if ('innovator' in options) {
-		conditions.innovator = options.innovator;
-	}
+	// if ('innovator' in options) {
+	// 	conditions.innovator = options.innovator;
+	// }
 
 	var totalCount = null;
 
-	return Idea
+	return Project
 		.count(conditions)
 		.then(function(result){
 			totalCount = result;
@@ -79,14 +93,20 @@ exports.query = function(options){
 				skipped = total - pageSize;
 			}
 
-			return Idea
+			return Project
 				.find(conditions)
 				.skip(skipped)
 				.limit(pageSize)
+				.populate('relatedIdea')
+				.populate('sprints')
+				.populate('backlog')
 				.exec();
 
 		}).then(function(result){
-			return {total:totalCount,list:result};
+			return {
+				total:totalCount,
+				projects:result
+			};
 		});
 
 };

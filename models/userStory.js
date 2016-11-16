@@ -4,9 +4,11 @@ var Schema = mongoose.Schema;
 var userStorySchema = Schema({
 	as:String,
 
-	do:String,
+	want:String,
 
-	then:String
+	soThat:String,
+
+	point:String
 });
 
 var UserStory = mongoose.model("UserStory", userStorySchema);

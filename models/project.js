@@ -6,9 +6,9 @@ var projectSchema = Schema({
 
 	scope:String,
 
-	team:{
+	relatedIdea:{
 		type:Schema.Types.ObjectId,
-		ref:'Team'
+		ref:'Idea'
 	},
 
 	backlog:[{
