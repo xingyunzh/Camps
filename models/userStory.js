@@ -2,11 +2,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userStorySchema = Schema({
-	as:String,
+	as:{
+		type:String,
+		required:true
+	},
 
-	want:String,
+	want:{
+		type:String,
+		required:true
+	},
 
-	soThat:String,
+	soThat:{
+		type:String,
+		required:true
+	},
 
 	point:String
 });
