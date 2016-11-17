@@ -17,15 +17,6 @@ router.get('/:id',userStoryController.getUserStoryById);
 //		id:String (project)
 //body parameters
 //userStories:[
-//	 {"as":"user","want":"do","soThat":"something"} 
-// ]
-router.post('/add/:id',authenticator.authenticate,userStoryController.createForProject);
-
-//query parameters
-//	required:
-//		id:String (project)
-//body parameters
-//userStories:[
 //	 {"as":"user","want":"do","soThat":"something"}  //add
 // 	 {"_id":"xxxxx"}  //remove
 //	 {"_id":"xxxxx","as":"new user","want":"change","soThat":"something new"} //update
