@@ -18,7 +18,7 @@ exports.findById = function(id){
 	return Project
 	.findById(id)
 	.populate({
-		path:'relatedIdea manager',
+		path:'relatedIdea manager backlog',
 		populate:{
 			path:'innovator consultant'
 		}
@@ -35,7 +35,7 @@ exports.updateById = function(id,data){
 		new:true
 	})
 	.populate({
-		path:'relatedIdea manager',
+		path:'relatedIdea manager backlog',
 		populate:{
 			path:'innovator consultant'
 		}
@@ -49,7 +49,7 @@ exports.update = function(conditions,data){
 		new:true
 	})
 	.populate({
-		path:'relatedIdea',
+		path:'relatedIdea manager backlog',
 		populate:{
 			path:'innovator consultant'
 		}
@@ -106,7 +106,7 @@ exports.query = function(options){
 				.find(conditions)
 				.skip(skipped)
 				.limit(pageSize)
-				.populate('relatedIdea manager')
+				.populate('relatedIdea manager backlog')
 				.exec();
 
 		}).then(function(result){

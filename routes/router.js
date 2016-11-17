@@ -34,4 +34,6 @@ module.exports = function(app, contextRoot) {
 
 	rootRouter.use('/api/project',projectAPI);
 
+    rootRouter.use('/api/us',userStoryAPI);
+
 };
