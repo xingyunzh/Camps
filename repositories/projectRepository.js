@@ -29,6 +29,15 @@ exports.getBacklog = function(id){
 	return Project.findById(id,'backlog').populate('backlog').lean().exec();
 };
 
+exports.getSprints = function(id){
+	return Project.findById(id,'sprints').populate({
+		path:'sprints',
+		populate:{
+			path:'backlog tasks'
+		}
+	}).lean().exec();
+};
+
 exports.updateById = function(id,data){
 	return Project
 	.findByIdAndUpdate(id,data,{

@@ -6,7 +6,7 @@ var sprintSchema = Schema({
 
 	endDate:Date,
 
-	userStoris:[{
+	backlog:[{
 		type:Schema.Types.ObjectId,
 		ref:'UserStory'
 	}],
