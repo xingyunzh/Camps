@@ -5,18 +5,6 @@ var router = require('express').Router();
 //query parameters
 //	required:
 //		id:String (project)
-//body parameters
-//	required:
-//		as:String
-//		want:String
-//		soThat:String
-//	optional:
-//		point:String  此API目前可被update代替，暂时保留，往后可能删除
-router.post('/add/:id',authenticator.authenticate,userStoryController.createForProject);
-
-//query parameters
-//	required:
-//		id:String (project)
 router.get('/project/:id',userStoryController.getUSByProject);
 
 //query parameters
@@ -28,12 +16,13 @@ router.get('/:id',userStoryController.getUserStoryById);
 //	required:
 //		id:String (project)
 //body parameters
-//	required:
-//		as:String
-//		want:String
-//		soThat:String
-//	optional:
-//		point:String
+// userStories:[
+//userStories:[
+//	 {"as":"user","want":"do","soThat":"something"}  //add
+// 	 {"_id":"xxxxx"}  //remove
+//	 {"_id":"xxxxx","as":"new user","want":"change","soThat":"something new"} //update
+//   1 - 3 parameters of as,want,soThat are required for update.
+// ]
 router.post('/update/:id',authenticator.authenticate,userStoryController.updateForProject);
 
 module.exports = router;
