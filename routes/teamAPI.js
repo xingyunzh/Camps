@@ -11,12 +11,16 @@ var router = require('express').Router();
 //		coach:String (user)
 //		lead:String(user)
 //		member:[String] (user)
-//		project: [String] (project) 暂时未开放
+//		project: [String] (project)
+//response:
+// {team:{TeamEntity}}
 router.post('/add',authenticator.authenticate,teamController.create);
 
 //query parameters
 //	required:
 //		id:String (idea)
+//response:
+// {team:{TeamEntity}}
 router.get('/:id',teamController.getTeamById);
 
 //body parameters
@@ -25,12 +29,16 @@ router.get('/:id',teamController.getTeamById);
 //		pageNum:Number (default:0)
 //		pageSize:Number (default:10)
 //		keyword:String (for name)
+//response:
+// {total:totalNumber,teams:[TeamEntities]}
 router.post('/list',teamController.list);
 
 
 //body parameters
 //	required:
 //		name:String 
+//response:
+//{exist:true/false}
 router.post('/check/name',teamController.checkNameExist);
 
 //body parameters
@@ -41,7 +49,9 @@ router.post('/check/name',teamController.checkNameExist);
 //		coach:String (user)
 //		lead:String(user)
 //		member:[String] (user)
-//		project: [String] (project) 暂时未开放
+//		project: [String] (project)
+//response:
+//{team:TeamEntity}
 router.post('/update/:id',authenticator.authenticate,teamController.update);
 
 module.exports = router;

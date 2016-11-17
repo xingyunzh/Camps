@@ -11,8 +11,8 @@ exports.list = function(req,res){
 			result.projects = projects;
 			return result;
 		});
-	}).then(function(fullProject){
-		res.send(util.wrapBody(fullProject));
+	}).then(function(fullProjects){
+		res.send(util.wrapBody(fullProjects));
 	}).fail(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));

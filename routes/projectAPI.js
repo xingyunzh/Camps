@@ -10,11 +10,15 @@ var router = require('express').Router();
 //		scope:String
 // 		relatedIdea:String (idea)
 //		relatedAsset:[String] (asset) 未实现
+//response:
+//{project:{ProjectEntity}}
 router.post('/add',authenticator.authenticate,projectController.create);
 
 //query parameters
 //	required:
 //		id:String (project)
+//response:
+//{project:{ProjectEntity}}
 router.get('/:id',projectController.getProjectById);
 
 //body parameters
@@ -23,6 +27,8 @@ router.get('/:id',projectController.getProjectById);
 //		pageNum:Number (default:0)
 //		pageSize:Number (default:10)
 //		keyword:String (for name)
+//response:
+//{total:TotalNumber,projects:[ProjectEntities]}
 router.post('/list',projectController.list);
 
 //query parameters
@@ -35,6 +41,8 @@ router.post('/list',projectController.list);
 //		scope:String
 // 		relatedIdea:String (idea)
 //		relatedAsset:[String] (asset) 未实现
+//response:
+//{project:{ProjectEntity}}
 router.post('/update/:id',authenticator.authenticate,projectController.update);
 
 module.exports = router;

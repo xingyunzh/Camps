@@ -16,12 +16,16 @@ var router = require('express').Router();
 //		deadline:Date
 //		hrRequirement:String
 //		relatedAssets:[String] (Asset)
+//response:
+//{idea:IdeaEntity}
 router.post('/add',authenticator.authenticate,ideaController.createIdea);
 
 //query parameters
 //	required:
 //		id:String (idea)
-router.get('/id/:id',ideaController.getIdeaById);
+//response:
+//{idea:IdeaEntity}
+router.get('/:id',ideaController.getIdeaById);
 
 //query parameters
 //	required:
@@ -39,6 +43,8 @@ router.get('/id/:id',ideaController.getIdeaById);
 //		deadline:Date
 //		hrRequirement:String
 //		relatedAssets:[String] (Asset)
+//response:
+//{idea:IdeaEntity}
 router.post('/update/:id',authenticator.authenticate,ideaController.updateIdea);
 
 //query parameters
@@ -57,13 +63,15 @@ router.post('/update/:id',authenticator.authenticate,ideaController.updateIdea);
 //		deadline:Date
 //		hrRequirement:String
 //		relatedAssets:[String] (Asset)
+//response:
+//{idea:IdeaEntity}
 router.post('/publish/:id',authenticator.authenticate,ideaController.publishIdea);
 
 //query parameters
 //	required:
 //		id:String (idea)
 //	**********INCOMPLETE!*********
-router.get('/delete/:id',authenticator.authenticate,ideaController.deleteIdea);
+//router.get('/delete/:id',authenticator.authenticate,ideaController.deleteIdea);
 
 //body parameters
 //	required:
@@ -78,6 +86,8 @@ router.get('/delete/:id',authenticator.authenticate,ideaController.deleteIdea);
 //		pageSize:Number
 //		keyword:String (for name)
 //		sector:String
+//response:
+//{total:TotalNumber,ideas:[IdeaEntities]}
 router.post('/list',ideaController.listIdea);
 
 
@@ -89,6 +99,8 @@ router.post('/list',ideaController.listIdea);
 //		pageSize:Number
 //		keyword:String (for name)
 //		sector:String
+//response:
+//{total:TotalNumber,ideas:[IdeaEntities]}
 router.post('/list/:id',ideaController.listIdeasByInnovator);
 
 module.exports = router;
