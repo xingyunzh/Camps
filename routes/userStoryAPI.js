@@ -11,7 +11,7 @@ var router = require('express').Router();
 //		want:String
 //		soThat:String
 //	optional:
-//		point:String
+//		point:String  此API目前可被update代替，暂时保留，往后可能删除
 router.post('/add/:id',authenticator.authenticate,userStoryController.createForProject);
 
 //query parameters
