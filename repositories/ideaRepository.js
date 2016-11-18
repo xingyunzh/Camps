@@ -29,13 +29,7 @@ exports.create = function(data){
 	return Idea.create(data);
 };
 
-/*
- #param options
-	pageNum
-	pageSize
-	sector
-	keywords
-*/
+
 exports.query = function(options){
 	
 

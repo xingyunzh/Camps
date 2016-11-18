@@ -33,7 +33,7 @@ exports.update = function(req,res){
         console.log(err);
         res.send(util.wrapBody('Internal Error','E'));
     });
-}
+};
 
 exports.getProfileById = function(req,res){
 	var id = req.params.id;
@@ -47,7 +47,7 @@ exports.getProfileById = function(req,res){
         console.log(err);
         res.send(util.wrapBody('Internal Error','E'));
     });
-}
+};
 
 exports.listUser = function(req,res){
 	var conditions = {
@@ -84,7 +84,6 @@ function login(req,res,type){
 	var loginResult = null;
 	var latestUser = null;
 	var latestProfile = null;
-	var token = null;
 
 	const STATE_LOGIN_WECHAT = 1;
 	const STATE_LOGIN_EMAIL = 2;
@@ -172,17 +171,16 @@ function login(req,res,type){
 			break;
 			case STATE_CREATE_TOKEN:
 				authenticator.create(latestUser._id,function(err,newToken){
-					token = newToken;
+					res.setHeader('set-token',newToken);					
 					stateMachine(err,STATE_SEND_RESPONSE);
 				});
 			break;
 			case STATE_INVALID_CREDENTIALS:
-				token = null;
+				latestUser = null;
 				stateMachine(null,STATE_SEND_RESPONSE);
 			break;
 			case STATE_SEND_RESPONSE:
 				var responseBody = {
-					token:token,
 					user:latestUser
 				};
 				//console.log("resbody:",responseBody);

@@ -14,7 +14,7 @@ router.get('/project/:id',userStoryController.getUSByProject);
 //		id:String (userStory)
 //response:
 // {userStory:{UserStoryEntity}
-router.get('/:id',userStoryController.getUserStoryById);
+router.get('/id/:id',userStoryController.getUserStoryById);
 
 //query parameters
 //	required:

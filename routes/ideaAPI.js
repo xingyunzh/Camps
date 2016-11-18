@@ -79,7 +79,7 @@ router.post('/publish/:id',authenticator.authenticate,ideaController.publishIdea
 //	optional:
 //router.post('/check/name',ideaController.checkIfNameExists);
 
-//body parameters
+//query parameters
 //	required:
 //	optional:
 //		pageNum:Number
@@ -88,7 +88,7 @@ router.post('/publish/:id',authenticator.authenticate,ideaController.publishIdea
 //		sector:String
 //response:
 //{total:TotalNumber,ideas:[IdeaEntities]}
-router.post('/list',ideaController.listIdea);
+router.get('/list',ideaController.listIdea);
 
 
 //body parameters
@@ -101,6 +101,6 @@ router.post('/list',ideaController.listIdea);
 //		sector:String
 //response:
 //{total:TotalNumber,ideas:[IdeaEntities]}
-router.post('/list/:id',ideaController.listIdeasByInnovator);
+router.get('/list/:id',ideaController.listIdeasByInnovator);
 
 module.exports = router;

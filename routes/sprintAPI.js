@@ -8,4 +8,4 @@ router.post('/update/:id',sprintController.update);
 
 router.post('/add',sprintController.create);
 
-router.get('/:id',sprintController.getSprintById);
+router.get('/id/:id',sprintController.getSprintById);

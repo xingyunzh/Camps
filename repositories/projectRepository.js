@@ -1,5 +1,4 @@
 var Project = require('../models/project');
-var Task = require('../models/task');
 var UserStory = require('../models/userStory');
 
 exports.deleteById = function(id){
@@ -68,13 +67,7 @@ exports.create = function(data){
 	return Project.create(data);
 };
 
-/*
- #param options
-	pageNum
-	pageSize
-	sector
-	keywords
-*/
+
 exports.query = function(options){
 	
 

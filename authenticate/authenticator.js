@@ -19,12 +19,16 @@ module.exports.verify = function(tokenString,callback){
 };
 
 module.exports.create = function(userId,callback){
-	jwt.sign({
-		userId:userId
-	},getSecret(),{
-		expiresIn:3600
-	},callback);
+	generate(userId,callback);
 };
+
+function generate(id,callback){
+	return jwt.sign({
+		userId:id
+	},getSecret(),{
+		expiresIn:60 * 60 * 24
+	},callback);
+}
 
 module.exports.authenticate = function(req, res, next) {
 
@@ -35,10 +39,27 @@ module.exports.authenticate = function(req, res, next) {
 	}else{
 		jwt.verify(tokenString,getSecret(),function(err,tokenObject){
 			if (err) {
+				console.log(err);
 				res.send(util.wrapBody('Invalid token','E'));
 			}else{
 				req.token = tokenObject;
-				next();
+
+				if (tokenObject.exp - Math.floor(Date.now() / 1000) < 6 * 60 * 60) {
+					generate(tokenObject.userId,function(err,newTokenString){
+						if(err){
+							console.log(err);
+							res.send(util.wrapBody('Internal Error','E'));
+						}else{
+							res.setHeader('set-token',newTokenString);
+							next();
+						}
+						
+					});
+
+				}else{
+					next();
+				}
+				
 			}
 		});
 	}

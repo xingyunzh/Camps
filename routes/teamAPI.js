@@ -21,9 +21,9 @@ router.post('/add',authenticator.authenticate,teamController.create);
 //		id:String (idea)
 //response:
 // {team:{TeamEntity}}
-router.get('/:id',teamController.getTeamById);
+router.get('/id/:id',teamController.getTeamById);
 
-//body parameters
+//query  parameters
 //	required:
 //	optional:
 //		pageNum:Number (default:0)
@@ -31,15 +31,15 @@ router.get('/:id',teamController.getTeamById);
 //		keyword:String (for name)
 //response:
 // {total:totalNumber,teams:[TeamEntities]}
-router.post('/list',teamController.list);
+router.get('/list',teamController.list);
 
 
-//body parameters
+//query parameters
 //	required:
 //		name:String 
 //response:
 //{exist:true/false}
-router.post('/check/name',teamController.checkNameExist);
+router.get('/check',teamController.checkExist);
 
 //body parameters
 //	required:
