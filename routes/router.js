@@ -2,6 +2,9 @@
 var userAPI = require('./userAPI');
 var ideaAPI = require('./ideaAPI');
 var teamAPI = require('./teamAPI');
+var projectAPI = require('./projectAPI');
+var sprintAPI = require('./sprintAPI');
+var userStoryAPI = require('./userStoryAPI');
 
 var rootRouter = require("express").Router();
 var messageRouter = require("./messageRouter");
@@ -28,5 +31,9 @@ module.exports = function(app, contextRoot) {
 	rootRouter.use('/api/idea',ideaAPI);
 
 	rootRouter.use('/api/team',teamAPI);
+
+	rootRouter.use('/api/project',projectAPI);
+
+    rootRouter.use('/api/us',userStoryAPI);
 
 };
