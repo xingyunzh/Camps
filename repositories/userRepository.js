@@ -31,7 +31,7 @@ exports.query = function(options){
 	}
 
 	if ('role' in options) {
-		conditions.role = options.role;
+		conditions.roles = options.role;
 	}
 
 	if ('sector' in options) {

@@ -30,10 +30,24 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2">行业领域:</label>
+            <div class="col-md-10">
+                <div class="btn-group" uib-dropdown is-open="isDropdownOpen">
+                    <button type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+                        {{!!form.sector ? form.sector : "下拉选择"}} <span class="pull-right caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                        <li role="menuitem" ng-repeat="sectorValue in sectorValues"><a ng-click="form.sector=sectorValue">{{sectorValue}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div class="checkbox">
                     <labbel>
-                        <input type="checkbox" ng-model="form.accepted"> 我理解并遵守 <a href="#">创新点协议</a>的内容
+                        <input type="checkbox" ng-model="accepted"> 我理解并遵守 <a href="#">创新点协议</a>的内容
                     </labbel>
                 </div>
             </div>

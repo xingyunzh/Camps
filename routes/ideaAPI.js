@@ -25,7 +25,7 @@ router.post('/add',authenticator.authenticate,ideaController.createIdea);
 //		id:String (idea)
 //response:
 //{idea:IdeaEntity}
-router.get('/:id',ideaController.getIdeaById);
+router.get('/id/:id',ideaController.getIdeaById);
 
 //query parameters
 //	required:

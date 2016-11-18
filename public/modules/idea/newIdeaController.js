@@ -4,6 +4,7 @@
 app.controller("newIdeaController", ["$scope", "$rootScope", "util", "ideaService", "toaster",
     function($scope, $rootScope, util, ideaService, toaster) {
     $scope.form = {};
+    $scope.sectorValues = ["互联网+","物联网","大数据","高精尖"];
     
     $scope.onSaveButton = function () {
         if(!$scope.form.name){

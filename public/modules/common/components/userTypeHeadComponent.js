@@ -11,9 +11,9 @@ app.component('userTypehead', {
     controller: function($scope, $element, $attrs, $q, playerService, coachService){
         $scope.getUsers = function (viewValue) {
             if($attrs.whichRole == "coach") {
-                return coachService.coachSource();
+                return coachService.coachSource(viewValue);
             }
-            return playerService.playerSource();
+            return playerService.playerSource(viewValue);
         };
         
         $scope.selectedUser = null;
