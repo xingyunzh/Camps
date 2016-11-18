@@ -83,12 +83,17 @@ function updateUserStories(usChanges){
 		var promise = null;
 
 		if ('_id' in usChange) {
-			if (!('as' in usChange) && !('want' in usChange) && !('soThat' in usChange)) {
-				//remove
-				promise = userStoryRepository.remove(usChange._id);
-			}else{
+			if ('as' in usChange ||
+				'want' in usChange ||
+				'soThat' in usChange) {
+				
 				//update
 				promise = userStoryRepository.updateById(usChange._id,usChange);	
+				
+			}else{
+				//remove
+				promise = userStoryRepository.remove(usChange._id);
+
 			}
 		}else{
 			//create

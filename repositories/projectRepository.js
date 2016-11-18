@@ -33,7 +33,7 @@ exports.getSprints = function(id){
 		populate:{
 			path:'backlog tasks'
 		}
-	}).lean().exec();
+	}).sort('startDate').lean().exec();
 };
 
 exports.updateById = function(id,data){

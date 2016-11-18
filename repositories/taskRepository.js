@@ -5,11 +5,11 @@ exports.getTaskById = function(id) {
 };
 
 exports.create = function(task){
-	return Task.create(task);
+	return Task.create(task).populate('assignee');
 };
 
 exports.insertMany = function(tasks){
-	return Task.insertMany(tasks);
+	return Task.insertMany(tasks).populate('assignee');
 };
 
 exports.updateById = function(id,data){
