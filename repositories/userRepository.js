@@ -43,7 +43,7 @@ exports.query = function(options){
 	return User.count(conditions).then(function(result){
 		totalCount = result;
 
-		var pageNum = 1;
+		var pageNum = 0;
 		var pageSize = 10;
 
 		if ('pageNum' in options && 'pageSize' in options) {
@@ -51,7 +51,7 @@ exports.query = function(options){
 			pageSize = options.pageSize;
 		}
 
-		var skipped = (pageNum - 1) * pageSize;
+		var skipped = pageNum * pageSize;
 
 		return User
 		.find(conditions)
@@ -60,7 +60,7 @@ exports.query = function(options){
 		.exec();
 
 	}).then(function(result){
-		return {count:totalCount,list:result};
+		return {count:totalCount,users:result};
 	});
 
 };

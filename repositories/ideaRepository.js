@@ -1,5 +1,4 @@
 var Idea = require('../models/idea');
-var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.deleteById = function(id){
 
@@ -61,7 +60,7 @@ exports.query = function(options){
 		.then(function(result){
 			totalCount = result;
 
-			var pageNum = 1;
+			var pageNum = 0;
 			var pageSize = 10;
 
 			if ('pageNum' in options) {
@@ -72,7 +71,7 @@ exports.query = function(options){
 				pageSize = options.pageSize;
 			}
 
-			var skipped = (pageNum - 1) * pageSize;
+			var skipped = pageNum * pageSize;
 
 			if (pageSize >= totalCount) {
 				skipped = 0;
@@ -87,7 +86,7 @@ exports.query = function(options){
 				.exec();
 
 		}).then(function(result){
-			return {total:totalCount,list:result};
+			return {total:totalCount,ideas:result};
 		});
 
 };
