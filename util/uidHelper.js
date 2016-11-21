@@ -61,6 +61,8 @@ var postUID = function(path,body,token,callback){
 		  	if (resJSON.status == 'E'){
 		  		callback(new Error(resJSON.body));
 		  	}else{
+		  		var resBody = resJSON.body;
+		  		resBody.token = null;
 		  		callback(null,resJSON.body);
 		  	}
 		  	

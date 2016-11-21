@@ -23,7 +23,7 @@ module.exports.create = function(userId,callback){
 };
 
 function generate(id,callback){
-	return jwt.sign({
+	jwt.sign({
 		userId:id
 	},getSecret(),{
 		expiresIn:60 * 60 * 24

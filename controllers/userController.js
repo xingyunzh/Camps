@@ -1,10 +1,9 @@
 var userRepository = require('../repositories/userRepository');
-var http = require('http');
 var uidHelper = require('../util/uidHelper');
 var util = require('../util/util');
 var stringHelper = require('../util/shared/stringHelper');
-var queryString = require('querystring');
 var authenticator = require('../authenticate/authenticator');
+var q = require('q');
 
 
 exports.loginByEmail = function(req,res){
@@ -12,7 +11,7 @@ exports.loginByEmail = function(req,res){
 	if (!util.checkParam(req.body,['email','password'])) {
 		res.send(util.wrapBody('Invalid Parameter','E'));
 	}else{
-		login(req,res,'email');
+		loginP(req,res,'email');
 	}
 };
 
@@ -20,7 +19,7 @@ exports.loginByWechat = function(req,res){
 	if (!util.checkParam(req.body,['code'])) {
 		res.send(util.wrapBody('Invalid Parameter','E'));
 	}else{
-		login(req,res,'wechat');
+		loginP(req,res,'wechat');
 	}
 };
 
@@ -75,7 +74,106 @@ exports.listUser = function(req,res){
 	});
 };
 
+function loginP(req,res,type){
+	var token = null;
 
+	var deferred = q.defer();
+	if (type == 'email') {
+		var email = req.body.email;
+		var	password = req.body.password;
+
+		uidHelper.loginByEmail(email,password,function(err,result){
+			if (err) {
+				deferred.reject(err);
+			}else{
+				deferred.resolve(result);
+			}
+		});
+	}else if(type == 'wechat'){
+		var code = req.body.code;
+		uidHelper.loginByWechat(code,function(err,result){
+			if (err) {
+				deferred.reject(err);
+			}else{
+				deferred.resolve(result);
+			}
+		});
+	}else{
+		console.log('Invalid Type:',type);
+		deferred.reject(new Error('Internal Error'));
+	}
+
+	deferred.promise.then(function getProfile(result){
+		var user = result.user;
+
+		if (!user) {
+			return null;
+		}
+
+		return userRepository
+		.findByUid(user.userId)
+		.then(function(userResult){
+			if(userResult == null){
+				return importProfile(user.userId,result.token);
+			}else{
+				return userResult;
+			}
+		});
+	}).then(function generateToken(user){
+		if (!user) {
+			return null;
+		}
+
+		var deferred = q.defer();
+
+		authenticator.create(user._id,function(err,newToken){
+			if (err) {
+				deferred.reject(err);
+			}else{
+				res.setHeader('set-token',newToken);
+				deferred.resolve(user);
+			}				
+		});
+
+		return deferred.promise;
+	}).then(function sendResponse(user){
+		
+		var responseBody = {
+			user:user
+		};
+
+		res.send(util.wrapBody(responseBody));
+	}).fail(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Error','E'));
+	});
+
+}
+
+function importProfile(userId,token){
+	var deferred = q.defer();
+	uidHelper.getProfile(token,function(err,data){
+		if (err) {
+			deferred.reject(err);
+		}else{
+			var profile = data.profile;
+
+			var user = {
+				uid:userId
+			};
+
+			if (!!profile.nickname) {
+				user.nickname = profile.nickname;
+			} else {
+				user.nickname = '新用户' + stringHelper.generate(4,'all');
+			}
+
+		 	deferred.resolve(userRepository.create(user));
+		}
+	});
+
+	return deferred.promise;
+}
 
 function login(req,res,type){
 	var email = null;
@@ -132,7 +230,8 @@ function login(req,res,type){
 			break;
 			case STATE_IS_FRIST_TIME:
 				if (!loginResult.token) {
-					stateMachine(null,STATE_INVALID_CREDENTIALS);
+					latestUser = null;
+					stateMachine(null,STATE_SEND_RESPONSE);
 				}else{
 					userRepository
 					.findByUid(loginResult.user.userId)
@@ -174,10 +273,6 @@ function login(req,res,type){
 					res.setHeader('set-token',newToken);					
 					stateMachine(err,STATE_SEND_RESPONSE);
 				});
-			break;
-			case STATE_INVALID_CREDENTIALS:
-				latestUser = null;
-				stateMachine(null,STATE_SEND_RESPONSE);
 			break;
 			case STATE_SEND_RESPONSE:
 				var responseBody = {
