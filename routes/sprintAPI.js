@@ -49,7 +49,7 @@ router.post('/update/:id',sprintController.update);
 // ]}
 //response:
 //{sprint:[SprintEntity]}
-router.post('/add',sprintController.create);
+router.post('/add/:id',sprintController.create);
 
 //query parameters
 //	required:
@@ -57,3 +57,8 @@ router.post('/add',sprintController.create);
 //response:
 // {sprint:[SprintEntity]}
 router.get('/id/:id',sprintController.getSprintById);
+
+
+module.exports = router;
+
+

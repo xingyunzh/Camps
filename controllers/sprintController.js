@@ -2,13 +2,14 @@ var sprintRepository = require('../repositories/sprintRepository');
 var projectRepository = require('../repositories/projectRepository');
 var taskRepository = require('../repositories/taskRepository');
 var util = require('../util/util');
+var _ = require('lodash');
 var q = require('q');
 
 exports.getSprintsByProject = function(req,res) {
 	var projectId = req.params.id;
 
-	projectRepository.getSprints(projectId).then(function(sprints){
-		res.send(util.wrapBody({sprints:sprints}));
+	projectRepository.getSprints(projectId).then(function(project){
+		res.send(util.wrapBody({sprints:project.sprints}));
 	}).fail(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
@@ -27,6 +28,7 @@ exports.getSprintById = function(req,res){
 };
 
 exports.create = function(req,res){
+	var projectId = req.params.id;
 	var sprint = req.body;
 
 	if(util.checkParam(sprint,['startDate','endDate'])){
@@ -43,8 +45,22 @@ exports.create = function(req,res){
 			promise = sprintRepository.create(sprint);
 		}
 
-		promise.then(function(sprint){
-			res.send(util.wrapBody({sprint:sprint}));
+		var newSprint = null;
+
+		promise.then(function updateProject(sprint){
+			var promises = [];
+
+			promises.push(projectRepository.updateById(projectId,{
+				$push:{
+					sprints:sprint
+				}
+			}));
+
+			promises.push(sprintRepository.findById(sprint._id));
+
+			return q.all(promises);
+		}).then(function sendResponse(results){
+			res.send(util.wrapBody({sprint:results[1]}));
 		}).fail(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
@@ -56,24 +72,46 @@ exports.create = function(req,res){
 
 };
 
+exports.remove = function(req,res){
+	var id = req.params.id;
+
+	sprintRepository.deleteById(id).then(function(){
+		res.send(util.wrapBody({success:true}));
+	}).fail(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Error','E'));
+	});
+};
+
 exports.update = function(req,res){
 	var sprintId = req.params.id;
-	var sprint = req.body;
+	var updates = req.body;
 
 	var promises = [];
 
-	if ('tasks' in sprint) {
-		promises.push(updateTasks(sprint.tasks));
+	if ('tasks' in updates) {
+		promises.push(updateTasks(updates.tasks));
 	}
 
 	// if ('discussMinutes' in sprint) {
 	// 	promises.push(updateDiscusses(sprint.discussMinutes));
 	// }
 
-	q.all(promises).then(function updateSprint(tasks){
-		var ids = getIds(tasks);
+	q.all(promises).then(function integrateIds(tasks){
+		var ids = getIds(tasks[0]);
 
-		return sprintRepository.updateById(sprintId,{tasks:ids});
+		return sprintRepository.findById(sprintId).then(function(sprint){
+			var oldIds = getIds(sprint.tasks);
+			var uIds = _.union(oldIds,ids);
+			// _.remove(uIds,function(n){
+			// 	return n == null;
+			// });
+			return uIds;
+		});
+
+	}).then(function updateSprint(taskIds){
+		updates.tasks = taskIds;
+		return sprintRepository.updateById(sprintId,updates);
 	}).then(function(sprint){
 		res.send(util.wrapBody({sprint:sprint}));
 	}).fail(function(err){
@@ -88,7 +126,7 @@ exports.update = function(req,res){
 function getIds(data){
 	return _.map(data,function(item){
 		if (!!item) {
-			return item._id.valueOf();
+			return item._id.toString();
 		}else{
 			return item;
 		}
@@ -110,15 +148,15 @@ function updateTasks(taskChanges){
 				'userStory' in taskChange) {
 				
 				//update
-				promise = userStoryRepository.updateById(taskChange._id,taskChange);
+				promise = taskRepository.updateById(taskChange._id,taskChange);
 			}else{
 				//remove
-				promise = userStoryRepository.remove(taskChange._id);
+				promise = taskRepository.deleteById(taskChange._id);
 	
 			}
 		}else{
 			//create
-			promise = userStoryRepository.create(taskChange);
+			promise = taskRepository.create(taskChange);
 		}
 
 		promises.push(promise);

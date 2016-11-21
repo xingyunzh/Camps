@@ -11,7 +11,7 @@ var sprintSchema = Schema({
 		ref:'UserStory'
 	}],
 
-	task:[{
+	tasks:[{
 		type:Schema.Types.ObjectId,
 		ref:'Task'
 	}],

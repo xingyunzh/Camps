@@ -31,7 +31,10 @@ exports.getSprints = function(id){
 	return Project.findById(id,'sprints').populate({
 		path:'sprints',
 		populate:{
-			path:'backlog tasks'
+			path:'tasks backlog',
+			populate:{
+				path:'assignee'
+			}
 		}
 	}).sort('startDate').lean().exec();
 };
@@ -107,8 +110,12 @@ exports.query = function(options){
 				.find(conditions)
 				.skip(skipped)
 				.limit(pageSize)
-				.populate('relatedIdea manager backlog')
-				.exec();
+				.populate({
+					path:'relatedIdea manager backlog',
+					populate:{
+						path:'innovator consultant'
+					}
+				}).exec();
 
 		}).then(function(result){
 			return {

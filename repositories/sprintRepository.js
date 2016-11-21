@@ -1,8 +1,17 @@
 var Sprint = require('../models/sprint');
 var Task = require('../models/task');
 
-exports.getSprintById = function(id) {
-	return Sprint.findById(id).lean().exec();
+exports.create = function(data){
+	return Sprint.create(data);
+};
+
+exports.findById = function(id) {
+	return Sprint.findById(id).populate({
+		path:'tasks backlog',
+		populate:{
+			path:'assignee'
+		}
+	}).lean().exec();
 };
 
 exports.updateById = function(id,data){

@@ -46,9 +46,7 @@ exports.updateForProject = function(req,res){
 
 		return projectRepository.findById(projectId)
 		.then(function getBacklogs(project){
-			return project.backlog;
-		}).then(function unionIds(backlog){
-			var userStoryIds = getIds(backlog);
+			var userStoryIds = getIds(project.backlog);
 
 			return _.union(userStoryIds,ids);
 		});
@@ -68,7 +66,7 @@ exports.updateForProject = function(req,res){
 function getIds(userStories){
 	return _.map(userStories,function(item){
 		if (!!item) {
-			return item._id.valueOf();
+			return item._id.toString();
 		}else{
 			return item;
 		}

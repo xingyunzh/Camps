@@ -36,4 +36,6 @@ module.exports = function(app, contextRoot) {
 
     rootRouter.use('/api/story',userStoryAPI);
 
+    rootRouter.use('/api/sprint',sprintAPI);
+
 };
