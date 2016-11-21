@@ -3,7 +3,7 @@
  */
 app.service("ideaService", ["util", "$q", "httpHelper", function (util, $q, httpHelper) {
     this.ideaSource = function () {
-        return httpHelper.sendRequest("POST", "./api/idea/list", {});
+        return httpHelper.sendRequest("GET", "./api/idea/list", {});
     }
 
     this.getIdeaById = function (id) {
