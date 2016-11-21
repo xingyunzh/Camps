@@ -73,12 +73,6 @@ router.post('/publish/:id',authenticator.authenticate,ideaController.publishIdea
 //	**********INCOMPLETE!*********
 //router.get('/delete/:id',authenticator.authenticate,ideaController.deleteIdea);
 
-//body parameters
-//	required:
-//		name:String
-//	optional:
-//router.post('/check/name',ideaController.checkIfNameExists);
-
 //query parameters
 //	required:
 //	optional:
