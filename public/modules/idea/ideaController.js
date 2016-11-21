@@ -5,7 +5,7 @@ app.controller("ideaController", ["$scope", "$rootScope", "ideaService", "toaste
     $scope.ideas = [];
 
     ideaService.ideaSource().then(function(data){
-        $scope.ideas = data.list;
+        $scope.ideas = data.ideas;
     }).catch(function(error){
         toaster.pop({
             type:"error",
