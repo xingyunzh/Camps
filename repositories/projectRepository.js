@@ -1,5 +1,5 @@
 var Project = require('../models/project');
-var Sprint = require('../models/Sprint');
+var Sprint = require('../models/sprint');
 var Task = require('../models/task');
 var UserStory = require('../models/userStory');
 
