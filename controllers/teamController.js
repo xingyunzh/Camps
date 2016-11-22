@@ -2,7 +2,7 @@ var teamRepository = require('../repositories/teamRepository');
 var util = require('../util/util');
 
 exports.list = function(req,res){
-	var conditions = req.body;
+	var conditions = req.query;
 
 	conditions.state = 'active';
 
@@ -14,18 +14,16 @@ exports.list = function(req,res){
 	});
 };
 
-exports.checkNameExist = function(req,res){
+exports.checkExist = function(req,res){
 
-	if (!!req.body.name) {
-		checkNameExist(req.body.name).then(function(exist){
-			res.send(util.wrapBody({exist:exist}));
-		}).fail(function(err){
-			console.log(err);
-			res.send(util.wrapBody('Internal Error','E'));		
-		});
-	}else{
-		res.send(util.wrapBody('Invalid Parameter','E'));
-	}
+	var name = req.query.name;
+
+	checkNameExist(req.body.name).then(function(exist){
+		res.send(util.wrapBody({exist:exist}));
+	}).fail(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Error','E'));		
+	});
 	
 };
 

@@ -1,7 +1,7 @@
 var Task = require('../models/task');
 
 exports.getTaskById = function(id) {
-	return Task.findById(id).lean().exec();
+	return Task.findById(id).populate('assignee').lean().exec();
 };
 
 exports.create = function(task){

@@ -32,11 +32,16 @@ app.service('httpHelper', function ($http, $q, $rootScope) {
 
 		var deferred = $q.defer();
 		$http(req).then(function success(argument) {
+			var token = argument.headers('set-token');
+			if (!!token) {
+				$rootScope.token = token;
+			}
+
 			if (argument.data.status == "S") {
 				deferred.resolve(argument.data.body);
 			} else {
 				deferred.reject(argument.data.status);
-			};
+			}
 		}, function fail(argument) {
 			deferred.reject(argument.statusText);
 		});

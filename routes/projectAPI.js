@@ -19,9 +19,9 @@ router.post('/add',authenticator.authenticate,projectController.create);
 //		id:String (project)
 //response:
 //{project:{ProjectEntity}}
-router.get('/:id',projectController.getProjectById);
+router.get('/id/:id',projectController.getProjectById);
 
-//body parameters
+//query parameters
 //	required:
 //	optional:
 //		pageNum:Number (default:0)
@@ -29,7 +29,7 @@ router.get('/:id',projectController.getProjectById);
 //		keyword:String (for name)
 //response:
 //{total:TotalNumber,projects:[ProjectEntities]}
-router.post('/list',projectController.list);
+router.get('/list',projectController.list);
 
 //query parameters
 //	required:

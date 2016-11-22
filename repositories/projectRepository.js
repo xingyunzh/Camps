@@ -1,6 +1,4 @@
 var Project = require('../models/project');
-var Sprint = require('../models/sprint');
-var Task = require('../models/task');
 var UserStory = require('../models/userStory');
 
 exports.deleteById = function(id){
@@ -33,9 +31,12 @@ exports.getSprints = function(id){
 	return Project.findById(id,'sprints').populate({
 		path:'sprints',
 		populate:{
-			path:'backlog tasks'
+			path:'tasks backlog',
+			populate:{
+				path:'assignee'
+			}
 		}
-	}).lean().exec();
+	}).sort('startDate').lean().exec();
 };
 
 exports.updateById = function(id,data){
@@ -69,13 +70,7 @@ exports.create = function(data){
 	return Project.create(data);
 };
 
-/*
- #param options
-	pageNum
-	pageSize
-	sector
-	keywords
-*/
+
 exports.query = function(options){
 	
 
@@ -115,8 +110,12 @@ exports.query = function(options){
 				.find(conditions)
 				.skip(skipped)
 				.limit(pageSize)
-				.populate('relatedIdea manager backlog')
-				.exec();
+				.populate({
+					path:'relatedIdea manager backlog',
+					populate:{
+						path:'innovator consultant'
+					}
+				}).exec();
 
 		}).then(function(result){
 			return {

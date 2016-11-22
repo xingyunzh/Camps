@@ -44,7 +44,7 @@ exports.deleteIdea = function(req,res){
 };
 
 exports.listIdea = function(req,res){
-	var conditions = req.body;
+	var conditions = req.query;
 
 	ideaRepostory.query(conditions).then(function(result){
 		res.send(util.wrapBody(result));
@@ -152,7 +152,7 @@ exports.updateIdea = function(req,res){
 };
 
 exports.listIdeasByInnovator = function(req,res){
-	var conditions = req.body;
+	var conditions = req.query;
 	conditions.innovator = req.params.id;
 
 	ideaRepostory.query(conditions).then(function(result){

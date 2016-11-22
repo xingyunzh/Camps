@@ -48,11 +48,9 @@ app.controller("loginController", ["$scope","loginService","$rootScope",function
 		if (err) {
 			$scope.form.prompt = err.message;
 		}else{
-			$scope.token = data.token;
 			$scope.user = data.user;
 
 			$rootScope.currentUser = data.user;
-			$rootScope.token = data.token;
 
 			$rootScope.$emit('loggedIn');
 		}
