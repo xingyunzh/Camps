@@ -12,7 +12,10 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
         .state("nav.idea", {
             url: "/idea",
             templateUrl: "./modules/idea/idea.html",
-            controller: "ideaController"
+            controller: "ideaController",
+            data:{
+                title:"创意  让世界变得更美好"
+            }
         })
         .state("nav.createIdea", {
             url: "/createIdea",
@@ -27,7 +30,10 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
         .state("nav.project", {
             url: "/project",
             templateUrl: "./modules/project/project.html",
-            controller: "projectController"
+            controller: "projectController",
+            data:{
+                title:"项目 让我们动手来让这些创新落地"
+            }
         })
         .state("nav.createProject", {
             url:"/createProject",
@@ -42,7 +48,10 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
         .state("nav.team", {
             url: "/team",
             templateUrl: "./modules/team/team.html",
-            controller: "teamController"
+            controller: "teamController",
+            data:{
+                title:"团队 真正的teamwork"
+            }
         })
         .state("nav.createTeam", {
             url:"/createTeam",
@@ -57,17 +66,26 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
         .state("nav.coach", {
             url: "/coach",
             templateUrl: "./modules/coach/coach.html",
-            controller: "coachController"
+            controller: "coachController",
+            data:{
+                title:"教练 全方位的指导我们组队、敏捷项目管理与开发"
+            }
         })
         .state("nav.player", {
             url: "/player",
             templateUrl: "./modules/player/player.html",
-            controller: "playerController"
+            controller: "playerController",
+            data:{
+                title:"创意  让世界变得更美好"
+            }
         })
         .state("nav.asset", {
             url: "/asset",
             templateUrl: "./modules/asset/asset.html",
-            controller: "assetController"
+            controller: "assetController",
+            data:{
+                title:"可重用资产 站在巨人的肩膀上"
+            }
         })
         .state("nav.message", {
             url: "/message",
