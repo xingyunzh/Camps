@@ -145,27 +145,17 @@ function login(req,res,type){
 
 }
 
-function importProfile(userId){
-	var deferred = q.defer();
-	uidHelper.getProfile(userId,function(err,data){
-		if (err) {
-			deferred.reject(err);
-		}else{
-			var profile = data.user;
+function importProfile(user){
 
-			var user = {
-				uid:userId
-			};
+	var newUser = {
+		uid:user._id
+	};
 
-			if (!!profile.nickname) {
-				user.nickname = profile.nickname;
-			} else {
-				user.nickname = '新用户' + stringHelper.generate(4,'all');
-			}
+	if (!!user.nickname) {
+		newUser.nickname = profile.nickname;
+	} else {
+		newUser.nickname = '新用户' + stringHelper.generate(4,'all');
+	}
 
-		 	deferred.resolve(userRepository.create(user));
-		}
-	});
-
-	return deferred.promise;
+	return userRepository.create(newUser);
 }
