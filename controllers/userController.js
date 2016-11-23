@@ -106,10 +106,10 @@ function login(req,res,type){
 		}
 
 		return userRepository
-		.findByUid(user.userId)
+		.findByUid(user._id)
 		.then(function(userResult){
 			if(userResult == null){
-				return importProfile(user.userId,result.token);
+				return importProfile(user._id);
 			}else{
 				return userResult;
 			}
@@ -145,9 +145,9 @@ function login(req,res,type){
 
 }
 
-function importProfile(userId,token){
+function importProfile(userId){
 	var deferred = q.defer();
-	uidHelper.getProfile(token,function(err,data){
+	uidHelper.getProfile(userId,function(err,data){
 		if (err) {
 			deferred.reject(err);
 		}else{

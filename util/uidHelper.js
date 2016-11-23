@@ -13,8 +13,8 @@ exports.loginByEmail = function(email,password,callback){
 // 	postUID('/clduser/register',{email:email,password:password},callback);
 // }
 
-exports.getProfile = function(token,callback){
-	postUID('/clduser/api/profile',{},token,callback);
+exports.getProfile = function(userId,callback){
+	postUID('/clduser/api/profile/' + userId,{},null,callback);
 }
 
 // exports.checkEmailActivated = function(token,callback){

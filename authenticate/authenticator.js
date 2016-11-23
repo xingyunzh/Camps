@@ -9,7 +9,8 @@ function getSecret(){
 	if (secret) {
 		return secret;
 	}else{
-		return scr.getTokenSecret().secret;
+		secret = scr.getTokenSecret().secret;
+		return secret;
 	}
 
 }
@@ -34,10 +35,10 @@ module.exports.authenticate = function(req, res, next) {
 
 	var tokenString = req.get('x-access-token');
 
-	if (tokenString === undefined || tokenString == null) {
+	if (!tokenString) {
 		res.send(util.wrapBody('Invalid token','E'));
 	}else{
-		jwt.verify(tokenString,getSecret(),function(err,tokenObject){
+		jwt.verify(tokenString,function(err,tokenObject){
 			if (err) {
 				console.log(err);
 				res.send(util.wrapBody('Invalid token','E'));

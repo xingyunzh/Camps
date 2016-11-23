@@ -68,14 +68,14 @@ app.controller("loginController", ["$scope","loginService","$rootScope",function
 		
 
 		var obj = new WxLogin({
-		  id:"wechatCode", 
-		  appid: "wx5ce7696222e79ca5", 
-		  scope: "snsapi_login", 
-		  //redirect_uri: "http%3A%2F%2Fwww.xingyunzh.com",
-		  redirect_uri: encodeURIComponent(universalAPI),
-		  state: "345",
-		  style: "",
-		  href: ""
+		    id:"wechatCode", 
+		    appid: "wx5ce7696222e79ca5", 
+		    scope: "snsapi_login", 
+		    //redirect_uri: "http%3A%2F%2Fwww.xingyunzh.com",
+		    redirect_uri: encodeURIComponent(universalAPI),
+		    state: "345",
+		    style: "",
+		    href: ""
 		});
 
 		$scope.hasWechatInit = true;
