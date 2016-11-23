@@ -15,6 +15,10 @@
     margin-left: 10px;
 }
 
+.camps-navbar {
+    margin: 0px;
+}
+
 .camps-nav-user {
     display: block;
     text-decoration: none;
@@ -29,7 +33,7 @@
 }
 
 .camps-navbar-placehoder {
-    margin-top: -20px;
+    margin-top: 0px;
     height:50px;
 }
 
@@ -49,19 +53,46 @@
 .camps-nav-mast h2{
     color: white;
     display: block;
-    padding-top:80px;
+    top: 80px;
+    position: relative;
+    margin: 0px;
+}
+
+.camps-nav-mast-mask {
+    background-color: rgba(0,0,0,0.4);
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
 }
 
 .camps-nav-menu {
-    font-size: 15px;
+    font-size: 16px;
     text-align: left;
+    height: 78px;
+    /* Rectangle 5: */
+    background: #FFFFFF;
+    border-bottom: 1px solid #979797;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50), inset 0 1px 3px 0 rgba(0,0,0,0.50);
+    margin-bottom: 5px;
 }
 
 .camps-nav-menu-item {
-    padding-top: 20px;
+    padding-top: 25px;
     width: 150px;
     height: 78px;
+}
+
+.camps-nav-menu-item a:active,a:link.camps-nav-menu-item-selected, a:visited.camps-nav-menu-item-selected{
+    text-decoration: none;
+
+    color: #fd8f26;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #fd8f26;
+}
+
+.camps-nav-menu-item a:hover{
+    text-decoration: none;
+}
+
+.camps-nav-menu-item a:link,a:visited {
+    text-decoration: none;
 }

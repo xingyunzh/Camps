@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="./modules/nav/nav.css">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top camps-navbar" role="navigation">
     <div class="navbar-header">
         <a ui-sref="nav.idea" >
             <div>
@@ -20,56 +20,48 @@
                 </span>
             </span>
     </div>
-
-    <!--<button class="navbar-toggle" type="button" ng-init="navCollapsed=true" ng-click="navCollapsed=!navCollapsed">-->
-        <!--<span class="sr-only">Toggle navigation</span>-->
-        <!--<span class="icon-bar"></span>-->
-        <!--<span class="icon-bar"></span>-->
-        <!--<span class="icon-bar"></span>-->
-    <!--</button>-->
-    <!--<div uib-collapse="navCollapsed" class="collapse navbar-collapse navbar-responsive-collapse">-->
-        <!--<ul class="nav navbar-nav navbar-right">-->
-            <!--<li ng-class="{active:$state.name.endsWith('idea')}"><a ui-sref="nav.idea">创意</a></li>-->
-            <!--<li ng-class="{active:$state.name.endsWith('team')}"><a ui-sref="nav.team">团队</a></li>-->
-            <!--<li ng-class="{active:$state.name.endsWith('project')}"><a ui-sref="nav.project">项目</a></li>-->
-            <!--<li ng-class="{active:$state.name.endsWith('coach')}"><a ui-sref="nav.coach">教练</a></li>-->
-            <!--<li ng-class="{active:$state.name.endsWith('asset')}"><a ui-sref="nav.asset">组件</a></li>-->
-            <!--<li ng-class="{active:$state.name.endsWith('message')}"><a ui-sref="nav.message">私信</a></li>-->
-            <!--<li ng-hide="!hasLoggedIn">-->
-                <!--<a id="r-nav-id-name" ui-sref="nav.profile">你好, {{currentUser.nickname}}</a>-->
-            <!--</li>-->
-
-        <!--</ul>-->
-    <!--</div>-->
-    <!-- </div> -->
 </nav>
 
 <div class="camps-navbar-placehoder"></div>
 
 <div class="camps-nav-mast" ng-show="!!$state.current.data.title">
-    <h2 class="text-center">{{$state.current.data.title}} </h2>
+    <div class="camps-nav-mast-mask">
+        <h2 class="text-center">{{$state.current.data.title}}</h2>
+    </div>
 </div>
 
 <div class="container-fluid">
-    <div class="camps-nav-menu">
-        <div class="row">
-            <div class="col-sm-1 col-sm-offset-3">
-                <div ng-class="{active:$state.name.endsWith('idea'), 'camps-nav-menu-item':true}"><a ui-sref="nav.idea">创意</a></div>
+    <div class="row">
+        <div class="camps-nav-menu">
+            <div class="col-xs-1 col-xs-offset-3">
+                <div class="camps-nav-menu-item">
+                    <a ui-sref="nav.idea" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'idea'}">创意</a>
+                </div>
             </div>
-            <div class="col-sm-1">
-                <div ng-class="{active:$state.name.endsWith('project'), 'camps-nav-menu-item':true}"><a ui-sref="nav.project">项目</a></div>
+            <div class="col-xs-1">
+                <div class="camps-nav-menu-item">
+                    <a ui-sref="nav.project" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'project'}">项目</a>
+                </div>
             </div>
-            <div class="col-sm-1">
-                <div ng-class="{active:$state.name.endsWith('team'), 'camps-nav-menu-item':true}"><a ui-sref="nav.team">团队</a></div>
+            <div class="col-xs-1">
+                <div class="camps-nav-menu-item">
+                    <a ui-sref="nav.team" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'team'}">团队</a>
+                </div>
             </div>
-            <div class="col-sm-1">
-                <div ng-class="{active:$state.name.endsWith('coach'), 'camps-nav-menu-item':true}"><a ui-sref="nav.coach">教练</a></div>
+            <div class="col-xs-1">
+                <div class="camps-nav-menu-item">
+                    <a ui-sref="nav.coach" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'coach'}">教练</a>
+                </div>
             </div>
-            <div class="col-sm-1">
-                <div ng-class="{active:$state.name.endsWith('message'), 'camps-nav-menu-item':true}"><a ui-sref="nav.message">私信</a></div>
+            <div class="col-xs-1">
+                <div class="camps-nav-menu-item">
+                    <a ui-sref="nav.message" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'message'}">私信</a>
+                </div>
             </div>
-            <div class="col-sm-1">
-                <div ng-class="{active:$state.name.endsWith('asset'), 'camps-nav-menu-item':true}"><a ui-sref="nav.asset">组件</a></div>
+            <div class="col-xs-1">
+                <div class="camps-nav-menu-item">
+                    <a ui-sref="nav.asset" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'asset'}">组件</a>
+                </div>
             </div>
         </div>
     </div>
