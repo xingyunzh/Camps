@@ -151,7 +151,7 @@ function importProfile(userId){
 		if (err) {
 			deferred.reject(err);
 		}else{
-			var profile = data.profile;
+			var profile = data.user;
 
 			var user = {
 				uid:userId
