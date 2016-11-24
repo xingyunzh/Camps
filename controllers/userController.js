@@ -147,15 +147,26 @@ function login(req,res,type){
 
 function importProfile(user){
 
-	var newUser = {
-		uid:user._id
-	};
+	var imageName = stringHelper.randomString(10,['lower','digit']);
 
-	if (!!user.nickname) {
-		newUser.nickname = profile.nickname;
-	} else {
-		newUser.nickname = '新用户' + stringHelper.generate(4,'all');
-	}
+	return imageRepository
+	.getFromUrl(imageName,user.headImageUrl)
+	.then(function(tempPath){
+		return imageRepository.putToOSS(imageName,tempPath);
+	}).then(function(res){
+		
+		var newUser = {
+			uid:user._id,
+			headImageUrl:res.url
+		};
 
-	return userRepository.create(newUser);
+		if (!!user.nickname) {
+			newUser.nickname = profile.nickname;
+		} else {
+			newUser.nickname = '新用户' + stringHelper.generate(4,'all');
+		}
+
+		return userRepository.create(newUser);
+	});
+
 }
