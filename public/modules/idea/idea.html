@@ -1,29 +1,38 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <div class="camps-bordered">
-                浏览大家提交的创意,有些已经在项目实现中哦。
-            </div>
-            <button class="btn btn-primary center-block camps-idea-submit" ui-sref="nav.createIdea">提交你的创意</button>
-        </div>
-        <div class="col-md-6">
+        <div class="col-xs-9 camps-idea-card-space">
+
             <div class="" ng-repeat="item in ideas">
-                <div class="media camps-media-card" ng-click="handleItemClick(item)">
-                    <a href="#" class="media-left">
-                        <img ng-src="{{item.imageUrl}}" alt="Img">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            {{item.name}}
-                        </h4>
-                        <h5>- {{item.innovator.nickname}}</h5>
-                        <span ng-bind-html="item.solution | htmlConent"></span>
+                <div class="camps-media-card" ng-click="handleItemClick(item)">
+                    <img ng-src="./images/bike.png" alt="Img">
+
+                    <div class="camps-media-card-body">
+                        <div class="camps-idea-card-title">
+                            <h1>
+                                {{item.name}}
+                            </h1>
+                        </div>
+                        <div class="camps-idea-card-submitter">
+                            <h2>提交人 <span>{{item.innovator.nickname}}</span></h2>
+                        </div>
+                        <div class="camps-idea-card-short-line"></div>
+                        <div class="camps-idea-card-description">
+                            <h2 ng-bind-html="item.solution | htmlConent"></h2>
+                        </div>
+                    </div>
+                    <div class="camps-media-card-footer">
+                        <div class="camps-idea-card-footer">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> <span>249</span> &nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-eye-open"></span> <span>2368</span>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-xs-3 camps-idea-panel-space">
             <idea-typehead on-selected="handleItemClick(idea)" glyphicon-class="glyphicon-search"></idea-typehead>
+            <button class="btn btn-primary center-block camps-idea-submit" ui-sref="nav.createIdea">提交你的创意</button>
         </div>
     </div>
 

@@ -1,3 +1,54 @@
 .camps-idea-submit {
     margin-top: 10px;
+    width: 100%;
+    border-top: 1px solid $d1d1d1;
 }
+
+.camps-idea-card-space {
+    border-right: 1px solid #d1d1d1;
+}
+
+.camps-idea-panel-space,.camps-idea-card-space {
+    padding-top: 20px;
+}
+
+.camps-idea-card-title,.camps-idea-card-submitter,.camps-idea-card-description,.camps-idea-card-footer {
+    padding-left: 13px;
+}
+
+.camps-idea-card-title {
+    padding-top: 13px;
+}
+.camps-idea-card-submitter {
+    margin-top: 26px;
+    margin-bottom:6px;
+}
+.camps-idea-card-submitter span {
+    color: #0052FF;
+}
+
+.camps-idea-card-description {
+    margin-top: 6px;
+}
+
+.camps-idea-card-footer {
+    padding-top:5px;
+}
+
+.camps-idea-card-footer .glyphicon {
+    color: #9b9b9b;
+}
+
+.camps-idea-card-short-line{
+    margin:0px auto 0px 13px;
+    height: 1px;
+    width: 100px;
+    border-top: 1px solid #d1d1d1;
+}
+
+/* 空中自行车计划: */
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 14px;
+color: #0052FF;
+letter-spacing: 0;
+line-height: 18px;
