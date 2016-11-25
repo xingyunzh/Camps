@@ -1,38 +1,35 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-9 camps-idea-card-space">
+        <div class="col-xs-9 camps-card-space">
 
             <div class="" ng-repeat="item in ideas">
                 <div class="camps-media-card" ng-click="handleItemClick(item)">
                     <img ng-src="./images/bike.png" alt="Img">
 
                     <div class="camps-media-card-body">
-                        <div class="camps-idea-card-title">
+                        <div class="camps-media-card-title">
                             <h1>
                                 {{item.name}}
                             </h1>
                         </div>
-                        <div class="camps-idea-card-submitter">
+                        <div class="camps-media-card-leader">
                             <h2>提交人 <span>{{item.innovator.nickname}}</span></h2>
                         </div>
-                        <div class="camps-idea-card-short-line"></div>
-                        <div class="camps-idea-card-description">
+                        <div class="camps-media-card-short-line"></div>
+                        <div class="camps-media-card-description">
                             <h2 ng-bind-html="item.solution | htmlConent"></h2>
                         </div>
                     </div>
                     <div class="camps-media-card-footer">
-                        <div class="camps-idea-card-footer">
-                            <span class="glyphicon glyphicon-thumbs-up"></span> <span>249</span> &nbsp;&nbsp;
-                            <span class="glyphicon glyphicon-eye-open"></span> <span>2368</span>
-                        </div>
-
+                        <span class="glyphicon glyphicon-thumbs-up"></span> <span>249</span> &nbsp;&nbsp;
+                        <span class="glyphicon glyphicon-eye-open"></span> <span>2368</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xs-3 camps-idea-panel-space">
+        <div class="col-xs-3 camps-panel-space">
             <idea-typehead on-selected="handleItemClick(idea)" glyphicon-class="glyphicon-search"></idea-typehead>
-            <button class="btn btn-primary center-block camps-idea-submit" ui-sref="nav.createIdea">提交你的创意</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createIdea">提交你的创意</button>
         </div>
     </div>
 

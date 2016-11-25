@@ -1,37 +1,34 @@
 <div class="container">
-    <div class="row" class="camps-team-submit-panel">
-        <div class="col-md-3">
-            <h3 class="center-block">项目列表</h3>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-primary center-block camps-team-submit" ui-sref="nav.createProject">创建项目</button>
-        </div>
-        <div class="col-md-3">
-            <project-typehead glyphicon-class="glyphicon-search" on-selected="handleProjectClicked(project)"></project-typehead>
-        </div>
-    </div>
-</div>
-
-<div class="container">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div ng-repeat="project in projects">
-                <a ng-click="handleProjectClicked(project)">
-                    <div class="media camps-media-card" >
-                        <div class="media-left">
-                            <img src="images/stars_logo.jpg" alt="Img">
+        <div class="col-xs-9 camps-card-space">
+            <div class="" ng-repeat="item in projects">
+                <div class="camps-media-card" ng-click="handleProjectClicked(item)">
+                    <img ng-src="./images/project.png" alt="Img">
+
+                    <div class="camps-media-card-body">
+                        <div class="camps-media-card-title">
+                            <h1>
+                                {{item.name}}
+                            </h1>
                         </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">
-                                {{project.name}}
-                            </h4>
-                            {{project.scope}}
+                        <div class="camps-media-card-leader">
+                            <h2>队长 <span>{{item.team.name}}</span></h2>
+                        </div>
+                        <div class="camps-media-card-short-line"></div>
+                        <div class="camps-media-card-description">
+                            <h2 ng-bind-html="item.scope | htmlConent"></h2>
                         </div>
                     </div>
-                </a>
+                    <div class="camps-media-card-footer">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> <span>249</span> &nbsp;&nbsp;
+                        <span class="glyphicon glyphicon-eye-open"></span> <span>2368</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-xs-3 camps-panel-space">
+            <project-typehead glyphicon-class="glyphicon-search" on-selected="handleProjectClicked(project)"></project-typehead>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createProject">创建项目</button>
+        </div>
     </div>
 </div>
