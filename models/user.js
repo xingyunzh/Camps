@@ -14,7 +14,9 @@ var userSchema = Schema({
 
 	skills:[String],
 
-	sector:String
+	sector:String,
+
+	headImgUrl:String
 });
 
 var User = mongoose.model("User", userSchema);
