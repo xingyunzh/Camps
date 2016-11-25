@@ -18,6 +18,10 @@ app.controller("navController", ["$scope", "$rootScope", function($scope, $rootS
     	$scope.hasLoggedIn = false;
     });
 
+    $scope.onTap = function(a){
+          
+    };
+    
     $scope.logOut = function(){
     	$rootScope.currentUser = null;
     	$rootScope.token = null;
