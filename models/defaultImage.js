@@ -9,6 +9,6 @@ var imageSchema = Schema({
 	type:Number
 });
 
-var Item = mongoose.model("Item", itemSchema);
+var Image = mongoose.model("Image", imageSchema);
 
-module.exports = Item; 
+module.exports = Image; 
