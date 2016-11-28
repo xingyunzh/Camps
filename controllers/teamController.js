@@ -4,7 +4,7 @@ var util = require('../util/util');
 exports.list = function(req,res){
 	var conditions = req.query;
 
-	conditions.state = 'active';
+	conditions.state = 1;
 
 	teamRepository.query(conditions).then(function(result){
 		res.send(util.wrapBody(result));
@@ -43,7 +43,7 @@ exports.create = function(req,res){
 		var team = req.body;
 		team.lead = lead;
 		team.createDate = new Date();
-		team.state = 'active';
+		team.state = 1;
 
 		teamRepository.create(team).then(function(result){
 			res.send(util.wrapBody({team:result}));
@@ -83,7 +83,7 @@ exports.update = function(req,res){
 		teamRepository.findById(id)
 		.then(function copyToHistory(result){
 			delete result._id;
-			result.state = 'history';
+			result.state = 0;
 			return teamRepository.create(result);
 		}).then(function updateCurrentTeam(){
 			updates.createDate = new Date();

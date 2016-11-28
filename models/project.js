@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 var projectSchema = Schema({
 	name:String,
 
+	headImgUrl:String,
+
 	scope:String,
 
 	createDate:Date,

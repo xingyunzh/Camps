@@ -13,14 +13,14 @@ exports.findById = function(id){
 exports.findByProject = function(id){
 	return Team.findOne({
 		project:id,
-		state:'active'
+		state:1
 	}).populate('coach member lead').lean().exec();
 };
 
 exports.getActiveTeam = function(teamId){
 	return Team.findOne({
 		teamId:teamId,
-		state:'active'
+		state:1
 	}).populate('coach').populate('member').populate('lead').lean().exec();
 };
 

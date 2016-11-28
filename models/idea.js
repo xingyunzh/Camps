@@ -6,6 +6,8 @@ var ideaSchema = Schema({
 		type:String
 	},
 
+	headImgUrl:String,
+
 	state:String,
 
 	background:String,
