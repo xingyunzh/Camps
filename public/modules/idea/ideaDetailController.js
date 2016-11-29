@@ -3,8 +3,16 @@
  */
 app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaService", "toaster", "ossFileService",
     function($scope, $rootScope, util, ideaService, toaster, ossFileService){
+    $scope.sampleImages = [
+        "./images/bike.png",
+        "./images/bike.png",
+        "./images/bike.png",
+        "./images/bike.png",
+        "./images/bike.png",
+        "./images/bike.png"
+    ];
+
     $scope.isEditing = false;
-    // $scope.targetEditable = null;
     $scope.form = makeFormOfTheIdea();
     $scope.summerOption = {
         height: 200,

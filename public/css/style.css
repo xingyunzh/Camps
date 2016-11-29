@@ -3,7 +3,9 @@
 }
 
 body {
+    color: #313131;
     background-color: #f4f4f4;
+    font-size: 10px;
 }
 
 .camps-head-strip {
@@ -25,7 +27,7 @@ body {
 }
 
 .camps-media-card {
-    margin: 0px 35px 35px 35px;
+    margin: 25px;
 
     width: 202px;
     height: 300px;
@@ -77,12 +79,11 @@ body {
 }
 
 .camps-media-card h1 {
-    font-size: 14px;
-    color: #0052FF;
+    font-size: 1.4rem;
 }
 
 .camps-media-card h2 {
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #818181;
 }
 
@@ -103,9 +104,6 @@ body {
 .camps-media-card-leader {
     margin-top: 26px;
     margin-bottom:6px;
-}
-.camps-media-card-leader span {
-    color: #0052FF;
 }
 
 .camps-media-card-description {
@@ -130,3 +128,6 @@ body {
     width:150px;
 }
 
+.camps-text-highlight-color {
+    color:#0052FF
+}

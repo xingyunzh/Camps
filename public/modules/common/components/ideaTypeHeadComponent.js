@@ -10,7 +10,9 @@ app.component('ideaTypehead', {
     },
     controller: function($scope, $element, $attrs, ideaService){
         $scope.getIdeas = function (viewValue) {
-            return ideaService.ideaSource();
+            return ideaService.ideaSource(viewValue).then(function(data){
+                return data.ideas;
+            });
         };
 
         $scope.selectedIdea = null;
