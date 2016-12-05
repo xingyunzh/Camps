@@ -9,56 +9,63 @@
             </div>
             <div class="row">
                 <div class="camps-idea-d-text-section">
-                    团队描述
+                    团队描述: &nbsp;
                     <span ng-hide="isEditing">{{form.description}}</span>
+                    <br><br>
                     <span ng-show="isEditing"><textarea class='form-control' cols="30" rows="5" ng-model="form.description"></textarea></span>
 
                 </div>
             </div>
             <div class="row">
                 <div class="camps-idea-d-text-section">
-                    教练
-                    <span>{{form.coach.name}}</span>
+                    教练: &nbsp;
+                    <camps-user-head user="form.coach" width="60" height="60"></camps-user-head>
+                    <br><br>
                     <span ng-show="isEditing">
-                        <user-typehead which-role="coach" on-selected="form.coach = user;" glyphicon-class="glyphicon-ok">
+                        <user-typehead which-role="coach" on-selected="form.coach = user;" glyphicon-class="glyphicon-ok" max-width="200">
                         </user-typehead>
                     </span>
                 </div>
             </div>
             <div class="row">
                 <div class="camps-idea-d-text-section">
-                    队长
-                    <span>{{form.leader.name}}</span>
+                    队长: &nbsp;
+                    <camps-user-head user="form.leader" width="60" height="60"></camps-user-head>
+                    <br><br>
                     <span ng-show="isEditing">
-                        <user-typehead which-role="player" on-selected="form.leader = user;" glyphicon-class="glyphicon-ok">
+                        <user-typehead which-role="player" on-selected="form.leader = user;" glyphicon-class="glyphicon-ok" max-width="200">
                         </user-typehead>
                     </span>
                 </div>
             </div>
             <div class="row">
                 <div class="camps-idea-d-text-section">
-                    成员
+                    成员: &nbsp;
                     <span ng-repeat="user in form.members">
-                    <span class="label label-info" >{{user.name}}
-                           <span class="btn glyphicon glyphicon-remove" ng-show="isEditing" ng-click="form.members.splice($index, 1)"></span>
+                    <span ng-class="{label:isEditing, 'label-info':isEditing, 'camps-team-d-members':true}" >
+                        <camps-user-head user="user" width="60" height="60"></camps-user-head>
+                        <span class="btn glyphicon glyphicon-remove" ng-show="isEditing" ng-click="form.members.splice($index, 1)"></span>
                             </span>
                     &nbsp;
                     </span>
-                    <span ng-show="isEditing"><user-typehead on-selected="onAddMemeberToForm(user)"></user-typehead></span>
+                    <br><br>
+                    <span ng-show="isEditing"><user-typehead on-selected="onAddMemeberToForm(user)" max-width="200"></user-typehead></span>
 
                 </div>
             </div>
             <div class="row">
                 <div class="camps-idea-d-text-section">
-                    运作项目
+                    运作项目: &nbsp;
                     <a ng-click="handleProjectLink()">{{theTeam.project.name}}</a>
                 </div>
             </div>
             <div class="row">
-                成立时间
-                <div class="camps-idea-d-text-section">
-                    {{theTeam.birthday | date:"yyyy-MM-dd"}}
-                </div>
+               <div class="camps-idea-d-text-section">
+                   成立时间: &nbsp;
+                        <span class="camps-idea-d-text-section">
+                            {{theTeam.birthday | date:"yyyy-MM-dd"}}
+                        </span>
+               </div>
             </div>
             <div class="row">
                 <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>

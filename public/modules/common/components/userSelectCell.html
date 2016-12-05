@@ -1,6 +1,5 @@
 <a>
-    <!--<img ng-src="./images/stars_logo.jpg" width="20">-->
-    <span class="glyphicon glyphicon-user"></span>
+    <img ng-src="{{!!match.model.headImgUrl ? match.model.headImgUrl : './images/stars_logo.jpg'}}" width="20">
     <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
     &nbsp;
     <small>{{match.model.email}}</small>
