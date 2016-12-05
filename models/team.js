@@ -8,6 +8,8 @@ var teamSchema = Schema({
 		required:true
 	},
 
+	headImgUrl:String,
+
 	description:String,
 
 	teamId:{
@@ -38,7 +40,7 @@ var teamSchema = Schema({
 		ref:'User'
 	},
 
-	state:String
+	state:Number
 });
 
 var Team = mongoose.model("Team", teamSchema);
