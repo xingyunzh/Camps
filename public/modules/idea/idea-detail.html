@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="camps-idea-d-text-section">
                     截止日期:
-                    <span ng-hide="isEditing">{{form.deadline | date:"yyyy-MM-dd"}}</span>
+                    <span ng-hide="isEditing || form.deadline == null">{{form.deadline | date:"yyyy-MM-dd"}}</span>
                     <span ng-show="isEditing">
                         <p class="input-group">
                             <input type="text" class="form-control" uib-datepicker-popup ng-model="form.deadline"
@@ -113,7 +113,8 @@
         </div>
         <div class="col-xs-3 camps-panel-space">
             <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail')" glyphicon-class="glyphicon-search"></idea-typehead>
-            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createIdea">提交你的创意</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createIdea" ng-if="!!currentUser">提交你的创意</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="currentUser==null">提交你的创意</button>
         </div>
     </div>
 

@@ -12,10 +12,12 @@
         </div>
         <div class="form-group">
             <label for="id-camps-profile-headimage" class="col-md-2 control-label ">头像URL:</label>
-            <div class="col-md-10">
+            <div class="col-md-1">
+                <img class="img-circle" ng-src="{{form.headImgUrl}}" alt="Head" width="60">
+            </div>
+            <div class="col-md-9">
                 <input type="text" class="form-control" id="id-camps-profile-headimage" placeholder="头像链接" ng-model="form.headImgUrl">
             </div>
-
         </div>
         <div class="form-group">
             <label for="id-camps-profile-name" class="control-label col-md-2">真实姓名:</label>
@@ -32,18 +34,14 @@
         <div class="form-group">
             <label class="control-label col-md-2">角色:</label>
             <div class="col-md-10 btn-group" data-toggle="buttons">
-
-                    <input type="checkbox" autocomplete="off" ng-model="roles.playerRole">队员
-
-
-                    <input type="checkbox" autocomplete="off" ng-model="roles.coachRole">教练
-
+                <input type="checkbox" autocomplete="off" ng-model="roles.playerRole">队员
+                <input type="checkbox" autocomplete="off" ng-model="roles.coachRole">教练
             </div>
         </div>
 
         <div class="form-group">
             <div class="text-center">
-                <button class="btn btn-primary" ng-click="onSubmitButton()">Submit</button>
+                <button class="btn btn-primary" ng-click="onSubmitButton()">提交修改</button>
             </div>
         </div>
     </form>
