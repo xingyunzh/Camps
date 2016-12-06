@@ -12,12 +12,14 @@ var app = angular.module("app", ["ui.router", "ui.bootstrap", "toaster", "ngAnim
             minDate: new Date(1940,1,1),
             startingDay: 1
         }
-    }
+    };
+
+    $rootScope.defaultImages = {};
 
     $rootScope.back = function () {
         /* body... */
         $window.history.back();
-    }
+    };
 
-    console.log("run called!")
+    console.log("run called!");
 }]);

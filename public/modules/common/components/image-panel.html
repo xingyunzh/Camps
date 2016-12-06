@@ -1,0 +1,16 @@
+<div class="camps-image-panel">
+	<div class="camps-image-panel-top">
+		<div class="" ng-repeat="image in uploadImages">
+			<div class="camps-image-panel-card">
+				<img src="image.url">
+			</div>
+		</div>
+	</div>
+	<div class="camps-image-panel-bottom">
+		<div class="" ng-repeat="image in defaultImages">
+			<div class="camps-image-panel-card" ng-click="onDefaultImageClick(image)">
+				<img src="image.url">
+			</div>
+		</div>
+	</div>
+</div>

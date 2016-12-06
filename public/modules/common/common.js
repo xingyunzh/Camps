@@ -166,6 +166,16 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
     }
 }]);
 
+app.service("defaultImageService", ["httpHelper","$q","$rootScope", function(httpHelper,$q,$rootScope){
+	this.getImagesByType = function(type){
+		var deferred = q.defer();
+
+		if (!!$rootScope.defaultImages[type]) {
+			deferred.resolve($rootScope.defaultImages[type]);
+		}
+	}
+}]);
+
 
 app.service("ossFileService", ["httpHelper", "$q", "util", function (httpHelper, $q, util) {
     //This is for oss requirement. bt..
@@ -181,6 +191,13 @@ app.service("ossFileService", ["httpHelper", "$q", "util", function (httpHelper,
             }
         }
     }
+
+    this.getClient = function(){
+    	httpHelper.sendRequest('GET','./system/oss').then(function ok(data){
+    		var client = new OSS.Wrapper(data);
+    		return client;
+    	});
+    };
 
     this.uploadFile = function (name, file, progressFunc) {
          if (file == null){

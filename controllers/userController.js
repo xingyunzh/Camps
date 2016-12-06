@@ -28,7 +28,7 @@ exports.update = function(req,res){
 
 	userRepository.updateById(id, req.body).then(function(result){
         res.send(util.wrapBody(result));
-    }).catch(function(error){
+    }).catch(function(err){
         console.log(err);
         res.send(util.wrapBody('Internal Error','E'));
     });
@@ -54,11 +54,7 @@ exports.listUser = function(req,res){
 	userRepository
 	.query(conditions)
 	.then(function(result){
-		var responseBody = {
-			users:result
-		};
-
-		res.send(util.wrapBody(responseBody));
+		res.send(util.wrapBody(result));
 	}).catch(function(err){
 		if (typeof err == String) {
 			res.send(util.wrapBody(err,'E'));
@@ -109,7 +105,19 @@ function login(req,res,type){
 		.findByUid(user._id)
 		.then(function(userResult){
 			if(userResult == null){
-				return importProfile(user._id);
+				//return importProfile(user);
+				var newUser = {
+					uid:user._id,
+					headImgUrl:user.headImgUrl
+				};
+
+				if (!!user.nickname) {
+					newUser.nickname = user.nickname;
+				} else {
+					newUser.nickname = '新用户' + stringHelper.generate(4,'all');
+				}
+
+				return userRepository.create(newUser);
 			}else{
 				return userResult;
 			}
@@ -145,28 +153,30 @@ function login(req,res,type){
 
 }
 
-function importProfile(user){
+// function importProfile(user){
 
-	var imageName = stringHelper.randomString(10,['lower','digit']);
+// 	var imageName = stringHelper.randomString(10,['lower','digit']);
 
-	return imageRepository
-	.getFromUrl(imageName,user.headImageUrl)
-	.then(function(tempPath){
-		return imageRepository.putToOSS(imageName,tempPath);
-	}).then(function(res){
+// 	imageName = globalNameForFile(imageName,user);
+
+// 	return imageRepository
+// 	.getFromUrl(imageName,user.headImageUrl)
+// 	.then(function(tempPath){
+// 		return imageRepository.putToOSS(imageName,tempPath);
+// 	}).then(function(res){
 		
-		var newUser = {
-			uid:user._id,
-			headImageUrl:res.url
-		};
+// 		var newUser = {
+// 			uid:user._id,
+// 			headImageUrl:res.url
+// 		};
 
-		if (!!user.nickname) {
-			newUser.nickname = profile.nickname;
-		} else {
-			newUser.nickname = '新用户' + stringHelper.generate(4,'all');
-		}
+// 		if (!!user.nickname) {
+// 			newUser.nickname = user.nickname;
+// 		} else {
+// 			newUser.nickname = '新用户' + stringHelper.generate(4,'all');
+// 		}
 
-		return userRepository.create(newUser);
-	});
+// 		return userRepository.create(newUser);
+// 	});
 
-}
+// }
