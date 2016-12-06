@@ -9,6 +9,7 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     $scope.dt = new Date();
     $scope.selectedUser = null;
     $scope.file = null;
+    $scope.testuser = {nickname:'Jim Green', headImgUrl:'http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead.jpg'};
 
     $scope.onRefresh = function () {
         httpHelper.sendRequest("GET", "./demo").then(function success(data) {

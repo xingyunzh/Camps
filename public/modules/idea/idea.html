@@ -1,34 +1,41 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-xs-9 camps-card-space">
-
-            <div class="" ng-repeat="item in ideas">
-                <div class="camps-media-card" ng-click="handleItemClick(item)">
-                    <img ng-src="./images/bike.png" alt="Img">
-
-                    <div class="camps-media-card-body">
-                        <div class="camps-media-card-title">
-                            <h1>
-                                {{item.name}}
-                            </h1>
+            <div class="row" ng-show="currentUser">
+                <div class="btn-group camps-idea-filter-group">
+                    <label class="btn btn-primary" ng-model="cardFilter" uib-btn-radio="'all'">全部</label>
+                    <label class="btn btn-primary" ng-model="cardFilter" uib-btn-radio="'favourite'">我的收藏</label>
+                    <label class="btn btn-primary" ng-model="cardFilter" uib-btn-radio="'my'">我的提交</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="" ng-repeat="item in ideas">
+                    <div class="camps-media-card" ng-click="handleItemClick(item)">
+                        <img ng-src="./images/bike.png" alt="Img">
+                        <div class="camps-media-card-body">
+                            <div class="camps-media-card-title">
+                                <h1 class="camps-text-highlight-color">
+                                    {{item.name}}
+                                </h1>
+                            </div>
+                            <div class="camps-media-card-leader">
+                                <h2>提交人 <span class="camps-text-highlight-color">{{item.innovator.nickname}}</span></h2>
+                            </div>
+                            <div class="camps-media-card-short-line"></div>
+                            <div class="camps-media-card-description">
+                                <h2 ng-bind-html="item.solution | htmlConent"></h2>
+                            </div>
                         </div>
-                        <div class="camps-media-card-leader">
-                            <h2>提交人 <span>{{item.innovator.nickname}}</span></h2>
+                        <div class="camps-media-card-footer">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> <span>249</span> &nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-eye-open"></span> <span>2368</span>
                         </div>
-                        <div class="camps-media-card-short-line"></div>
-                        <div class="camps-media-card-description">
-                            <h2 ng-bind-html="item.solution | htmlConent"></h2>
-                        </div>
-                    </div>
-                    <div class="camps-media-card-footer">
-                        <span class="glyphicon glyphicon-thumbs-up"></span> <span>249</span> &nbsp;&nbsp;
-                        <span class="glyphicon glyphicon-eye-open"></span> <span>2368</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xs-3 camps-panel-space">
-            <idea-typehead on-selected="handleItemClick(idea)" glyphicon-class="glyphicon-search"></idea-typehead>
+            <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail')" glyphicon-class="glyphicon-search"></idea-typehead>
             <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createIdea">提交你的创意</button>
         </div>
     </div>

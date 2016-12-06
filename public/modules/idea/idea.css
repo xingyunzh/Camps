@@ -1,0 +1,32 @@
+.camps-idea-d-title {
+    font-size: 1.6rem;
+    padding-right: 5%;
+}
+
+.camps-idea-d-text-section {
+    font-size: 1.4rem;
+    padding-right: 5%;
+}
+
+.camps-idea-d-title,.camps-idea-d-text-section,.camps-idea-d-metro-section {
+    margin: 1rem 0rem;
+}
+
+.camps-idea-d-metro-section{
+    height: 316px;
+}
+
+.camps-idea-d-metro-section .camps-piece{
+    position: relative;
+    float: left;
+}
+
+.camps-idea-d-metro-section img {
+    width: 202px;
+    height: 158px;
+    margin: 0px;
+}
+
+.camps-idea-filter-group {
+    margin-left: 25px;
+}

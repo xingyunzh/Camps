@@ -14,8 +14,8 @@ app.service("profileService", ['httpHelper', function (httpHelper) {
         });
     }
 
-	this.updateUser = function(updateContent) {
-		return httpHelper.sendRequest("POST", "./api/user/profile/update",updateContent);
+	this.updateUser = function(user, updateContent) {
+		return httpHelper.sendRequest("POST", "./api/user/profile/update/"+user._id, updateContent);
 	}
 
 }]);

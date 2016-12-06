@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-xs-9 camps-card-space">
             <div class="" ng-repeat="item in projects">
@@ -7,12 +7,12 @@
 
                     <div class="camps-media-card-body">
                         <div class="camps-media-card-title">
-                            <h1>
+                            <h1 class="camps-text-highlight-color">
                                 {{item.name}}
                             </h1>
                         </div>
                         <div class="camps-media-card-leader">
-                            <h2>队长 <span>{{item.team.name}}</span></h2>
+                            <h2>队长 <span class="camps-text-highlight-color">{{item.leader.nickname}}</span></h2>
                         </div>
                         <div class="camps-media-card-short-line"></div>
                         <div class="camps-media-card-description">
