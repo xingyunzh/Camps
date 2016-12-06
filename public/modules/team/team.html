@@ -13,7 +13,7 @@
                             </h1>
                         </div>
                         <div class="camps-media-card-leader">
-                            <h2>队长 <span class="camps-text-highlight-color">{{item.leader.name}}</span></h2>
+                            <h2>队长 <span class="camps-text-highlight-color">{{item.lead.nickname}}</span></h2>
                         </div>
                         <div class="camps-media-card-short-line"></div>
                         <div class="camps-media-card-description">
@@ -28,7 +28,8 @@
         </div>
         <div class="col-xs-3 camps-panel-space">
             <team-typehead glyphicon-class="glyphicon-search" on-selected="onTeamClicked(team)"></team-typehead>
-            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createTeam">创建团队</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createTeam" ng-if="!!currentUser">创建团队</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="!currentUser">创建团队</button>
         </div>
     </div>
 </div>

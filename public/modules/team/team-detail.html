@@ -76,7 +76,8 @@
 
         <div class="col-xs-3 camps-panel-space">
             <team-typehead glyphicon-class="glyphicon-search" on-selected="onTeamClicked(team)"></team-typehead>
-            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createTeam">创建团队</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createTeam" ng-if="!!currentUser">创建团队</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="!currentUser">创建团队</button>
         </div>
     </div>
 </div>
