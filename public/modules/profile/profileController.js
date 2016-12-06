@@ -8,8 +8,8 @@ app.controller("profileController", ["$scope", "$rootScope", "profileService", "
     };
 
     $scope.roles = {
-        playerRole:$rootScope.currentUser.roles.indexOf("Player") >= 0,
-        coachRole:$rootScope.currentUser.roles.indexOf("Coach") >= 0
+        playerRole:$rootScope.currentUser.roles.indexOf("player") >= 0,
+        coachRole:$rootScope.currentUser.roles.indexOf("coach") >= 0
     };
 
     $scope.skills = _.reduce($rootScope.currentUser.skills, function (result, item, index) {
@@ -21,11 +21,11 @@ app.controller("profileController", ["$scope", "$rootScope", "profileService", "
         var updateContent = angular.copy($scope.form);
         var roles = [];
         if ($scope.roles.playerRole) {
-            roles.push("Player");
+            roles.push("player");
         }
 
         if ($scope.roles.coachRole) {
-            roles.push("Coach");
+            roles.push("coach");
         }
 
         if (!_.isEqual($rootScope.currentUser.roles.sort(), roles.sort())) {
@@ -63,7 +63,7 @@ app.controller("profileController", ["$scope", "$rootScope", "profileService", "
                 body: '正在提交修改,请稍候',
             }
         );
-        profileService.updateUser(updateContent).then(function (data) {
+        profileService.updateUser($rootScope.currentUser, updateContent).then(function (data) {
             toaster.clear();
             toaster.pop({
                 type:'success',

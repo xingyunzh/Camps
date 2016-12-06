@@ -6,6 +6,10 @@ app.service("ideaService", ["util", "$q", "httpHelper", function (util, $q, http
         return httpHelper.sendRequest("GET", !!value ? "./api/idea/list?keyword="+value : "./api/idea/list");
     }
 
+    this.ideaSourceByInnovator = function(owner){
+        return httpHelper.sendRequest("GET", "./api/idea/list/" + owner._id);
+    }
+
     this.getIdeaById = function (id) {
         return httpHelper.sendRequest("GET", "./api/idea/id/"+id);
     }
