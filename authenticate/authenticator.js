@@ -15,9 +15,9 @@ function getSecret(){
 
 }
 
-module.exports.verify = function(tokenString,callback){
-	jwt.verify(tokenString,getSecret(),callback);
-};
+// module.exports.verify = function(tokenString,callback){
+// 	jwt.verify(tokenString,getSecret(),callback);
+// };
 
 module.exports.create = function(userId,callback){
 	generate(userId,callback);
@@ -38,7 +38,7 @@ module.exports.authenticate = function(req, res, next) {
 	if (!tokenString) {
 		res.send(util.wrapBody('Invalid token','E'));
 	}else{
-		jwt.verify(tokenString,function(err,tokenObject){
+		jwt.verify(tokenString,getSecret(),function(err,tokenObject){
 			if (err) {
 				console.log(err);
 				res.send(util.wrapBody('Invalid token','E'));
