@@ -30,6 +30,23 @@
         </div>
 
         <div class="form-group">
+            <label for="id-camps-create-idea-deadline" class="col-md-2 control-label ">截止日期:</label>
+            <div class="col-md-10">
+                <div class="camps-datepicker">
+                    <p class="input-group">
+                        <input type="text" id="id-camps-create-idea-deadline" class="form-control" uib-datepicker-popup ng-model="form.deadline"
+                               datepicker-options="gOptions.datePicker"
+                               ng-required="true" is-open="isDatePickerOpen" close-text="关闭"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="isDatePickerOpen=!isDatePickerOpen"><i
+                                class="glyphicon glyphicon-calendar"></i> </button>
+                    </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="control-label col-md-2">行业领域:</label>
             <div class="col-md-10">
                 <div class="btn-group" uib-dropdown is-open="isDropdownOpen">

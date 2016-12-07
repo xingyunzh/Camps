@@ -106,7 +106,7 @@ exports.publishIdea = function(req,res){
 
 function checkIdeaReady2Publish(idea){
 	var requires = ['name','background','solution','innovator',
-					'sector','painPoint'];
+					'sector','painpoint'];
 
 	for (var i = requires.length - 1; i >= 0; i--) {
 		if(!idea[requires[i]]){

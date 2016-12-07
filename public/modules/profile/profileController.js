@@ -4,7 +4,8 @@
 app.controller("profileController", ["$scope", "$rootScope", "profileService", "toaster", function ($scope, $rootScope, profileService, toaster) {
     $scope.form = {
         nickname: $rootScope.currentUser.nickname,
-        name: $rootScope.currentUser.name
+        name: $rootScope.currentUser.name,
+        headImgUrl:$rootScope.currentUser.headImgUrl
     };
 
     $scope.roles = {

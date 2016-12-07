@@ -7,7 +7,7 @@ var router = require('express').Router();
 //	required:
 //		name:String
 //	optional:
-//		background:String
+//		description:String
 //		coach:String (user)
 //		lead:String(user)
 //		member:[String] (user)
@@ -45,7 +45,7 @@ router.get('/check',teamController.checkExist);
 //	required:
 //	optional:
 //		name:String
-//		background:String
+//		description:String
 //		coach:String (user)
 //		lead:String(user)
 //		member:[String] (user)

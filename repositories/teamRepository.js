@@ -101,7 +101,7 @@ exports.query = function(options){
 				.find(conditions)
 				.skip(skipped)
 				.limit(pageSize)
-				.populate('Coach').populate('member').populate('lead')
+				.populate('coach member lead')
 				.exec();
 
 		}).then(function(result){
