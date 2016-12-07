@@ -9,7 +9,7 @@ app.component('campsUserHead', {
         height:"<"
     },
     controller: function($scope, $element, $attrs){
-        if (!!this.user.headImgUrl) {
+        if (!!this.user && !!this.user.headImgUrl) {
             $scope.url = this.user.headImgUrl;
         }
         else {

@@ -4,7 +4,7 @@
 app.controller("newTeamController", ["$scope", "$rootScope", "teamService", "util", function ($scope, $rootScope, teamService, util) {
     $scope.form = {
         name: null,
-        background: null,
+        description: null,
         lead: $rootScope.currentUser,
         member: [],
         coach:null

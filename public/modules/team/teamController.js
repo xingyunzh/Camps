@@ -8,8 +8,7 @@ app.controller("teamController", ["$scope", "$rootScope", "teamService", functio
     });
 
     $scope.onTeamClicked = function(team){
-        $rootScope.theTeam = teamData[0];
-
+        $rootScope.theTeam = team;
         $rootScope.$state.go("nav.team-detail");
     }
 }]);

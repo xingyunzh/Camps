@@ -30,10 +30,10 @@
             <div class="row">
                 <div class="camps-idea-d-text-section">
                     队长: &nbsp;
-                    <camps-user-head user="form.leader" width="60" height="60"></camps-user-head>
+                    <camps-user-head user="form.lead" width="60" height="60"></camps-user-head>
                     <br><br>
                     <span ng-show="isEditing">
-                        <user-typehead which-role="player" on-selected="form.leader = user;" glyphicon-class="glyphicon-ok" max-width="200">
+                        <user-typehead which-role="player" on-selected="form.lead = user;" glyphicon-class="glyphicon-ok" max-width="200">
                         </user-typehead>
                     </span>
                 </div>
@@ -41,11 +41,13 @@
             <div class="row">
                 <div class="camps-idea-d-text-section">
                     成员: &nbsp;
-                    <span ng-repeat="user in form.members">
-                    <span ng-class="{label:isEditing, 'label-info':isEditing, 'camps-team-d-members':true}" >
-                        <camps-user-head user="user" width="60" height="60"></camps-user-head>
-                        <span class="btn glyphicon glyphicon-remove" ng-show="isEditing" ng-click="form.members.splice($index, 1)"></span>
+                    <span ng-repeat="user in form.member">
+                        <span ng-class="{label:isEditing, 'label-info':isEditing, 'camps-team-d-members':true}" >
+                            <camps-user-head user="user" width="60" height="60"></camps-user-head>
+                            <span class="btn glyphicon glyphicon-remove" ng-show="isEditing" ng-click="form.member.splice($index, 1)">
+
                             </span>
+                        </span>
                     &nbsp;
                     </span>
                     <br><br>
