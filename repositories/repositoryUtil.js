@@ -19,7 +19,7 @@ exports.paging = function(model,conditions,options,population) {
 
 		var skipped = pageNum * pageSize;
 
-		if (skipped >= totalCount) {
+		if (totalCount > 0 && skipped >= totalCount) {
 			throw new CamproError('Invalid Parameter: pageNum=' + pageNum);
 		}
 
