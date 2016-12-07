@@ -94,7 +94,7 @@ exports.update = function(req,res){
 
 	if ('createDate' in updates) delete updates.createDate;
 	if ('name' in updates && !updates.name) {
-		res.send(util.wrapBody('Invalid Parameter','E'));
+		res.send(util.wrapBody('Invalid Parameter: name could not be \'\'','E'));
 		return;
 	}
 
