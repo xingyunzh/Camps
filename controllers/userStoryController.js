@@ -9,7 +9,7 @@ exports.getUSByProject = function(req,res){
 
 	projectRepository.getBacklog(id).then(function(project){
 		res.send(util.wrapBody({backlog:project.backlog}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
@@ -28,7 +28,7 @@ exports.getUSByProject = function(req,res){
 // 		});
 // 	}).then(function(project){
 // 		res.send(util.wrapBody({backlog:project.backlog}));
-// 	}).fail(function(err){
+// 	}).catch(function(err){
 // 		console.log(err);
 // 		res.send(util.wrapBody('Internal Error','E'));
 // 	});
@@ -57,7 +57,7 @@ exports.updateForProject = function(req,res){
 		});
 	}).then(function sendResponse(project){
 		res.send(util.wrapBody({backlog:project.backlog}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
@@ -110,7 +110,7 @@ exports.getUserStoryById = function(req,res) {
 
 	userStoryRepository.findById(id).then(function(userStory){
 		res.send(util.wrapBody({userStory:userStory}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});

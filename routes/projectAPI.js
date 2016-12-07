@@ -7,18 +7,42 @@ var router = require('express').Router();
 //	required:
 //		name:String
 //	optional:
+//		headImgUrl:String
+//		team:String(team)
 //		scope:String
 // 		relatedIdea:String (idea)
 //		relatedAsset:[String] (asset) 未实现
 //response:
-//{project:{ProjectEntity}}
+//{project:{
+//		name:String
+//		scope:String
+//		headImgUrl:String
+//		createDate:Date
+//		manager:String (user)
+//		relatedIdea:String (idea)
+//		relatedAsset: []
+//	 	team:String (team)
+//		backlog:[String] (userStory)
+//		sprints:[String] (sprint)
+//}}
 router.post('/add',authenticator.authenticate,projectController.create);
 
 //query parameters
 //	required:
 //		id:String (project)
 //response:
-//{project:{ProjectEntity}}
+//{project:{
+//		name:String
+//		scope:String
+//		headImgUrl:String
+//		createDate:Date
+//		manager:String (user)
+//		relatedIdea:String (idea)
+//		relatedAsset: []
+//	 	team:String (team)
+//		backlog:[String] (userStory)
+//		sprints:[String] (sprint)
+//}}
 router.get('/id/:id',projectController.getProjectById);
 
 //query parameters

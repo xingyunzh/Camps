@@ -1,5 +1,6 @@
 var Project = require('../models/project');
 var UserStory = require('../models/userStory');
+var repositoryUtil = require('./repositoryUtil');
 
 exports.deleteById = function(id){
 
@@ -73,56 +74,18 @@ exports.create = function(data){
 
 exports.query = function(options){
 	
-
 	var conditions = {};
 
 	if ('keyword' in options) {
 		conditions.name = new RegExp(options.keyword, "i");
 	}
 
-	var totalCount = null;
-
-	return Project
-		.count(conditions)
-		.then(function(result){
-			totalCount = result;
-
-			var pageNum = 0;
-			var pageSize = 10;
-
-			if ('pageNum' in options) {
-				pageNum = options.pageNum;
-			}
-
-			if ('pageSize' in options) {
-				pageSize = options.pageSize;
-			}
-
-			var skipped = pageNum * pageSize;
-
-			if (pageSize >= totalCount) {
-				skipped = 0;
-			}else if (skipped >= totalCount) {
-				skipped = total - pageSize;
-			}
-
-			return Project
-				.find(conditions)
-				.skip(skipped)
-				.limit(pageSize)
-				.populate({
-					path:'relatedIdea manager backlog',
-					populate:{
-						path:'innovator consultant'
-					}
-				}).exec();
-
-		}).then(function(result){
-			return {
-				total:totalCount,
-				projects:result
-			};
-		});
+	return repositoryUtil.paging(Project,conditions,options,{
+		path:'relatedIdea manager backlog',
+		populate:{
+			path:'innovator consultant'
+		}
+	});
 
 };
 

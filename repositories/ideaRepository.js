@@ -1,4 +1,5 @@
 var Idea = require('../models/idea');
+var repositoryUtil = require('./repositoryUtil');
 
 exports.deleteById = function(id){
 
@@ -47,41 +48,7 @@ exports.query = function(options){
 		conditions.innovator = options.innovator;
 	}
 
-	var totalCount = null;
-
-	return Idea
-		.count(conditions)
-		.then(function(result){
-			totalCount = result;
-
-			var pageNum = 0;
-			var pageSize = 10;
-
-			if ('pageNum' in options) {
-				pageNum = options.pageNum;
-			}
-
-			if ('pageSize' in options) {
-				pageSize = options.pageSize;
-			}
-
-			var skipped = pageNum * pageSize;
-
-			if (pageSize >= totalCount) {
-				skipped = 0;
-			}else if (skipped >= totalCount) {
-				skipped = total - pageSize;
-			}
-
-			return Idea
-				.find(conditions).populate("innovator consultant")
-				.skip(skipped)
-				.limit(pageSize)
-				.exec();
-
-		}).then(function(result){
-			return {total:totalCount,ideas:result};
-		});
+	return repositoryUtil.paging(Idea,conditions,options,'innovator consultant');
 
 };
 

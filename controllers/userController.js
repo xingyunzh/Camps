@@ -4,7 +4,7 @@ var util = require('../util/util');
 var stringHelper = require('../util/shared/stringHelper');
 var authenticator = require('../authenticate/authenticator');
 var q = require('q');
-
+var CamproError = require('../models/CamproError');
 
 exports.loginByEmail = function(req,res){
 
@@ -54,12 +54,15 @@ exports.listUser = function(req,res){
 	userRepository
 	.query(conditions)
 	.then(function(result){
-		res.send(util.wrapBody(result));
+		res.send(util.wrapBody({
+			total:result.total,
+			users:result.list
+		}));
 	}).catch(function(err){
-		if (typeof err == String) {
-			res.send(util.wrapBody(err,'E'));
+		console.log(err);
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
 		} else {
-			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
 		}
 	});
