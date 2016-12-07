@@ -70,8 +70,8 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 		 for (i = array.length - 1; i >= 0; i--) {
 		 	if (equlFunc(array[i], object)) {
 		 		return i;
-		 	};
-		 };
+		 	}
+		 }
 
 		 return -1;
 	};
@@ -80,7 +80,7 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 		for(key in obj){
 			if (obj[key] === value) {
 				return key;
-			};
+			}
 		}
 
 		return null;
@@ -168,12 +168,21 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 
 app.service("defaultImageService", ["httpHelper","$q","$rootScope", function(httpHelper,$q,$rootScope){
 	this.getImagesByType = function(type){
-		var deferred = q.defer();
+		var deferred = $q.defer();
 
 		if (!!$rootScope.defaultImages[type]) {
 			deferred.resolve($rootScope.defaultImages[type]);
+		}else{
+			httpHelper.sendRequest('GET','./api/image/type/' + type).then(function(data){
+				$rootScope.defaultImages[type] = data;
+				deferred.resolve(data);
+			}).catch(function(err){
+				deferred.reject(err);
+			});
 		}
-	}
+
+		return deferred.promise;
+	};
 }]);
 
 

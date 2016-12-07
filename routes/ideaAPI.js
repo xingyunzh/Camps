@@ -20,14 +20,14 @@ var router = require('express').Router();
 //{idea:IdeaEntity}
 router.post('/add',authenticator.authenticate,ideaController.createIdea);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (idea)
 //response:
 //{idea:IdeaEntity}
 router.get('/id/:id',ideaController.getIdeaById);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (idea)
 //body parameters
@@ -47,7 +47,7 @@ router.get('/id/:id',ideaController.getIdeaById);
 //{idea:IdeaEntity}
 router.post('/update/:id',authenticator.authenticate,ideaController.updateIdea);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (idea)/Use string 'new' instead if createAndPublish
 //body parameters
@@ -85,9 +85,10 @@ router.post('/publish/:id',authenticator.authenticate,ideaController.publishIdea
 router.get('/list',ideaController.listIdea);
 
 
-//body parameters
+//path parameters
 //	required:
 // 		id:String (innovator)
+//body parameters
 //	optional:
 //		pageNum:Number
 //		pageSize:Number

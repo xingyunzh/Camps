@@ -8,28 +8,6 @@ body {
     font-size: 10px;
 }
 
-.camps-image-panel{
-    width: 400px;
-    height: 300px;
-}
-
-.camps-image-panel-top{
-    width: 400px;
-    height: 100px;
-    overflow-y:scroll;
-}
-
-.camps-image-panel-bottom{
-    width: 400px;
-    height: 200px;
-    overflow-y:scroll;
-}
-
-.camps-image-panel-card{
-    width: 80px;
-    height: 80px;
-}
-
 .camps-head-strip {
     height:150px;
     margin-bottom: 20px;
