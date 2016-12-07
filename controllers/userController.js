@@ -149,7 +149,7 @@ function login(req,res,type){
 		};
 
 		res.send(util.wrapBody(responseBody));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});

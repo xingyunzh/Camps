@@ -106,7 +106,7 @@ exports.publishIdea = function(req,res){
 
 	}).then(function sendSuccessResponse(newIdea){
 		res.send(util.wrapBody({idea:newIdea}));
-	}).catch(function sendFailureResponse(err){
+	}).catch(function sendcatchureResponse(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});

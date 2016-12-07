@@ -15,7 +15,7 @@ exports.addNewImage = function(req,res) {
 		imageRepository.create(data).then(function(image){
 			image.type = types[image.type];
 			res.send(util.wrapBody({image:image}));
-		}).fail(function(err){
+		}).catch(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error'));
 		});
@@ -32,7 +32,7 @@ exports.getImageById = function(req,res){
 	imageRepository.findById(id).then(function(image){
 		image.type = types[image.type];
 		res.send(util.wrapBody({image:image}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error'));
 	});
@@ -50,7 +50,7 @@ exports.getImagesByType = function(req,res){
 				result.images[i].type = types[result.images[i].type];
 			}
 			res.send(util.wrapBody(result));
-		}).fail(function(err){
+		}).catch(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error'));
 		});

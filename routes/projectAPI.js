@@ -8,22 +8,22 @@ var router = require('express').Router();
 //		name:String
 //	optional:
 //		headImgUrl:String
-//		team:String(team)
+//		team:id(team)
 //		scope:String
-// 		relatedIdea:String (idea)
-//		relatedAsset:[String] (asset) 未实现
+// 		relatedIdea:id (idea)
+//		relatedAsset:[id] (asset) 未实现
 //response:
 //{project:{
 //		name:String
 //		scope:String
 //		headImgUrl:String
 //		createDate:Date
-//		manager:String (user)
-//		relatedIdea:String (idea)
+//		manager:id (user)
+//		relatedIdea:id (idea)
 //		relatedAsset: []
-//	 	team:String (team)
-//		backlog:[String] (userStory)
-//		sprints:[String] (sprint)
+//	 	team:id (team)
+//		backlog:[id] (userStory)
+//		sprints:[id] (sprint)
 //}}
 router.post('/add',authenticator.authenticate,projectController.create);
 
