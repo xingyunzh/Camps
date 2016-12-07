@@ -1,0 +1,61 @@
+.camps-image-popover{
+    max-height: 318px;
+    max-width: 428px; 
+    width: 428px;
+    height: 318px;
+}
+
+.camps-image-panel{
+    width: 400px;
+    height: 300px;
+}
+
+.camps-image-panel-top{
+    width: 400px;
+    height: 100px;
+    overflow-y:scroll;
+}
+
+.camps-image-panel-bottom{
+    width: 400px;
+    height: 200px;
+    overflow-y:scroll;
+}
+
+.camps-image-panel-card{
+    cursor: pointer;
+    float: left;
+    margin: 10px;
+    width: 80px;
+    height: 80px;
+}
+
+.camps-image-panel-selected{ 
+    width: 80px;
+    height: 80px;
+}
+
+.camps-image-panel-card img{ 
+    width: 80px;
+    height: 80px;
+}
+
+.camps-image-panel-control{
+
+}
+
+.camps-image-panel-upload {
+    cursor: pointer;
+    z-index: 1;
+    margin-top: -80px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.camps-image-panel-local{
+    line-height: 80px;
+    border-style: dashed;
+    border-width: 1px;
+    text-align: center;
+}

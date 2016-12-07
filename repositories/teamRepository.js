@@ -1,5 +1,6 @@
 var Team = require('../models/team');
 var uuid = require('node-uuid');
+var repositoryUtil = require('./repositoryUtil');
 
 exports.create = function(team){
 	team.teamId = uuid.v1();
@@ -71,41 +72,6 @@ exports.query = function(options){
 		conditions.state = options.state;
 	}
 
-	var totalCount = null;
-
-	return Team
-		.count(conditions)
-		.then(function(result){
-			totalCount = result;
-
-			var pageNum = 0;
-			var pageSize = 10;
-
-			if ('pageNum' in options) {
-				pageNum = options.pageNum;
-			}
-
-			if ('pageSize' in options) {
-				pageSize = options.pageSize;
-			}
-
-			var skipped = pageNum * pageSize;
-
-			if (pageSize >= totalCount) {
-				skipped = 0;
-			}else if (skipped >= totalCount) {
-				skipped = total - pageSize;
-			}
-
-			return Team
-				.find(conditions)
-				.skip(skipped)
-				.limit(pageSize)
-				.populate('coach member lead')
-				.exec();
-
-		}).then(function(result){
-			return {total:totalCount,teams:result};
-		});
+	return repositoryUtil.paging(Team,conditions,options,'coach member lead');
 
 };

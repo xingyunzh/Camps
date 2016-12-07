@@ -1,4 +1,5 @@
 var User = require('../models/user.js');
+var repositoryUtil = require('./repositoryUtil');
 
 exports.findByUid = function(uid) {
 	return User.findOne({uid:uid}).lean().exec();
@@ -38,29 +39,6 @@ exports.query = function(options){
 		conditions.sector = options.sector;
 	}
 
-	var totalCount = null;
-
-	return User.count(conditions).then(function(result){
-		totalCount = result;
-
-		var pageNum = 0;
-		var pageSize = 10;
-
-		if ('pageNum' in options && 'pageSize' in options) {
-			pageNum = options.pageNum;
-			pageSize = options.pageSize;
-		}
-
-		var skipped = pageNum * pageSize;
-
-		return User
-		.find(conditions)
-		.skip(skipped)
-		.limit(pageSize)
-		.exec();
-
-	}).then(function(result){
-		return {count:totalCount,users:result};
-	});
+	return repositoryUtil.paging(User,conditions,options,'');
 
 };

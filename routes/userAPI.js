@@ -17,23 +17,24 @@ router.post('/login/wechat',userController.loginByWechat);
 //{user:UserEntity}
 router.post('/login/email',userController.loginByEmail);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (idea)
 //response:
 //{user:UserEntity}
 router.get('/profile/:id',userController.getProfileById);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (idea)
 //body parameters
 //	required:
 //	optional:
 //		nickName:String
-//		role:[String] (coach/player)
+//		roles:[String] (coach/player)
 //		sector:String
 //		skills:[String]
+//		headImgUrl: String
 //response:
 //{user:UserEntity}
 router.post('/profile/update/:id',authenticator.authenticate,userController.update);
@@ -44,7 +45,7 @@ router.post('/profile/update/:id',authenticator.authenticate,userController.upda
 //		pageNum:Number
 //		pageSize:Number
 //		keyword:String (for name)
-//		roles:String (coach/player)
+//		role:String (coach/player)
 //		sector:String
 //response:
 //{total:TotalNumber,ideas:[UserEntities]}

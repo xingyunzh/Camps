@@ -1,6 +1,7 @@
 var ideaRepostory= require('../repositories/ideaRepository');
 var util = require('../util/util');
 var q = require('q');
+var CamproError = require('../models/CamproError');
 
 exports.createIdea = function(req,res){
 
@@ -47,11 +48,19 @@ exports.listIdea = function(req,res){
 	var conditions = req.query;
 
 	ideaRepostory.query(conditions).then(function(result){
-		res.send(util.wrapBody(result));
+		res.send(util.wrapBody({
+			total:result.total,
+			ideas:result.list
+		}));
 		
 	}).catch(function(err){
 		console.log(err);
-		res.send(util.wrapBody('Internal Error','E'));
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
+		}else{
+			res.send(util.wrapBody('Internal Error','E'));
+		}
+		
 	});
 
 };
@@ -97,7 +106,7 @@ exports.publishIdea = function(req,res){
 
 	}).then(function sendSuccessResponse(newIdea){
 		res.send(util.wrapBody({idea:newIdea}));
-	}).catch(function sendFailureResponse(err){
+	}).catch(function sendcatchureResponse(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
@@ -156,16 +165,19 @@ exports.listIdeasByInnovator = function(req,res){
 	conditions.innovator = req.params.id;
 
 	ideaRepostory.query(conditions).then(function(result){
+		res.send(util.wrapBody({
+			total:result.total,
+			ideas:result.list
+		}));
 		
-		res.send(util.wrapBody(result));
-
 	}).catch(function(err){
-		if (typeof err == String) {
-			res.send(util.wrapBody(err,'E'));
-		} else {
-			console.log(err);
+		console.log(err);
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
+		}else{
 			res.send(util.wrapBody('Internal Error','E'));
 		}
+		
 	});
 
 };

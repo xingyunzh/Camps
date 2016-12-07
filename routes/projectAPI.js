@@ -7,18 +7,31 @@ var router = require('express').Router();
 //	required:
 //		name:String
 //	optional:
+//		headImgUrl:String
+//		team:id(team)
 //		scope:String
-// 		relatedIdea:String (idea)
-//		relatedAsset:[String] (asset) 未实现
+// 		relatedIdea:id (idea)
+//		relatedAsset:[id] (asset) 未实现
 //response:
-//{project:{ProjectEntity}}
+//{project:{
+//		name:String
+//		scope:String
+//		headImgUrl:String
+//		createDate:Date
+//		manager:id (user)
+//		relatedIdea:id (idea)
+//		relatedAsset: []
+//	 	team:id (team)
+//		backlog:[id] (userStory)
+//		sprints:[id] (sprint)
+//}}
 router.post('/add',authenticator.authenticate,projectController.create);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (project)
 //response:
-//{project:{ProjectEntity}}
+//{project:entity} (project)
 router.get('/id/:id',projectController.getProjectById);
 
 //query parameters
@@ -28,21 +41,27 @@ router.get('/id/:id',projectController.getProjectById);
 //		pageSize:Number (default:10)
 //		keyword:String (for name)
 //response:
-//{total:TotalNumber,projects:[ProjectEntities]}
+//{
+//	total:TotalNumber,
+//	projects:[entity] (project)
+//}
 router.get('/list',projectController.list);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (project)
 //body parameters
 //	required:
 //	optional:
-//		name:String
+// 		manager:id(user)
+//		headImgUrl:String
+//		team:id(team)
+//		name:String (not '')
 //		scope:String
-// 		relatedIdea:String (idea)
-//		relatedAsset:[String] (asset) 未实现
+// 		relatedIdea:id (idea)
+//		relatedAsset:[id] (asset) 未实现
 //response:
-//{project:{ProjectEntity}}
+//{project:entity (project)}
 router.post('/update/:id',authenticator.authenticate,projectController.update);
 
 module.exports = router;

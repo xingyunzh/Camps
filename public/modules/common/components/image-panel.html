@@ -1,0 +1,26 @@
+<div class="camps-image-panel">
+	<div class="camps-image-panel-top">
+		<div class="camps-image-panel-control">
+			<button class="btn btn-primary" ng-click="submit()">确认</button>
+			<button class="btn btn-warning" ng-click="cancel()">取消</button>
+		</div>
+		<div class="" ng-repeat="image in uploadImages">
+			<div class="camps-image-panel-card">
+				<img ng-src="{{image.url}}" alt="Description" ng-show="uploading">
+			</div>
+		</div>
+	</div>
+	<div class="camps-image-panel-bottom">
+		<div class="camps-image-panel-card">
+			<div class="camps-image-panel-local">
+				从本地上传
+				<input type="file" ng-model="imageToUpload" class="camps-image-panel-upload" />
+			</div>
+		</div>
+		<div class="" ng-repeat="image in defaultImages">
+			<div class="camps-image-panel-card" ng-click="onDefaultImageClick(image)">
+				<img ng-src="{{image.url}}" alt="Description">
+			</div>
+		</div>
+	</div>
+</div>

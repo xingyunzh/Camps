@@ -10,7 +10,7 @@ exports.getSprintsByProject = function(req,res) {
 
 	projectRepository.getSprints(projectId).then(function(project){
 		res.send(util.wrapBody({sprints:project.sprints}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
@@ -21,7 +21,7 @@ exports.getSprintById = function(req,res){
 
 	sprintRepository.findById(sprintId).then(function(sprint){
 		res.send(util.wrapBody({sprint:sprint}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
@@ -61,7 +61,7 @@ exports.create = function(req,res){
 			return q.all(promises);
 		}).then(function sendResponse(results){
 			res.send(util.wrapBody({sprint:results[1]}));
-		}).fail(function(err){
+		}).catch(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
 		});
@@ -77,7 +77,7 @@ exports.remove = function(req,res){
 
 	sprintRepository.deleteById(id).then(function(){
 		res.send(util.wrapBody({success:true}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
@@ -114,7 +114,7 @@ exports.update = function(req,res){
 		return sprintRepository.updateById(sprintId,updates);
 	}).then(function(sprint){
 		res.send(util.wrapBody({sprint:sprint}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});

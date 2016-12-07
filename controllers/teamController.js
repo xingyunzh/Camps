@@ -1,5 +1,7 @@
 var teamRepository = require('../repositories/teamRepository');
 var util = require('../util/util');
+var CamproError = require('../models/CamproError');
+
 
 exports.list = function(req,res){
 	var conditions = req.query;
@@ -7,10 +9,17 @@ exports.list = function(req,res){
 	conditions.state = 1;
 
 	teamRepository.query(conditions).then(function(result){
-		res.send(util.wrapBody(result));
-	}).fail(function(err){
+		res.send(util.wrapBody({
+			total:result.total,
+			team:result.list
+		}));
+	}).catch(function(err){
 		console.log(err);
-		res.send(util.wrapBody('Internal Error','E'));
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
+		}else{
+			res.send(util.wrapBody('Internal Error','E'));
+		}
 	});
 };
 
@@ -20,7 +29,7 @@ exports.checkExist = function(req,res){
 
 	checkNameExist(req.body.name).then(function(exist){
 		res.send(util.wrapBody({exist:exist}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));		
 	});
@@ -47,7 +56,7 @@ exports.create = function(req,res){
 
 		teamRepository.create(team).then(function(result){
 			res.send(util.wrapBody({team:result}));
-		}).fail(function(err){
+		}).catch(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
 		});
@@ -63,7 +72,7 @@ exports.getTeamById = function(req,res) {
 
 	teamRepository.findById(id).then(function(result){
 		res.send(util.wrapBody({team:result}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Err','E'));
 	});
@@ -90,16 +99,16 @@ exports.update = function(req,res){
 			return teamRepository.updateById(id,updates);
 		}).then(function(team){
 			res.send(util.wrapBody({team:team}));
-		}).fail(function(err){
+		}).catch(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
 		});
 	}else{
 		teamRepository.updateById(id,updates).then(function(result){
 			res.send(util.wrapBody({team:result}));
-		}).fail(function(err){
+		}).catch(function(err){
 			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+			res.send(util.wrapBody('Internal Error','E'));
 		});
 	}
 };

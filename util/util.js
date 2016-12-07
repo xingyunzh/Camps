@@ -5,6 +5,13 @@
 }(this, function () { 
 	var util = {};
 
+	util.globalNameForFile = function (filename, user, type) {
+        if (user) {
+            return type + user.uid + '_' +filename;
+        }
+        return 'g'+'_'+filename;
+    };
+
 	util.checkParam = function(container,params){
 		for (var i = params.length - 1; i >= 0; i--) {
 			if (!(params[i] in container)) {

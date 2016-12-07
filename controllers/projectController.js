@@ -7,13 +7,15 @@ exports.list = function(req,res){
 
 	projectRepository.query(conditions)
 	.then(function attachTeam(result){
-		return populateTeams(result.projects).then(function(projects){
-			result.projects = projects;
-			return result;
+		return populateTeams(result.list).then(function(projects){
+			return {
+				total:result.total,
+				projects:projects
+			};
 		});
 	}).then(function(fullProjects){
 		res.send(util.wrapBody(fullProjects));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
@@ -30,23 +32,20 @@ exports.create = function(req,res){
 
 		projectRepository.create(project)
 		.then(function updateTeam(newProject){
-			var promise = null;
-
 			if (!!project.team) {
-				promise = teamRepository.updateById(project.team,{
+				return teamRepository.updateById(project.team,{
 					project:newProject._id
 				}).then(function(team){
 					newProject.team = team;
 					return newProject;
 				});
 			}else{
-				promise =  newProject;
+				return newProject;
 			}
 
-			return promise;
 		}).then(function sendResponse(result){
 			res.send(util.wrapBody({project:result}));
-		}).fail(function(err){
+		}).catch(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));
 		});
@@ -60,7 +59,7 @@ exports.getProjectById = function(req,res) {
 
 	projectRepository.findById(id).then(populateTeam).then(function(result){
 		res.send(util.wrapBody({project:result}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
 	});
@@ -95,7 +94,7 @@ exports.update = function(req,res){
 
 	if ('createDate' in updates) delete updates.createDate;
 	if ('name' in updates && !updates.name) {
-		res.send(util.wrapBody('Invalid Parameter','E'));
+		res.send(util.wrapBody('Invalid Parameter: name could not be \'\'','E'));
 		return;
 	}
 
@@ -114,7 +113,7 @@ exports.update = function(req,res){
 		}
 	}).then(function sendResponse(result){
 		res.send(util.wrapBody({project:result}));
-	}).fail(function(err){
+	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Err','E'));
 	});
