@@ -70,9 +70,13 @@
                </div>
             </div>
             <div class="row">
-                <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
-                &nbsp;&nbsp;
-                <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">{{isEditing ? "保存修改" : "编辑基本信息"}}</button>
+                <div class="camps-idea-d-text-section" ng-show="currentUser._id == theTeam.lead._id">
+                    <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">
+                        {{isEditing ? "保存修改" : "编辑基本信息"}}
+                    </button>
+                </div>
             </div>
         </div>
 

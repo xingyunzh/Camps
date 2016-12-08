@@ -1,4 +1,4 @@
 <span class="camps-user-head" ng-show="!!$ctrl.user">
-    <img class="img-circle" ng-src="{{url}}" alt="User" ng-style="{width:{{$ctrl.width}}, height:{{$ctrl.height}}}">
+    <img class="img-circle" ng-src="{{!!$ctrl.user.headImgUrl ? $ctrl.user.headImgUrl : defaultImageSrc}}" alt="User" ng-style="{width:{{$ctrl.width}}, height:{{$ctrl.height}}}">
     <span class="">{{$ctrl.user.nickname}}</span>
 </span>

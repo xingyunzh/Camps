@@ -26,10 +26,9 @@
             <div class="row">
                 <div class="camps-idea-d-text-section">
                     背景:
-                    <span ng-hide="isEditing"><span ng-bind-html="form.background | htmlConent"></span></span>
+                    <span ng-hide="isEditing"><span ng-bind="form.background"></span></span>
                     <span ng-show="isEditing">
-                        <summernote class='form-control' config="summerOption" data-on-image-upload="imageUpload(files, editorB)"
-                                    ng-model="form.background" editor="editorB" editable="editableB"></summernote>
+                        <textarea class='form-control' cols="30" rows="10" ng-model="form.background" ></textarea>
                     </span>
                 </div>
             </div>
@@ -38,9 +37,9 @@
                     解决问题:
                     <span ng-hide="isEditing"><span ng-bind-html="form.painpoint | htmlConent"></span> </span>
                     <span ng-show="isEditing">
-                        <summernote class='form-control' config="summerOption" on-image-upload="imageUpload(files, editorP)"
-                                    ng-model="form.painpoint" editor="editorP" editable="editableP"></summernote>
+                        <textarea class='form-control' cols="30" rows="10" ng-model="form.painpoint" ></textarea>
                     </span>
+
                 </div>
             </div>
             <div class="row">
@@ -97,7 +96,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="camps-idea-d-text-section">
+                <div class="camps-idea-d-text-section" ng-show="currentUser._id==theIdea.innovator._id">
                     <span ng-show="isEditing" class="pull-right">
                         <button class="btn btn-default  camps-team-editing-button"
                                 ng-click="onCancelButton()">取消</button>

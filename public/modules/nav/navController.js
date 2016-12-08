@@ -10,12 +10,21 @@ app.controller("navController", ["$scope", "$rootScope", function($scope, $rootS
 
     $rootScope.$on('loggedIn',function(){
     	$scope.hasLoggedIn = true;
+
+        $rootScope.$state.go(!!$rootScope.$previousState ? $rootScope.$previousState : "nav.idea");
     });
 
     $rootScope.$on('loggedOut',function(){
     	$rootScope.currentUser = null;
     	$rootScope.token = null;
     	$scope.hasLoggedIn = false;
+
+        $rootScope.$state.go("nav.idea");
+    });
+
+    $rootScope.$on('$stateChangeSuccess', function (event, to, toParams, from, fromParams) {
+        $rootScope.$previousState = from;
+        $rootScope.$previousStateParams = fromParams;
     });
 
     $scope.onTap = function(a){
@@ -23,8 +32,6 @@ app.controller("navController", ["$scope", "$rootScope", function($scope, $rootS
     };
     
     $scope.logOut = function(){
-    	$rootScope.currentUser = null;
-    	$rootScope.token = null;
-    	$scope.hasLoggedIn = false;
+        $rootScope.$emit("loggedOut");
     };
 }]);
