@@ -1,14 +1,20 @@
+//button-label optional 按钮标签 例子：'选择图片' 默认：‘添加图片
+//mutiple optional 是否是多选模式 Boolean 默认：false
+//type optional defaultImage的类型 user/idea/team/project/other  默认：'other'
+//onFinished required 回调函数，参数为 [{name:String,url:String}]
+
 app.component('imagePicker', {
     templateUrl: "./modules/common/components/image-picker.html",
     bindings: {
         buttonLabel:'=',
-        res:'<',
-        type:'=',
-        onSelected:'&'
+        mutiple:'<',
+        type:'<',
+        onFinished:'&'
     },
-    controller: function($scope, $element, $attrs,ossFileService,$q,defaultImageService,toaster){
+    controller: function($scope,$rootScope, $element, $attrs,ossFileService,$q,defaultImageService,toaster,util){
         
         init();
+        dataInit();
         getImages();
 
         function init(){
@@ -17,25 +23,30 @@ app.component('imagePicker', {
                 $scope.buttonValue = $attrs.buttonLabel;
             }
 
+            $scope.mutiple = false;
+            if (!!$attrs.mutiple) {
+                $scope.mutiple = $attrs.mutiple;
+            }
             $scope.defaultImages = [];
             $scope.uploadImages = [];
-            $scope.selectedImages = [];
-            $scope.imageToUpload = null;
             $scope.OSSClient = null;
             $scope.popoverIsOpen = false;
             $scope.panelUrl = './modules/common/components/image-panel.html';
+        }
 
+        function dataInit(){
+            $scope.selectedImages = [];
         }
 
         function getClient(){
             var deferred = $q.defer();
 
             if (!!$scope.OSSClient) {
-                return deferred.resovle($scope.OSSClient);
+                deferred.resolve($scope.OSSClient);
             }else{
-                $ossFileService.getClient().then(function(client){
+                ossFileService.getClient().then(function(client){
                     $scope.OSSClient = client;
-                    deferred.resovle(client);
+                    deferred.resolve(client);
                 }).catch(function(err){
                     deferred.reject(err);
                 });
@@ -45,7 +56,12 @@ app.component('imagePicker', {
         }
 
         function getImages(){
-            defaultImageService.getImagesByType($attrs.res).then(function(data){
+            var type = 'other';
+            if (!!$attrs.type) {
+                type = $attrs.type;
+            }
+
+            defaultImageService.getImagesByType(type).then(function(data){
                 $scope.defaultImages = data.images;
             }).catch(function(err){
                 toaster.pop({
@@ -57,35 +73,76 @@ app.component('imagePicker', {
             });
         }
 
-        $scope.uploadImage = function(){
-            var file = $scope.imageToUpload;
+        $scope.uploadImage = function(file){
+            if (!file) {
+                return;
+            }
 
             var gFilename = util.globalNameForFile(file.name, $rootScope.currentUser);
 
-            ossFileService.uploadFile(gFilename,$scope.imageToUpload,function(p){
+            var image = {
+                percentage : 0,
+                name : gFilename
+            };
 
+            $scope.uploadImages.push(image);
+
+            //var index = $scope.uploadImages.length - 1;
+            getClient().then(function(client){
+                return ossFileService.uploadFileWithClient(client,gFilename,file,function(p){
+                    $scope.$apply(function(scope){
+                        image.percentage = p;
+                    });
+                    console.log(p);
+                });
             }).then(function(res){
-                var image = {
-                    url:'',
-                };
-
-                $scope.uploadImages.concat(image);
-
+                image.url = res.url;  
+                checkImage(image);
             }).catch(function(err){
-
+                console.log('ERROR',err);
             });
+
+        };
+
+        $scope.deleteImage = function(image){
+            $scope.uploadImages.splice(image,1);
+
+            // getClient().then(function(client){
+            //     return ossFileService.deleteFileWithClient(client,name);
+            // }).then(function(res){
+            //     console.log(err);
+            // }).catch(function(err){
+            //     console.log('ERROR',err);
+            // });
         };
 
         $scope.submit = function(){
-
-        };
-
-        $scope.cancel = function(){
+            $scope.$ctrl.onFinished({images:$scope.selectedImages});
+            dataInit();
             $scope.popoverIsOpen = false;
         };
 
-        $scope.onDefaultImageClick = function(id){
-            $ctrl.onSelected(id);
+        $scope.cancel = function(){
+            dataInit();
+            $scope.popoverIsOpen = false;
+        };
+
+        function checkImage(image){
+            if ($scope.mutiple) {
+                $scope.selectedImages.push(image);
+            }else{
+                $scope.selectedImages = [image];
+            }
+        }
+
+        $scope.onImageClick = function(image){
+            var i = $scope.selectedImages.indexOf(image);
+
+            if (i > -1) {
+                $scope.selectedImages.splice(i,1);
+            }else{
+                checkImage(image);
+            }
         };
     }
 });

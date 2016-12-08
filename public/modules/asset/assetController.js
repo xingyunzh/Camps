@@ -45,6 +45,10 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
             // timeout:0
         });
     }
+
+    $scope.onFileUploadFinished = function(images){
+        console.log(images);
+    }
     
     $scope.toasterClear = function () {
         toaster.clear();
