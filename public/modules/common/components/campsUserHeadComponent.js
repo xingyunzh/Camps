@@ -21,5 +21,10 @@ app.component('campsUserHead', {
         //         $scope.url = "http://campro.oss-cn-shanghai.aliyuncs.com/stars_logo.jpg";
         //     }
         // };
+
+        if (this.width == null && this.height == null) {
+            this.width = 60;
+            this.height = 60;
+        }
     }
 });
