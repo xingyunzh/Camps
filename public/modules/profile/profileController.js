@@ -18,6 +18,10 @@ app.controller("profileController", ["$scope", "$rootScope", "profileService", "
     }, '');
     $scope.skills = $scope.skills.slice(0, -1);
 
+    $scope.onImagesPicked = function(images){
+        $scope.form.headImgUrl = images[0].url;
+    }
+
     $scope.onSubmitButton = function () {
         var updateContent = angular.copy($scope.form);
         var roles = [];

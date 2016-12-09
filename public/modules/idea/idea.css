@@ -13,12 +13,25 @@
 }
 
 .camps-idea-d-metro-section{
-    height: 316px;
+
 }
 
 .camps-idea-d-metro-section .camps-piece{
     position: relative;
     float: left;
+}
+
+.camps-idea-d-metro-section .camps-piece .camps-piece-addon {
+    position:absolute;
+}
+
+.camps-idea-d-metro-section .camps-piece button.camps-piece-addon  {
+    display: block;
+    top: 5px;
+    right:15px;
+    font-size: 1.6rem;
+    background-color: transparent;
+    border: none;
 }
 
 .camps-idea-d-metro-section img {

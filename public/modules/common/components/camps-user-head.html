@@ -1,4 +1,11 @@
-<span class="camps-user-head" ng-show="!!$ctrl.user">
-    <img class="img-circle" ng-src="{{!!$ctrl.user.headImgUrl ? $ctrl.user.headImgUrl : defaultImageSrc}}" alt="User" ng-style="{width:{{$ctrl.width}}, height:{{$ctrl.height}}}">
-    <span class="">{{$ctrl.user.nickname}}</span>
+<span class="camps-user-head" ng-show="!!$ctrl.user" ng-style="{height:$ctrl.height}">
+    <div ng-style="{width:$ctrl.width, height:$ctrl.height, display:'inline-block', overflow:'hidden'}">
+        <img class="img-responsive img-circle"
+             ng-src="{{!!$ctrl.user.headImgUrl ? $ctrl.user.headImgUrl : defaultImageSrc}}"
+             alt="User">
+    </div>
+    <div ng-style="{display: 'inline-block', height:$ctrl.height}">
+        <span>{{$ctrl.user.nickname}}</span>
+    </div>
+
 </span>

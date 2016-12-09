@@ -11,12 +11,12 @@
 
         </div>
         <div class="form-group">
-            <label for="id-camps-profile-headimage" class="col-md-2 control-label ">头像URL:</label>
+            <label class="col-md-2 control-label ">头像URL:</label>
             <div class="col-md-1">
                 <img class="img-circle" ng-src="{{form.headImgUrl}}" alt="Head" width="60">
             </div>
             <div class="col-md-9">
-                <input type="text" class="form-control" id="id-camps-profile-headimage" placeholder="头像链接" ng-model="form.headImgUrl">
+                <image-picker button-label='"添加图片"' on-finished='onImagesPicked(images)' type='user'></image-picker>
             </div>
         </div>
         <div class="form-group">
