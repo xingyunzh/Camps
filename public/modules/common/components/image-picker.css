@@ -5,6 +5,30 @@
     height: 318px;
 }
 
+.camps-image-remove{
+    color: red;
+    float: right;
+    z-index: 3;
+    margin-right: -15px;
+    margin-top: 75px;
+}
+
+.camps-image-check{
+    color: green;
+    float: right;
+    z-index: 1;
+    margin-top: -5px;
+    margin-right: -5px;
+}
+
+.camps-image-uncheck{
+    color: green;
+    float: right;
+    z-index: 1;
+    margin-top: -5px;
+    margin-right: -5px;
+}
+
 .camps-image-panel{
     width: 400px;
     height: 300px;
@@ -13,13 +37,11 @@
 .camps-image-panel-top{
     width: 400px;
     height: 100px;
-    overflow-y:scroll;
 }
 
 .camps-image-panel-bottom{
     width: 400px;
     height: 200px;
-    overflow-y:scroll;
 }
 
 .camps-image-panel-card{
@@ -36,12 +58,17 @@
 }
 
 .camps-image-panel-card img{ 
+    float: right;
     width: 80px;
     height: 80px;
+    position: absolute;
 }
 
 .camps-image-panel-control{
-
+    float: left;
+    margin: 10px;
+    width: 80px;
+    height: 80px;
 }
 
 .camps-image-panel-upload {
