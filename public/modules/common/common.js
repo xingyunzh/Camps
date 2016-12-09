@@ -202,10 +202,28 @@ app.service("ossFileService", ["httpHelper", "$q", "util", function (httpHelper,
     }
 
     this.getClient = function(){
-    	httpHelper.sendRequest('GET','./system/oss').then(function ok(data){
+    	return httpHelper.sendRequest('GET','./system/oss').then(function ok(data){
     		var client = new OSS.Wrapper(data);
     		return client;
     	});
+    };
+
+    this.uploadFileWithClient = function(client,name,file,progressFunc){
+    	return client.multipartUpload(name,file, {
+    		progress:progressFuncMaker(progressFunc)
+    	}).then(function ok(data){
+             //bug fix for oss sdk: sometimes it misses the "url" property
+             if (data.url == null){
+                 data.url = data.res.requestUrls[0].split('?')[0];
+             }
+             return util.promiseWithResolve(data);
+        });
+    };
+
+    this.deleteFileWithClient = function(client,name){
+    	return client.delete(name).then(function ok(data){
+             return util.promiseWithResolve(data);
+        });
     };
 
     this.uploadFile = function (name, file, progressFunc) {

@@ -1,7 +1,7 @@
 /**
  * Created by brillwill on 16/9/14.
  */
-var app = angular.module("app", ["ui.router", "ui.bootstrap", "toaster", "ngAnimate", "summernote", "ngSanitize"])
+var app = angular.module("app", ["ui.router","ngFileUpload", "ui.bootstrap", "toaster", "ngAnimate", "summernote", "ngSanitize"])
 .run(["$rootScope", "$state", "$stateParams", function($rootScope, $state, $stateParams){
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
