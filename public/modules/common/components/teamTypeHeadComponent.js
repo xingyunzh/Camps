@@ -10,7 +10,9 @@ app.component('teamTypehead', {
     },
     controller: function($scope, $element, $attrs, $q, teamService){
         $scope.getTeams = function (viewValue) {
-            return teamService.teamSource();
+            return teamService.teamSource(viewValue).then(function(data){
+                return data.team;
+            });
         };
 
         $scope.selectedTeam = null;
