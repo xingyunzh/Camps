@@ -92,7 +92,7 @@
                 <div class="camps-idea-d-text-section">
                     关联项目:
                     <span ng-repeat="prj in theIdea.projects">
-                                {{prj.name}}
+                        <a ng-click="handleProjectLink(prj)">{{prj.name}}</a>
                     </span>
                 </div>
             </div>

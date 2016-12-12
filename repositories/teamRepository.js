@@ -72,6 +72,6 @@ exports.query = function(options){
 		conditions.state = options.state;
 	}
 
-	return repositoryUtil.paging(Team,conditions,options,'coach member lead');
+	return repositoryUtil.paging(Team,conditions,options,'coach member lead project');
 
 };

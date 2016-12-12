@@ -22,4 +22,8 @@ app.service("projectService", ["util", "$q", "httpHelper", function (util, $q, h
         return httpHelper.sendRequest("POST","./api/project/update/"+project._id, params);
     }
 
+    this.getProjectsByIdea = function(id){
+        return httpHelper.sendRequest("GET", "./api/project/list?idea=" + id);
+    }
+
 }]);

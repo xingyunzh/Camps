@@ -1,8 +1,8 @@
 /**
  * Created by brillwill on 16/9/27.
  */
-app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaService", "toaster", "ossFileService",
-    function ($scope, $rootScope, util, ideaService, toaster, ossFileService) {
+app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaService", "toaster", "projectService",
+    function ($scope, $rootScope, util, ideaService, toaster, projectService) {
 
         $scope.isEditing = false;
         $scope.form = makeFormOfTheIdea();
@@ -24,6 +24,12 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaSer
                 ['view', ['fullscreen', 'codeview']]
             ]
         };
+
+        (function initialize(){
+            projectService.getProjectsByIdea($rootScope.theIdea._id).then(function(data){
+                $rootScope.theIdea.projects = data.projects;
+            });
+        })();
 
 
         $scope.onEditButton = function () {
@@ -61,6 +67,15 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaSer
         $scope.onRemoveHeadImage = function(){
             $scope.form.headImgUrl = null;
         };
+
+        $scope.handleProjectLink = function (prj) {
+            projectService.getProjectById(prj._id).then(function ok(data) {
+                $rootScope.theProject = data.project;
+                $rootScope.$state.go("nav.project-detail");
+            }, function fail() {
+                util.confirmationStep("错误", "项目不存在");
+            });
+        }
 
         function makeFormOfTheIdea() {
             return {

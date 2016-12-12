@@ -80,6 +80,10 @@ exports.query = function(options){
 		conditions.name = new RegExp(options.keyword, "i");
 	}
 
+    if ('idea' in options){
+        conditions.relatedIdea = options.idea;
+    }
+    
 	return repositoryUtil.paging(Project,conditions,options,{
 		path:'relatedIdea manager backlog',
 		populate:{

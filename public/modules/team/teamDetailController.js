@@ -65,7 +65,7 @@ app.controller("teamDetailController", ["$scope", "$rootScope", "util", "project
     
     $scope.handleProjectLink = function () {
         projectService.getProjectById($rootScope.theTeam.project._id).then(function ok(data) {
-            $rootScope.theProject = data;
+            $rootScope.theProject = data.project;
             $rootScope.$state.go("nav.project-detail");
         }, function fail() {
            util.confirmationStep("错误", "项目不存在");
