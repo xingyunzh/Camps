@@ -6,7 +6,8 @@ app.component('ideaTypehead', {
     bindings: {
         glyphiconClass: "=",
         whichRole: "=",
-        notifySelected:"&onSelected"
+        notifySelected:"&onSelected",
+        maxWidth:"<"
     },
     controller: function($scope, $element, $attrs, ideaService){
         $scope.getIdeas = function (viewValue) {

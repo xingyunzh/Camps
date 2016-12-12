@@ -40,7 +40,7 @@ app.service('httpHelper', function ($http, $q, $rootScope) {
 			if (argument.data.status == "S") {
 				deferred.resolve(argument.data.body);
 			} else {
-				deferred.reject(argument.data.status);
+				deferred.reject(argument.data.body);
 			}
 		}, function fail(argument) {
 			deferred.reject(argument.statusText);

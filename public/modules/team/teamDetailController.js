@@ -64,7 +64,7 @@ app.controller("teamDetailController", ["$scope", "$rootScope", "util", "project
     }
     
     $scope.handleProjectLink = function () {
-        projectService.getProjectById($rootScope.theTeam.project.id).then(function ok(data) {
+        projectService.getProjectById($rootScope.theTeam.project._id).then(function ok(data) {
             $rootScope.theProject = data;
             $rootScope.$state.go("nav.project-detail");
         }, function fail() {

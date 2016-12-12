@@ -23,6 +23,32 @@ exports.list = function(req,res){
 	});
 };
 
+exports.getByUserAsMember = function(req, res){
+	var userid = req.params.id;
+	doGetByUserWithCondition({member:userid}, res);
+}
+exports.getByUserAsCoach = function(req, res){
+	var userid = req.params.id;
+	doGetByUserWithCondition({coach:userid}, res);
+}
+exports.getByUserAsLead = function(req, res){
+	var userid = req.params.id;
+	doGetByUserWithCondition({lead:userid}, res);
+}
+
+function doGetByUserWithCondition(condition, res){
+	teamRepository.query(condition).then(function(result){
+		res.send(util.wrapBody({total:result.total, team:result.list}));
+	}).catch(function(err){
+		console.log(err);
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
+		}else{
+			res.send(util.wrapBody('Internal Error','E'));
+		}
+	});
+}
+
 exports.checkExist = function(req,res){
 
 	var name = req.query.name;

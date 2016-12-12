@@ -13,4 +13,13 @@ app.service("projectService", ["util", "$q", "httpHelper", function (util, $q, h
     this.getProjectById = function (id){
         return httpHelper.sendRequest("GET", "./api/project/id/"+id);
     }
+    
+    this.add = function(params) {
+        return httpHelper.sendRequest("POST", "./api/project/add", params);
+    }
+
+    this.update = function(project, params) {
+        return httpHelper.sendRequest("POST","./api/project/update/"+project._id, params);
+    }
+
 }]);

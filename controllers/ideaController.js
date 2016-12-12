@@ -183,7 +183,6 @@ exports.listIdeasByInnovator = function(req,res){
 };
 
 exports.getIdeaById = function(req,res){
-	
 	var ideaId = req.params.id;
 
 	ideaRepostory.findById(ideaId).then(function(result){

@@ -54,4 +54,9 @@ router.get('/check',teamController.checkExist);
 //{team:TeamEntity}
 router.post('/update/:id',authenticator.authenticate,teamController.update);
 
+router.get('/member/:id', teamController.getByUserAsMember);
+router.get('/coach/:id', teamController.getByUserAsCoach);
+router.get('/lead/:id', teamController.getByUserAsLead);
+
+
 module.exports = router;
