@@ -26,4 +26,12 @@ app.service("projectService", ["util", "$q", "httpHelper", function (util, $q, h
         return httpHelper.sendRequest("GET", "./api/project/list?idea=" + id);
     }
 
+    this.getBacklogByProject = function(project) {
+        return httpHelper.sendRequest("GET", "./api/story/project/"+project._id);
+    }
+    
+    this.updateBacklogByProject = function (project, backlog) {
+        return httpHelper.sendRequest("POST", "./api/story/update/"+project._id, {userStories:backlog});
+    }
+
 }]);

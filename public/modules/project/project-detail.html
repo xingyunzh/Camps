@@ -33,20 +33,60 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="camps-idea-d-text-section">
+                    需求分析与工作分解
+                </div>
+            </div>
+            <div class="row camps-project-d-wbs">
+                <div class="col-md-7">
                     <div class="camps-idea-d-text-section">
                         Backlog:
-                        <div ui-sortable="sortableOptions" ng-model="list" class="list-group">
-                            <a ng-repeat="item in list" class="list-group-item">
-                                <span>{{item}}</span>
-                            </a>
+                        <button class="btn btn-link" ng-show="isBacklogEditing" ng-click="onAddOrUpdateStory()"><span>添加</span></button>
+                        <button class="btn btn-primary" ng-click="onBacklogEdit()">{{isBacklogEditing ? "完成":"修改"}}</button>
+                        <button class="btn btn-default" ng-click="isBacklogEditing=false;" ng-show="isBacklogEditing">取消</button>
+
+                        <div ui-sortable="sortableOptions" ng-model="backlog" class="list-group">
+                            <div ng-repeat="item in backlog" class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <a>
+                                            <div class="text-left" ng-style="{'text-decoration':item.deleted ? 'line-through' : 'none'}">
+                                                <span><strong>US {{item._id.slice(0,1) + "***" + item._id.slice(-4)}}</strong></span>
+                                                <span>{{item | nameOfStory}}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2" ng-show="isBacklogEditing">
+                                        <span>
+                                            <a ng-click="onRemoveStory(item)">删除</a>
+                                            <a ng-click="onAddOrUpdateStory(item)">编辑</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--<div class="row">-->
+                                    <!--<div class="col-md-10">-->
+                                        <!--<span>US-{{item._id}}</span>-->
+                                        <!--<br>-->
+                                        <!--<span>{{item | nameOfStory}}</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-2" ng-show="isBacklogEditing">-->
+                                        <!--<a ng-click="onRemoveStory(item)">删除</a>-->
+                                        <!--<a ng-click="onAddOrUpdateStory(item)">编辑</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="camps-idea-d-text-section">
                         Task:
+                        <button class="btn btn-link" ng-show="isTaskEditing" ng-click="onAddOrUpdateTask()"><span>添加</span></button>
+                        <button class="btn btn-primary" ng-click="onTaskEdit()">{{isTaskEditing ? "完成":"修改"}}</button>
+                        <button class="btn btn-default" ng-click="isTaskEditing=false;" ng-show="isTaskEditing">取消</button>
+
                         <ul class="list-group">
                             <li class="list-group-item">Task1</li>
                             <li class="list-group-item">Task2</li>

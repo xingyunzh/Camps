@@ -131,3 +131,7 @@ body {
 .camps-text-highlight-color {
     color:#0052FF
 }
+
+a, a:hover, a:visited, a.active, a:focus {
+    text-decoration: none;
+}

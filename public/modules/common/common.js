@@ -1,5 +1,6 @@
 var kConfirmationHTML = "./modules/common/confirmation.html";
 var kModalInputTextHTML = "./modules/common/modal-text-input.html";
+var kModalInputUserStoryHTML = "./modules/common/modal-userstory-input.html";
 var kConfirmationController = 'commonModalController';
 
 app.controller(kConfirmationController, function ($scope, $uibModalInstance, title, content) {
@@ -48,13 +49,12 @@ app.service('httpHelper', function ($http, $q, $rootScope) {
 
 		return deferred.promise;
 	};
-
 });
 
 
 app.filter("nameOfStory",function () {
 	return function(us){
-		return "US:"+ us.as + ',' + us.do + ',' + us.then;
+		return us.as + ',' + us.want + ',' + us.soThat;
 	}
 });
 
@@ -87,8 +87,6 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 	};
 
 	this.confirmationStep = function(aTitle, aConent) {
-		var deferred = $q.defer();
-
 		var modalInstance = $uibModal.open({
 			animation: true,
 			templateUrl: kConfirmationHTML,
@@ -104,18 +102,10 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 			}
 		});
 
-		modalInstance.result.then(function ok() {
-			deferred.resolve("ok");
-		}, function cancel(argument) {
-			deferred.reject("cancel");
-		});
-
-		return deferred.promise;
+		return modalInstance.result;
 	};
 
 	this.modalTextInputStep = function (aTitle, aConent) {
-		var deferred = $q.defer();
-
 		var modalInstance = $uibModal.open({
 			animation: true,
 			templateUrl: kModalInputTextHTML,
@@ -131,14 +121,28 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 			}
 		});
 
-		modalInstance.result.then(function ok(content) {
-			deferred.resolve(content);
-		}, function cancel(argument) {
-			deferred.reject("cancel");
+		return modalInstance.result;
+	};
+
+	this.modalUserStoryInputStep = function (aTitle, aContent) {
+		var modalInstance = $uibModal.open({
+			animation: true,
+			templateUrl: kModalInputUserStoryHTML,
+			controller: kConfirmationController,
+			size: "lg",
+			resolve: {
+				title: function() {
+					return aTitle;
+				},
+				content: function() {
+					return aContent;
+				}
+			}
 		});
 
-		return deferred.promise;
+		return modalInstance.result;
 	};
+
 
     this.globalNameForFile = function (filename, user) {
         if (user) {
