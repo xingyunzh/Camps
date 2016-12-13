@@ -34,4 +34,12 @@ app.service("projectService", ["util", "$q", "httpHelper", function (util, $q, h
         return httpHelper.sendRequest("POST", "./api/story/update/"+project._id, {userStories:backlog});
     }
 
+    this.getSprintsByProject = function(project){
+        return httpHelper.sendRequest("GET", "./api/sprint/project/"+project._id);
+    }
+
+    this.updateSprintsByProject = function(project, sprints){
+        
+    }
+
 }]);

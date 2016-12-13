@@ -30,7 +30,8 @@ app.controller("projectDetailController", ["$scope", "$rootScope", "util", "team
             
             projectService.getBacklogByProject($rootScope.theProject).then(function(data){
                 $scope.backlog = data.backlog;
-            })
+            });
+
 
         })();
 
@@ -93,6 +94,18 @@ app.controller("projectDetailController", ["$scope", "$rootScope", "util", "team
             });
         }
 
+        $scope.onSprintEdit = function(){
+            $scope.isSprintEditing = true;
+        }
+
+        $scope.onAddOrUpdateSprint = function (task) {
+
+        }
+
+        $scope.onRemoveSprint = function () {
+
+        }
+
         $scope.onTaskEdit = function(){
             $scope.isTaskEditing = true;
         }
@@ -139,7 +152,43 @@ app.controller("projectDetailController", ["$scope", "$rootScope", "util", "team
             $rootScope.$state.go("nav.team-detail")
         };
 
+        $scope.handleStoryOrSprints = function($event){
+            var coord = angular.element($event.target).offset();
+            var panelCoord = angular.element(".camps-project-d-task-panel:first").offset();
+            panelCoord.top = coord.top;
+            angular.element(".camps-project-d-task-panel:first").offset(panelCoord);
+        }
 
+        $scope.allowEditProject = function(){
+            if (!$rootScope.currentUser){
+                return false;
+            }
+
+            if ($rootScope.currentUser._id == $rootScope.theProject.manager._id){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        $scope.allowEditTasks = function(){
+            if (!$rootScope.currentUser){
+                return false;
+            }
+
+            if($scope.allowEditProject()) {
+                return true;
+            }
+
+            for (var i = 0; i < $rootScope.theTeam.member.length; i++){
+                if ($rootScope.theTeam.member[i]._id == $rootScope.currentUser._id){
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         function makeFormOftheProject() {
             return {
@@ -151,6 +200,5 @@ app.controller("projectDetailController", ["$scope", "$rootScope", "util", "team
                 tasks: angular.copy($rootScope.theProject.tasks)
             }
         }
-
 
     }]);

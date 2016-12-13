@@ -11,7 +11,7 @@ router.get('/project/:id',sprintController.getSprintsByProject);
 
 //query parameters
 //	required:
-//		id:String (project)
+//		id:String (sprint)
 //body parameters
 // required:
 //{	
