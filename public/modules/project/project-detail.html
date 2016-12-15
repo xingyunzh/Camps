@@ -101,6 +101,38 @@
 
             <div class="row">
                 <div class="camps-idea-d-text-section">
+                    项目文档:
+                    <div class="camps-project-d-attachments">
+                        <a ng-href="{{attachment}}" ng-repeat="attachment in sampleAttachments">
+                            <div class="thumbnail text-center">
+                                <img src="./images/logo.png" alt="File" width="60px" hight="90px">
+                                <div><span>{{nameFromAttachment(attachment)}}</span></div>
+                                <button class="btn btn-primary" ng-show="isAttachmentsEditing">删除</button>
+                            </div>
+                        </a>
+                        <a ng-click="" ng-show="isAttachmentsEditing">
+                            <div class="thumbnail text-center">
+                                <div ngf-select="uploadFile($file)">
+                                    <img src="./images/logo.png" alt="File" width="60px" hight="80px">
+                                    <div><span>{{fileToUpload ? nameFromAttachment(fileToUpload) : "上传文件"}}</span></div>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <button class="btn btn-primary pull-right"
+                            ng-click="onDataEdit(['attachments'], 'isAttachmentsEditing')" ng-show="allowEditTasks()">
+                        {{isAttachmentsEditing ? "完成":"修改"}}
+                    </button>
+                    <button class="btn btn-default pull-right" ng-click="isAttachmentsEditing=false;"
+                            ng-show="isAttachmentsEditing">取消
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
                     <span>项目人员:</span>
                 </div>
             </div>

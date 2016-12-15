@@ -7,6 +7,14 @@ app.controller("projectDetailController", ["$scope", "$rootScope", "util", "team
         $scope.form = makeFormOftheProject();
         $scope.list = ["one", "two", "three", "four", "five", "six"];
         $scope.isBacklogEditing = false;
+        $scope.fileToUpload = null;
+        $scope.isAttachmentsEditing = false;
+
+        $scope.sampleAttachments = [
+            "http://campro.oss-cn-shanghai.aliyuncs.com/u5825aeb15f490a225690a3a0_Bitmaphead.jpg",
+            "http://campro.oss-cn-shanghai.aliyuncs.com/g_IMG_1466.PNG",
+            "http://campro.oss-cn-shanghai.aliyuncs.com/u5825aeb15f490a225690a3a0_bike.png"
+        ];
 
         $scope.sortableOptions = {
             update: function(e, ui) {
@@ -188,6 +196,16 @@ app.controller("projectDetailController", ["$scope", "$rootScope", "util", "team
             }
 
             return false;
+        }
+
+        $scope.uploadFile = function (file) {
+            $scope.fileToUpload = file.name;
+
+        }
+
+        $scope.nameFromAttachment = function(attachment){
+            var components = attachment.split('/');
+            return util.rawNameFromGlobalName(components[components.length - 1]);
         }
 
         function makeFormOftheProject() {

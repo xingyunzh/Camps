@@ -33,7 +33,9 @@ var projectSchema = Schema({
 	sprints:[{
 		type:Schema.Types.ObjectId,
 		ref:'Sprint'
-	}]
+	}],
+
+	attachments:[String]
 });
 
 var Project = mongoose.model("Project", projectSchema);

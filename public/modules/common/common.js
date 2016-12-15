@@ -151,6 +151,18 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
         return 'g'+'_'+filename;
     };
 
+	this.rawNameFromGlobalName = function(globalName){
+		if (globalName.startsWith("g_")){
+			return globalName.substring(2);
+		}
+		else if(globalName.search(RegExp('^u[a-zA-Z0-9]{24}_')) > -1) {
+			return globalName.substring(26);
+		}
+		else {
+			return globalName;
+		}
+	}
+
     this.promiseWithReject = function(data) {
         var deferred = $q.defer();
         setTimeout(function () {
