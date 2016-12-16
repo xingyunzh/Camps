@@ -11,7 +11,12 @@ app.controller("navController", ["$scope", "$rootScope", function($scope, $rootS
     $rootScope.$on('loggedIn',function(){
     	$scope.hasLoggedIn = true;
 
-        $rootScope.$state.go(!!$rootScope.$previousState ? $rootScope.$previousState : "nav.idea");
+        if ($rootScope.$previousState){
+            $rootScope.$state.go($rootScope.$previousState, $rootScope.$previousStateParams);
+        }
+        else {
+            $rootScope.$state.go("nav.idea");
+        }
     });
 
     $rootScope.$on('loggedOut',function(){

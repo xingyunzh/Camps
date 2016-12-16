@@ -103,7 +103,7 @@
                 <div class="camps-idea-d-text-section">
                     项目文档:
                     <div class="camps-project-d-attachments">
-                        <a ng-href="{{attachment}}" ng-repeat="attachment in sampleAttachments">
+                        <a ng-href="{{attachment}}" ng-repeat="attachment in form.attachments">
                             <div class="thumbnail text-center">
                                 <img src="./images/logo.png" alt="File" width="60px" hight="90px">
                                 <div><span>{{nameFromAttachment(attachment)}}</span></div>
@@ -115,6 +115,7 @@
                                 <div ngf-select="uploadFile($file)">
                                     <img src="./images/logo.png" alt="File" width="60px" hight="80px">
                                     <div><span>{{fileToUpload ? nameFromAttachment(fileToUpload) : "上传文件"}}</span></div>
+                                    <uib-progressbar max="1" value="percentage"><span style="color:blue; white-space:nowrap;"></span></uib-progressbar>
                                 </div>
                             </div>
                         </a>
