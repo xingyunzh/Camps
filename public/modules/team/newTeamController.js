@@ -25,7 +25,7 @@ app.controller("newTeamController", ["$scope", "$rootScope", "teamService", "uti
                 toaster.clear();
 
                 $rootScope.theTeam = data.team;
-                $rootScope.$state.go('nav.team-detail');
+                $rootScope.$state.go('nav.team-detail', {teamId:data.team._id});
             })
             .catch(function (error){
                 toaster.clear();

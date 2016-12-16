@@ -1,11 +1,11 @@
 /**
  * Created by brillwill on 16/9/27.
  */
-app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaService", "toaster", "projectService",
-    function ($scope, $rootScope, util, ideaService, toaster, projectService) {
+app.controller("ideaDetailController", ["$scope", "$rootScope", "$stateParams", "util", "ideaService", "toaster", "projectService",
+    function ($scope, $rootScope, $stateParams, util, ideaService, toaster, projectService) {
 
         $scope.isEditing = false;
-        $scope.form = makeFormOfTheIdea();
+        $scope.form = {};
         $scope.summerOption = {
             height: 200,
             focus: false,
@@ -26,9 +26,32 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaSer
         };
 
         (function initialize(){
-            projectService.getProjectsByIdea($rootScope.theIdea._id).then(function(data){
+            var updateTheIdeaIfNeeds = null;
+            if (!$rootScope.theIdea || ($stateParams.ideaId && $rootScope.theIdea._id != $stateParams.ideaId)){
+                updateTheIdeaIfNeeds = ideaService.getIdeaById($stateParams.ideaId).then(function(data){
+                    return data.idea;
+                });
+            }
+            else {
+                updateTheIdeaIfNeeds = util.promiseWithResolve($rootScope.theIdea);
+            }
+
+            updateTheIdeaIfNeeds.then(function(idea){
+                $rootScope.theIdea = idea;
+                $scope.form = makeFormOfTheIdea();
+
+                return projectService.getProjectsByIdea(idea._id);
+            }).then(function(data){
                 $rootScope.theIdea.projects = data.projects;
+            }).catch(function(error){
+                toaster.pop({
+                    type:"error",
+                    title:"系统错误",
+                    body:JSON.stringify(error),
+                    timeout:500
+                });
             });
+
         })();
 
 
@@ -71,7 +94,7 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaSer
         $scope.handleProjectLink = function (prj) {
             projectService.getProjectById(prj._id).then(function ok(data) {
                 $rootScope.theProject = data.project;
-                $rootScope.$state.go("nav.project-detail");
+                $rootScope.$state.go("nav.project-detail", {projectId:data.project._id});
             }, function fail() {
                 util.confirmationStep("错误", "项目不存在");
             });

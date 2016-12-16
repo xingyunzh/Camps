@@ -7,7 +7,7 @@ app.controller("ideaController", ["$scope", "$rootScope", "ideaService", "toaste
 
     $scope.handleItemClick = function(idea){
         $rootScope.theIdea = idea;
-        $rootScope.$state.go("nav.idea-detail");
+        $rootScope.$state.go("nav.idea-detail", {ideaId:idea._id});
     }
 
     $scope.$watch("cardFilter", function(value){

@@ -41,7 +41,7 @@ app.controller("newProjectController", ["$scope", "$rootScope", "util", "project
                             toaster.clear();
                             if (data.project) {
                                 $rootScope.theProject = data.project;
-                                $rootScope.$state.go("nav.project-detail");
+                                $rootScope.$state.go("nav.project-detail", {projectId:data.project._id});
                                 toaster.pop({
                                     type: "success",
                                     title: "新建",

@@ -9,7 +9,7 @@ app.controller("teamController", ["$scope", "$rootScope", "teamService", functio
 
     $scope.onTeamClicked = function(team){
         $rootScope.theTeam = team;
-        $rootScope.$state.go("nav.team-detail");
+        $rootScope.$state.go("nav.team-detail", {teamId:team._id});
     }
 }]);
 

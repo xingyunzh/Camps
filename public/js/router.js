@@ -27,7 +27,7 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             }
         })
         .state("nav.idea-detail", {
-            url:"/idetail",
+            url:"/idetail/:ideaId",
             templateUrl:"./modules/idea/idea-detail.html",
             controller:"ideaDetailController",
             data:{
@@ -53,7 +53,7 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
 
         })
         .state("nav.project-detail", {
-            url:"/pdetail",
+            url:"/pdetail/:projectId",
             templateUrl:"./modules/project/project-detail.html",
             controller:"projectDetailController",
             data:{
@@ -78,7 +78,7 @@ app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $ur
             }
         })
         .state("nav.team-detail", {
-            url: "/tdetail",
+            url: "/tdetail/:teamId",
             templateUrl:"./modules/team/team-detail.html",
             controller: "teamDetailController",
             data:{

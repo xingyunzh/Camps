@@ -8,6 +8,6 @@ app.controller("projectController", ["$scope", "$rootScope","projectService", fu
 
     $scope.handleProjectClicked = function (project) {
         $rootScope.theProject = project;
-        $rootScope.$state.go("nav.project-detail");
+        $rootScope.$state.go("nav.project-detail", {projectId:project._id});
     };
 }]);

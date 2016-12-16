@@ -29,4 +29,8 @@ app.service("teamService", ["httpHelper", "$q", function (httpHelper, $q) {
     this.getTeamAsCoach = function(user) {
         return httpHelper.sendRequest("GET", "./api/team/coach/"+user._id);
     }
+
+    this.getTeamById = function(id){
+        return httpHelper.sendRequest("GET", "./api/team/id/"+id);
+    }
 }]);

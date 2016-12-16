@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="col-xs-3 camps-panel-space">
-            <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail')" glyphicon-class="glyphicon-search"></idea-typehead>
+            <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail',{ideaId:theIdea._id})" glyphicon-class="glyphicon-search"></idea-typehead>
             <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createIdea" ng-if="!!currentUser">提交你的创意</button>
             <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="currentUser==null">提交你的创意</button>
         </div>

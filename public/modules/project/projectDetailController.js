@@ -1,10 +1,11 @@
 /**
  * Created by brillwill on 16/10/4.
  */
-app.controller("projectDetailController", ["$scope", "$rootScope", "util", "teamService", "projectService","toaster", "$filter",
-    function ($scope, $rootScope, util, teamService, projectService, toaster, $filter) {
+app.controller("projectDetailController",
+    ["$scope", "$rootScope", "$stateParams", "util", "teamService", "projectService","toaster", "$filter","$q",
+    function ($scope, $rootScope,$stateParams, util, teamService, projectService, toaster, $filter,$q) {
         $scope.isNameEditing = false;
-        $scope.form = makeFormOftheProject();
+        $scope.form = {};
         $scope.list = ["one", "two", "three", "four", "five", "six"];
         $scope.isBacklogEditing = false;
         $scope.fileToUpload = null;
@@ -32,15 +33,36 @@ app.controller("projectDetailController", ["$scope", "$rootScope", "util", "team
         $rootScope.theTeam = null;
 
         (function(){
-            teamService.getTeamAsLead($rootScope.theProject.manager).then(function(data){
-                $rootScope.theTeam = data.team[0];
-            });
-            
-            projectService.getBacklogByProject($rootScope.theProject).then(function(data){
-                $scope.backlog = data.backlog;
-            });
+            var updateProjectIfNeeds = null;
+            if ($rootScope.theProject && $rootScope.theProject._id == $stateParams.projectId) {
+                updateProjectIfNeeds = util.promiseWithResolve($rootScope.theProject);
+            }
+            else if ($stateParams.projectId){
+                updateProjectIfNeeds = projectService.getProjectById($stateParams.projectId).then(function(data){
+                  return data.project;
+                });
+            }
+            else {
+                return;
+            }
 
+            updateProjectIfNeeds.then(function(project){
+                $rootScope.theProject = project;
+                $scope.form = makeFormOftheProject();
 
+                return $q.all([teamService.getTeamAsLead(project.manager),
+                    projectService.getBacklogByProject(project)]);
+            }).then(function(dataGroup){
+                $rootScope.theTeam = dataGroup[0].team[0];
+                $scope.backlog = dataGroup[1].backlog;
+            }).catch(function(error){
+                toaster.pop({
+                    type:"error",
+                    title:"系统错误",
+                    body:JSON.stringify(error),
+                    timeout:500
+                });
+            });
         })();
 
         $scope.onBacklogEdit= function(){
@@ -153,11 +175,11 @@ app.controller("projectDetailController", ["$scope", "$rootScope", "util", "team
 
         $scope.handleIdeaLink = function () {
             $rootScope.theIdea = $scope.theProject.relatedIdea;
-            $rootScope.$state.go("nav.idea-detail");
+            $rootScope.$state.go("nav.idea-detail",{ideaId:$rootScope.theIdea._id});
         };
 
         $scope.handleTeamLink = function () {
-            $rootScope.$state.go("nav.team-detail")
+            $rootScope.$state.go("nav.team-detail", {teamId:$rootScope.theTeam._id});
         };
 
         $scope.handleStoryOrSprints = function($event){

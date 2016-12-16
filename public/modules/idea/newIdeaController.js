@@ -58,7 +58,7 @@ app.controller("newIdeaController", ["$scope", "$rootScope", "util", "ideaServic
                 timeout:3000
             });
             $rootScope.theIdea = data.idea;
-            $rootScope.$state.go("nav.idea-detail");
+            $rootScope.$state.go('nav.idea-detail',{ideaId:data.idea._id});
         }).catch(function(error){
             if (error != "cancel"){
                 toaster.pop({
