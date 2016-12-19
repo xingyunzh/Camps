@@ -13,7 +13,7 @@ exports.count = function(conditions){
 };
 
 exports.findById = function(id){
-	return Idea.findById(id).lean().exec();
+	return Idea.findById(id).populate('innovator').lean().exec();
 };
 
 exports.update = function(conditions,data){

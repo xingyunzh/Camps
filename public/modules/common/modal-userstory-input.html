@@ -1,0 +1,36 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">{{title}}</h3>
+	</div>
+
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-sm-2">
+				<h4>用户类型(As)</h4>
+			</div>
+			<div class="col-sm-5">
+				<h4>需求动作(I want)</h4>
+			</div>
+			<div class="col-sm-5">
+				<h4>目的效果(so that)</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<input type="text" class="form-control" ng-model="modal.content.as">
+			</div>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" ng-model="modal.content.want">
+			</div>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" ng-model="modal.content.soThat">
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-primary" type="button" ng-click="ok()">保存</button>
+		<button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+	</div>	
+</div>
+

@@ -30,4 +30,38 @@ app.service("loginService", ['httpHelper', function (httpHelper) {
         });
     };
 
+	this.archiveUserInfo = function(key, value){
+		console.assert(key == kCampsArchiveKeyAuthToken || key == kCampsArchiveKeyUserId, "You are using wrong archive method.");
+		window.localStorage.setItem(key, value);
+	};
+
+	this.removeArchivedUserInfo = function(key){
+		if (!key){
+			window.localStorage.removeItem(kCampsArchiveKeyAuthToken);
+			window.localStorage.removeItem(kCampsArchiveKeyUserId);
+		}
+		else {
+			window.localStorage.removeItem(key);
+		}
+	};
+
+	this.recoverLoginIfPossible = function(rootScope){
+		if (rootScope.currentUser){
+			return;
+		}
+
+		var userId = window.localStorage.getItem(kCampsArchiveKeyUserId);
+		var token = window.localStorage.getItem(kCampsArchiveKeyAuthToken);
+		if(!!userId && !!token){
+			rootScope.token = token;
+
+			httpHelper.sendRequest("GET", "./api/user/profile/"+userId).then(function(data){
+				rootScope.currentUser = data.user;
+			}).catch(function(error){
+				rootScope.token = null;
+			});
+		}
+	};
+
+
 }]);

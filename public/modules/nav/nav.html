@@ -10,12 +10,12 @@
     <div class="pull-right">
             <span class="camps-nav-user">
                 <span class="glyphicon glyphicon-user camps-nav-user-icon"></span>
-                <span ng-hide="!hasLoggedIn">
+                <span ng-hide="!hasLoggedIn()">
                 <a id="r-nav-id-name" ui-sref="nav.profile">你好, {{currentUser.nickname}}</a>
                 </span>
                 <span>
-                    <a class="" ng-show="!hasLoggedIn" ng-click="goLogin()">登录</a>
-                    <a class="" ng-show="hasLoggedIn" ng-click="logOut()">登出</a>
+                    <a class="" ng-show="!hasLoggedIn()" ui-sref="nav.login" ">登录</a>
+                    <a class="" ng-show="hasLoggedIn()" ng-click="logOut()">登出</a>
                 </span>
             </span>
     </div>

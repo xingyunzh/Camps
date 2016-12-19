@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="" ng-repeat="item in ideas">
                     <div class="camps-media-card" ng-click="handleItemClick(item)">
-                        <img ng-src="./images/bike.png" alt="Img">
+                        <img ng-src="{{item.headImgUrl}}" alt="Img">
                         <div class="camps-media-card-body">
                             <div class="camps-media-card-title">
                                 <h1 class="camps-text-highlight-color">
@@ -23,7 +23,7 @@
                             </div>
                             <div class="camps-media-card-short-line"></div>
                             <div class="camps-media-card-description">
-                                <h2 ng-bind-html="item.solution | htmlConent"></h2>
+                                <h2 ng-bind-html="item.painpoint | htmlConent" maxlength="8"></h2>
                             </div>
                         </div>
                         <div class="camps-media-card-footer">
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="col-xs-3 camps-panel-space">
-            <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail')" glyphicon-class="glyphicon-search"></idea-typehead>
+            <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail',{ideaId:theIdea._id})" glyphicon-class="glyphicon-search"></idea-typehead>
             <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createIdea" ng-if="!!currentUser">提交你的创意</button>
             <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="currentUser==null">提交你的创意</button>
         </div>

@@ -6,7 +6,8 @@ app.component('projectTypehead', {
     bindings: {
         glyphiconClass:"=",
         whichRole: "=",
-        notifySelected:"&onSelected"
+        notifySelected:"&onSelected",
+        maxWidth:"<"
     },
     controller: function($scope, $element, $attrs, projectService){
         $scope.getProjects = function (viewValue) {

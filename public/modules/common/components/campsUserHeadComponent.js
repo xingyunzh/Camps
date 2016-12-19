@@ -9,11 +9,22 @@ app.component('campsUserHead', {
         height:"<"
     },
     controller: function($scope, $element, $attrs){
-        if (!!this.user && !!this.user.headImgUrl) {
-            $scope.url = this.user.headImgUrl;
-        }
-        else {
-            $scope.url = "http://campro.oss-cn-shanghai.aliyuncs.com/stars_logo.jpg";
+        $scope.defaultImageSrc = "http://campro.oss-cn-shanghai.aliyuncs.com/stars_logo.jpg";
+        // updateByUserValue(this.user);
+        // $scope.$watch("user", updateByUserValue);
+        //
+        // function updateByUserValue(value){
+        //     if (!!value && !!value.headImgUrl) {
+        //         $scope.url = value.headImgUrl;
+        //     }
+        //     else {
+        //         $scope.url = "http://campro.oss-cn-shanghai.aliyuncs.com/stars_logo.jpg";
+        //     }
+        // };
+
+        if (this.width == null && this.height == null) {
+            this.width = 60;
+            this.height = 60;
         }
     }
 });

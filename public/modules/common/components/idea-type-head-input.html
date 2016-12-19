@@ -1,4 +1,4 @@
-<div class="input-group">
+<div class="input-group" ng-style="{'max-width':$ctrl.maxWidth ? $ctrl.maxWidth : auto}">
     <input type="text" ng-model="selectedIdea" placeholder="输入创意名查找"
            uib-typeahead="idea as idea.name for idea in getIdeas($viewValue)"
            typeahead-loading="loadingIdeas"

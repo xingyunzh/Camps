@@ -40,6 +40,7 @@ router.get('/id/:id',projectController.getProjectById);
 //		pageNum:Number (default:0)
 //		pageSize:Number (default:10)
 //		keyword:String (for name)
+//      idea:String (id)
 //response:
 //{
 //	total:TotalNumber,

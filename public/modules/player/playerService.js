@@ -3,8 +3,8 @@
  */
 app.service("playerService", ['httpHelper', 'util', '$q', function (httpHelper, util,$q) {
     this.playerSource = function (keyword) {
-        return httpHelper.sendRequest('GET', './api/user/list?roles=player&keyword='+keyword).then(function(data){
-            return data.users.users;
+        return httpHelper.sendRequest('GET', './api/user/list?role=player&keyword='+keyword).then(function(data){
+            return data.users;
         });
 
     };

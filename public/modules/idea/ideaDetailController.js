@@ -1,137 +1,143 @@
 /**
  * Created by brillwill on 16/9/27.
  */
-app.controller("ideaDetailController", ["$scope", "$rootScope", "util", "ideaService", "toaster", "ossFileService",
-    function($scope, $rootScope, util, ideaService, toaster, ossFileService){
-    $scope.sampleImages = [
-        "./images/bike.png",
-        "./images/bike.png",
-        "./images/bike.png",
-        "./images/bike.png",
-        "./images/bike.png",
-        "./images/bike.png"
-    ];
+app.controller("ideaDetailController", ["$scope", "$rootScope", "$stateParams", "util", "ideaService", "toaster", "projectService",
+    function ($scope, $rootScope, $stateParams, util, ideaService, toaster, projectService) {
 
-    $scope.isEditing = false;
-    $scope.form = makeFormOfTheIdea();
-    $scope.summerOption = {
-        height: 200,
-        focus: false,
-        airMode: false,
-        toolbar: [
-            ['edit',['undo','redo']],
-            ['headline', ['style']],
-            ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-            ['fontface', ['fontname']],
-            ['textsize', ['fontsize']],
-            ['fontclr', ['color']],
-            ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-            ['height', ['height']],
-            ['table', ['table']],
-            ['insert', ['link','picture']],
-            ['view', ['fullscreen', 'codeview']]
-        ]
-    };
+        $scope.isEditing = false;
+        $scope.form = {};
+        $scope.summerOption = {
+            height: 200,
+            focus: false,
+            airMode: false,
+            toolbar: [
+                ['edit', ['undo', 'redo']],
+                ['headline', ['style']],
+                ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
+                ['fontface', ['fontname']],
+                ['textsize', ['fontsize']],
+                ['fontclr', ['color']],
+                ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']],
+                ['view', ['fullscreen', 'codeview']]
+            ]
+        };
 
+        (function initialize(){
+            var updateTheIdeaIfNeeds = null;
+            if (!$rootScope.theIdea || ($stateParams.ideaId && $rootScope.theIdea._id != $stateParams.ideaId)){
+                updateTheIdeaIfNeeds = ideaService.getIdeaById($stateParams.ideaId).then(function(data){
+                    return data.idea;
+                });
+            }
+            else {
+                updateTheIdeaIfNeeds = util.promiseWithResolve($rootScope.theIdea);
+            }
 
-    $scope.onEditButton = function () {
-        if ($scope.isEditing){
-            util.confirmationStep("提交修改", "是否保存并提交您的修改?")
-                .then(function(){
-                    $scope.isEditing = false;
-                    var updateContent = makeUpdateContent();
-                    return ideaService.updateIdeaById($rootScope.theIdea._id, updateContent);
-                }).then(function(data){
-                $rootScope.theIdea = data.idea;
+            updateTheIdeaIfNeeds.then(function(idea){
+                $rootScope.theIdea = idea;
                 $scope.form = makeFormOfTheIdea();
+
+                return projectService.getProjectsByIdea(idea._id);
+            }).then(function(data){
+                $rootScope.theIdea.projects = data.projects;
             }).catch(function(error){
                 toaster.pop({
                     type:"error",
-                    title:"错误",
-                    body:error
+                    title:"系统错误",
+                    body:JSON.stringify(error),
+                    timeout:500
                 });
             });
-        }
-        else {
-            $scope.isEditing = true;
-        }
-    }
 
-    $scope.onCancelButton = function () {
-        $scope.form = makeFormOfTheIdea();
-        $scope.isEditing = false;
-    }
-
-    $scope.imageUpload = function(files,editor){
-        var file = files[0];
-        if (file == null){
-            return;
-        }
-
-        var targetEditable = null;
-        if (editor == $scope.editorB){
-            targetEditable = $scope.editableB;
-        }
-        else if (editor == $scope.editorP){
-            targetEditable = $scope.editableP;
-        }
-        else {
-            targetEditable = $scope.editableS;
-        }
-
-        var location = null;
-        var gFilename = util.globalNameForFile(file.name, $rootScope.currentUser);
-        ossFileService.uploadFile(gFilename, file, function (p) {
-            console.log("file progress " + p * 100 + "%");
-        }).then(function (data) {
-            console.log("upload data = " + data.url);
-            location = data.url;
-            editor.insertImage(targetEditable,location, gFilename);
-
-        }, function fail(error){
-            console.log("upload fail data = " + error);
-        });
-
-    }
+        })();
 
 
-    function makeFormOfTheIdea() {
-        return {
-            name:$rootScope.theIdea.name,
-            background:$rootScope.theIdea.background,
-            innovator:angular.copy($rootScope.theIdea.innovator),
-            deadline:new Date($rootScope.theIdea.deadline),
-            painpoint:$rootScope.theIdea.painpoint,
-            solution:$rootScope.theIdea.solution,
-            hrRequirement:$rootScope.theIdea.hrRequirement,
-            consultant:angular.copy($rootScope.theIdea.consultant)
-        }
-    }
-
-    function makeUpdateContent(){
-        var content = angular.copy($scope.form);
-        var toDelete = [];
-        for(var key in content){
-            if (key == "deadline" && JSON.stringify(content[key]) == $rootScope.theIdea.deadline){
-                toDelete.push(key);
-                continue;
+        $scope.onEditButton = function () {
+            if ($scope.isEditing) {
+                util.confirmationStep("提交修改", "是否保存并提交您的修改?")
+                    .then(function () {
+                        $scope.isEditing = false;
+                        var updateContent = makeUpdateContent();
+                        return ideaService.updateIdeaById($rootScope.theIdea._id, updateContent);
+                    }).then(function (data) {
+                    $rootScope.theIdea = data.idea;
+                    $scope.form = makeFormOfTheIdea();
+                }).catch(function (error) {
+                    toaster.pop({
+                        type: "error",
+                        title: "错误",
+                        body: error
+                    });
+                });
             }
-
-            if ((key == 'innovator' || key == "consultant")
-                && (content[key] == null || content[key]._id == $rootScope.theIdea[key]._id)){
-                toDelete.push(key);
-                continue;
-            }
-
-            if (content[key] == $rootScope.theIdea[key]){
-                toDelete.push(key);
+            else {
+                $scope.isEditing = true;
             }
         }
 
-        _.forEach(toDelete, function(value){
-            delete content[value];
-        });
+        $scope.onCancelButton = function () {
+            $scope.form = makeFormOfTheIdea();
+            $scope.isEditing = false;
+        };
 
-        return content;
-    }
-}]);
+        $scope.onImagesPicked = function (images) {
+            $scope.form.headImgUrl = images[0].url;
+        };
+
+        $scope.onRemoveHeadImage = function(){
+            $scope.form.headImgUrl = null;
+        };
+
+        $scope.handleProjectLink = function (prj) {
+            projectService.getProjectById(prj._id).then(function ok(data) {
+                $rootScope.theProject = data.project;
+                $rootScope.$state.go("nav.project-detail", {projectId:data.project._id});
+            }, function fail() {
+                util.confirmationStep("错误", "项目不存在");
+            });
+        }
+
+        function makeFormOfTheIdea() {
+            return {
+                name: $rootScope.theIdea.name,
+                background: $rootScope.theIdea.background,
+                innovator: angular.copy($rootScope.theIdea.innovator),
+                deadline: new Date($rootScope.theIdea.deadline),
+                painpoint: $rootScope.theIdea.painpoint,
+                solution: $rootScope.theIdea.solution,
+                hrRequirement: $rootScope.theIdea.hrRequirement,
+                consultant: angular.copy($rootScope.theIdea.consultant),
+                headImgUrl:$rootScope.theIdea.headImgUrl
+            }
+        }
+
+        function makeUpdateContent() {
+            var content = angular.copy($scope.form);
+            var toDelete = [];
+            for (var key in content) {
+                if (key == "deadline" && JSON.stringify(content[key]) == $rootScope.theIdea.deadline) {
+                    toDelete.push(key);
+                    continue;
+                }
+
+                if ((key == 'innovator' || key == "consultant")
+                    && (content[key] == null || content[key]._id == $rootScope.theIdea[key]._id)) {
+                    toDelete.push(key);
+                    continue;
+                }
+
+                if (content[key] == $rootScope.theIdea[key]) {
+                    toDelete.push(key);
+                }
+            }
+
+            _.forEach(toDelete, function (value) {
+                delete content[value];
+            });
+
+            return content;
+        }
+    }]);

@@ -8,19 +8,19 @@ exports.create = function(team){
 };
 
 exports.findById = function(id){
-	return Team.findById(id).populate('coach members').lean().exec();
+	return Team.findById(id).populate('coach members project').lean().exec();
 };
 
 exports.findActiveTeam = function(conditions){
 	conditions.state = 1;
 
-	return Team.findOne(conditions).populate('coach members').lean().exec();
+	return Team.findOne(conditions).populate('coach members project').lean().exec();
 };
 
 exports.getTeamsById = function(teamId){
 	return Team.find({
 		teamId:teamId
-	}).populate('coach members').lean().exec();
+	}).populate('coach members project').lean().exec();
 };
 
 exports.removeById = function(id){
@@ -30,13 +30,13 @@ exports.removeById = function(id){
 exports.update = function(conditions,updates){
 	return Team.findOneAndUpdate(conditions,updates,{
 		new:true
-	}).populate('coach members').exec();
+	}).populate('coach members project').exec();
 };
 
 exports.updateById = function(id,updates){
 	return Team.findByIdAndUpdate(id,updates,{
 		new:true
-	}).populate('coach members').exec();
+	}).populate('coach members project').exec();
 };
 
 exports.countByName = function(name){
@@ -52,10 +52,14 @@ exports.query = function(options){
 		conditions.name = new RegExp(options.keyword, "i");
 	}
 
+	if ('coach' in options) {
+		conditions.coach = options.coach;
+	}
+
 	if ('state' in options) {
 		conditions.state = options.state;
 	}
 
-	return repositoryUtil.paging(Team,conditions,options,'coach members lead');
+	return repositoryUtil.paging(Team,conditions,options,'coach members project');
 
 };

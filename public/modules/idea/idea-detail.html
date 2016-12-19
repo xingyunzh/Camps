@@ -4,32 +4,32 @@
             <div class="row">
                 <div class="camps-idea-d-title">
                     <span>{{theIdea.name}}</span>
+                    <span class="camps-text-highlight-color" ng-hide="theIdea.state=='published'"><small>{{theIdea.state}}</small></span>
                 </div>
             </div>
+
             <div class="row">
                 <div class="camps-idea-d-text-section">
-                    发起人:  <span class="camps-text-highlight-color">{{theIdea.innovator.nickname}}</span>
+                    发起人:<camps-user-head user="theIdea.innovator" class="camps-text-highlight-color"></camps-user-head>
                 </div>
             </div>
             <div class="row">
+                <div ng-show="isEditing">
+                    <image-picker button-label='"添加图片"' on-finished='onImagesPicked(images)' type='idea'></image-picker>
+                </div>
                 <div class="camps-idea-d-metro-section">
-                    <div class="camps-piece" ng-repeat="image in sampleImages track by $index">
-                        <img ng-src="{{image}}">
-                    </div>
-                    <div class="camps-piece" ng-show="isEditing">
-                        <a>
-                            <img src="" alt="上传图片">
-                        </a>
+                    <div class="camps-piece" ng-show="!!form.headImgUrl">
+                        <img ng-src="{{form.headImgUrl}}" alt="Image">
+                        <button class="camps-piece-addon" ng-click="onRemoveHeadImage()" ng-show="isEditing"><span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="camps-idea-d-text-section">
                     背景:
-                    <span ng-hide="isEditing"><span ng-bind-html="form.background | htmlConent"></span></span>
+                    <span ng-hide="isEditing"><span ng-bind="form.background"></span></span>
                     <span ng-show="isEditing">
-                        <summernote class='form-control' config="summerOption" data-on-image-upload="imageUpload(files, editorB)"
-                                    ng-model="form.background" editor="editorB" editable="editableB"></summernote>
+                        <textarea class='form-control' cols="30" rows="10" ng-model="form.background" ></textarea>
                     </span>
                 </div>
             </div>
@@ -38,9 +38,9 @@
                     解决问题:
                     <span ng-hide="isEditing"><span ng-bind-html="form.painpoint | htmlConent"></span> </span>
                     <span ng-show="isEditing">
-                        <summernote class='form-control' config="summerOption" on-image-upload="imageUpload(files, editorP)"
-                                    ng-model="form.painpoint" editor="editorP" editable="editableP"></summernote>
+                        <textarea class='form-control' cols="30" rows="10" ng-model="form.painpoint" ></textarea>
                     </span>
+
                 </div>
             </div>
             <div class="row">
@@ -92,12 +92,12 @@
                 <div class="camps-idea-d-text-section">
                     关联项目:
                     <span ng-repeat="prj in theIdea.projects">
-                                {{prj.name}}
+                        <a ng-click="handleProjectLink(prj)">{{prj.name}}</a>
                     </span>
                 </div>
             </div>
             <div class="row">
-                <div class="camps-idea-d-text-section">
+                <div class="camps-idea-d-text-section" ng-show="currentUser._id==theIdea.innovator._id">
                     <span ng-show="isEditing" class="pull-right">
                         <button class="btn btn-default  camps-team-editing-button"
                                 ng-click="onCancelButton()">取消</button>
@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="col-xs-3 camps-panel-space">
-            <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail')" glyphicon-class="glyphicon-search"></idea-typehead>
+            <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail',{ideaId:theIdea._id})" glyphicon-class="glyphicon-search"></idea-typehead>
             <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createIdea" ng-if="!!currentUser">提交你的创意</button>
             <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="currentUser==null">提交你的创意</button>
         </div>

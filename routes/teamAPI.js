@@ -68,4 +68,5 @@ router.post('/update/:id',authenticator.authenticate,teamController.update);
 //{success:true}
 router.delete('/remove/:id',authenticator.authenticate,teamController.removeById);
 
+
 module.exports = router;
