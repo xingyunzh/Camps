@@ -36,6 +36,7 @@ app.service('httpHelper', function ($http, $q, $rootScope) {
 			var token = argument.headers('set-token');
 			if (!!token) {
 				$rootScope.token = token;
+				$rootScope.$emit("CampsDidReceiveAuthToken");
 			}
 
 			if (argument.data.status == "S") {

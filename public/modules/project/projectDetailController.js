@@ -193,7 +193,7 @@ app.controller("projectDetailController",
         };
 
         $scope.allowEditProject = function(){
-            if (!$rootScope.currentUser){
+            if (!$rootScope.currentUser || !$rootScope.theProject){
                 return false;
             }
 
@@ -206,7 +206,7 @@ app.controller("projectDetailController",
         };
 
         $scope.allowEditTasks = function(){
-            if (!$rootScope.currentUser){
+            if (!$rootScope.currentUser || !$rootScope.theTeam){
                 return false;
             }
 
