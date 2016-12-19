@@ -28,6 +28,7 @@ exports.paging = function(model,conditions,options,population) {
 			.skip(skipped)
 			.limit(pageSize)
 			.populate(population)
+			.lean()
 			.exec();
 
 	}).then(function(result){
