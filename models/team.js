@@ -5,7 +5,8 @@ var teamSchema = Schema({
 	name:{
 		type:String,
 		index:true,
-		required:true
+		required:true,
+		unique:true
 	},
 
 	headImgUrl:String,
@@ -30,15 +31,11 @@ var teamSchema = Schema({
 		ref:'User'
 	},
 
-	member:[{
+	//first member is the team lead
+	members:[{
 		type:Schema.Types.ObjectId,
 		ref:'User'
 	}],
-
-	lead:{
-		type:Schema.Types.ObjectId,
-		ref:'User'
-	},
 
 	state:Number
 });

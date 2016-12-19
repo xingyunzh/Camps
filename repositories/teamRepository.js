@@ -8,27 +8,19 @@ exports.create = function(team){
 };
 
 exports.findById = function(id){
-	return Team.findById(id).populate('coach').populate('member').populate('lead').lean().exec();
+	return Team.findById(id).populate('coach members').lean().exec();
 };
 
-exports.findByProject = function(id){
-	return Team.findOne({
-		project:id,
-		state:1
-	}).populate('coach member lead').lean().exec();
-};
+exports.findActiveTeam = function(conditions){
+	conditions.state = 1;
 
-exports.getActiveTeam = function(teamId){
-	return Team.findOne({
-		teamId:teamId,
-		state:1
-	}).populate('coach').populate('member').populate('lead').lean().exec();
+	return Team.findOne(conditions).populate('coach members').lean().exec();
 };
 
 exports.getTeamsById = function(teamId){
 	return Team.find({
 		teamId:teamId
-	}).populate('coach').populate('member').populate('lead').lean().exec();
+	}).populate('coach members').lean().exec();
 };
 
 exports.removeById = function(id){
@@ -38,13 +30,13 @@ exports.removeById = function(id){
 exports.update = function(conditions,updates){
 	return Team.findOneAndUpdate(conditions,updates,{
 		new:true
-	}).populate('coach').populate('member').populate('lead').exec();
+	}).populate('coach members').exec();
 };
 
 exports.updateById = function(id,updates){
 	return Team.findByIdAndUpdate(id,updates,{
 		new:true
-	}).populate('coach').populate('member').populate('lead').exec();
+	}).populate('coach members').exec();
 };
 
 exports.countByName = function(name){
@@ -60,18 +52,10 @@ exports.query = function(options){
 		conditions.name = new RegExp(options.keyword, "i");
 	}
 
-	if ('member' in options) {
-		conditions.member = options.member;
-	}
-
-	if ('lead' in options) {
-		conditions.lead = options.lead;
-	}
-
 	if ('state' in options) {
 		conditions.state = options.state;
 	}
 
-	return repositoryUtil.paging(Team,conditions,options,'coach member lead');
+	return repositoryUtil.paging(Team,conditions,options,'coach members lead');
 
 };

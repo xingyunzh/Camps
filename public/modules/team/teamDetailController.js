@@ -54,13 +54,13 @@ app.controller("teamDetailController", ["$scope", "$rootScope", "util", "project
     }
 
     $scope.onAddMemeberToForm = function (user) {
-        for (var i = 0; i < $scope.form.member.length; i++) {
-            if ($scope.form.member[i].uid == user.uid) {
+        for (var i = 0; i < $scope.form.members.length; i++) {
+            if ($scope.form.members[i].uid == user.uid) {
                 return;
             }
         }
 
-        $scope.form.member.push(user);
+        $scope.form.members.push(user);
     }
     
     $scope.handleProjectLink = function () {
@@ -76,8 +76,7 @@ app.controller("teamDetailController", ["$scope", "$rootScope", "util", "project
         return {
             name:$rootScope.theTeam.name,
             description:$rootScope.theTeam.description,
-            lead:angular.copy($rootScope.theTeam.lead),
-            member:$rootScope.theTeam.member,
+            members:$rootScope.theTeam.members,
             coach:angular.copy($rootScope.theTeam.coach),
         };
     }

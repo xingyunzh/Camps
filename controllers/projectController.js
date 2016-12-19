@@ -66,7 +66,9 @@ exports.getProjectById = function(req,res) {
 };
 
 var populateTeam = function(project){
-	return teamRepository.findByProject(project._id).then(function(team){
+	return teamRepository.findActiveTeam({
+		project:project._id
+	}).then(function(team){
 		project.team = team;
 		return project;
 	});

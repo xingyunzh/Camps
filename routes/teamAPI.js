@@ -8,10 +8,10 @@ var router = require('express').Router();
 //		name:String
 //	optional:
 //		description:String
-//		coach:String (user)
-//		lead:String(user)
-//		member:[String] (user)
-//		project: [String] (project)
+//		coach:id (user)
+//		lead:id(user)
+//		members:[id] (user)
+//		project:id (project)
 //response:
 // {team:{TeamEntity}}
 router.post('/add',authenticator.authenticate,teamController.create);
@@ -22,6 +22,13 @@ router.post('/add',authenticator.authenticate,teamController.create);
 //response:
 // {team:{TeamEntity}}
 router.get('/id/:id',teamController.getTeamById);
+
+//query parameters
+//	required:
+//		id:[id] (member)
+//response:
+// {team:{TeamEntity}}
+router.get('/member/:id',teamController.getTeamByMember);
 
 //query  parameters
 //	required:
@@ -46,12 +53,19 @@ router.get('/check',teamController.checkExist);
 //	optional:
 //		name:String
 //		description:String
-//		coach:String (user)
-//		lead:String(user)
-//		member:[String] (user)
-//		project: [String] (project)
+//		coach:id (user)
+//		lead:id(user)
+//		member:[id] (user)
+//		project: id (project)
 //response:
 //{team:TeamEntity}
 router.post('/update/:id',authenticator.authenticate,teamController.update);
+
+//body parameters
+//	required:
+//		id:id(team)
+//response:
+//{success:true}
+router.delete('/remove/:id',authenticator.authenticate,teamController.removeById);
 
 module.exports = router;
