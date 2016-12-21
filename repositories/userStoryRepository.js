@@ -8,13 +8,22 @@ exports.remove = function(id){
 	return UserStory.findByIdAndRemove(id).exec();
 };
 
+exports.getTasks = function(id){
+	return UserStory.findById(id,'tasks').populate({
+		path:'tasks',
+		populate:{
+			path:'assignee'
+		}
+	}).lean().exec();
+};
+
 exports.findById = function(id){
 	return UserStory.findById(id).lean().exec();
 };
 
-exports.insertMany = function(data){
-	return UserStory.insertMany(data);
-};
+// exports.insertMany = function(data){
+// 	return UserStory.insertMany(data);
+// };
 
 exports.update = function(conditions,data){
 
@@ -22,6 +31,7 @@ exports.update = function(conditions,data){
 	.findOneAndUpdate(conditions,data,{
 		new:true
 	})
+	.populate('tasks')
 	.exec();
 };
 
@@ -31,6 +41,7 @@ exports.updateById = function(id,data){
 	.findByIdAndUpdate(id,data,{
 		new:true
 	})
+	.populate('tasks')
 	.exec();
 };
 

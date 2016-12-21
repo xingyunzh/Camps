@@ -17,7 +17,7 @@ exports.findById = function(id){
 	return Project
 	.findById(id)
 	.populate({
-		path:'relatedIdea manager backlog',
+		path:'relatedIdea manager',
 		populate:{
 			path:'innovator consultant'
 		}
@@ -25,19 +25,19 @@ exports.findById = function(id){
 };
 
 exports.getBacklog = function(id){
-	return Project.findById(id,'backlog').populate('backlog').lean().exec();
-};
-
-exports.getSprints = function(id){
-	return Project.findById(id,'sprints').populate({
-		path:'sprints',
+	return Project.findById(id,'backlog').populate({
+		path:'backlog',
 		populate:{
-			path:'tasks backlog',
+			path:'tasks',
 			populate:{
 				path:'assignee'
 			}
 		}
-	}).sort('startDate').lean().exec();
+	}).lean().exec();
+};
+
+exports.getSprints = function(id){
+	return Project.findById(id,'sprints').populate('sprints').sort('startDate').lean().exec();
 };
 
 exports.updateById = function(id,data){
@@ -46,7 +46,7 @@ exports.updateById = function(id,data){
 		new:true
 	})
 	.populate({
-		path:'relatedIdea manager backlog',
+		path:'relatedIdea manager',
 		populate:{
 			path:'innovator consultant'
 		}
@@ -60,7 +60,7 @@ exports.update = function(conditions,data){
 		new:true
 	})
 	.populate({
-		path:'relatedIdea manager backlog',
+		path:'relatedIdea manager',
 		populate:{
 			path:'innovator consultant'
 		}
@@ -85,7 +85,7 @@ exports.query = function(options){
     }
     
 	return repositoryUtil.paging(Project,conditions,options,{
-		path:'relatedIdea manager backlog',
+		path:'relatedIdea manager',
 		populate:{
 			path:'innovator consultant'
 		}

@@ -8,12 +8,14 @@ exports.create = function(task){
 	return Task.create(task);
 };
 
-exports.insertMany = function(tasks){
-	return Task.insertMany(tasks);
-};
+// exports.insertMany = function(tasks){
+// 	return Task.insertMany(tasks);
+// };
 
 exports.updateById = function(id,data){
-	return Task.findByIdAndUpdate(id,data).populate('assignee').lean().exec();
+	return Task.findByIdAndUpdate(id,data,{
+		new:true
+	}).populate('assignee').lean().exec();
 };
 
 exports.deleteById = function(id) {

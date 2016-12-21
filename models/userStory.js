@@ -17,7 +17,12 @@ var userStorySchema = Schema({
 		required:true
 	},
 
-	point:String
+	point:String,
+
+	tasks:[{
+		type:Schema.Types.ObjectId,
+		ref:'Task'
+	}]
 });
 
 var UserStory = mongoose.model("UserStory", userStorySchema);

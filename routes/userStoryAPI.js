@@ -2,32 +2,50 @@ var userStoryController = require('../controllers/userStoryController');
 var authenticator = require('../authenticate/authenticator');
 var router = require('express').Router();
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (project)
 //response:
 // {backlog:[UserStoryEntities]}
 router.get('/project/:id',userStoryController.getUSByProject);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (userStory)
 //response:
 // {userStory:{UserStoryEntity}
 router.get('/id/:id',userStoryController.getUserStoryById);
 
-//query parameters
+//path parameters
 //	required:
-//		id:String (project)
+//		id:id (project)
 //body parameters
-//{userStories:[
-//	 {"as":"user","want":"do","soThat":"something"}  //add
-// 	 {"_id":"xxxxx"}  //remove
-//	 {"_id":"xxxxx","as":"new user","want":"change","soThat":"something new"} //update
-//   1 - 3 parameters of as,want,soThat are required for update
-// ]}
+//	required:
+//		as:String
+//		want:String
+//		soThat:String
 //response:
-//{backlog:[UserStoryEntities]}
-router.post('/update/:id',authenticator.authenticate,userStoryController.updateForProject);
+//{UserStory:UserStoryEntity}
+router.post('/add/:id',authenticator.authenticate,userStoryController.create);
+
+//path parameters
+//	required:
+//		id:id (userStory)
+//response:
+//{success:true}
+router.delete('/remove/:id',authenticator.authenticate,userStoryController.remove);
+
+//path parameters
+//	required:
+//		id:String (userStory)
+//body parameters
+//	optional:
+//		as:String
+//		want:String
+//		soThat:String
+//		tasks:[id] (task)
+//response:
+//{UserStory:UserStoryEntity}
+router.post('/update/:id',authenticator.authenticate,userStoryController.update);
 
 module.exports = router;

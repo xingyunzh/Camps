@@ -61,6 +61,8 @@ router.get('/list',projectController.list);
 //		scope:String
 // 		relatedIdea:id (idea)
 //		relatedAsset:[id] (asset) 未实现
+//		backlog:[id] (userStory)
+//		sprints:[id] (sprint)
 //response:
 //{project:entity (project)}
 router.post('/update/:id',authenticator.authenticate,projectController.update);
