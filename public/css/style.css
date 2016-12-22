@@ -124,8 +124,12 @@ body {
     border-top: 1px solid #d1d1d1;
 }
 
-.camps-datepicker {
+.camps-datepicker{
     width:150px;
+}
+
+.camps-short-field {
+    width: 200px;
 }
 
 .camps-text-highlight-color {

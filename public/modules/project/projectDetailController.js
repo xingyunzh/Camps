@@ -3,9 +3,9 @@
  */
 app.controller("projectDetailController",
     ["$scope", "$rootScope", "$stateParams", "util", "teamService", "projectService","toaster", "$filter",
-        "$q", "ossFileService",
+        "$q", "ossFileService", "$timeout",
     function ($scope, $rootScope,$stateParams, util, teamService, projectService, toaster, $filter,
-              $q, ossFileService) {
+              $q, ossFileService, $timeout) {
         $scope.isNameEditing = false;
         $scope.form = {};
         $scope.list = ["one", "two", "three", "four", "five", "six"];
@@ -13,6 +13,7 @@ app.controller("projectDetailController",
         $scope.fileToUpload = null;
         $scope.isAttachmentsEditing = false;
         $scope.percentage = 0;
+        $scope.theUserStory = null;
 
         $scope.sampleAttachments = [
             "http://campro.oss-cn-shanghai.aliyuncs.com/u5825aeb15f490a225690a3a0_Bitmaphead.jpg",
@@ -52,12 +53,12 @@ app.controller("projectDetailController",
             updateProjectIfNeeds.then(function(project){
                 $rootScope.theProject = project;
                 $scope.form = makeFormOfTheProject();
+                $rootScope.theTeam = project.team;
 
-                return $q.all([teamService.getTeamByMember(project.manager),
-                    projectService.getBacklogByProject(project)]);
+                return $q.all([projectService.getBacklogByProject(project), projectService.getSprintsByProject(project)]);
             }).then(function(dataGroup){
-                $rootScope.theTeam = dataGroup[0].team[0];
-                $scope.backlog = dataGroup[1].backlog;
+                $scope.backlog = dataGroup[0].backlog;
+                $scope.sprints = dataGroup[1].sprints;
             }).catch(function(error){
                 toaster.pop({
                     type:"error",
@@ -185,11 +186,16 @@ app.controller("projectDetailController",
             $rootScope.$state.go("nav.team-detail", {teamId:$rootScope.theTeam._id});
         };
 
-        $scope.handleStoryOrSprints = function($event){
-            var coord = angular.element($event.target).offset();
-            var panelCoord = angular.element(".camps-project-d-task-panel:first").offset();
-            panelCoord.top = coord.top;
-            angular.element(".camps-project-d-task-panel:first").offset(panelCoord);
+        $scope.handleStory = function(story, $event){
+            $scope.theUserStory = story;
+
+            $timeout(function(){
+                var coord = angular.element($event.delegateTarget).offset();
+                console.log("click " + $event.delegateTarget.localName);
+                var panelCoord = angular.element(".camps-project-d-task-panel:first").offset();
+                panelCoord.top = coord.top + 10;
+                angular.element(".camps-project-d-task-panel:first").offset(panelCoord);
+            });
         };
 
         $scope.allowEditProject = function(){
@@ -211,11 +217,11 @@ app.controller("projectDetailController",
             }
 
             if($scope.allowEditProject()) {
-                return true;
+                return true;s
             }
 
-            for (var i = 0; i < $rootScope.theTeam.member.length; i++){
-                if ($rootScope.theTeam.member[i]._id == $rootScope.currentUser._id){
+            for (var i = 0; i < $rootScope.theTeam.members.length; i++){
+                if ($rootScope.theTeam.members[i]._id == $rootScope.currentUser._id){
                     return true;
                 }
             }

@@ -2,8 +2,6 @@
  * Created by brillwill on 16/9/14.
  */
 app.controller("navController", ["$scope", "$rootScope", "loginService", function($scope, $rootScope, loginService){
-
-
     (function initialize(){
         loginService.recoverLoginIfPossible($rootScope);
 
@@ -11,11 +9,14 @@ app.controller("navController", ["$scope", "$rootScope", "loginService", functio
 
     $rootScope.$on('loggedIn',function(){
         loginService.archiveUserInfo(kCampsArchiveKeyUserId, $rootScope.currentUser._id);
-        if ($rootScope.$previousState){
-            $rootScope.$state.go($rootScope.$previousState, $rootScope.$previousStateParams);
-        }
-        else {
-            $rootScope.$state.go("nav.idea");
+
+        if ($rootScope.$state.is('nav.login')){
+            if ($rootScope.$previousState){
+                $rootScope.$state.go($rootScope.$previousState, $rootScope.$previousStateParams);
+            }
+            else {
+                $rootScope.$state.go("nav.idea");
+            }
         }
     });
 
