@@ -88,8 +88,8 @@ app.controller("teamDetailController", ["$scope", "$rootScope","$stateParams", "
     
     $scope.handleProjectLink = function () {
         projectService.getProjectById($rootScope.theTeam.project.id).then(function ok(data) {
-            $rootScope.theProject = data;
-            $rootScope.$state.go("nav.project-detail");
+            $rootScope.theProject = data.project;  
+            $rootScope.$state.go("nav.project-detail", {projectId:data.project._id});
         }, function fail() {
            util.confirmationStep("错误", "项目不存在");
         });

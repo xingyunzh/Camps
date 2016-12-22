@@ -2,16 +2,16 @@ var sprintController = require('../controllers/sprintController');
 var authenticator = require('../authenticate/authenticator');
 var router = require('express').Router();
 
-//query parameters
+//path parameters
 //	required:
-//		id:String (project)
+//		id:id (project)
 //response:
 // {sprints:[SprintEntities]}
 router.get('/project/:id',sprintController.getSprintsByProject);
 
-//query parameters
+//path parameters
 //	required:
-//		id:String (sprint)
+//		id:id (sprint)
 //body parameters
 // required:
 //	optional:
@@ -22,9 +22,9 @@ router.get('/project/:id',sprintController.getSprintsByProject);
 //{sprint:[SprintEntity]}
 router.post('/update/:id',sprintController.update);
 
-//query parameters
+//path parameters
 //	required:
-//		id:String (project)
+//		id:id (project)
 //body parameters
 //required
 //	startDate:Date
@@ -33,12 +33,19 @@ router.post('/update/:id',sprintController.update);
 //{sprint:[SprintEntity]}
 router.post('/add/:id',sprintController.create);
 
-//query parameters
+//path parameters
 //	required:
-//		id:String (sprint)
+//		id:id (sprint)
 //response:
 // {sprint:[SprintEntity]}
 router.get('/id/:id',sprintController.getSprintById);
+
+//path parameters
+//	required:
+//		id:id (sprint)
+//response:
+// {sprint:[SprintEntity]}
+router.get('/remove/:id',sprintController.remove);
 
 
 module.exports = router;

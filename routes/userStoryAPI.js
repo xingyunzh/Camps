@@ -33,7 +33,7 @@ router.post('/add/:id',authenticator.authenticate,userStoryController.create);
 //		id:id (userStory)
 //response:
 //{success:true}
-router.delete('/remove/:id',authenticator.authenticate,userStoryController.remove);
+router.get('/remove/:id',authenticator.authenticate,userStoryController.remove);
 
 //path parameters
 //	required:
