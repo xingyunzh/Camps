@@ -11,7 +11,7 @@ router.get('/story/:id',taskController.getTasksByUserStory);
 
 //path parameters
 //	required:
-//		id:String (task)
+//		id:id (task)
 //body parameters
 // required:
 //	optional:
@@ -25,7 +25,7 @@ router.post('/update/:id',taskController.update);
 
 //path parameters
 //	required:
-//		id:String (project)
+//		id:id(userStory)
 //body parameters
 //	required
 //		description:String
@@ -39,10 +39,10 @@ router.post('/add/:id',taskController.create);
 
 //path parameters
 //	required:
-//		id:String (task)
+//		id:id (task)
 //response:
 // {sprint:[SprintEntity]}
-router.delete('/remove/:id',taskController.remove);
+router.get('/remove/:id',taskController.remove);
 
 
 module.exports = router;

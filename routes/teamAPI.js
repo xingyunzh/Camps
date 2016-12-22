@@ -9,21 +9,20 @@ var router = require('express').Router();
 //	optional:
 //		description:String
 //		coach:id (user)
-//		lead:id(user)
 //		members:[id] (user)
 //		project:id (project)
 //response:
 // {team:{TeamEntity}}
 router.post('/add',authenticator.authenticate,teamController.create);
 
-//query parameters
+//path parameters
 //	required:
 //		id:String (idea)
 //response:
 // {team:{TeamEntity}}
 router.get('/id/:id',teamController.getTeamById);
 
-//query parameters
+//path parameters
 //	required:
 //		id:[id] (member)
 //response:
@@ -54,19 +53,18 @@ router.get('/check',teamController.checkExist);
 //		name:String
 //		description:String
 //		coach:id (user)
-//		lead:id(user)
 //		member:[id] (user)
 //		project: id (project)
 //response:
 //{team:TeamEntity}
 router.post('/update/:id',authenticator.authenticate,teamController.update);
 
-//body parameters
+//path parameters
 //	required:
 //		id:id(team)
 //response:
 //{success:true}
-router.delete('/remove/:id',authenticator.authenticate,teamController.removeById);
+router.get('/remove/:id',authenticator.authenticate,teamController.removeById);
 
 
 module.exports = router;
