@@ -90,6 +90,16 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
             console.log("upload fail data = " + error);
         });
 
+        ossFileService.getClient().then(function(client){
+            return ossFileService.uploadFileWithClient(client,gFileName,file,function(p){
+                console.log("file progress " + p * 100 + "%");
+            });
+        }).then(function(res){
+            console.log("upload data = " + res.url);
+        }).catch(function(error){
+            console.log("upload fail data = " + error);
+        });
+
    }
 
 }]);

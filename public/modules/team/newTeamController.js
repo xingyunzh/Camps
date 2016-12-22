@@ -6,8 +6,7 @@ app.controller("newTeamController", ["$scope", "$rootScope", "teamService", "uti
     $scope.form = {
         name: null,
         description: null,
-        lead: $rootScope.currentUser,
-        member: [],
+        members: [$rootScope.currentUser],
         coach:null
     };
 

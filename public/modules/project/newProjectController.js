@@ -30,7 +30,7 @@ app.controller("newProjectController", ["$scope", "$rootScope", "util", "project
                         body: "正在为您新建项目,请稍候...",
                     });
 
-                    teamService.getTeamAsLead($rootScope.currentUser).then(function(data) {
+                    teamService.getTeamByMember($rootScope.currentUser).then(function(data) {
                         var myTeam = data.team[0];
                         if (!myTeam || !myTeam._id){
                             throw "只有队长才能创建项目。";

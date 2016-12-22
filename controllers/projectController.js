@@ -1,6 +1,7 @@
 var projectRepository = require('../repositories/projectRepository');
 var teamRepository = require('../repositories/teamRepository');
 var util = require('../util/util');
+var q = require('q');
 
 exports.list = function(req,res){
 	var conditions = req.body;
@@ -65,26 +66,27 @@ exports.getProjectById = function(req,res) {
 	});
 };
 
-var populateTeam = function(project){
-	return teamRepository.findByProject(project._id).then(function(team){
+function populateTeam(project){
+	return teamRepository.findActiveTeam({
+		project:project._id
+	}).then(function(team){
 		project.team = team;
 		return project;
 	});
-};
+}
 
 function populateTeams(projects,count){
-	if (count === undefined) {
-		count = projects.length;
-	}else if(count === 0){
-		return projects;
+	var promises = [];
+
+	for (var i = projects.length - 1; i >= 0; i--) {
+		var project = projects[i];
+
+		var promise = populateTeam(project);
+
+		promises.push(promise);
 	}
 
-	count--;
-
-	return populateTeam(projects[count]).then(function(project){
-		projects[count] = project;
-		return populateTeams(projects,count);
-	});
+	return q.all(promises);
 	
 }
 

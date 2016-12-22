@@ -53,7 +53,7 @@ app.controller("projectDetailController",
                 $rootScope.theProject = project;
                 $scope.form = makeFormOfTheProject();
 
-                return $q.all([teamService.getTeamAsLead(project.manager),
+                return $q.all([teamService.getTeamByMember(project.manager),
                     projectService.getBacklogByProject(project)]);
             }).then(function(dataGroup){
                 $rootScope.theTeam = dataGroup[0].team[0];

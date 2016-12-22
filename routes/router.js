@@ -1,5 +1,6 @@
 
 var userAPI = require('./userAPI');
+var taskAPI = require('./taskAPI');
 var ideaAPI = require('./ideaAPI');
 var teamAPI = require('./teamAPI');
 var imageAPI = require('./imageAPI');
@@ -36,6 +37,8 @@ module.exports = function(app, contextRoot) {
 	rootRouter.use('/api/project',projectAPI);
 
     rootRouter.use('/api/story',userStoryAPI);
+
+    rootRouter.use('/api/task',taskAPI);
 
     rootRouter.use('/api/sprint',sprintAPI);
 

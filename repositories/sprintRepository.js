@@ -7,18 +7,20 @@ exports.create = function(data){
 
 exports.findById = function(id) {
 	return Sprint.findById(id).populate({
-		path:'tasks backlog',
+		path:'backlog',
 		populate:{
-			path:'assignee'
+			path:'tasks'
 		}
 	}).lean().exec();
 };
 
 exports.updateById = function(id,data){
-	return Sprint.findByIdAndUpdate(id,data).populate({
-		path:'tasks backlog',
+	return Sprint.findByIdAndUpdate(id,data,{
+		new:true
+	}).populate({
+		path:'backlog',
 		populate:{
-			path:'assignee'
+			path:'tasks'
 		}
 	}).lean().exec();
 };

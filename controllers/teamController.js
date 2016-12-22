@@ -11,7 +11,7 @@ exports.list = function(req,res){
 	teamRepository.query(conditions).then(function(result){
 		res.send(util.wrapBody({
 			total:result.total,
-			team:result.list
+			teams:result.list
 		}));
 	}).catch(function(err){
 		console.log(err);
@@ -22,32 +22,6 @@ exports.list = function(req,res){
 		}
 	});
 };
-
-exports.getByUserAsMember = function(req, res){
-	var userid = req.params.id;
-	doGetByUserWithCondition({member:userid}, res);
-}
-exports.getByUserAsCoach = function(req, res){
-	var userid = req.params.id;
-	doGetByUserWithCondition({coach:userid}, res);
-}
-exports.getByUserAsLead = function(req, res){
-	var userid = req.params.id;
-	doGetByUserWithCondition({lead:userid}, res);
-}
-
-function doGetByUserWithCondition(condition, res){
-	teamRepository.query(condition).then(function(result){
-		res.send(util.wrapBody({total:result.total, team:result.list}));
-	}).catch(function(err){
-		console.log(err);
-		if (err instanceof CamproError) {
-			res.send(util.wrapBody(err.customMsg,'E'));
-		}else{
-			res.send(util.wrapBody('Internal Error','E'));
-		}
-	});
-}
 
 exports.checkExist = function(req,res){
 
@@ -73,10 +47,8 @@ function checkNameExist(name){
 exports.create = function(req,res){
 
 	if(util.checkParam(req.body,['name'])){
-		var lead = req.token.userId;
 
 		var team = req.body;
-		team.lead = lead;
 		team.createDate = new Date();
 		team.state = 1;
 
@@ -91,6 +63,19 @@ exports.create = function(req,res){
 	}
 
 
+};
+
+exports.getTeamByMember = function(req,res){
+	var memberId = req.params.id;
+
+	teamRepository.findActiveTeam({
+		members:memberId
+	}).then(function(result){
+		res.send(util.wrapBody({team:result}));
+	}).catch(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Err','E'));
+	});
 };
 
 exports.getTeamById = function(req,res) {
@@ -115,7 +100,8 @@ exports.update = function(req,res){
 	}
 
 	if (triggerNewTeam(updates)) {
-		teamRepository.findById(id)
+		teamRepository
+		.findById(id)
 		.then(function copyToHistory(result){
 			delete result._id;
 			result.state = 0;
@@ -139,8 +125,19 @@ exports.update = function(req,res){
 	}
 };
 
+exports.removeById = function(req,res){
+	var id = req.params.id;
+
+	teamRepository.removeById(id).then(function(){
+		res.send(util.wrapBody({success:true}));
+	}).catch(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Error','E'));
+	});
+};
+
 function triggerNewTeam(conditions){
-	var triggerCon = ['lead','member','coach','project'];
+	var triggerCon = ['member','coach','project'];
 
 	for (var i = triggerCon.length - 1; i >= 0; i--) {
 		if(triggerCon[i] in conditions){

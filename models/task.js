@@ -11,11 +11,6 @@ var taskSchema = Schema({
 	assignee:{
 		type:Schema.Types.ObjectId,
 		ref:'User'
-	},
-
-	userStory:{
-		type:Schema.Types.ObjectId,
-		ref:'UserStory'
 	}
 });
 

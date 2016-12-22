@@ -18,16 +18,12 @@ app.service("teamService", ["httpHelper", "$q", function (httpHelper, $q) {
         return httpHelper.sendRequest("POST", "./api/team/update/"+team._id, param);
     }
 
-    this.getTeamAsMember = function(user) {
+    this.getTeamByMember = function(user) {
         return httpHelper.sendRequest("GET", "./api/team/member/"+user._id);
     }
 
-    this.getTeamAsLead = function(user) {
-        return httpHelper.sendRequest("GET", "./api/team/lead/"+user._id);
-    }
-
     this.getTeamAsCoach = function(user) {
-        return httpHelper.sendRequest("GET", "./api/team/coach/"+user._id);
+        return httpHelper.sendRequest("GET", "./api/team/list?coach="+user._id);
     }
 
     this.getTeamById = function(id){
