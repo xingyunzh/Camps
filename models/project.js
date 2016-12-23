@@ -35,7 +35,9 @@ var projectSchema = Schema({
 		ref:'Sprint'
 	}],
 
-	attachments:[String]
+	attachments:[String],
+
+	images:[String]
 });
 
 var Project = mongoose.model("Project", projectSchema);

@@ -30,13 +30,13 @@ exports.removeById = function(id){
 exports.update = function(conditions,updates){
 	return Team.findOneAndUpdate(conditions,updates,{
 		new:true
-	}).populate('coach members project').exec();
+	}).populate('coach members project').lean().exec();
 };
 
 exports.updateById = function(id,updates){
 	return Team.findByIdAndUpdate(id,updates,{
 		new:true
-	}).populate('coach members project').exec();
+	}).populate('coach members project').lean().exec();
 };
 
 exports.countByName = function(name){

@@ -47,7 +47,10 @@ var ideaSchema = Schema({
 	relatedAssets:[{
 		type:Schema.Types.ObjectId,
 		ref:'Asset'
-	}]
+	}],
+
+	images:[String]
+	
 });
 
 var Idea = mongoose.model('Idea', ideaSchema);
