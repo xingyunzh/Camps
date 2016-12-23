@@ -32,6 +32,7 @@ app.controller("projectDetailController",
             stop: function(e, ui) {
                 // this callback has the changed model
                 // console.log("Stop:" + JSON.stringify($scope.list));
+                $scope.backlogReordered = true;
             }
         };
 
@@ -71,15 +72,38 @@ app.controller("projectDetailController",
         $scope.onBacklogEdit= function(){
             if($scope.isBacklogEditing){
                 var backlog = angular.copy($scope.backlog);
+
+                var actions = [];
                 _.map(backlog, function(item){
-                    if (item.deleted){
-                        delete item.as;
-                        delete item.want;
-                        delete item.soThat;
+                    if (item.deleted && !!item._id){
+                        actions.push(projectService.removeStory(item));
+                    }
+
+                    if(item.modified){
+                        actions.push(projectService.updateStory(item));
+                    }
+
+                    if(!item._id) {
+                        actions.push(projectService.createStoryForProject(item, $scope.theProject));
                     }
                 });
 
-                projectService.updateBacklogByProject($rootScope.theProject, backlog).then(function(backlog){
+                $q.all(actions).then(function(dataGroup){
+                    if ($scope.backlogReordered){
+                        var prioritizedBacklog = _.filter(backlog, function(item){
+                            return !item.deleted;
+                        }).map(function(item){
+                            return item._id;
+                        });
+                        return projectService.updateProjectBacklogPriority($scope.theProject, prioritizedBacklog)
+                            .then(function(project){
+                                return projectService.getBacklogByProject(project);
+                            });
+                    }
+                    else {
+                        return projectService.getBacklogByProject($scope.theProject);
+                    }
+                }).then(function(backlog){
                     $scope.backlog = backlog;
                     toaster.pop({
                         type:"success",
@@ -99,6 +123,7 @@ app.controller("projectDetailController",
                 });
             } else {
                 $scope.isBacklogEditing = true;
+                $scope.theUserStory = null;
             }
         };
 
@@ -106,7 +131,11 @@ app.controller("projectDetailController",
             var content = !us ? {} : us;
             util.modalUserStoryInputStep(!us ? "新建UserStory" : "US-"+us._id, content).then(function(userStory){
                 if (!!us){
-                    us = angular.copy(userStory);
+                    us.as = userStory.as;
+                    us.want = userStory.want;
+                    us.soThat = userStory.soThat;
+
+                    us.modified = true;
                 }
                 else {
                     $scope.backlog.push(userStory);

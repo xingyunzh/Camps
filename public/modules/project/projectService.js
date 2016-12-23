@@ -42,10 +42,71 @@ app.service("projectService", ["util", "$q", "httpHelper", function (util, $q, h
         });
     };
     
-    this.updateBacklogByProject = function (project, backlog) {
-        return httpHelper.sendRequest("POST", "./api/story/update/"+project._id, {userStories:backlog}).then(function(data){
-            return data.backlog;
+    this.updateProjectBacklogPriority = function (project, backlog) {
+        return httpHelper.sendRequest("POST", "./api/project/update/"+project._id, {backlog:backlog}).then(function(data){
+            return data.project;
         });
+    };
+
+    this.createStoryForProject = function (story, project) {
+        return httpHelper.sendRequest("POST", "./api/story/add/" + project._id, {
+            as: story.as,
+            want: story.want,
+            soThat: story.soThat
+        })
+            .then(function (data) {
+                return data.userStory;
+            });
+    };
+
+    this.updateStory = function(story){
+        if(story._id){
+            return httpHelper.sendRequest("POST", "./api/story/update/"+story._id, story).then(function(data){
+                return data.userStory;
+            });
+        }
+        else {
+            return util.promiseWithResolve(story);
+        }
+    };
+
+    this.removeStory = function(story){
+        if(story._id) {
+            return httpHelper.sendRequest("GET", "./api/story/remove/"+story._id).then(function(data){
+                return data.success;
+            });
+        }
+        else {
+            return util.promiseWithResolve(true);
+        }
+    };
+
+    this.createTaskForStory = function(task, story){
+        return httpHelper.sendRequest("POST", "./api/task/add/"+story._id, task).then(function(data){
+            return data.task;
+        });
+    };
+
+    this.updateTask = function(task){
+        if (!!task._id){
+            return httpHelper.sendRequest("POST", "./api/task/update/"+task._id, task).then(function(data){
+                return data.task;
+            });
+        }
+        else {
+            return util.promiseWithResolve(task);
+        }
+    };
+    
+    this.removeTask = function(task){
+        if (!!task._id){
+            return httpHelper.sendRequest("GET", "./api/task/remove/"+task._id).then(function(data){
+                return data.success;
+            });
+        }
+        else {
+            return util.promiseWithResolve(true);
+        }
     };
 
     this.getSprintsByProject = function(project){
