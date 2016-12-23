@@ -10,12 +10,12 @@ var router = require('express').Router();
 //		background:String
 //		solution:String
 //		painpoint:String
-//		innovator:String (User)
-//		consultant:String (User)
+//		innovator:id (User)
+//		consultant:id (User)
 //		sector:String
 //		deadline:Date
 //		hrRequirement:String
-//		relatedAssets:[String] (Asset)
+//		relatedAssets:[id] (Asset)
 //response:
 //{idea:IdeaEntity}
 router.post('/add',authenticator.authenticate,ideaController.createIdea);

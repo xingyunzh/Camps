@@ -13,7 +13,7 @@ exports.count = function(conditions){
 };
 
 exports.findById = function(id){
-	return Idea.findById(id).populate('innovator').lean().exec();
+	return Idea.findById(id).populate('innovator consultant').lean().exec();
 };
 
 exports.update = function(conditions,data){
@@ -22,7 +22,7 @@ exports.update = function(conditions,data){
 	.findOneAndUpdate(conditions,data,{
 		new:true
 	})
-	.populate('innovator')
+	.populate('innovator consultant')
 	.exec();
 };
 

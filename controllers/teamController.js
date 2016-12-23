@@ -54,7 +54,7 @@ exports.create = function(req,res){
 
 		teamRepository.create(team)
 		.then(function(result){
-			return teamRepository.findById(team._id);
+			return teamRepository.findById(result._id);
 		}).then(function(newTeam){
 			res.send(util.wrapBody({team:newTeam}));
 		}).catch(function(err){
