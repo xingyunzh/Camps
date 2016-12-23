@@ -55,7 +55,19 @@ app.service('httpHelper', function ($http, $q, $rootScope) {
 
 app.filter("nameOfStory",function () {
 	return function(us){
+        if (us == null){
+            return "";
+        }
 		return us.as + ',' + us.want + ',' + us.soThat;
+	}
+});
+
+app.filter("idOfStory",function () {
+	return function(us){
+        if (us == null){
+            return "";
+        }
+		return us._id.slice(0,1) + "***" + us._id.slice(-4);
 	}
 });
 

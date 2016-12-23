@@ -31,11 +31,7 @@ app.controller("newProjectController", ["$scope", "$rootScope", "util", "project
                     });
 
                     teamService.getTeamByMember($rootScope.currentUser).then(function(data) {
-                        var myTeam = data.team[0];
-                        if (!myTeam || !myTeam._id){
-                            throw "只有队长才能创建项目。";
-                        }
-
+                        var myTeam = data.team;
                         $scope.form.team = myTeam._id;
                         return projectService.add($scope.form).then(function (data) {
                             toaster.clear();
