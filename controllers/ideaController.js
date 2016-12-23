@@ -20,12 +20,12 @@ exports.createIdea = function(req,res){
 	}
 
 	ideaRepostory.create(idea).then(function(result){
-		res.send(util.wrapBody({idea:idea}));
-		
+		return ideaRepostory.findById(result._id);
+	}).then(function(newIdea){
+		res.send(util.wrapBody({idea:newIdea}));
 	}).catch(function(err){
 		console.log(err);
 		res.send(util.wrapBody('Internal Error','E'));
-
 	});
 	
 

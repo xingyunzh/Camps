@@ -40,7 +40,7 @@ function checkNameExist(name){
 	var q = teamRepository.countByName(name);
 
 	return teamRepository.countByName(name).then(function(count){
-		return count>0;
+		return count > 0;
 	});
 }
 
@@ -52,8 +52,11 @@ exports.create = function(req,res){
 		team.createDate = new Date();
 		team.state = 1;
 
-		teamRepository.create(team).then(function(result){
-			res.send(util.wrapBody({team:result}));
+		teamRepository.create(team)
+		.then(function(result){
+			return teamRepository.findById(team._id);
+		}).then(function(newTeam){
+			res.send(util.wrapBody({team:newTeam}));
 		}).catch(function(err){
 			console.log(err);
 			res.send(util.wrapBody('Internal Error','E'));

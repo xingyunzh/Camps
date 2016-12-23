@@ -32,7 +32,9 @@ exports.create = function(req,res){
 		project.createDate = new Date();
 
 		projectRepository.create(project)
-		.then(function updateTeam(newProject){
+		.then(function findProject(result){
+			return projectRepository.findById(project._id);
+		}).then(function updateTeam(newProject){
 			if (!!project.team) {
 				return teamRepository.updateById(project.team,{
 					project:newProject._id
