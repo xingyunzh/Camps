@@ -7,19 +7,27 @@ app.service("teamService", ["httpHelper", "$q", function (httpHelper, $q) {
         if (word){
             url += "?keyword="+word;
         }
-        return httpHelper.sendRequest("GET", url);
+        return httpHelper.sendRequest("GET", url).then(function(data){
+            return data.teams;
+        });
     };
 
     this.add = function(param) {
-        return httpHelper.sendRequest("POST", "./api/team/add", param);
+        return httpHelper.sendRequest("POST", "./api/team/add", param).then(function(data){
+            return data.team;
+        });
     };
     
     this.update = function(team, param) {
-        return httpHelper.sendRequest("POST", "./api/team/update/"+team._id, param);
+        return httpHelper.sendRequest("POST", "./api/team/update/"+team._id, param).then(function(data){
+            return data.team;
+        });
     };
 
     this.getTeamByMember = function(user) {
-        return httpHelper.sendRequest("GET", "./api/team/member/"+user._id);
+        return httpHelper.sendRequest("GET", "./api/team/member/"+user._id).then(function(data){
+            return data.team;
+        });
     };
 
     this.getTeamAsCoach = function(user) {
@@ -27,7 +35,9 @@ app.service("teamService", ["httpHelper", "$q", function (httpHelper, $q) {
     };
 
     this.getTeamById = function(id){
-        return httpHelper.sendRequest("GET", "./api/team/id/"+id);
+        return httpHelper.sendRequest("GET", "./api/team/id/"+id).then(function(data){
+            return data.team;
+        });
     };
     
     this.checkName = function (name) {

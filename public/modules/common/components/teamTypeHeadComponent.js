@@ -11,9 +11,7 @@ app.component('teamTypehead', {
     },
     controller: function($scope, $element, $attrs, $q, teamService){
         $scope.getTeams = function (viewValue) {
-            return teamService.teamSource(viewValue).then(function(data){
-                return data.team;
-            });
+            return teamService.teamSource(viewValue);
         };
 
         $scope.selectedTeam = null;

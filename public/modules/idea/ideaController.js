@@ -27,8 +27,8 @@ app.controller("ideaController", ["$scope", "$rootScope", "ideaService", "toaste
             return;
         }
 
-        pullingData.then(function(data){
-            $scope.ideas = data.ideas;
+        pullingData.then(function(ideas){
+            $scope.ideas = ideas;
         }).catch(function(error){
             toaster.pop({
                 type:"error",

@@ -34,11 +34,11 @@ app.controller("newTeamController", ["$scope", "$rootScope", "teamService", "uti
                     });
                     return teamService.add($scope.form);
                 })
-                .then(function (data) {
+                .then(function (team) {
                     toaster.clear();
 
-                    $rootScope.theTeam = data.team;
-                    $rootScope.$state.go('nav.team-detail', {teamId: data.team._id});
+                    $rootScope.theTeam = team;
+                    $rootScope.$state.go('nav.team-detail', {teamId:team._id});
                 })
                 .catch(function (error) {
                     toaster.clear();

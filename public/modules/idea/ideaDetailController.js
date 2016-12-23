@@ -28,9 +28,7 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "$stateParams", 
         (function initialize(){
             var updateTheIdeaIfNeeds = null;
             if (!$rootScope.theIdea || ($stateParams.ideaId && $rootScope.theIdea._id != $stateParams.ideaId)){
-                updateTheIdeaIfNeeds = ideaService.getIdeaById($stateParams.ideaId).then(function(data){
-                    return data.idea;
-                });
+                updateTheIdeaIfNeeds = ideaService.getIdeaById($stateParams.ideaId);
             }
             else {
                 updateTheIdeaIfNeeds = util.promiseWithResolve($rootScope.theIdea);
@@ -62,8 +60,8 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "$stateParams", 
                         $scope.isEditing = false;
                         var updateContent = makeUpdateContent();
                         return ideaService.updateIdeaById($rootScope.theIdea._id, updateContent);
-                    }).then(function (data) {
-                    $rootScope.theIdea = data.idea;
+                    }).then(function (idea) {
+                    $rootScope.theIdea = idea;
                     $scope.form = makeFormOfTheIdea();
                 }).catch(function (error) {
                     toaster.pop({
@@ -92,9 +90,9 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "$stateParams", 
         };
 
         $scope.handleProjectLink = function (prj) {
-            projectService.getProjectById(prj._id).then(function ok(data) {
-                $rootScope.theProject = data.project;
-                $rootScope.$state.go("nav.project-detail", {projectId:data.project._id});
+            projectService.getProjectById(prj._id).then(function ok(project) {
+                $rootScope.theProject = project;
+                $rootScope.$state.go("nav.project-detail", {projectId:project._id});
             }, function fail() {
                 util.confirmationStep("错误", "项目不存在");
             });

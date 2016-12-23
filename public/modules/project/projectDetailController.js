@@ -42,9 +42,7 @@ app.controller("projectDetailController",
                 updateProjectIfNeeds = util.promiseWithResolve($rootScope.theProject);
             }
             else if ($stateParams.projectId){
-                updateProjectIfNeeds = projectService.getProjectById($stateParams.projectId).then(function(data){
-                  return data.project;
-                });
+                updateProjectIfNeeds = projectService.getProjectById($stateParams.projectId);
             }
             else {
                 return;
@@ -57,8 +55,8 @@ app.controller("projectDetailController",
 
                 return $q.all([projectService.getBacklogByProject(project), projectService.getSprintsByProject(project)]);
             }).then(function(dataGroup){
-                $scope.backlog = dataGroup[0].backlog;
-                $scope.sprints = dataGroup[1].sprints;
+                $scope.backlog = dataGroup[0];
+                $scope.sprints = dataGroup[1];
             }).catch(function(error){
                 toaster.pop({
                     type:"error",
@@ -80,8 +78,8 @@ app.controller("projectDetailController",
                     }
                 });
 
-                projectService.updateBacklogByProject($rootScope.theProject, backlog).then(function(data){
-                    $scope.backlog = data.backlog;
+                projectService.updateBacklogByProject($rootScope.theProject, backlog).then(function(backlog){
+                    $scope.backlog = backlog;
                     toaster.pop({
                         type:"success",
                         title:"编辑Backlog",
@@ -159,8 +157,8 @@ app.controller("projectDetailController",
                     param[keys[i]] = $scope.form[keys[i]];
                 }
 
-                projectService.update($rootScope.theProject, param).then(function(data){
-                    $rootScope.theProject = data.project;
+                projectService.update($rootScope.theProject, param).then(function(project){
+                    $rootScope.theProject = project;
 
                     $scope[keyEditing] = false;
                 }).catch(function(error){

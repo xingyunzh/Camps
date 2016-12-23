@@ -14,8 +14,8 @@ app.controller("teamDetailController", ["$scope", "$rootScope","$stateParams", "
             }
 
             if ($stateParams.teamId){
-                teamService.getTeamById($stateParams.teamId).then(function(data){
-                    $rootScope.theTeam = data.team;
+                teamService.getTeamById($stateParams.teamId).then(function(team){
+                    $rootScope.theTeam = team;
                     $scope.form = makeFormOfTheTeam();
                 }).catch(function(error){
                     toaster.pop({
@@ -39,8 +39,8 @@ app.controller("teamDetailController", ["$scope", "$rootScope","$stateParams", "
                                 body: '正在提交修改,请稍候',
                             }
                         );
-                        teamService.update($rootScope.theTeam, $scope.form).then(function (data) {
-                            $scope.theTeam = data.team;
+                        teamService.update($rootScope.theTeam, $scope.form).then(function (team) {
+                            $scope.theTeam = team;
                             $scope.form = makeFormOfTheTeam();
                             toaster.clear();
                             toaster.pop({
@@ -87,9 +87,9 @@ app.controller("teamDetailController", ["$scope", "$rootScope","$stateParams", "
     }
     
     $scope.handleProjectLink = function () {
-        projectService.getProjectById($rootScope.theTeam.project.id).then(function ok(data) {
-            $rootScope.theProject = data.project;  
-            $rootScope.$state.go("nav.project-detail", {projectId:data.project._id});
+        projectService.getProjectById($rootScope.theTeam.project._id).then(function ok(project) {
+            $rootScope.theProject = project;
+            $rootScope.$state.go("nav.project-detail", {projectId:project._id});
         }, function fail() {
            util.confirmationStep("错误", "项目不存在");
         });
@@ -103,6 +103,4 @@ app.controller("teamDetailController", ["$scope", "$rootScope","$stateParams", "
             coach:angular.copy($rootScope.theTeam.coach),
         };
     }
-
-
     }]);

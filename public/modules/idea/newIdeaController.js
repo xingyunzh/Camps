@@ -18,14 +18,14 @@ app.controller("newIdeaController", ["$scope", "$rootScope", "util", "ideaServic
             return;
         }
         
-        ideaService.addIdea($scope.form).then(function(data){
+        ideaService.addIdea($scope.form).then(function(idea){
             toaster.pop({
                 type:"success",
                 title:"保存",
                 body:"创意保存成功",
                 timeout:3000
             });
-            $rootScope.theIdea = data.idea;
+            $rootScope.theIdea = idea;
         }).catch(function(error){
             toaster.pop({
                 type:"error",
@@ -50,15 +50,15 @@ app.controller("newIdeaController", ["$scope", "$rootScope", "util", "ideaServic
 
         util.confirmationStep("新建创意", "是否提交您的创意到后台审核?").then(function ok(){
             return ideaService.submitIdea("new", $scope.form);
-        }).then(function(data){
+        }).then(function(idea){
             toaster.pop({
                 type:"success",
                 title:"提交",
                 body:"创意提交成功,等待审核",
                 timeout:3000
             });
-            $rootScope.theIdea = data.idea;
-            $rootScope.$state.go('nav.idea-detail',{ideaId:data.idea._id});
+            $rootScope.theIdea = idea;
+            $rootScope.$state.go('nav.idea-detail',{ideaId:idea._id});
         }).catch(function(error){
             if (error != "cancel"){
                 toaster.pop({
