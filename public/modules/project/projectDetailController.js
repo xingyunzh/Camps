@@ -10,6 +10,7 @@ app.controller("projectDetailController",
         $scope.form = {};
         $scope.list = ["one", "two", "three", "four", "five", "six"];
         $scope.isBacklogEditing = false;
+        $scope.isManagerEditing = false;
         $scope.fileToUpload = null;
         $scope.isAttachmentsEditing = false;
         $scope.percentage = 0;
@@ -268,6 +269,7 @@ app.controller("projectDetailController",
                 name: $rootScope.theProject.name,
                 scope: $rootScope.theProject.scope,
 
+                manager:angular.copy($rootScope.theProject.manager),
                 backlog: angular.copy($rootScope.theProject.backlog),
                 sprints: angular.copy($rootScope.theProject.sprints),
                 tasks: angular.copy($rootScope.theProject.tasks),
