@@ -27,7 +27,7 @@ exports.checkExist = function(req,res){
 
 	var name = req.query.name;
 
-	checkNameExist(req.body.name).then(function(exist){
+	checkNameExist(name).then(function(exist){
 		res.send(util.wrapBody({exist:exist}));
 	}).catch(function(err){
 		console.log(err);
