@@ -115,8 +115,22 @@ app.service("projectService", ["util", "$q", "httpHelper", function (util, $q, h
         });
     };
 
-    this.updateSprintsByProject = function(project, sprints){
-        
+    this.createSprintInProject = function(sprint, project){
+        return httpHelper.sendRequest("POST", "./api/sprint/add/"+project._id, sprint).then(function(data){
+            return data.sprint;
+        });
+    };
+
+    this.updateSprint = function(sprint){
+        return httpHelper.sendRequest("POST", "./api/sprint/update/"+sprint._id, sprint).then(function(data){
+            return data.sprint;
+        });
+    };
+
+    this.removeSprint = function(sprint){
+        return httpHelper.sendRequest("GET", "./api/sprint/remove/"+sprint._id).then(function(data){
+            return data.sprint;
+        });
     };
 
 }]);

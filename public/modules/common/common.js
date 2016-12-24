@@ -1,12 +1,15 @@
 var kConfirmationHTML = "./modules/common/confirmation.html";
 var kModalInputTextHTML = "./modules/common/modal-text-input.html";
 var kModalInputUserStoryHTML = "./modules/common/modal-userstory-input.html";
+var kModalInputTaskHTML = "./modules/common/modal-task-input.html";
+var kModalInputSprintHTML = "./modules/common/modal-sprint-input.html";
 var kConfirmationController = 'commonModalController';
 
-app.controller(kConfirmationController, function ($scope, $uibModalInstance, title, content) {
+app.controller(kConfirmationController, function ($scope, $uibModalInstance, title, content, list) {
 	$scope.title = title;
 	$scope.modal = {};
 	$scope.modal.content = content;
+	$scope.modal.list = list;
 
 	$scope.ok = function () {
 		 /* body... */ 
@@ -19,7 +22,7 @@ app.controller(kConfirmationController, function ($scope, $uibModalInstance, tit
 	};
 });
 
-app.service('httpHelper', function ($http, $q, $rootScope) {
+app.service('httpHelper', function ($http, $q, $rootScope, $timeout) {
 	this.sendRequest = function(method, url, data) {
 		var req = {
 			"method": method,
@@ -42,6 +45,11 @@ app.service('httpHelper', function ($http, $q, $rootScope) {
 			if (argument.data.status == "S") {
 				deferred.resolve(argument.data.body);
 			} else {
+				if(argument.data.body == "Invalid token") {
+					$timeout(function(){
+						$rootScope.$emit("loggedOut");
+					});
+				}
 				deferred.reject(argument.data.body);
 			}
 		}, function fail(argument) {
@@ -68,6 +76,24 @@ app.filter("idOfStory",function () {
             return "";
         }
 		return us._id.slice(0,1) + "***" + us._id.slice(-4);
+	}
+});
+
+app.filter("idOfTask", function(){
+	return function(task){
+		if(task == null){
+			return "";
+		}
+		return task._id.slice(0,1) + "***" + task._id.slice(-4);
+	}
+});
+
+app.filter("idOfSprint", function(){
+	return function(sprint){
+		if(sprint == null){
+			return "";
+		}
+		return sprint._id.slice(0,1) + "***" + sprint._id.slice(-4);
 	}
 });
 
@@ -156,6 +182,58 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 		return modalInstance.result;
 	};
 
+	this.modalTaskInputStep = function(aTitle, aContent){
+		if (!(aContent.duedate instanceof Date)){
+			aContent.duedate = new Date(aContent.duedate);
+		}
+
+		var modalInstance = $uibModal.open({
+			animation: true,
+			templateUrl: kModalInputTaskHTML,
+			controller: kConfirmationController,
+			size: "lg",
+			resolve: {
+				title: function() {
+					return aTitle;
+				},
+				content: function() {
+					return aContent;
+				}
+			}
+		});
+
+		return modalInstance.result;
+	};
+
+	this.modalSprintInputStep = function(aTitle, aContent, aProjectBacklog){
+		if (!(aContent.startDate instanceof Date)){
+			aContent.startDate = new Date(aContent.startDate);
+		}
+
+		if (!(aContent.endDate instanceof Date)){
+			aContent.endDate = new Date(aContent.endDate);
+		}
+
+		var modalInstance = $uibModal.open({
+			animation: true,
+			templateUrl: kModalInputSprintHTML,
+			controller: kConfirmationController,
+			size: "lg",
+			resolve: {
+				title: function() {
+					return aTitle;
+				},
+				content: function() {
+					return aContent;
+				},
+				list:function(){
+					return aProjectBacklog;
+				}
+			}
+		});
+
+		return modalInstance.result;
+	};
 
     this.globalNameForFile = function (filename, user) {
         if (user) {

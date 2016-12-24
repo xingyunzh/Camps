@@ -29,7 +29,12 @@ app.controller("navController", ["$scope", "$rootScope", "loginService", functio
     	$rootScope.token = null;
         loginService.removeArchivedUserInfo();
 
-        $rootScope.$state.go("nav.idea");
+        if ($rootScope.$previousState){
+            $rootScope.$state.go($rootScope.$previousState, $rootScope.$previousStateParams);
+        }
+        else {
+            $rootScope.$state.go("nav.idea");
+        }
     });
 
     $rootScope.$on('$stateChangeSuccess', function (event, to, toParams, from, fromParams) {

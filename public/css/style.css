@@ -8,6 +8,10 @@ body {
     font-size: 10px;
 }
 
+.camps-inline-block {
+    display:inline-block;
+}
+
 .camps-head-strip {
     height:150px;
     margin-bottom: 20px;

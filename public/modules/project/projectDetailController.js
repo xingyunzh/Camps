@@ -157,27 +157,104 @@ app.controller("projectDetailController",
         };
 
         $scope.onSprintEdit = function(){
-            $scope.isSprintEditing = true;
+            $scope.isSprintEditing = !$scope.isSprintEditing;
         };
 
-        $scope.onAddOrUpdateSprint = function (task) {
-
+        $scope.onAddOrUpdateSprint = function (sprint) {
+            var content = sprint ? sprint : {};
+            util.modalSprintInputStep(sprint?"编辑Sprint":"新建Sprint", content, $scope.backlog).then(function(resultSprint){
+                if (sprint){
+                    for(var key in resultSprint){
+                        sprint[key] = resultSprint[key];
+                    }
+                    return projectService.updateSprint(sprint);
+                }
+                else {
+                    return projectService.createSprintInProject(resultSprint, $rootScope.theProject);
+                }
+            }).then(function(sp){
+                var indexFound = -1;
+                for(var i = 0; i < $scope.sprints.length; i++){
+                    if($scope.sprints[i]._id == sp._id){
+                        $scope.sprints[i] = sp;
+                        indexFound = i;
+                        break;
+                    }
+                }
+                if(indexFound < 0){
+                    $scope.sprints.push(sp);
+                }
+            });
         };
 
-        $scope.onRemoveSprint = function () {
+        $scope.onRemoveSprint = function (sprint) {
+            util.confirmationStep("删除Sprint", "是否确定要删除Sprint "+$filter("idOfSprint")(sprint)).then(function(){
+                return projectService.removeSprint(sprint);
+            }).then(function(sprint){
+                _.remove($rootScope.sprints, function(item){
+                    return item._id == sprint._id;
+                });
+            });
+        };
+
+        $scope.handleSprint = function(item, $event){
 
         };
 
         $scope.onTaskEdit = function(){
-            $scope.isTaskEditing = true;
+            if ($scope.isTaskEditing){
+                $scope.isTaskEditing = false;
+            }
+            else {
+                $scope.isTaskEditing = true;
+            }
         };
         
         $scope.onAddOrUpdateTask = function (task) {
-            
+            var content = task ? task : {};
+            util.modalTaskInputStep(task?"编辑Task":"新建Task", content).then(function(resultTask){
+                if (task){
+                    //update
+                    for(var key in resultTask){
+                        task[key] = resultTask[key];
+                    }
+                    return projectService.updateTask(task);
+                }
+                else {
+                    //create
+                    return projectService.createTaskForStory(resultTask, $scope.theUserStory);
+                }
+            }).then(function(task){
+                if(task){
+                    var indexFound = -1;
+                    for(var i = 0; i < $scope.theUserStory.tasks.length; i++){
+                        if($scope.theUserStory.tasks[i]._id == task._id){
+                            $scope.theUserStory.tasks[i] = task;
+                            indexFound = i;
+                            break;
+                        }
+                    }
+
+                    if (indexFound < 0){
+                        $scope.theUserStory.tasks.push(task);
+                    }
+                }
+            });
         };
         
-        $scope.onRemoveTask = function () {
-
+        $scope.onRemoveTask = function (task) {
+            util.confirmationStep("删除任务", "是否确定要删除:Task "+$filter("idOfTask")(task)+"?").then(function(){
+                if(task._id){
+                    return projectService.removeTask(task);
+                }
+                else {
+                    return task;
+                }
+            }).then(function(){
+                _.remove($scope.theUserStory.tasks, function(item){
+                    return item == task;
+                });
+            });
         };
         
         $scope.onDataEdit = function(keys, keyEditing){

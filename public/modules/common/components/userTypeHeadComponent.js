@@ -4,7 +4,7 @@
 app.component('userTypehead', {
     templateUrl: "./modules/common/components/user-type-head-input.html",
     bindings: {
-        glyphiconClass:"=",
+        glyphiconClass:"<",
         whichRole: "=",
         notifySelected:"&onSelected",
         maxWidth:"<"

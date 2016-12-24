@@ -48,17 +48,17 @@
                         <div ui-sortable="sortableOptions" ng-model="backlog" class="list-group">
                             <a ng-repeat="item in backlog" class="list-group-item" ng-click="handleStory(item, $event)">
                                 <div class="row">
-                                    <div class="col-md-10">
+                                    <div ng-class="{'col-md-10':isBacklogEditing, 'col-md-12':!isBacklogEditing}">
                                         <div class="text-left" ng-style="{'text-decoration':item.deleted ? 'line-through' : 'none'}">
                                             <span><strong>US {{item._id ? (item | idOfStory) : "新建"}}</strong></span>
                                             <span>{{item | nameOfStory}}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2" ng-show="isBacklogEditing">
-                                    <span>
-                                        <button ng-click="onRemoveStory(item)">删除</button>
-                                        <button ng-click="onAddOrUpdateStory(item)">编辑</button>
-                                    </span>
+                                    <div class="col-md-2" ng-if="isBacklogEditing">
+                                        <span>
+                                            <button ng-click="onRemoveStory(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateStory(item)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
                                     </div>
                                 </div>
                             </a>
@@ -73,9 +73,20 @@
                         <button class="btn btn-default" ng-click="isSprintEditing=false;" ng-show="isSprintEditing">取消</button>
 
                         <div class="list-group">
-                            <a class="list-group-item" ng-repeat="item in sprints" ng-click="handleStoryOrSprints($event)">
-                                <span>Sprint {{item.endDate | date:'yyyy-MM-dd'}}</span>
-                                <span class="badge" ng-show="item.backlog.length > 0">{{item.backlog.length}}</span>
+                            <a class="list-group-item" ng-repeat="item in sprints" ng-click="handleSprint(item, $event)">
+                                <div class="row">
+                                    <div ng-class="{'col-md-10':isSprintEditing, 'col-md-12':!isSprintEditing}">
+                                        <span>Sprint {{item.startDate | date:'yyyy-MM-dd'}} - {{item.endDate | date:'yyyy-MM-dd'}}</span>
+                                        <span class="text-danger">{{item.result}}</span>
+                                        <span class="badge pull-right" ng-show="item.backlog.length > 0">{{item.backlog.length}}</span>
+                                    </div>
+                                    <div class="col-md-2" ng-if="isSprintEditing">
+                                        <span>
+                                            <button ng-click="onRemoveSprint(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateSprint(item)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -91,7 +102,20 @@
                         <ul class="list-group">
                             <li class="list-group-item" ng-show="!theUserStory.tasks || theUserStory.tasks.length == 0">暂无具体任务</li>
                             <li class="list-group-item" ng-repeat="task in theUserStory.tasks">
-                                {{task.description}} <small class="pull-right">{{task.assignee.nickname}}</small>
+                                <div class="row">
+                                    <div ng-class="{'col-md-10':isTaskEditing, 'col-md-12':!isTaskEditing}">
+                                        <div style="padding-top: 3px;padding-bottom: 3px">
+                                            <span><strong>Task {{task | idOfTask}}</strong></span>&nbsp; {{task.description}}
+                                            <small class="pull-right"><i>{{task.assignee.nickname}}</i></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" ng-if="isTaskEditing">
+                                        <span>
+                                            <button ng-click="onRemoveTask(task)"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateTask(task)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
