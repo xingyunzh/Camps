@@ -10,11 +10,19 @@ exports.findById = function(id){
 };
 
 exports.create = function(data){
+	data.alphabetName = repositoryUtil.alphabetize(data.nickname,{
+		separator:'|'
+	});
+
 	return User.create(data);
 };
 
 exports.updateById = function(id,data){
 	data.editDate = new Date();
+
+	if ('nickname' in data) data.alphabetName = repositoryUtil.alphabetize(data.nickname,{
+		separator:'|'
+	});
 
 	return User.findByIdAndUpdate(id,data,{
 		new:true,
@@ -27,8 +35,8 @@ exports.query = function(options){
 
 	var conditions = {};
 
-	if ('keyword' in options) {
-		conditions.nickname = new RegExp(options.keyword, "i");
+	if ('nickname' in options) {
+		conditions.alphabetName = repositoryUtil.buildSearchRegExp(options.nickname);
 	}
 
 	if ('role' in options) {

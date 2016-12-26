@@ -4,10 +4,14 @@ var Schema = mongoose.Schema;
 var teamSchema = Schema({
 	name:{
 		type:String,
-		index:true,
 		required:true,
 		unique:true
 	},
+
+	alphabetName:[{
+		type:String,
+		index:true
+	}],
 
 	headImgUrl:String,
 

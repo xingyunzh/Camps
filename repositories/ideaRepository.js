@@ -17,6 +17,9 @@ exports.findById = function(id){
 };
 
 exports.update = function(conditions,data){
+	if ('name' in data) data.name = repositoryUtil.alphabetize(data.name,{
+		separator:'|'
+	});
 
 	return Idea
 	.findOneAndUpdate(conditions,data,{
@@ -27,6 +30,9 @@ exports.update = function(conditions,data){
 };
 
 exports.create = function(data){
+	if ('name' in data) data.alphabetName = repositoryUtil.alphabetize(data.name,{
+		separator:'|'
+	});
 	return Idea.create(data);
 };
 
@@ -37,7 +43,7 @@ exports.query = function(options){
 	var conditions = {};
 
 	if ('keyword' in options) {
-		conditions.name = new RegExp(options.keyword, "i");
+		conditions.alphabetName = repositoryUtil.buildSearchRegExp(options.keyword);
 	}
 
 	if ('sector' in options) {

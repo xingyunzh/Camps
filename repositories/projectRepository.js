@@ -41,6 +41,10 @@ exports.getSprints = function(id){
 };
 
 exports.updateById = function(id,data){
+	if ('name' in data) data.alphabetName = repositoryUtil.alphabetize(data.name,{
+		separator:'|'
+	});
+
 	return Project
 	.findByIdAndUpdate(id,data,{
 		new:true
@@ -54,6 +58,9 @@ exports.updateById = function(id,data){
 };
 
 exports.update = function(conditions,data){
+	if ('name' in data) data.alphabetName = repositoryUtil.alphabetize(data.name,{
+		separator:'|'
+	});
 
 	return Project
 	.findOneAndUpdate(conditions,data,{
@@ -68,6 +75,10 @@ exports.update = function(conditions,data){
 };
 
 exports.create = function(data){
+	if ('name' in data) data.alphabetName = repositoryUtil.alphabetize(data.name,{
+		separator:'|'
+	});
+
 	return Project.create(data);
 };
 
@@ -77,7 +88,7 @@ exports.query = function(options){
 	var conditions = {};
 
 	if ('keyword' in options) {
-		conditions.name = new RegExp(options.keyword, "i");
+		conditions.alphabetName = repositoryUtil.buildSearchRegExp(options.keyword);
 	}
 
     if ('idea' in options){

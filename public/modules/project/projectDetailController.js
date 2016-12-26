@@ -217,7 +217,7 @@ app.controller("projectDetailController",
             }
 
             if($scope.allowEditProject()) {
-                return true;s
+                return true;
             }
 
             for (var i = 0; i < $rootScope.theTeam.members.length; i++){
