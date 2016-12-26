@@ -4,7 +4,7 @@
 
             <div class="" ng-repeat="item in teams">
                 <div class="camps-media-card" ng-click="onTeamClicked(item)">
-                    <img ng-src="./images/team.png" alt="Img">
+                    <img ng-src="{{item.headImgUrl?item.headImgUrl:'./images/team.png'}}" alt="Img">
 
                     <div class="camps-media-card-body">
                         <div class="camps-media-card-title">

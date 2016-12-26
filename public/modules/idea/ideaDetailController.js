@@ -81,12 +81,22 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "$stateParams", 
             $scope.isEditing = false;
         };
 
-        $scope.onImagesPicked = function (images) {
+        $scope.onHeadImagesPicked = function (images) {
             $scope.form.headImgUrl = images[0].url;
         };
 
+        $scope.onImagesPicked = function(images){
+            $scope.form.images = _.union($scope.form.images, _.map(images, function(item){
+                return item.url;
+            }));
+        }
+
         $scope.onRemoveHeadImage = function(){
             $scope.form.headImgUrl = null;
+        };
+
+        $scope.onRemoveImage = function($index){
+            $scope.form.images.splice($index, 1);
         };
 
         $scope.handleProjectLink = function (prj) {
@@ -108,7 +118,8 @@ app.controller("ideaDetailController", ["$scope", "$rootScope", "$stateParams", 
                 solution: $rootScope.theIdea.solution,
                 hrRequirement: $rootScope.theIdea.hrRequirement,
                 consultant: angular.copy($rootScope.theIdea.consultant),
-                headImgUrl:$rootScope.theIdea.headImgUrl
+                headImgUrl:$rootScope.theIdea.headImgUrl,
+                images:angular.copy($rootScope.theIdea.images)
             }
         }
 
