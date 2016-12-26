@@ -69,7 +69,7 @@ exports.listUser = function(req,res){
 };
 
 function login(req,res,type){
-	var token = null;
+	var isFirstTimeLogin = false;
 
 	var deferred = q.defer();
 	if (type == 'email') {
@@ -108,6 +108,7 @@ function login(req,res,type){
 		.findByUid(user._id)
 		.then(function(userResult){
 			if(userResult == null){
+				isFirstTimeLogin = true;
 				//return importProfile(user);
 				var newUser = {
 					uid:user._id,
@@ -146,7 +147,8 @@ function login(req,res,type){
 	}).then(function sendResponse(user){
 		
 		var responseBody = {
-			user:user
+			user:user,
+			isFirstTimeLogin:isFirstTimeLogin
 		};
 
 		res.send(util.wrapBody(responseBody));

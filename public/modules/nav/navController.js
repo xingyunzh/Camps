@@ -7,10 +7,12 @@ app.controller("navController", ["$scope", "$rootScope", "loginService", functio
 
     })();
 
-    $rootScope.$on('loggedIn',function(){
+    $rootScope.$on('loggedIn',function(event,isFirstTimeLogin){
         loginService.archiveUserInfo(kCampsArchiveKeyUserId, $rootScope.currentUser._id);
 
-        if ($rootScope.$state.is('nav.login')){
+        if (isFirstTimeLogin) {
+            $rootScope.$state.go("nav.profile");
+        }else if ($rootScope.$state.is('nav.login')){
             if ($rootScope.$previousState){
                 $rootScope.$state.go($rootScope.$previousState, $rootScope.$previousStateParams);
             }
@@ -21,7 +23,7 @@ app.controller("navController", ["$scope", "$rootScope", "loginService", functio
     });
 
     $rootScope.$on('CampsDidReceiveAuthToken', function(){
-        loginService.archiveUserInfo(kCampsArchiveKeyAuthToken, $rootScope.token)
+        loginService.archiveUserInfo(kCampsArchiveKeyAuthToken, $rootScope.token);
     });
 
     $rootScope.$on('loggedOut',function(){
