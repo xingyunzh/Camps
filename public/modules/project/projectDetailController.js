@@ -8,18 +8,12 @@ app.controller("projectDetailController",
               $q, ossFileService, $timeout) {
         $scope.isNameEditing = false;
         $scope.form = {};
-        $scope.list = ["one", "two", "three", "four", "five", "six"];
         $scope.isBacklogEditing = false;
+        $scope.isManagerEditing = false;
         $scope.fileToUpload = null;
         $scope.isAttachmentsEditing = false;
         $scope.percentage = 0;
         $scope.theUserStory = null;
-
-        $scope.sampleAttachments = [
-            "http://campro.oss-cn-shanghai.aliyuncs.com/u5825aeb15f490a225690a3a0_Bitmaphead.jpg",
-            "http://campro.oss-cn-shanghai.aliyuncs.com/g_IMG_1466.PNG",
-            "http://campro.oss-cn-shanghai.aliyuncs.com/u5825aeb15f490a225690a3a0_bike.png"
-        ];
 
         $scope.sortableOptions = {
             update: function(e, ui) {
@@ -31,6 +25,7 @@ app.controller("projectDetailController",
             stop: function(e, ui) {
                 // this callback has the changed model
                 // console.log("Stop:" + JSON.stringify($scope.list));
+                $scope.backlogReordered = true;
             }
         };
 
@@ -42,9 +37,7 @@ app.controller("projectDetailController",
                 updateProjectIfNeeds = util.promiseWithResolve($rootScope.theProject);
             }
             else if ($stateParams.projectId){
-                updateProjectIfNeeds = projectService.getProjectById($stateParams.projectId).then(function(data){
-                  return data.project;
-                });
+                updateProjectIfNeeds = projectService.getProjectById($stateParams.projectId);
             }
             else {
                 return;
@@ -57,8 +50,8 @@ app.controller("projectDetailController",
 
                 return $q.all([projectService.getBacklogByProject(project), projectService.getSprintsByProject(project)]);
             }).then(function(dataGroup){
-                $scope.backlog = dataGroup[0].backlog;
-                $scope.sprints = dataGroup[1].sprints;
+                $scope.backlog = dataGroup[0];
+                $scope.sprints = dataGroup[1];
             }).catch(function(error){
                 toaster.pop({
                     type:"error",
@@ -72,16 +65,39 @@ app.controller("projectDetailController",
         $scope.onBacklogEdit= function(){
             if($scope.isBacklogEditing){
                 var backlog = angular.copy($scope.backlog);
+
+                var actions = [];
                 _.map(backlog, function(item){
-                    if (item.deleted){
-                        delete item.as;
-                        delete item.want;
-                        delete item.soThat;
+                    if (item.deleted && !!item._id){
+                        actions.push(projectService.removeStory(item));
+                    }
+
+                    if(item.modified){
+                        actions.push(projectService.updateStory(item));
+                    }
+
+                    if(!item._id) {
+                        actions.push(projectService.createStoryForProject(item, $scope.theProject));
                     }
                 });
 
-                projectService.updateBacklogByProject($rootScope.theProject, backlog).then(function(data){
-                    $scope.backlog = data.backlog;
+                $q.all(actions).then(function(dataGroup){
+                    if ($scope.backlogReordered){
+                        var prioritizedBacklog = _.filter(backlog, function(item){
+                            return !item.deleted;
+                        }).map(function(item){
+                            return item._id;
+                        });
+                        return projectService.updateProjectBacklogPriority($scope.theProject, prioritizedBacklog)
+                            .then(function(project){
+                                return projectService.getBacklogByProject(project);
+                            });
+                    }
+                    else {
+                        return projectService.getBacklogByProject($scope.theProject);
+                    }
+                }).then(function(backlog){
+                    $scope.backlog = backlog;
                     toaster.pop({
                         type:"success",
                         title:"编辑Backlog",
@@ -100,6 +116,7 @@ app.controller("projectDetailController",
                 });
             } else {
                 $scope.isBacklogEditing = true;
+                $scope.theUserStory = null;
             }
         };
 
@@ -107,7 +124,11 @@ app.controller("projectDetailController",
             var content = !us ? {} : us;
             util.modalUserStoryInputStep(!us ? "新建UserStory" : "US-"+us._id, content).then(function(userStory){
                 if (!!us){
-                    us = angular.copy(userStory);
+                    us.as = userStory.as;
+                    us.want = userStory.want;
+                    us.soThat = userStory.soThat;
+
+                    us.modified = true;
                 }
                 else {
                     $scope.backlog.push(userStory);
@@ -129,27 +150,111 @@ app.controller("projectDetailController",
         };
 
         $scope.onSprintEdit = function(){
-            $scope.isSprintEditing = true;
+            $scope.isSprintEditing = !$scope.isSprintEditing;
         };
 
-        $scope.onAddOrUpdateSprint = function (task) {
-
+        $scope.onAddOrUpdateSprint = function (sprint) {
+            var content = sprint ? sprint : {};
+            util.modalSprintInputStep(sprint?"编辑Sprint":"新建Sprint", content, $scope.backlog).then(function(resultSprint){
+                if (sprint){
+                    for(var key in resultSprint){
+                        sprint[key] = resultSprint[key];
+                    }
+                    return projectService.updateSprint(sprint);
+                }
+                else {
+                    return projectService.createSprintInProject(resultSprint, $rootScope.theProject);
+                }
+            }).then(function(sp){
+                var indexFound = -1;
+                for(var i = 0; i < $scope.sprints.length; i++){
+                    if($scope.sprints[i]._id == sp._id){
+                        $scope.sprints[i] = sp;
+                        indexFound = i;
+                        break;
+                    }
+                }
+                if(indexFound < 0){
+                    $scope.sprints.push(sp);
+                }
+            });
         };
 
-        $scope.onRemoveSprint = function () {
+        $scope.onRemoveSprint = function (sprint) {
+            util.confirmationStep("删除Sprint", "是否确定要删除Sprint "+$filter("idOfSprint")(sprint)).then(function(){
+                return projectService.removeSprint(sprint);
+            }).then(function(sprint){
+                _.remove($rootScope.sprints, function(item){
+                    return item._id == sprint._id;
+                });
+            });
+        };
+
+        $scope.handleSprint = function(item, $event){
 
         };
 
         $scope.onTaskEdit = function(){
-            $scope.isTaskEditing = true;
+            if ($scope.isTaskEditing){
+                $scope.isTaskEditing = false;
+            }
+            else {
+                $scope.isTaskEditing = true;
+            }
         };
         
         $scope.onAddOrUpdateTask = function (task) {
-            
+            var content = task ? task : {};
+            content.candidates = $rootScope.theTeam.members;
+            util.modalTaskInputStep(task?"编辑Task":"新建Task", content).then(function(resultTask){
+                if (task){
+                    //update
+                    for(var key in resultTask){
+                        if(key == "candidates"){
+                            continue;
+                        }
+
+                        task[key] = resultTask[key];
+                    }
+                    return projectService.updateTask(task);
+                }
+                else {
+                    //create
+                    var newTask = resultTask;
+                    delete newTask.candidates;
+                    return projectService.createTaskForStory(newTask, $scope.theUserStory);
+                }
+            }).then(function(task){
+                if(task){
+                    var indexFound = -1;
+                    for(var i = 0; i < $scope.theUserStory.tasks.length; i++){
+                        if($scope.theUserStory.tasks[i]._id == task._id){
+                            $scope.theUserStory.tasks[i] = task;
+                            indexFound = i;
+                            break;
+                        }
+                    }
+
+                    if (indexFound < 0){
+                        $scope.theUserStory.tasks.push(task);
+                    }
+                }
+            });
         };
         
-        $scope.onRemoveTask = function () {
-
+        $scope.onRemoveTask = function (task) {
+            util.confirmationStep("删除任务", "是否确定要删除:Task "+$filter("idOfTask")(task)+"?").then(function(){
+                if(task._id){
+                    return projectService.removeTask(task);
+                }
+                else {
+                    return task;
+                }
+            }).then(function(){
+                _.remove($scope.theUserStory.tasks, function(item){
+                    return item == task;
+                });
+            });
         };
         
         $scope.onDataEdit = function(keys, keyEditing){
@@ -159,8 +264,8 @@ app.controller("projectDetailController",
                     param[keys[i]] = $scope.form[keys[i]];
                 }
 
-                projectService.update($rootScope.theProject, param).then(function(data){
-                    $rootScope.theProject = data.project;
+                projectService.update($rootScope.theProject, param).then(function(project){
+                    $rootScope.theProject = project;
 
                     $scope[keyEditing] = false;
                 }).catch(function(error){
@@ -270,6 +375,7 @@ app.controller("projectDetailController",
                 name: $rootScope.theProject.name,
                 scope: $rootScope.theProject.scope,
 
+                manager:angular.copy($rootScope.theProject.manager),
                 backlog: angular.copy($rootScope.theProject.backlog),
                 sprints: angular.copy($rootScope.theProject.sprints),
                 tasks: angular.copy($rootScope.theProject.tasks),

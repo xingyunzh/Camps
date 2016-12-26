@@ -3,8 +3,8 @@
  */
 app.controller("teamController", ["$scope", "$rootScope", "teamService", function($scope, $rootScope, teamService){
 
-    teamService.teamSource().then(function(data){
-        $scope.teams = data.teams;
+    teamService.teamSource().then(function(teams){
+        $scope.teams = teams;
     });
 
     $scope.onTeamClicked = function(team){

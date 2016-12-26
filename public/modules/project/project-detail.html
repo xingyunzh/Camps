@@ -5,8 +5,8 @@
                 <div class="camps-idea-d-title">
                     <span>{{theProject.name}}</span>
                     <input type="text" class="form-control" ng-model="form.name" ng-show="isNameEditing">
-                    <button class="btn btn-primary pull-right" ng-click="onDataEdit(['name'], 'isNameEditing')" ng-show="allowEditProject()">{{isNameEditing ? "完成":"修改"}}</button>
-                    <button class="btn btn-default pull-right" ng-click="isNameEditing=false;" ng-show="isNameEditing">取消</button>
+                    <button class="btn btn-primary" ng-click="onDataEdit(['name'], 'isNameEditing')" ng-show="allowEditProject()">{{isNameEditing ? "完成":"编辑"}}</button>
+                    <button class="btn btn-default" ng-click="isNameEditing=false;" ng-show="isNameEditing">取消</button>
                 </div>
             </div>
 
@@ -18,8 +18,8 @@
                         <textarea class='form-control' cols="30" rows="10" ng-model="form.scope" ></textarea>
                     </span>
 
-                    <button class="btn btn-primary pull-right" ng-click="onDataEdit(['scope'], 'isScopeEditing')" ng-show="allowEditProject()">{{isScopeEditing ? "完成":"修改"}}</button>
-                    <button class="btn btn-default pull-right" ng-click="isScopeEditing=false;" ng-show="isScopeEditing">取消</button>
+                    <button class="btn btn-primary" ng-click="onDataEdit(['scope'], 'isScopeEditing')" ng-show="allowEditProject()">{{isScopeEditing ? "完成":"编辑"}}</button>
+                    <button class="btn btn-default" ng-click="isScopeEditing=false;" ng-show="isScopeEditing">取消</button>
                 </div>
             </div>
 
@@ -42,23 +42,23 @@
                     <div class="camps-idea-d-text-section">
                         Backlog:
                         <button class="btn btn-link" ng-show="isBacklogEditing" ng-click="onAddOrUpdateStory()"><span>添加</span></button>
-                        <button class="btn btn-primary" ng-click="onBacklogEdit()" ng-show="allowEditProject()">{{isBacklogEditing ? "完成":"修改"}}</button>
+                        <button class="btn btn-primary" ng-click="onBacklogEdit()" ng-show="allowEditProject()">{{isBacklogEditing ? "完成":"编辑"}}</button>
                         <button class="btn btn-default" ng-click="isBacklogEditing=false;" ng-show="isBacklogEditing">取消</button>
 
                         <div ui-sortable="sortableOptions" ng-model="backlog" class="list-group">
                             <a ng-repeat="item in backlog" class="list-group-item" ng-click="handleStory(item, $event)">
                                 <div class="row">
-                                    <div class="col-md-10">
+                                    <div ng-class="{'col-md-10':isBacklogEditing, 'col-md-12':!isBacklogEditing}">
                                         <div class="text-left" ng-style="{'text-decoration':item.deleted ? 'line-through' : 'none'}">
-                                            <span><strong>US {{item | idOfStory}}</strong></span>
+                                            <span><strong>US {{item._id ? (item | idOfStory) : "新建"}}</strong></span>
                                             <span>{{item | nameOfStory}}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2" ng-show="isBacklogEditing">
-                                    <span>
-                                        <button ng-click="onRemoveStory(item)">删除</button>
-                                        <button ng-click="onAddOrUpdateStory(item)">编辑</button>
-                                    </span>
+                                    <div class="col-md-2" ng-if="isBacklogEditing">
+                                        <span>
+                                            <button ng-click="onRemoveStory(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateStory(item)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
                                     </div>
                                 </div>
                             </a>
@@ -69,13 +69,24 @@
                         Sprints:
 
                         <button class="btn btn-link" ng-show="isSprintEditing" ng-click="onAddOrUpdateSprint()"><span>添加</span></button>
-                        <button class="btn btn-primary" ng-click="onSprintEdit()" ng-show="allowEditTasks()">{{isSprintEditing ? "完成":"修改"}}</button>
+                        <button class="btn btn-primary" ng-click="onSprintEdit()" ng-show="allowEditTasks()">{{isSprintEditing ? "完成":"编辑"}}</button>
                         <button class="btn btn-default" ng-click="isSprintEditing=false;" ng-show="isSprintEditing">取消</button>
 
                         <div class="list-group">
-                            <a class="list-group-item" ng-repeat="item in sprints" ng-click="handleStoryOrSprints($event)">
-                                <span>Sprint {{item.endDate | date:'yyyy-MM-dd'}}</span>
-                                <span class="badge" ng-show="item.backlog.length > 0">{{item.backlog.length}}</span>
+                            <a class="list-group-item" ng-repeat="item in sprints" ng-click="handleSprint(item, $event)">
+                                <div class="row">
+                                    <div ng-class="{'col-md-10':isSprintEditing, 'col-md-12':!isSprintEditing}">
+                                        <span>Sprint {{item.startDate | date:'yyyy-MM-dd'}} - {{item.endDate | date:'yyyy-MM-dd'}}</span>
+                                        <span class="text-danger">{{item.result}}</span>
+                                        <span class="badge pull-right" ng-show="item.backlog.length > 0">{{item.backlog.length}}</span>
+                                    </div>
+                                    <div class="col-md-2" ng-if="isSprintEditing">
+                                        <span>
+                                            <button ng-click="onRemoveSprint(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateSprint(item)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -85,13 +96,26 @@
                     <div class="camps-idea-d-text-section camps-project-d-task-panel" ng-show="!!theUserStory">
                         Task for <strong>US {{theUserStory | idOfStory}}</strong>:
                         <button class="btn btn-link" ng-show="isTaskEditing" ng-click="onAddOrUpdateTask()"><span>添加</span></button>
-                        <button class="btn btn-primary" ng-click="onTaskEdit()" ng-show="allowEditTasks()">{{isTaskEditing ? "完成":"修改"}}</button>
+                        <button class="btn btn-primary" ng-click="onTaskEdit()" ng-show="allowEditTasks()">{{isTaskEditing ? "完成":"编辑"}}</button>
                         <button class="btn btn-default" ng-click="isTaskEditing=false;" ng-show="isTaskEditing">取消</button>
 
                         <ul class="list-group">
                             <li class="list-group-item" ng-show="!theUserStory.tasks || theUserStory.tasks.length == 0">暂无具体任务</li>
                             <li class="list-group-item" ng-repeat="task in theUserStory.tasks">
-                                {{task.description}} <small class="pull-right">{{task.assignee.nickname}}</small>
+                                <div class="row">
+                                    <div ng-class="{'col-md-10':isTaskEditing, 'col-md-12':!isTaskEditing}">
+                                        <div style="padding-top: 3px;padding-bottom: 3px">
+                                            <span><strong>Task {{task | idOfTask}}</strong></span>&nbsp; {{task.description}}
+                                            <small class="pull-right"><i>{{task.assignee.nickname}}</i></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" ng-if="isTaskEditing">
+                                        <span>
+                                            <button ng-click="onRemoveTask(task)"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateTask(task)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -121,11 +145,11 @@
 
                     </div>
 
-                    <button class="btn btn-primary pull-right"
+                    <button class="btn btn-primary"
                             ng-click="onDataEdit(['attachments'], 'isAttachmentsEditing')" ng-show="allowEditTasks()">
-                        {{isAttachmentsEditing ? "完成":"修改"}}
+                        {{isAttachmentsEditing ? "完成":"编辑"}}
                     </button>
-                    <button class="btn btn-default pull-right" ng-click="isAttachmentsEditing=false;"
+                    <button class="btn btn-default" ng-click="isAttachmentsEditing=false;"
                             ng-show="isAttachmentsEditing">取消
                     </button>
                 </div>
@@ -133,7 +157,26 @@
 
             <div class="row">
                 <div class="camps-idea-d-text-section">
-                    <span>项目人员:</span>
+                    <span>项目小组:</span> <span>{{theTeam.name}}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    项目经理: &nbsp;
+                    <camps-user-head user="form.manager" width="60" height="60"></camps-user-head>
+                    <span ng-show="isManagerEditing">
+                        <user-typehead which-role="player" on-selected="form.manager = user;" glyphicon-class="glyphicon-ok" max-width="200">
+                        </user-typehead>
+                    </span>
+
+                    <button class="btn btn-primary"
+                            ng-click="onDataEdit(['manager'], 'isManagerEditing')" ng-show="allowEditProject()">
+                        {{isManagerEditing ? "完成":"编辑"}}
+                    </button>
+                    <button class="btn btn-default" ng-click="isManagerEditing=false;"
+                            ng-show="isManagerEditing">取消
+                    </button>
                 </div>
             </div>
 

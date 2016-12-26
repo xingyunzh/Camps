@@ -30,14 +30,14 @@ app.controller("newProjectController", ["$scope", "$rootScope", "util", "project
                         body: "正在为您新建项目,请稍候...",
                     });
 
-                    teamService.getTeamByMember($rootScope.currentUser).then(function(data) {
-                        var myTeam = data.team;
+                    teamService.getTeamByMember($rootScope.currentUser).then(function(team) {
+                        var myTeam = team;
                         $scope.form.team = myTeam._id;
-                        return projectService.add($scope.form).then(function (data) {
+                        return projectService.add($scope.form).then(function (project) {
                             toaster.clear();
-                            if (data.project) {
-                                $rootScope.theProject = data.project;
-                                $rootScope.$state.go("nav.project-detail", {projectId:data.project._id});
+                            if (project) {
+                                $rootScope.theProject = project;
+                                $rootScope.$state.go("nav.project-detail", {projectId:project._id});
                                 toaster.pop({
                                     type: "success",
                                     title: "新建",

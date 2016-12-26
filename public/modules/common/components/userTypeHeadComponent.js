@@ -4,13 +4,22 @@
 app.component('userTypehead', {
     templateUrl: "./modules/common/components/user-type-head-input.html",
     bindings: {
-        glyphiconClass:"=",
+        glyphiconClass:"<",
         whichRole: "=",
         notifySelected:"&onSelected",
-        maxWidth:"<"
+        maxWidth:"<",
+        candidates:"="
     },
-    controller: function($scope, $element, $attrs, $q, playerService, coachService){
+    controller: function($scope, $element, $attrs, util, playerService, coachService){
         $scope.getUsers = function (viewValue) {
+            if(this.$ctrl.candidates){
+                // return util.promiseWithResolve(_.filter(this.$ctrl.candidates, function(item){
+                //     return item.nickname.search(viewValue) != -1;
+                // }));
+
+                return util.promiseWithResolve(this.$ctrl.candidates);
+            }
+
             if($attrs.whichRole == "coach") {
                 return coachService.coachSource(viewValue);
             }

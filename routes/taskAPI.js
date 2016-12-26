@@ -41,7 +41,7 @@ router.post('/add/:id',taskController.create);
 //	required:
 //		id:id (task)
 //response:
-// {sprint:[SprintEntity]}
+// {success:true}
 router.get('/remove/:id',taskController.remove);
 
 
