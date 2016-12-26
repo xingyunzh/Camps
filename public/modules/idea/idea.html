@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="" ng-repeat="item in ideas">
                     <div class="camps-media-card" ng-click="handleItemClick(item)">
-                        <img ng-src="{{item.headImgUrl}}" alt="Img">
+                        <img ng-src="{{item.headImgUrl?item.headImgUrl:'./images/bike.png'}}" alt="Img">
                         <div class="camps-media-card-body">
                             <div class="camps-media-card-title">
                                 <h1 class="camps-text-highlight-color">

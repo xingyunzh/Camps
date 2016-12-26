@@ -8,6 +8,14 @@
                 </div>
             </div>
             <div class="row">
+                <div class="camps-idea-d-metro-section">
+                    <img ng-src="{{form.headImgUrl?form.headImgUrl:'./images/team.png'}}" alt="">
+                </div>
+                <div ng-show="isEditing">
+                    <image-picker button-label='"更换主题图片"' on-finished='onHeadImagesPicked(images)' type='team'></image-picker>
+                </div>
+            </div>
+            <div class="row">
                 <div class="camps-idea-d-text-section">
                     团队描述: &nbsp;
                     <span ng-hide="isEditing">{{form.description}}</span>

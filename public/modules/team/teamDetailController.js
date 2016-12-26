@@ -95,12 +95,17 @@ app.controller("teamDetailController", ["$scope", "$rootScope", "$stateParams", 
             });
         };
 
+        $scope.onHeadImagesPicked = function(images){
+            $scope.form.headImgUrl = images[0].url;
+        };
+
         function makeFormOfTheTeam() {
             return {
                 name: $rootScope.theTeam.name,
                 description: $rootScope.theTeam.description,
                 members: $rootScope.theTeam.members,
                 coach: angular.copy($rootScope.theTeam.coach),
+                headImgUrl:$rootScope.theTeam.headImgUrl
             };
         }
     }]);
