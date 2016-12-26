@@ -6,6 +6,11 @@ var ideaSchema = Schema({
 		type:String
 	},
 
+	alphabetName:[{
+		type:String,
+		index:true
+	}],
+
 	headImgUrl:String,
 
 	state:String,

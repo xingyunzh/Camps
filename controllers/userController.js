@@ -111,13 +111,14 @@ function login(req,res,type){
 				//return importProfile(user);
 				var newUser = {
 					uid:user._id,
-					headImgUrl:user.headImgUrl
+					headImgUrl:user.headImgUrl,
+					roles:['player']
 				};
 
 				if (!!user.nickname) {
 					newUser.nickname = user.nickname;
 				} else {
-					newUser.nickname = '新用户' + stringHelper.generate(4,'all');
+					newUser.nickname = '新用户' + stringHelper.randomString(4,'all');
 				}
 
 				return userRepository.create(newUser);

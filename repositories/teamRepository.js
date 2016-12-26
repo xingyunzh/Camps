@@ -2,9 +2,12 @@ var Team = require('../models/team');
 var uuid = require('node-uuid');
 var repositoryUtil = require('./repositoryUtil');
 
-exports.create = function(team){
-	team.teamId = uuid.v1();
-	return Team.create(team);
+exports.create = function(data){
+	data.teamId = uuid.v1();
+	data.alphabetName = repositoryUtil.alphabetize(data.name,{
+		separator:'|'
+	});
+	return Team.create(data);
 };
 
 exports.findById = function(id){
@@ -28,12 +31,20 @@ exports.removeById = function(id){
 };
 
 exports.update = function(conditions,updates){
+	if('name' in updates) updates.alphabetName = repositoryUtil.alphabetize(updates.name,{
+		separator:'|'
+	});
+
 	return Team.findOneAndUpdate(conditions,updates,{
 		new:true
 	}).populate('coach members project').lean().exec();
 };
 
 exports.updateById = function(id,updates){
+	if('name' in updates) updates.alphabetName = repositoryUtil.alphabetize(updates.name,{
+		separator:'|'
+	});
+
 	return Team.findByIdAndUpdate(id,updates,{
 		new:true
 	}).populate('coach members project').lean().exec();
@@ -45,11 +56,10 @@ exports.countByName = function(name){
 
 exports.query = function(options){
 	
-
 	var conditions = {};
 
 	if ('keyword' in options) {
-		conditions.name = new RegExp(options.keyword, "i");
+		conditions.alphabetName = repositoryUtil.buildSearchRegExp(options.keyword);
 	}
 
 	if ('coach' in options) {
