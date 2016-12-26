@@ -66,28 +66,51 @@
                     </div>
 
                     <div class="camps-idea-d-text-section">
-                        Sprints:
+                        <div class="row">
+                            Sprints:
 
-                        <button class="btn btn-link" ng-show="isSprintEditing" ng-click="onAddOrUpdateSprint()"><span>添加</span></button>
-                        <button class="btn btn-primary" ng-click="onSprintEdit()" ng-show="allowEditTasks()">{{isSprintEditing ? "完成":"编辑"}}</button>
-                        <button class="btn btn-default" ng-click="isSprintEditing=false;" ng-show="isSprintEditing">取消</button>
+                            <button class="btn btn-link" ng-show="isSprintEditing" ng-click="onAddOrUpdateSprint()"><span>添加</span></button>
+                            <button class="btn btn-primary" ng-click="onSprintEdit()" ng-show="allowEditTasks()">{{isSprintEditing ? "完成":"编辑"}}</button>
+                            <button class="btn btn-default" ng-click="isSprintEditing=false;" ng-show="isSprintEditing">取消</button>
+                        </div>
 
-                        <div class="list-group">
-                            <a class="list-group-item" ng-repeat="item in sprints" ng-click="handleSprint(item, $event)">
-                                <div class="row">
-                                    <div ng-class="{'col-md-10':isSprintEditing, 'col-md-12':!isSprintEditing}">
-                                        <span>Sprint {{item.startDate | date:'yyyy-MM-dd'}} - {{item.endDate | date:'yyyy-MM-dd'}}</span>
-                                        <span class="text-danger">{{item.result}}</span>
-                                        <span class="badge pull-right" ng-show="item.backlog.length > 0">{{item.backlog.length}}</span>
-                                    </div>
-                                    <div class="col-md-2" ng-if="isSprintEditing">
+                        <div class="row">
+                            <uib-accordion close-others="true" class="camps-sprint-uib">
+                                <div uib-accordion-group class="panel-default" ng-repeat="item in sprints">
+                                    <uib-accordion-heading>
+                                        <a ng-click="handleSprint(item, $event)">
+                                            <div class="row">
+                                                <div ng-class="{'col-md-10':isSprintEditing, 'col-md-12':!isSprintEditing}">
+                                                    <span>Sprint {{item.startDate | date:'yyyy-MM-dd'}} - {{item.endDate | date:'yyyy-MM-dd'}}</span>
+                                                    <span class="text-danger">{{item.result}}</span>
+                                                    <span class="badge pull-right" ng-show="item.backlog.length > 0">{{item.backlog.length}}</span>
+                                                </div>
+                                                <div class="col-md-2" ng-if="isSprintEditing">
                                         <span>
                                             <button ng-click="onRemoveSprint(item)"><span class="glyphicon glyphicon-remove"></span></button>
                                             <button ng-click="onAddOrUpdateSprint(item)"><span class="glyphicon glyphicon-pencil"></span></button>
                                         </span>
-                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </uib-accordion-heading>
+                                    <ul>
+                                        <li ng-repeat="us in item.backlog">
+                                            <div>
+                                                <div class="text-left">
+                                                    <span><strong>US {{ us| idOfStory}}</strong></span>
+                                                    <ul>
+                                                        <li ng-repeat="task in storyFromBacklogWithId(us).tasks">
+                                                            <span><strong>Task {{task | idOfTask}}</strong></span>&nbsp; {{task.description}}
+                                                            <small class="pull-right"><i>{{task.assignee.nickname}}</i></small>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </a>
+                            </uib-accordion>
                         </div>
                     </div>
                 </div>

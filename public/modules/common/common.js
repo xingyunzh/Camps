@@ -75,7 +75,15 @@ app.filter("idOfStory",function () {
         if (us == null){
             return "";
         }
-		return us._id.slice(0,1) + "***" + us._id.slice(-4);
+
+        var id = null;
+        if(typeof us == "string"){
+            id = us;
+        }else {
+            id = us._id;
+        }
+
+		return id.slice(0,1) + "***" + id.slice(-4);
 	}
 });
 
@@ -137,7 +145,10 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 				},
 				content: function() {
 					return aConent;
-				}
+				},
+                list:function(){
+                    return null;
+                }
 			}
 		});
 

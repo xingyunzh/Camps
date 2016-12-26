@@ -370,6 +370,14 @@ app.controller("projectDetailController",
             return util.rawNameFromGlobalName(components[components.length - 1]);
         };
 
+        $scope.storyFromBacklogWithId = function(id){
+            for(var index = 0; index < $scope.backlog.length; index++) {
+                if ($scope.backlog[index]._id == id) {
+                    return $scope.backlog[index];
+                }
+            }
+        };
+
         function makeFormOfTheProject() {
             return {
                 name: $rootScope.theProject.name,
