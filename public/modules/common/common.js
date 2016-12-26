@@ -156,7 +156,10 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 				},
 				content: function() {
 					return aConent;
-				}
+				},
+                list:function(){
+                    return null;
+                }
 			}
 		});
 
@@ -175,7 +178,10 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 				},
 				content: function() {
 					return aContent;
-				}
+				},
+                list:function(){
+                    return null;
+                }
 			}
 		});
 
@@ -183,7 +189,11 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 	};
 
 	this.modalTaskInputStep = function(aTitle, aContent){
-		if (!(aContent.duedate instanceof Date)){
+		if (aContent.startDate && !(aContent.startDate instanceof Date)){
+            aContent.startDate = new Date(aContent.startDate);
+        }
+
+		if (aContent.duedate && !(aContent.duedate instanceof Date)){
 			aContent.duedate = new Date(aContent.duedate);
 		}
 
@@ -198,7 +208,10 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 				},
 				content: function() {
 					return aContent;
-				}
+				},
+                list:function(){
+                    return aContent.candidates;
+                }
 			}
 		});
 

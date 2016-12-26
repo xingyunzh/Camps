@@ -8,19 +8,12 @@ app.controller("projectDetailController",
               $q, ossFileService, $timeout) {
         $scope.isNameEditing = false;
         $scope.form = {};
-        $scope.list = ["one", "two", "three", "four", "five", "six"];
         $scope.isBacklogEditing = false;
         $scope.isManagerEditing = false;
         $scope.fileToUpload = null;
         $scope.isAttachmentsEditing = false;
         $scope.percentage = 0;
         $scope.theUserStory = null;
-
-        $scope.sampleAttachments = [
-            "http://campro.oss-cn-shanghai.aliyuncs.com/u5825aeb15f490a225690a3a0_Bitmaphead.jpg",
-            "http://campro.oss-cn-shanghai.aliyuncs.com/g_IMG_1466.PNG",
-            "http://campro.oss-cn-shanghai.aliyuncs.com/u5825aeb15f490a225690a3a0_bike.png"
-        ];
 
         $scope.sortableOptions = {
             update: function(e, ui) {
@@ -212,17 +205,24 @@ app.controller("projectDetailController",
         
         $scope.onAddOrUpdateTask = function (task) {
             var content = task ? task : {};
+            content.candidates = $rootScope.theTeam.members;
             util.modalTaskInputStep(task?"编辑Task":"新建Task", content).then(function(resultTask){
                 if (task){
                     //update
                     for(var key in resultTask){
+                        if(key == "candidates"){
+                            continue;
+                        }
+
                         task[key] = resultTask[key];
                     }
                     return projectService.updateTask(task);
                 }
                 else {
                     //create
-                    return projectService.createTaskForStory(resultTask, $scope.theUserStory);
+                    var newTask = resultTask;
+                    delete newTask.candidates;
+                    return projectService.createTaskForStory(newTask, $scope.theUserStory);
                 }
             }).then(function(task){
                 if(task){
@@ -322,7 +322,7 @@ app.controller("projectDetailController",
             }
 
             if($scope.allowEditProject()) {
-                return true;s
+                return true;
             }
 
             for (var i = 0; i < $rootScope.theTeam.members.length; i++){
