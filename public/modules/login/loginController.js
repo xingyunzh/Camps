@@ -52,20 +52,13 @@ app.controller("loginController", ["$scope","loginService","$rootScope",function
 
 			$rootScope.currentUser = data.user;
 
-			$rootScope.$emit('loggedIn');
+			$rootScope.$emit('loggedIn',data.isFirstTimeLogin);
 		}
 	}
 
 	$scope.wechatInit = function(){
 		var currentURL = window.location.href;
-		var universalAPI = window.location.href.split('#')[0] + '#/nav/login';
-		// var universalAPI = '';
-		// if (currentURL.indexOf('loginB') > -1) {
-		// 	universalAPI = window.location.href.split('#')[0] + '#/nav/login';
-		// } else {
-	 	// 		universalAPI = window.location.href.split('#')[0] + '#/nav/loginB';
-		// }
-		
+		var universalAPI = window.location.href.split('#')[0] + '#/nav/login';		
 
 		var obj = new WxLogin({
 		    id:"wechatCode", 
