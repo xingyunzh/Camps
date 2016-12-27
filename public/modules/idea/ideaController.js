@@ -46,7 +46,7 @@ app.controller("ideaController", ["$scope", "$rootScope", "ideaService", "toaste
 
         pullingData.then(function(data){
             if (more){
-                $scope.ideas.push(data.ideas);
+                Array.prototype.push.apply($scope.ideas, data.ideas);
             }
             else {
                 $scope.ideas = data.ideas;

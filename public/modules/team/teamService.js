@@ -1,14 +1,19 @@
 /**
  * Created by brillwill on 16/10/6.
  */
-app.service("teamService", ["httpHelper", "$q", function (httpHelper, $q) {
-    this.teamSource = function (word) {
-        var url = "./api/team/list";
-        if (word){
-            url += "?keyword="+word;
+app.service("teamService", ["httpHelper", "$q", "kPageSize", function (httpHelper, $q, kPageSize) {
+    this.teamSource = function (word, pageNumber) {
+        var url = "./api/team/list?pageSize="+kPageSize;
+        if(pageNumber){
+            url += "&pageNum="+pageNumber;
         }
+
+        if (word){
+            url += "&keyword="+word;
+        }
+
         return httpHelper.sendRequest("GET", url).then(function(data){
-            return data.teams;
+            return {teams:data.teams, total:data.total};
         });
     };
 

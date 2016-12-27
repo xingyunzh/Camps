@@ -5,7 +5,7 @@ app.service("ideaService", ["util", "$q", "httpHelper", "kPageSize", function (u
     this.ideaSource = function (value, pageNumber) {
         var url = "./api/idea/list?pageSize="+kPageSize;
         if(pageNumber){
-            url += "&pageNumber=" + pageNumber;
+            url += "&pageNum=" + pageNumber;
         }
 
         if(value){
