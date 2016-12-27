@@ -5,6 +5,8 @@ var kModalInputTaskHTML = "./modules/common/modal-task-input.html";
 var kModalInputSprintHTML = "./modules/common/modal-sprint-input.html";
 var kConfirmationController = 'commonModalController';
 
+app.constant("kPageSize", 10);
+
 app.controller(kConfirmationController, function ($scope, $uibModalInstance, title, content, list) {
 	$scope.title = title;
 	$scope.modal = {};

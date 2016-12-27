@@ -33,6 +33,9 @@
                     </div>
                 </div>
             </div>
+            <div class="row text-center">
+                <button class="btn btn-default" ng-click="nextPage()" ng-show="hasMore()">加载更多创意</button>
+            </div>
         </div>
         <div class="col-xs-3 camps-panel-space">
             <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail',{ideaId:theIdea._id})" glyphicon-class="glyphicon-search"></idea-typehead>
