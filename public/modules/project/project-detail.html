@@ -12,8 +12,10 @@
 
             <div class="row">
                 <div class="camps-idea-d-metro-section">
-                    <img ng-src="{{form.headImgUrl?form.headImgUrl:'./images/project.png'}}" alt="Img">
-                    <button class="camps-piece-addon" ng-click="onRemoveHeadImage()" ng-show="isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                    <div class="camps-piece">
+                        <img ng-src="{{form.headImgUrl?form.headImgUrl:'./images/project.png'}}" alt="Img">
+                        <button class="camps-piece-addon" ng-click="onRemoveHeadImage()" ng-show="isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
 
                     <div ng-show="isHeadImageEditing">
                         <image-picker button-label='"更换主题图片"' on-finished='onHeadImagesPicked(images)' type='project'></image-picker>
