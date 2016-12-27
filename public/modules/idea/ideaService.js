@@ -17,11 +17,16 @@ app.service("ideaService", ["util", "$q", "httpHelper", "kPageSize", function (u
         });
     };
 
+    //pageNumber: -1 means in one ago
     this.ideaSourceByInnovator = function(owner, pageNumber){
         var url = "./api/idea/list/" + owner._id;
-        if(pageNumber){
+        if(pageNumber = -1){
+            url += "?pageSize="+1000+"&pageNumber=" + 0;
+        }
+        else if(pageNumber >= 0){
             url += "?pageSize="+kPageSize+"&pageNumber=" + pageNumber;
         }
+
         return httpHelper.sendRequest("GET", url).then(function(data){
             return  {ideas:data.ideas, total:data.total};
         });

@@ -56,7 +56,7 @@ app.controller("newTeamController", ["$scope", "$rootScope", "teamService", "uti
             });
         };
 
-        $rootScope.$on('UserProfileDidRefresh', function () {
+        $rootScope.$on('CampsDidFinishAutoLogin', function () {
             if (!$scope.form.members[0] || $scope.form.members[0]._id != $rootScope.currentUser._id){
                 $scope.form.members.unshift($rootScope.currentUser);
             }
