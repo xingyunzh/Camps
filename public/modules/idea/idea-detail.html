@@ -76,7 +76,7 @@
             <div class="row">
                 <div class="camps-idea-d-text-section">
                     截止日期:
-                    <span ng-hide="isEditing || form.deadline == null">{{form.deadline | date:"yyyy-MM-dd"}}</span>
+                    <span ng-hide="isEditing">{{(form.deadline | date:"yyyy-MM-dd") == 'null' ? (form.deadline | date:"yyyy-MM-dd") : ""}}</span>
                     <span ng-show="isEditing">
                         <p class="input-group">
                             <input type="text" class="form-control" uib-datepicker-popup ng-model="form.deadline"
