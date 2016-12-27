@@ -57,10 +57,10 @@
     height: 80px;
 }
 
-.camps-image-panel-card img{ 
+.camps-image-panel-card > div > img{ 
     float: right;
-    width: 80px;
-    height: 80px;
+    width: 80px !important;
+    height: 80px !important;
     position: absolute;
 }
 

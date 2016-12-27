@@ -90,10 +90,10 @@ exports.publishIdea = function(req,res){
 			throw new Error('Invalid innovator');
 		}else{
 
-			if(checkIdeaReady2Publish(idea)){
+			if(checkIdeaReadyToPublish(idea)){
 				return idea;
 			}else{
-				throw new Error('Miss data to publish');			
+				throw new CamproError('Miss data to publish');			
 			}
 		}
 	}).then(function publishIdea(idea){
@@ -108,12 +108,16 @@ exports.publishIdea = function(req,res){
 		res.send(util.wrapBody({idea:newIdea}));
 	}).catch(function sendcatchureResponse(err){
 		console.log(err);
-		res.send(util.wrapBody('Internal Error','E'));
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
+		}else{
+			res.send(util.wrapBody('Internal Error','E'));
+		}
 	});
 
 };
 
-function checkIdeaReady2Publish(idea){
+function checkIdeaReadyToPublish(idea){
 	var requires = ['name','background','solution','innovator',
 					'sector','painpoint'];
 

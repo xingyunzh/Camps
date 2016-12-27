@@ -1,13 +1,13 @@
 //button-label optional 按钮标签 例子：'选择图片' 默认：‘添加图片
-//mutiple optional 是否是多选模式 Boolean 默认：false
+//multiple optional 是否是多选模式 Boolean 默认：false
 //type optional defaultImage的类型 user/idea/team/project/other  默认：'other'
 //onFinished required 回调函数，参数为 [{name:String,url:String}]
 
 app.component('imagePicker', {
     templateUrl: "./modules/common/components/image-picker.html",
     bindings: {
-        buttonLabel:'=',
-        mutiple:'<',
+        buttonLabel:'@',
+        multiple:'<',
         type:'<',
         onFinished:'&'
     },
@@ -23,12 +23,11 @@ app.component('imagePicker', {
                 $scope.buttonValue = $attrs.buttonLabel;
             }
 
-            $scope.mutiple = false;
-            if (!!$attrs.mutiple) {
-                $scope.mutiple = $attrs.mutiple;
+            $scope.multiple = false;
+            if (!!$attrs.multiple) {
+                $scope.multiple = $attrs.multiple;
             }
             $scope.defaultImages = [];
-            $scope.uploadImages = [];
             $scope.OSSClient = null;
             $scope.popoverIsOpen = false;
             $scope.panelUrl = './modules/common/components/image-panel.html';
@@ -36,6 +35,7 @@ app.component('imagePicker', {
 
         function dataInit(){
             $scope.selectedImages = [];
+            $scope.uploadImages = [];
         }
 
         function getClient(){
@@ -128,7 +128,7 @@ app.component('imagePicker', {
         };
 
         function checkImage(image){
-            if ($scope.mutiple) {
+            if ($scope.multiple) {
                 $scope.selectedImages.push(image);
             }else{
                 $scope.selectedImages = [image];

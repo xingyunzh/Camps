@@ -4,7 +4,7 @@
 
             <div class="" ng-repeat="item in coaches">
                 <div class="camps-media-card" ng-click="handleItemClick(item)">
-                    <img ng-src="./images/coach.png" alt="Img">
+                    <img ng-src="{{item.headImgUrl}}" alt="Img">
 
                     <div class="camps-media-card-body">
                         <div class="camps-media-card-title">
@@ -13,11 +13,11 @@
                             </h1>
                         </div>
                         <div class="camps-media-card-leader">
-                            <h2>职业 <span class="camps-text-highlight-color">{{item.desc}}</span></h2>
+                            <h2>类型 <span class="camps-text-highlight-color">{{item.type}}</span></h2>
                         </div>
                         <div class="camps-media-card-short-line"></div>
                         <div class="camps-media-card-description">
-                            <h2>聊天,游泳,文体活动</h2>
+                            <h2>{{item.sector}}</h2>
                         </div>
                     </div>
                     <div class="camps-media-card-footer">
