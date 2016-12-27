@@ -20,6 +20,9 @@ app.controller("navController", ["$scope", "$rootScope", "loginService", functio
                 $rootScope.$state.go("nav.idea");
             }
         }
+        else{
+            $rootScope.$emit("CampsDidFinishAutoLogin");
+        }
     });
 
     $rootScope.$on('CampsDidReceiveAuthToken', function(){

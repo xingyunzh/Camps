@@ -58,7 +58,7 @@ app.service("loginService", ['httpHelper', function (httpHelper) {
 			httpHelper.sendRequest("GET", "./api/user/profile/"+userId).then(function(data){
 				rootScope.currentUser = data.user;
 
-				rootScope.$emit('UserProfileDidRefresh');
+				rootScope.$emit('CampsDidFinishAutoLogin');
 			}).catch(function(error){
 				rootScope.token = null;
 			});
