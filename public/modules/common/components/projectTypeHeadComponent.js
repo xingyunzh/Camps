@@ -11,7 +11,9 @@ app.component('projectTypehead', {
     },
     controller: function($scope, $element, $attrs, projectService){
         $scope.getProjects = function (viewValue) {
-            return projectService.projectSource();
+            return projectService.projectSource(viewValue).then(function(data){
+                return data.projects;
+            });
         };
 
         $scope.selectedProject = null;

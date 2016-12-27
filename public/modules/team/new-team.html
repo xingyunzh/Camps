@@ -8,6 +8,7 @@
             <div class="col-md-10">
                 <input type="text" class="form-control camps-short-field" id="id-camps-create-team-name" placeholder="名字" ng-model="form.name" ng-change="onNameChange(form.name)">
                 <span ng-show="nameAvailable"><span class="glyphicon glyphicon-ok text-success" ></span><span class="text-success">该名字可用</span></span>
+                <span ng-hide="nameAvailable"><span class="glyphicon glyphicon-ok text-error" ></span><span class="text-success">请输入可用的团队名,不能与其他团队重复。</span></span>
             </div>
 
         </div>

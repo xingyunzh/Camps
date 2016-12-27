@@ -14,3 +14,13 @@
 {
     display: inline-block;
 }
+
+.camps-sprint-uib {
+    margin-top: 10px;
+    width: 100%;
+    display: inline-block;
+}
+
+.camps-sprint-uib uib-accordion-heading {
+    background-color: #1b6d85;
+}

@@ -5,6 +5,8 @@ var kModalInputTaskHTML = "./modules/common/modal-task-input.html";
 var kModalInputSprintHTML = "./modules/common/modal-sprint-input.html";
 var kConfirmationController = 'commonModalController';
 
+app.constant("kPageSize", 10);
+
 app.controller(kConfirmationController, function ($scope, $uibModalInstance, title, content, list) {
 	$scope.title = title;
 	$scope.modal = {};
@@ -75,7 +77,15 @@ app.filter("idOfStory",function () {
         if (us == null){
             return "";
         }
-		return us._id.slice(0,1) + "***" + us._id.slice(-4);
+
+        var id = null;
+        if(typeof us == "string"){
+            id = us;
+        }else {
+            id = us._id;
+        }
+
+		return id.slice(0,1) + "***" + id.slice(-4);
 	}
 });
 
@@ -137,7 +147,10 @@ app.service('util', ["$q", "$uibModal", function ($q, $uibModal) {
 				},
 				content: function() {
 					return aConent;
-				}
+				},
+                list:function(){
+                    return null;
+                }
 			}
 		});
 

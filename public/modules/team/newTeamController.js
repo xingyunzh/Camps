@@ -14,7 +14,7 @@ app.controller("newTeamController", ["$scope", "$rootScope", "teamService", "uti
 
         $scope.onSubmitButton = function () {
             if (!$scope.form.name || !$scope.nameAvailable){
-                util.confirmationStep("输入", "团队的名字不能为空。");
+                util.confirmationStep("输入", "团队的名字不能为空,并且不能与其他团队重名。");
 
                 return;
             }

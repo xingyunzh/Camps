@@ -1,14 +1,19 @@
 /**
  * Created by brillwill on 16/10/6.
  */
-app.service("projectService", ["util", "$q", "httpHelper", function (util, $q, httpHelper) {
-    this.projectSource = function (value) {
-        var url = "./api/project/list";
+app.service("projectService", ["util", "$q", "httpHelper", "kPageSize", function (util, $q, httpHelper, kPageSize) {
+    this.projectSource = function (value, pageNumber) {
+        var url = "./api/project/list?pageSize="+kPageSize;
         if (!!value){
-            url += "?keyword=" + value;
+            url += "&keyword=" + value;
         }
+
+        if(pageNumber){
+            url += "&pageNum="+pageNumber;
+        }
+
         return httpHelper.sendRequest("GET", url).then(function(data){
-            return data.projects;
+            return {projects:data.projects, total:data.total};
         });
     };
 

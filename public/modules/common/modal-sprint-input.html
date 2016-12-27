@@ -48,7 +48,7 @@
                     <a class="list-group-item" ng-repeat="item in modal.list" ng-click="!!modal.content.backlog ? modal.content.backlog.push(item) : (modal.content.backlog = [item]);">
                         <span><strong>US {{item | idOfStory}}</strong></span>
                         {{item | nameOfStory}}
-                        <span class="pull-right" ng-show="modal.content.backlog.indexOf(item) >= 0"><span class="glyphicon glyphicon-ok"></span></span>
+                        <span class="pull-right" ng-show="(item._id ? (modal.content.backlog.indexOf(item._id)) : (modal.content.backlog.indexOf(item))) >= 0"><span class="glyphicon glyphicon-ok"></span></span>
                     </a>
                 </div>
             </div>

@@ -370,6 +370,32 @@ app.controller("projectDetailController",
             return util.rawNameFromGlobalName(components[components.length - 1]);
         };
 
+        $scope.storyFromBacklogWithId = function(id){
+            for(var index = 0; index < $scope.backlog.length; index++) {
+                if ($scope.backlog[index]._id == id) {
+                    return $scope.backlog[index];
+                }
+            }
+        };
+
+        $scope.onHeadImagesPicked = function(images){
+            $scope.form.headImgUrl = images[0].url;
+        };
+
+        $scope.onImagesPicked = function(images){
+            $scope.form.images = _.map(images, function(item){
+                return item.url;
+            });
+        };
+
+        $scope.onRemoveImage = function($index){
+            $scope.form.images.splice($index, 1);
+        };
+
+        $scope.handleTeamClicked = function(team){
+            $rootScope.$state.go("nav.team-detail", {teamId:team._id});
+        };
+
         function makeFormOfTheProject() {
             return {
                 name: $rootScope.theProject.name,
@@ -379,7 +405,9 @@ app.controller("projectDetailController",
                 backlog: angular.copy($rootScope.theProject.backlog),
                 sprints: angular.copy($rootScope.theProject.sprints),
                 tasks: angular.copy($rootScope.theProject.tasks),
-                attachments:$rootScope.theProject.attachments ? angular.copy($rootScope.theProject.attachments) : []
+                attachments:$rootScope.theProject.attachments ? angular.copy($rootScope.theProject.attachments) : [],
+                headImgUrl:$rootScope.theProject.headImgUrl,
+                images:angular.copy($rootScope.theProject.images)
             }
         }
 

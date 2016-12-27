@@ -1,29 +1,37 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-9 camps-card-space">
+            <div class="row">
 
-            <div class="" ng-repeat="item in teams">
-                <div class="camps-media-card" ng-click="onTeamClicked(item)">
-                    <img ng-src="./images/team.png" alt="Img">
+            </div>
 
-                    <div class="camps-media-card-body">
-                        <div class="camps-media-card-title">
-                            <h1 class="camps-text-highlight-color">
-                                {{item.name}}
-                            </h1>
+            <div class="row">
+                <div class="" ng-repeat="item in teams">
+                    <div class="camps-media-card" ng-click="onTeamClicked(item)">
+                        <img ng-src="{{item.headImgUrl?item.headImgUrl:'./images/team.png'}}" alt="Img">
+
+                        <div class="camps-media-card-body">
+                            <div class="camps-media-card-title">
+                                <h1 class="camps-text-highlight-color">
+                                    {{item.name}}
+                                </h1>
+                            </div>
+                            <div class="camps-media-card-leader">
+                                <h2>队长 <span class="camps-text-highlight-color">{{item.members[0].nickname}}</span></h2>
+                            </div>
+                            <div class="camps-media-card-short-line"></div>
+                            <div class="camps-media-card-description">
+                                <h2 ng-bind="item.description" maxlength="10"></h2>
+                            </div>
                         </div>
-                        <div class="camps-media-card-leader">
-                            <h2>队长 <span class="camps-text-highlight-color">{{item.members[0].nickname}}</span></h2>
-                        </div>
-                        <div class="camps-media-card-short-line"></div>
-                        <div class="camps-media-card-description">
-                            <h2 ng-bind="item.description" maxlength="10"></h2>
-                        </div>
-                    </div>
-                    <div class="camps-media-card-footer">
+                        <div class="camps-media-card-footer">
                             <span class="glyphicon glyphicon-star"></span> <span>249</span> &nbsp; <span class="camps-annotation">(经验值)</span>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="row text-center">
+                <button class="btn btn-default" ng-click="nextPage()" ng-show="hasMore()">加载更多团队</button>
             </div>
         </div>
         <div class="col-xs-3 camps-panel-space">

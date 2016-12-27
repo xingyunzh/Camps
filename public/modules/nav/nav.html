@@ -54,12 +54,12 @@
             </div>
             <div class="col-xs-1">
                 <div class="camps-nav-menu-item">
-                    <a ui-sref="nav.message" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'message'}">私信</a>
+                    <a ui-sref="nav.asset" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'asset'}">资源</a>
                 </div>
             </div>
-            <div class="col-xs-1">
+            <div class="col-xs-1" ng-show="!!currentUser">
                 <div class="camps-nav-menu-item">
-                    <a ui-sref="nav.asset" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'asset'}">组件</a>
+                    <a ui-sref="nav.message" ng-class="{'camps-nav-menu-item-selected':$state.current.data.nav == 'message'}">我的工作台</a>
                 </div>
             </div>
         </div>
