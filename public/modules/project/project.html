@@ -34,7 +34,8 @@
         </div>
         <div class="col-xs-3 camps-panel-space">
             <project-typehead glyphicon-class="glyphicon-search" on-selected="handleProjectClicked(project)"></project-typehead>
-            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createProject">创建项目</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createProject" ng-if="!!currentUser">创建项目</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="!currentUser">创建项目</button>
         </div>
     </div>
 </div>

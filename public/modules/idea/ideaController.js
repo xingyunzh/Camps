@@ -3,8 +3,8 @@
  */
 app.controller("ideaController", ["$scope", "$rootScope", "ideaService", "toaster", "kPageSize", function($scope, $rootScope, ideaService, toaster, kPageSize){
     $scope.ideas = [];
-    $scope.cardFilter = "all";
     $scope.total = 0;
+    $scope.cardFilter = "all";
     $scope.pageNumber = 0;
 
     $scope.handleItemClick = function(idea){
@@ -67,7 +67,7 @@ app.controller("ideaController", ["$scope", "$rootScope", "ideaService", "toaste
         });
     }
 
-    refreshData();
+    // refreshData();  first load in $digest of cardFilter watch
 }]);
 
 
