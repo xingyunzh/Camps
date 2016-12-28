@@ -1,6 +1,7 @@
 var teamRepository = require('../repositories/teamRepository');
 var util = require('../util/util');
 var CamproError = require('../models/CamproError');
+var uuid = require('node-uuid');
 
 
 exports.list = function(req,res){
@@ -37,8 +38,6 @@ exports.checkExist = function(req,res){
 };
 
 function checkNameExist(name){
-	var q = teamRepository.countByName(name);
-
 	return teamRepository.countByName(name).then(function(count){
 		return count > 0;
 	});
@@ -51,6 +50,7 @@ exports.create = function(req,res){
 		var team = req.body;
 		team.createDate = new Date();
 		team.state = 1;
+		team.teamId = uuid.v1();
 
 		teamRepository.create(team)
 		.then(function(result){

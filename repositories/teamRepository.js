@@ -1,9 +1,7 @@
 var Team = require('../models/team');
-var uuid = require('node-uuid');
 var repositoryUtil = require('./repositoryUtil');
 
 exports.create = function(data){
-	data.teamId = uuid.v1();
 	data.alphabetName = repositoryUtil.alphabetize(data.name,{
 		separator:'|'
 	});
