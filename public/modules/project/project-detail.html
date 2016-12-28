@@ -18,7 +18,7 @@
                     </div>
 
                     <div ng-show="isHeadImageEditing">
-                        <image-picker button-label='"更换主题图片"' on-finished='onHeadImagesPicked(images)' type='project'></image-picker>
+                        <image-picker button-label='更换主题图片' on-finished='onHeadImagesPicked(images)' type='project'></image-picker>
                     </div>
 
                     <button class="btn btn-primary" ng-click="onDataEdit(['headImgUrl'], 'isHeadImageEditing')" ng-show="allowEditProject()">{{isHeadImageEditing ? "完成":"编辑"}}</button>
@@ -36,7 +36,7 @@
                         <button class="camps-piece-addon" ng-click="onRemoveImage($index)" ng-show="isImagesEditing"><span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                     <div ng-show="isImagesEditing">
-                        <image-picker button-label='"添加项目图片"' on-finished='onImagesPicked(images)' type='project' mutiple="true"></image-picker>
+                        <image-picker button-label='添加项目图片' on-finished='onImagesPicked(images)' type='project' mutiple="true"></image-picker>
                     </div>
                 </div>
 
