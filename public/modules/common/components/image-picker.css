@@ -39,6 +39,12 @@
     height: 100px;
 }
 
+.camps-image-panel-uploads{
+    overflow-x: scroll;
+    height: 100px;
+    width: 300px;
+}
+
 .camps-image-panel-bottom{
     width: 400px;
     height: 200px;
@@ -57,10 +63,10 @@
     height: 80px;
 }
 
-.camps-image-panel-card > div > img{ 
+.camps-image-panel-card>img,.camps-image-panel-card>div>img{ 
     float: right;
-    width: 80px !important;
-    height: 80px !important;
+    width: 80px;
+    height: 80px;
     position: absolute;
 }
 
