@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var assetSchema = Schema({
 	name:{
-		tpye:String,
+		type:String,
 		index:true,
 		required:true
 	},
@@ -21,13 +21,12 @@ var assetSchema = Schema({
 	},
 
 	version:{
-		type:String,
-		required:true
+		type:Number
 	},
 
 	editDate:{
 		type:Date,
-		required:true
+		default:new Date()
 	},
 
 	guide:String,

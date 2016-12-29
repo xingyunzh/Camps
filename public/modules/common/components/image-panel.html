@@ -4,15 +4,15 @@
 			<button class="btn btn-primary" ng-click="submit()">确认</button>
 			<button class="btn btn-warning" ng-click="cancel()">取消</button>
 		</div>
-		<div ng-repeat="image in uploadImages">
-			<div class="camps-image-panel-card">
+		<div class="camps-image-panel-uploads" >
+			<div class="camps-image-panel-card" ng-repeat="image in uploadImages">
 				<div ng-hide="image.percentage == 1">
 					<img alt="正在上传">
 					<uib-progressbar max="1" value="image.percentage"><span style="color:white; white-space:nowrap;"></span></uib-progressbar>
 				</div>
 				<div ng-click="onImageClick(image)" ng-show="image.percentage == 1">
-					<span ng-show="selectedImages.indexOf(image) > -1" class="camps-image-check glyphicon glyphicon-check"></span>
 					<span ng-hide="selectedImages.indexOf(image) > -1" class="camps-image-uncheck glyphicon glyphicon-unchecked"></span>
+					<span ng-show="selectedImages.indexOf(image) > -1" class="camps-image-check glyphicon glyphicon-check"></span>
 					<span class="camps-image-remove glyphicon glyphicon-remove" ng-click="deleteImage($index)"></span>
 					<img ng-src="{{image.url}}" alt="Description" >
 				</div>
@@ -28,8 +28,8 @@
 		</div>
 		<div class="" ng-repeat="image in defaultImages">
 			<div class="camps-image-panel-card" ng-click="onImageClick(image)">
-				<span ng-show="selectedImages.indexOf(image) > -1" class="camps-image-check glyphicon glyphicon-check"></span>
 				<span ng-hide="selectedImages.indexOf(image) > -1" class="camps-image-uncheck glyphicon glyphicon-unchecked"></span>
+				<span ng-show="selectedImages.indexOf(image) > -1" class="camps-image-check glyphicon glyphicon-check"></span>
 				<img ng-src="{{image.url}}" alt="Description">
 			</div>
 		</div>
