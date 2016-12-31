@@ -1,28 +1,64 @@
 /**
  * Created by brillwill on 16/9/28.
  */
-app.controller("newTeamController", ["$scope", "$rootScope", "util", function ($scope, $rootScope, util) {
-    $scope.form = {
-        name: null,
-        description: null,
-        leader: null,
-        members: [],
-        teamId: "20160701001",
-        isActive: true,
-        birthday: new Date("2015-12-12"),
-        project: null,
-        deactiveDate: null,
-        activeDate: new Date("2016-07-01"),
-    };
+app.controller("newTeamController", ["$scope", "$rootScope", "teamService", "util", "toaster",
+    function ($scope, $rootScope, teamService, util, toaster) {
+        $scope.form = {
+            name: null,
+            description: null,
+            members: [$rootScope.currentUser],
+            coach: null
+        };
 
-    $scope.onSubmitButton = function () {
-        util.confirmationStep("新建","你在同一时刻只能加入一个团队,是否确认自己新建一个团队?")
-            .then(function ok() {
-                $rootScope.theTeam = $scope.form;
+        $scope.nameAvailable = false;
 
-                $rootScope.$state.go("nav.team-detail");
-            }, function cancel() {
+        $scope.onSubmitButton = function () {
+            if (!$scope.form.name || !$scope.nameAvailable){
+                util.confirmationStep("输入", "团队的名字不能为空,并且不能与其他团队重名。");
 
-            })
-    }
-}]);
+                return;
+            }
+
+            if (!$scope.form.accepted) {
+                util.confirmationStep("输入", "请先接受团队创建协议。");
+
+                return;
+            }
+
+            util.confirmationStep("新建", "你在同一时刻只能加入一个团队,是否确认自己新建一个团队?")
+                .then(function () {
+                    toaster.pop({
+                        type: "info",
+                        title: "新建",
+                        body: "正在提交,请稍候。"
+                    });
+                    return teamService.add($scope.form);
+                })
+                .then(function (team) {
+                    toaster.clear();
+
+                    $rootScope.theTeam = team;
+                    $rootScope.$state.go('nav.team-detail', {teamId:team._id});
+                })
+                .catch(function (error) {
+                    toaster.clear();
+                    toaster.pop({
+                        type: "error",
+                        title: "错误",
+                        body: "系统错误:" + JSON.stringify(error)
+                    });
+                });
+        };
+
+        $scope.onNameChange = function(value){
+            teamService.checkName(value).then(function(exist){
+                $scope.nameAvailable = !exist;
+            });
+        };
+
+        $rootScope.$on('CampsDidFinishAutoLogin', function () {
+            if (!$scope.form.members[0] || $scope.form.members[0]._id != $rootScope.currentUser._id){
+                $scope.form.members.unshift($rootScope.currentUser);
+            }
+        });
+    }]);

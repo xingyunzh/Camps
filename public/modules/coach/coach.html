@@ -1,23 +1,36 @@
-<div class="bg-primary container-fluid camps-head-strip">
-    <div class="camps-parent-width">
-        <h1 class="text-center">教练 全方位的指导我们组队、敏捷项目管理与开发 </h1>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row camps-coach-join-button" >
-        <button class="btn btn-primary">成为教练</button>
-    </div>
-</div>
-
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-4" ng-repeat="coach in coaches">
-            <div class="thumbnail">
-                <img src="http://7xavvn.com2.z0.glb.qiniucdn.com/03/1313029034318_x3ab4u.jpg!bigger" alt="JOBS">
-                <h3>{{coach.name}}</h3>
-                <p>{{coach.desc}}</p>
+        <div class="col-xs-9 camps-card-space">
+
+            <div class="" ng-repeat="item in coaches">
+                <div class="camps-media-card" ng-click="handleItemClick(item)">
+                    <img ng-src="{{item.headImgUrl}}" alt="Img">
+
+                    <div class="camps-media-card-body">
+                        <div class="camps-media-card-title">
+                            <h1 class="camps-text-highlight-color">
+                                {{item.name}}
+                            </h1>
+                        </div>
+                        <div class="camps-media-card-leader">
+                            <h2>类型 <span class="camps-text-highlight-color">{{item.type}}</span></h2>
+                        </div>
+                        <div class="camps-media-card-short-line"></div>
+                        <div class="camps-media-card-description">
+                            <h2>{{item.sector}}</h2>
+                        </div>
+                    </div>
+                    <div class="camps-media-card-footer">
+                        <span class="glyphicon glyphicon-heart"></span> <span>249</span> &nbsp;&nbsp;
+                        <span class="glyphicon glyphicon-eye-open"></span> <span>2368</span>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="col-xs-3 camps-panel-space">
+            <user-typehead on-selected="handleItemClick(user)" which-role="coach" glyphicon-class="glyphicon-search"></user-typehead>
+            <button class="btn btn-primary center-block camps-panel-submit">成为教练</button>
+        </div>
     </div>
+
 </div>

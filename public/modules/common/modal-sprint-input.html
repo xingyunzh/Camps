@@ -1,0 +1,63 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">{{title}}</h3>
+	</div>
+
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-sm-5">
+				<h4>开始时间</h4>
+			</div>
+			<div class="col-sm-5">
+				<h4>结束时间</h4>
+			</div>
+			<div class="col-sm-2">
+                <h4>执行结果</h4>
+            </div>
+		</div>
+		<div class="row">
+			<div class="col-sm-5">
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="modal.content.startDate"
+                           datepicker-options="gOptions.datePicker"
+                           ng-required="true" is-open="isStartDatePickerOpen" close-text="关闭"/>
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="isStartDatePickerOpen = !isStartDatePickerOpen;"><i
+                                class="glyphicon glyphicon-calendar"></i> </button>
+					</span>
+                </p>
+			</div>
+			<div class="col-sm-5">
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="modal.content.endDate"
+                           datepicker-options="gOptions.datePicker"
+                           ng-required="true" is-open="isEndDatePickerOpen" close-text="关闭"/>
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="isEndDatePickerOpen = !isEndDatePickerOpen;"><i
+                                class="glyphicon glyphicon-calendar"></i> </button>
+					</span>
+                </p>
+			</div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" ng-model="modal.content.result">
+            </div>
+		</div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="list-group">
+                    <a class="list-group-item" ng-repeat="item in modal.list" ng-click="!!modal.content.backlog ? modal.content.backlog.push(item) : (modal.content.backlog = [item]);">
+                        <span><strong>US {{item | idOfStory}}</strong></span>
+                        {{item | nameOfStory}}
+                        <span class="pull-right" ng-show="(item._id ? (modal.content.backlog.indexOf(item._id)) : (modal.content.backlog.indexOf(item))) >= 0"><span class="glyphicon glyphicon-ok"></span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-primary" type="button" ng-click="ok()">保存</button>
+		<button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+	</div>	
+</div>
+

@@ -6,11 +6,14 @@ app.component('teamTypehead', {
     bindings: {
         glyphiconClass:"=",
         whichRole: "=",
-        notifySelected:"&onSelected"
+        notifySelected:"&onSelected",
+        maxWidth:"<"
     },
     controller: function($scope, $element, $attrs, $q, teamService){
         $scope.getTeams = function (viewValue) {
-            return teamService.teamSource();
+            return teamService.teamSource(viewValue).then(function(data){
+                return data.teams;
+            });
         };
 
         $scope.selectedTeam = null;

@@ -1,99 +1,132 @@
-<div class="bg-primary container-fluid camps-head-strip">
-    <div class="camps-parent-width">
-        <h1 class="text-center">创意  {{theIdea.name}}</h1>
-        <h4 class="text-center">提交人: {{theIdea.innovator.name}}</h4>
-    </div>
-</div>
-
 <div class="container">
-    <row>
-        <row>
-            <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
-            &nbsp;&nbsp;
-            <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">{{isEditing ? "保存修改" : "编辑基本信息"}}</button>
-        </row>
-    </row>
+    <div class="row">
+        <div class="col-xs-9 camps-card-space">
+            <div class="row">
+                <div class="camps-idea-d-title">
+                    <span>{{theIdea.name}}</span>
+                    <span class="camps-text-highlight-color" ng-hide="theIdea.state=='published'"><small>{{theIdea.state}}</small></span>
+                </div>
+            </div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th class="col-md-1">&nbsp;标题&nbsp;</th>
-                <th class="text-center col-md-11">内容</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>背景</td>
-                <td>
-                    <span ng-hide="isEditing">{{form.background}}</span>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    发起人:<camps-user-head user="theIdea.innovator" class="camps-text-highlight-color"></camps-user-head>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-metro-section">
+                    <div class="camps-piece" ng-show="isEditing">
+                        <img ng-src="{{form.headImgUrl}}" alt="Image">
+                        <button class="camps-piece-addon" ng-click="onRemoveHeadImage()" ng-show="isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                        <div>
+                            <image-picker button-label='更换主题图片' on-finished='onHeadImagesPicked(images)' type='idea'></image-picker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-metro-section">
+                    <div class="camps-piece" ng-repeat="image in form.images">
+                        <img ng-src="{{image}}" alt="Image">
+                        <button class="camps-piece-addon" ng-click="onRemoveImage($index)" ng-show="isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                    <div ng-show="isEditing">
+                        <image-picker button-label='"添加图片"' on-finished='onImagesPicked(images)' type='idea' mutiple="true"></image-picker>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    背景:
+                    <span ng-hide="isEditing"><span ng-bind="form.background"></span></span>
                     <span ng-show="isEditing">
-                        <summernote class='form-control' height="200" ng-model="form.background"></summernote>
+                        <textarea class='form-control' cols="30" rows="10" ng-model="form.background" ></textarea>
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>解决的问题</td>
-                <td>
-                    <span ng-hide="isEditing">{{form.painpoint}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    解决问题:
+                    <span ng-hide="isEditing"><span ng-bind-html="form.painpoint | htmlConent"></span> </span>
                     <span ng-show="isEditing">
-                        <summernote class='form-control' height="200" ng-model="form.painpoint" ></summernote>
+                        <textarea class='form-control' cols="30" rows="10" ng-model="form.painpoint" ></textarea>
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>解决方案</td>
-                <td>
-                    <span ng-hide="isEditing">{{form.solution}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    解决方案:
+                    <span ng-hide="isEditing"><span ng-bind-html="form.solution | htmlConent"></span> </span>
                     <span ng-show="isEditing">
-                        <summernote class='form-control' height="300" ng-model="form.solution" ></summernote>
+                        <summernote class='form-control' config="summerOption" data-on-image-upload="imageUpload(files, editorS)"
+                                    ng-model="form.solution" editor="editorS" editable="editableS"></summernote>
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>人力资源</td>
-                <td>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    人力资源:
                     <span ng-hide="isEditing">{{form.hrRequirement}}</span>
                     <span ng-show="isEditing">
                         <textarea class='form-control' cols="30" rows="2" ng-model="form.hrRequirement" ></textarea>
                     </span>
-                </td>
-            </tr>
-            <!--<tr>-->
-                <!--<td>复用组件</td>-->
-                <!--<td>{{theIdea.relatedAssets}}</td>-->
-            <!--</tr>-->
-            <tr>
-                <td>截止日期</td>
-                <td>
-                    <span ng-hide="isEditing">{{form.deadline | date:"yyyy-MM-dd"}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    截止日期:
+                    <span ng-hide="isEditing">{{(form.deadline | date:"yyyy-MM-dd") == 'null' ? (form.deadline | date:"yyyy-MM-dd") : ""}}</span>
                     <span ng-show="isEditing">
                         <p class="input-group">
                             <input type="text" class="form-control" uib-datepicker-popup ng-model="form.deadline"
                                    datepicker-options="gOptions.datePicker"
-                                    ng-required="true" is-open="isDatePickerOpen" close-text="关闭"/>
+                                   ng-required="true" is-open="isDatePickerOpen" close-text="关闭"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="isDatePickerOpen=!isDatePickerOpen"><i
                                         class="glyphicon glyphicon-calendar"></i> </button>
                             </span>
                         </p>
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>咨询师</td>
-                <td>
-                    <span>{{form.consultant.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    咨询师:
+                    <span>{{form.consultant.nickname}}</span>
                     <span ng-show="isEditing">
                         <user-typehead which-role="coach" on-selected="form.consultant = user;"></user-typehead>
                     </span>
-                </td>
-            </tr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    关联项目:
+                    <span ng-repeat="prj in theIdea.projects">
+                        <a ng-click="handleProjectLink(prj)">{{prj.name}}</a>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section" ng-show="currentUser._id==theIdea.innovator._id">
+                    <span ng-show="isEditing" class="pull-right">
+                        <button class="btn btn-default  camps-team-editing-button"
+                                ng-click="onCancelButton()">取消</button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-primary camps-team-editing-button"
+                                ng-click="onEditButton()">保存修改</button>
+                    </span>
+                    <span ng-hide="isEditing" class="pull-right">
+                        <button class="btn btn-primary camps-team-editing-button" ng-click="onEditButton()">编辑基本信息</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3 camps-panel-space">
+            <idea-typehead on-selected="theIdea=idea;$state.go('nav.idea-detail',{ideaId:theIdea._id})" glyphicon-class="glyphicon-search"></idea-typehead>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createIdea" ng-if="!!currentUser">提交你的创意</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="currentUser==null">提交你的创意</button>
+        </div>
+    </div>
 
-            <tr ng-repeat="prj in theIdea.projects">
-                <td rowspan={{theIdea.projects.length}} ng-if="$index == 0">关联项目</td>
-                <td>{{prj.name}}</td>
-            </tr>
-
-        </tbody>
-    </table>
 </div>

@@ -6,51 +6,48 @@ var sprintSchema = Schema({
 
 	endDate:Date,
 
-	userStoris:[{
+	backlog:[{
 		type:Schema.Types.ObjectId,
 		ref:'UserStory'
 	}],
 
-	task:[{
-		type:Schema.Types.ObjectId,
-		ref:'Task'
-	}],
+	result:String
 
-	discussMinutes:[{
-		type:Schema.Types.ObjectId,
-		ref:'discussMinutes'
-	}],
+	// discussMinutes:[{
+	// 	type:Schema.Types.ObjectId,
+	// 	ref:'discussMinutes'
+	// }],
 
-	deliverables:{
-		snapShot:[{
-			url:String,
-			user:{
-				type:Schema.Types.ObjectId,
-				ref:'User'
-			},
-			date:Date
-		}],
+	// deliverables:{
+	// 	snapShot:[{
+	// 		url:String,
+	// 		user:{ 
+	// 			type:Schema.Types.ObjectId,
+	// 			ref:'User'
+	// 		},
+	// 		date:Date
+	// 	}],
 
-		evaluate:String,
+	// 	evaluate:String,
 
-		demo:{
-			url:String,
-			user:{
-				type:Schema.Types.ObjectId,
-				ref:'User'
-			},
-			date:Date
-		},
+	// 	demo:{
+	// 		url:String,
+	// 		user:{
+	// 			type:Schema.Types.ObjectId,
+	// 			ref:'User'
+	// 		},
+	// 		date:Date
+	// 	},
 
-		git:{
-			url:String,
-			user:{
-				type:Schema.Types.ObjectId,
-				ref:'User'
-			},
-			date:Date
-		}
-	}
+	// 	git:{
+	// 		url:String,
+	// 		user:{
+	// 			type:Schema.Types.ObjectId,
+	// 			ref:'User'
+	// 		},
+	// 		date:Date
+	// 	}
+	// }
 });
 
 var Sprint = mongoose.model("Sprint", sprintSchema);

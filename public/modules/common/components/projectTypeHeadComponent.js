@@ -6,11 +6,14 @@ app.component('projectTypehead', {
     bindings: {
         glyphiconClass:"=",
         whichRole: "=",
-        notifySelected:"&onSelected"
+        notifySelected:"&onSelected",
+        maxWidth:"<"
     },
     controller: function($scope, $element, $attrs, projectService){
         $scope.getProjects = function (viewValue) {
-            return projectService.projectSource();
+            return projectService.projectSource(viewValue).then(function(data){
+                return data.projects;
+            });
         };
 
         $scope.selectedProject = null;

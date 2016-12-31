@@ -9,6 +9,7 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
     $scope.dt = new Date();
     $scope.selectedUser = null;
     $scope.file = null;
+    $scope.testuser = {nickname:'Jim Green', headImgUrl:'http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead.jpg'};
 
     $scope.onRefresh = function () {
         httpHelper.sendRequest("GET", "./demo").then(function success(data) {
@@ -43,6 +44,10 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
             body:'bodyTextContent',
             // timeout:0
         });
+    }
+
+    $scope.onFileUploadFinished = function(images){
+        console.log(images);
     }
     
     $scope.toasterClear = function () {
@@ -82,6 +87,16 @@ app.controller("assetController", ["$scope", "$rootScope", "httpHelper", "util",
         }).then(function (data) {
             console.log("upload data = " + data.url);
         }, function fail(error){
+            console.log("upload fail data = " + error);
+        });
+
+        ossFileService.getClient().then(function(client){
+            return ossFileService.uploadFileWithClient(client,gFileName,file,function(p){
+                console.log("file progress " + p * 100 + "%");
+            });
+        }).then(function(res){
+            console.log("upload data = " + res.url);
+        }).catch(function(error){
             console.log("upload fail data = " + error);
         });
 

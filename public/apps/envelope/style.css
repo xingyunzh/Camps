@@ -1,0 +1,56 @@
+body{
+    font-size: 10px;
+}
+
+.head {
+    width: 100%;
+    text-align: center;
+}
+
+.head img {
+    max-width: 90%;
+}
+
+.content {
+    width: 300px;
+    margin: 10px auto;
+}
+
+.content .content-body {
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.content-body span {
+    display: block;
+    padding:20px;
+
+    line-height: 1.5rem;
+}
+
+.content-signature {
+    text-align: right;
+}
+
+.content-signature span {
+    padding-right: 40px;
+}
+
+.content-signature .signed-name {
+    font-size: 1.3rem;
+}
+
+footer {
+    margin-top: 50px;
+    text-align: center;
+}
+
+footer img {
+    height: 22px;
+
+    transform:rotate(10deg);
+    -ms-transform:rotate(10deg); 	/* IE 9 */
+    -moz-transform:rotate(10deg); 	/* Firefox */
+    -webkit-transform:rotate(10deg); /* Safari 和 Chrome */
+    -o-transform:rotate(10deg); 	/* Opera */
+}

@@ -1,18 +1,15 @@
 *{
-    font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+    font-family: "HelveticaNeueDeskInterface-Regular", "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
 }
 
-
-.camps-navbar-height {
-    height:51px;
+body {
+    color: #313131;
+    background-color: #f4f4f4;
+    font-size: 10px;
 }
 
-.camps-nav-footer{
-    margin-top: 50px;
-    padding-top: 10px;
-    color: #6B7C93;
-    text-align: center;
-    border-top: #6B7C93 1px solid;
+.camps-inline-block {
+    display:inline-block;
 }
 
 .camps-head-strip {
@@ -34,14 +31,115 @@
 }
 
 .camps-media-card {
-    margin-top: 35px;
-    margin-bottom: 35px;
+    margin: 25px;
+
+    width: 202px;
+    height: 300px;
 
     border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.30);
+
+    background: #FFFFFF;
+    position: relative;
+    float: left;
 }
 
-.camps-datepicker {
+.camps-media-card img {
+    width: 100%;
+    height: 158px;
+    display: block;
+}
+
+.camps-media-card .camps-media-card-body {
+    width: 100%;
+    height: 111px;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.camps-media-card .camps-media-card-footer {
+    width: 100%;
+    height:29px;
+
+    background-color: #F6F6F6;
+    margin-bottom: 0px;
+    padding-top:5px;
+
+}
+
+.camps-media-card-footer .glyphicon,.camps-media-card-footer .camps-annotation {
+    color: #9b9b9b;
+}
+
+.camps-media-card h1,.camps-media-card h2{
+    letter-spacing: 0;
+    line-height: 18px;
+    margin: 0;
+
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+
+.camps-media-card h1 {
+    font-size: 1.4rem;
+}
+
+.camps-media-card h2 {
+    font-size: 1.2rem;
+    color: #818181;
+}
+
+.camps-media-card-short-line{
+    margin:0px auto 0px 13px;
+    height: 1px;
+    width: 100px;
+    border-top: 1px solid #d1d1d1;
+}
+
+.camps-media-card-title,.camps-media-card-leader,.camps-media-card-description,.camps-media-card-footer {
+    padding-left: 13px;
+}
+
+.camps-media-card-title {
+    padding-top: 13px;
+}
+.camps-media-card-leader {
+    margin-top: 26px;
+    margin-bottom:6px;
+}
+
+.camps-media-card-description {
+    margin-top: 6px;
+}
+
+.camps-card-space {
+    border-right: 1px solid #d1d1d1;
+}
+
+.camps-panel-space,.camps-card-space {
+    padding-top: 20px;
+}
+
+.camps-panel-space .camps-panel-submit {
+    margin-top: 10px;
+    width: 100%;
+    border-top: 1px solid #d1d1d1;
+}
+
+.camps-datepicker{
     width:150px;
+}
+
+.camps-short-field {
+    width: 200px;
+}
+
+.camps-text-highlight-color {
+    color:#0052FF
+}
+
+a, a:hover, a:visited, a.active, a:focus {
+    text-decoration: none;
 }

@@ -1,125 +1,203 @@
-var ideaRepostory= require('./repositories/ideaRepository');
+var ideaRepostory= require('../repositories/ideaRepository');
 var util = require('../util/util');
+var q = require('q');
+var CamproError = require('../models/CamproError');
 
 exports.createIdea = function(req,res){
-	var idea = req.body.idea;
 
-	ideaRepostory.create(idea,function(err){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
-		} else {
-			res.send(util.wrapBody({success:true}));
-		}
+	var userId = req.token.userId;
+
+	var idea = req.body;
+
+	if ('_id' in idea) delete idea._id;
+	if ('state' in idea) delete idea.state;
+
+	idea.innovator = userId;
+
+	if (!idea.name) {
+		res.send(util.wrapBody('Invalid Parameter','E'));
+		return;
+	}
+
+	ideaRepostory.create(idea).then(function(result){
+		return ideaRepostory.findById(result._id);
+	}).then(function(newIdea){
+		res.send(util.wrapBody({idea:newIdea}));
+	}).catch(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Error','E'));
 	});
-}
+	
+
+};
 
 exports.deleteIdea = function(req,res){
+	
 	var ideaId = req.params.id;
 
-	util.checkParams(req.params,['id'],function(err){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
-		} else {
-			ideaRepostory.deleteById(ideaId,function(err){
-				if (err) {
-					console.log(err);
-					res.send(util.wrapBody('Internal Err','E'));
-				} else {
-					res.send(util.wrapBody({success:true}));
-				}
-			})
-		}
-	})
+	ideaRepostory.deleteById(ideaId).then(function(){
+		res.send(util.wrapBody({success:true}));
+	}).catch(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Error','E'));
 
-}
+	});
+};
 
 exports.listIdea = function(req,res){
-	util.checkParams(req.body,['pageSize','pageNum'],function(err){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
-		} else {
-			var pageSize = req.body.pageSize;
-			var pageNum = req.body.pageNum;
+	var conditions = req.query;
 
-			var options = {
-				pageNum:pageNum,
-				pageSize:pageSize
-			}
-
-			ideaRepostory.queryIdea(options,function(err,result){
-				if (err) {
-					console.log(err);
-					res.send(util.wrapBody('Internal Err','E'));
-				} else {
-					res.send(util.wrapBody(result));
-				}
-			});
+	ideaRepostory.query(conditions).then(function(result){
+		res.send(util.wrapBody({
+			total:result.total,
+			ideas:result.list
+		}));
+		
+	}).catch(function(err){
+		console.log(err);
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
+		}else{
+			res.send(util.wrapBody('Internal Error','E'));
 		}
-	})
+		
+	});
 
+};
+
+exports.publishIdea = function(req,res){
+	var userId = req.token.userId;
+	var ideaId = req.params.id;
+
+	var data = req.body;
+	var idea = null;
+
+	var promise = null;
+
+	if(ideaId == 'new'){
+		data.innovator = userId;
+		promise = ideaRepostory.create(data);
+	}else{
+		promise = ideaRepostory.update({
+			_id:ideaId,
+			innovator:userId
+		},data);
+	}	
+
+	promise.then(function checkRequiredData(idea){
+
+		if (!idea) {
+			throw new Error('Invalid innovator');
+		}else{
+
+			if(checkIdeaReadyToPublish(idea)){
+				return idea;
+			}else{
+				throw new CamproError('Miss data to publish');			
+			}
+		}
+	}).then(function publishIdea(idea){
+
+		return ideaRepostory.update({
+			_id:idea._id
+		},{
+			state:'published'
+		});
+
+	}).then(function sendSuccessResponse(newIdea){
+		res.send(util.wrapBody({idea:newIdea}));
+	}).catch(function sendcatchureResponse(err){
+		console.log(err);
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
+		}else{
+			res.send(util.wrapBody('Internal Error','E'));
+		}
+	});
+
+};
+
+function checkIdeaReadyToPublish(idea){
+	var requires = ['name','background','solution','innovator',
+					'sector','painpoint'];
+
+	for (var i = requires.length - 1; i >= 0; i--) {
+		if(!idea[requires[i]]){
+			console.log('Miss ' + requires[i]);
+			return false;
+		}
+	}
+
+	return true;
 }
-
 
 exports.updateIdea = function(req,res){
-	var idea = req.body.idea;
 
-	ideaRepostory.update(idea,function(err,result){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
-		} else {
+	var userId = req.token.userId;
+	var ideaId = req.params.id;
+
+	var idea = req.body;
+
+	if ('name' in idea && !idea.name) {
+		res.send(util.wrapBody('Invalid Parameter','E'));
+		return;
+	}
+
+	if ('_id' in idea) delete idea._id;
+	if ('state' in idea) delete idea.state;
+
+	ideaRepostory.update({
+		_id:ideaId,
+		innovator:userId
+	},idea).then(function(result){
+		if (!result) {
+			console.log('Invalid innovator',result);
+			res.send(util.wrapBody('Invalid innovator','E'));
+		}else{
 			res.send(util.wrapBody({idea:result}));
 		}
+
+	}).catch(function(err){
+		console.log(err);
+		res.send(util.wrapBody('Internal Error','E'));
+		
 	});
-}
+};
 
-exports.checkIfNameExists= function(req,res){
+exports.listIdeasByInnovator = function(req,res){
+	var conditions = req.query;
+	conditions.innovator = req.params.id;
 
-
-	util.checkParams(req.body,['name'],function(err){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
-		} else {
-			var ideaName = req.body.name;
-
-			ideaRepostory.count({name:ideaName},function(err,result){
-				if (err) {
-					console.log(err);
-					res.send(util.wrapBody('Internal Err','E'));
-				} else {
-					var exist = result>0?true:false;
-					res.send(util.wrapBody({exist:exist}));
-				}
-			});
+	ideaRepostory.query(conditions).then(function(result){
+		res.send(util.wrapBody({
+			total:result.total,
+			ideas:result.list
+		}));
+		
+	}).catch(function(err){
+		console.log(err);
+		if (err instanceof CamproError) {
+			res.send(util.wrapBody(err.customMsg,'E'));
+		}else{
+			res.send(util.wrapBody('Internal Error','E'));
 		}
+		
 	});
 
-
-}
+};
 
 exports.getIdeaById = function(req,res){
-	
-	util.checkParams(req.params,['id'],function(err){
-		if (err) {
-			console.log(err);
-			res.send(util.wrapBody('Internal Err','E'));
+	var ideaId = req.params.id;
+
+	ideaRepostory.findById(ideaId).then(function(result){
+		res.send(util.wrapBody({idea:result}));
+		
+	}).catch(function(err){
+		if (typeof err == String) {
+			res.send(util.wrapBody(err,'E'));
 		} else {
-			var ideaId = req.params.id;
-
-			ideaRepostory.findById(ideaId,function(err,result){
-				if (err) {
-					console.log(err);
-					res.send(util.wrapBody('Internal Err','E'));
-				} else {
-					res.send(util.wrapBody({idea:result}));
-				}
-			})
+			console.log(err);
+			res.send(util.wrapBody('Internal Error','E'));
 		}
-	})
-
-
-}
+	});
+};

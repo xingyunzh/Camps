@@ -1,35 +1,43 @@
-<div class="bg-primary container-fluid camps-head-strip">
-    <div class="camps-parent-width">
-        <h1 class="text-center">团队 真正的teamwork </h1>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row" class="camps-team-submit-panel">
-        <div class="col-md-3">
-            <h3 class="center-block">团队列表</h3>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-primary center-block camps-team-submit" ui-sref="nav.createTeam">创建团队</button>
-        </div>
-        <div class="col-md-3">
-            <team-typehead glyphicon-class="glyphicon-search" on-selected="onTeamClicked(team)"></team-typehead>
-        </div>
-    </div>
-</div>
-
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div ng-repeat="team in teams">
-            <a class="col-md-4">
-                <div ng-click="onTeamClicked(team)">
-                    <div class="thumbnail">
-                        <img src="http://img3.redocn.com/20120407/Redocn_2012040706593740.jpg" alt="TEAM">
-                        <h4>{{team.name}}</h4>
-                        <p>{{team.description}}</p>
+        <div class="col-xs-9 camps-card-space">
+            <div class="row">
+
+            </div>
+
+            <div class="row">
+                <div class="" ng-repeat="item in teams">
+                    <div class="camps-media-card" ng-click="onTeamClicked(item)">
+                        <img ng-src="{{item.headImgUrl?item.headImgUrl:'./images/team.png'}}" alt="Img">
+
+                        <div class="camps-media-card-body">
+                            <div class="camps-media-card-title">
+                                <h1 class="camps-text-highlight-color">
+                                    {{item.name}}
+                                </h1>
+                            </div>
+                            <div class="camps-media-card-leader">
+                                <h2>队长 <span class="camps-text-highlight-color">{{item.members[0].nickname}}</span></h2>
+                            </div>
+                            <div class="camps-media-card-short-line"></div>
+                            <div class="camps-media-card-description">
+                                <h2 ng-bind="item.description" maxlength="10"></h2>
+                            </div>
+                        </div>
+                        <div class="camps-media-card-footer">
+                            <span class="glyphicon glyphicon-star"></span> <span>249</span> &nbsp; <span class="camps-annotation">(经验值)</span>
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
+            <div class="row text-center">
+                <button class="btn btn-default" ng-click="nextPage()" ng-show="hasMore()">加载更多团队</button>
+            </div>
+        </div>
+        <div class="col-xs-3 camps-panel-space">
+            <team-typehead glyphicon-class="glyphicon-search" on-selected="onTeamClicked(team)"></team-typehead>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createTeam" ng-if="!!currentUser">创建团队</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="!currentUser">创建团队</button>
         </div>
     </div>
 </div>

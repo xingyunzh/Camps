@@ -324,33 +324,43 @@ var teamData = [
         },
         deactiveDate:null,
         activeDate:new Date("2016-07-01"),
-
         members:[
             {
-            name:"Jim Green",
-            uid:1,
-            roles:"player",
-            skills:[],
-            sector:"Student"
-        },
+                nickname:"Jim Green",
+                uid:1,
+                roles:"player",
+                skills:[],
+                sector:"Student",
+                headImgUrl:"http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead.jpg"
+            },
             {
-                name:"Kate Green",
+                nickname:"Kate Green",
                 uid:2,
                 roles:"player",
                 skills:[],
                 sector:"Student"
             },
+            {
+                nickname:"Bill Green",
+                uid:3,
+                roles:"player",
+                skills:[],
+                sector:"Student",
+                headImgUrl:"http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead2.jpg"
+            },
+
         ],
 
         leader:{
-            name:"Jim Green",
-            uid:1,
+            nickname:"Bill Green",
+            uid:3,
             roles:"player",
             skills:[],
-            sector:"Student"
+            sector:"Student",
+            headImgUrl:"http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead2.jpg"
         },
         coach:{
-            name:"Steve Cooper",
+            nickname:"Steve Cooper",
             email:"stevecgreen@test.com",
             uid:4,
             roles:"coach",
@@ -370,38 +380,41 @@ var teamData = [
 
         members:[
             {
-                name:"Jim Green",
+                nickname:"Jim Green",
                 uid:1,
                 roles:"player",
                 skills:[],
-                sector:"Student"
+                sector:"Student",
+                headImgUrl:"http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead.jpg"
             },
             {
-                name:"Kate Green",
+                nickname:"Kate Green",
                 uid:2,
                 roles:"player",
                 skills:[],
                 sector:"Student"
             },
             {
-                name:"Bill Green",
+                nickname:"Bill Green",
                 uid:3,
                 roles:"player",
                 skills:[],
-                sector:"Student"
+                sector:"Student",
+                headImgUrl:"http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead2.jpg"
             },
 
         ],
 
         leader:{
-            name:"Bill Green",
+            nickname:"Bill Green",
             uid:3,
             roles:"player",
             skills:[],
-            sector:"Student"
+            sector:"Student",
+            headImgUrl:"http://campro.oss-cn-shanghai.aliyuncs.com/Bitmaphead2.jpg"
         },
         coach:{
-            name:"Steve Cooper",
+            nickname:"Steve Cooper",
             email:"stevecgreen@test.com",
             uid:4,
             roles:"coach",

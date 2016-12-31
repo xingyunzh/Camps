@@ -1,213 +1,282 @@
-<div class="bg-primary container-fluid camps-head-strip">
-    <div class="camps-parent-width">
-        <h1 class="text-center">项目名:  {{form.name}}</h1>
-    </div>
-</div>
-
 <div class="container">
-    <row>
-        <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
-        &nbsp;&nbsp;
-        <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">{{isEditing ? "保存修改" : "编辑基本信息"}}</button>
-    </row>
+    <div class="row">
+        <div class="col-xs-9 camps-card-space">
+            <div class="row">
+                <div class="camps-idea-d-title">
+                    <span>{{theProject.name}}</span>
+                    <input type="text" class="form-control" ng-model="form.name" ng-show="isNameEditing">
+                    <button class="btn btn-primary" ng-click="onDataEdit(['name'], 'isNameEditing')" ng-show="allowEditProject()">{{isNameEditing ? "完成":"编辑"}}</button>
+                    <button class="btn btn-default" ng-click="isNameEditing=false;" ng-show="isNameEditing">取消</button>
+                </div>
+            </div>
 
-    <row>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th class="col-md-1">&nbsp;标题&nbsp;</th>
-                <th class="text-center col-md-11">内容</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>项目名称</td>
-                <td>
-                    <span ng-hide="isEditing">{{form.name}}</span>
-                    <span ng-show="isEditing"><input type="text" class="form-control" ng-model="form.name"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>项目范围</td>
-                <td>
-                    <span ng-hide="isEditing">{{form.scope}}</span>
-                    <span ng-show="isEditing"><summernote class='form-control' height="400" ng-model="form.scope"></summernote></span>
-                </td>
-            </tr>
-            <tr>
-                <td>创意</td>
-                <td>
-                    <a ng-click="handleIdeaLink()">{{idea.name}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>团队</td>
-                <td>
-                    <a ng-click="handleTeamLink()">{{theProject.team.name}}</a>
-                    <!--<span ng-show="isEditing"><user-typehead on-selected="form.leader = user;"></user-typehead></span>-->
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </row>
-</div>
+            <div class="row">
+                <div class="camps-idea-d-metro-section">
+                    <div class="camps-piece">
+                        <img ng-src="{{form.headImgUrl?form.headImgUrl:'./images/project.png'}}" alt="Img">
+                        <button class="camps-piece-addon" ng-click="onRemoveHeadImage()" ng-show="isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
 
-<div class="container">
-    <uib-accordion close-others="false">
-        <div uib-accordion-group class="panel-default" is-open="agileBoard.isBacklogOpen" is-disable="agileBoard.isBacklogDisabled">
-            <uib-accordion-heading>
-                    Product Backlog
-            </uib-accordion-heading>
+                    <div ng-show="isHeadImageEditing">
+                        <image-picker button-label='更换主题图片' on-finished='onHeadImagesPicked(images)' type='project'></image-picker>
+                    </div>
 
-            <table class="table table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>As</th>
-                    <th>I want</th>
-                    <th>so that</th>
-                    <th>points</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="us in form.backlog">
-                    <td>{{$index + 1}}</td>
-                    <td>
-                        <span ng-hide="isEditing">{{us.as}}</span>
-                        <span ng-show="isEditing"> <input type="text" class="form-control" ng-model="us.as"></span>
-                    </td>
-                    <td>
-                        <span ng-hide="isEditing">{{us.do}}</span>
-                        <span ng-show="isEditing"> <textarea class="form-control" rows="2" ng-model="us.do"></textarea></span>
-                    </td>
-                    <td>
-                        <span ng-hide="isEditing">{{us.then}}</span>
-                        <span ng-show="isEditing"> <textarea class="form-control" rows="2" ng-model="us.then"></textarea></span>
-                    </td>
-                    <td>
-                        <span ng-hide="isEditing">{{temp.x}}</span>
-                        <span ng-show="isEditing"> <input type="text" class="form-control" ng-model="temp.x"></span>
-                    </td>
-                </tbody>
-            </table>
-        </div>
+                    <button class="btn btn-primary" ng-click="onDataEdit(['headImgUrl'], 'isHeadImageEditing')" ng-show="allowEditProject()">{{isHeadImageEditing ? "完成":"编辑"}}</button>
+                    <button class="btn btn-default" ng-click="isHeadImageEditing=false;" ng-show="isHeadImageEditing">取消</button>
+                </div>
+            </div>
 
-        <div uib-accordion-group class="panel-default" is-open="agileBoard.isSprintsOpen" is-disable="agileBoard.isSprintsDisabled">
-            <uib-accordion-heading>
-                SprintX
-            </uib-accordion-heading>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    项目图片:
+                </div>
+                <div class="camps-idea-d-metro-section">
+                    <div class="camps-piece" ng-repeat="image in form.images">
+                        <img ng-src="{{image}}" alt="Image">
+                        <button class="camps-piece-addon" ng-click="onRemoveImage($index)" ng-show="isImagesEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                    <div ng-show="isImagesEditing">
+                        <image-picker button-label='添加项目图片' on-finished='onImagesPicked(images)' type='project' mutiple="true"></image-picker>
+                    </div>
+                </div>
 
-            <ul class="list-group">
-                <li ng-class="{'list-group-item':true, 'list-group-item-info':$index==0}" ng-repeat="sprint in form.sprints | orderBy:endDate:reverse">
-                    <div class="alert alert-success">
-                        <span>Sprint {{form.sprints.length - $index}} <i ng-if="$index!=0">&nbsp;&nbsp;&nbsp;&nbsp;成绩&nbsp;&nbsp;(执行:90,质量:80,沟通:60,分享:80,足迹:80)</i> </span>
-                        <span class="pull-right">
-                            <span class="form-inline">
-                                开始时间: <span ng-hide="isEditing && $index == 0">{{sprint.startDate | date:"yyyy-MM-dd"}}</span>
-                                <span class="input-group camps-datepicker" ng-show="isEditing" ng-if="$index == 0">
-                                    <input type="text" class="form-control" uib-datepicker-popup ng-model="sprint.startDate" datepicker-options="gOptions.datePicker"
-                                           ng-required="true" is-open="isDatePickerOpen1" close-text="关闭"/>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="isDatePickerOpen1 = !isDatePickerOpen1"><i class="glyphicon glyphicon-calendar"></i> </button>
-                                    </span>
-                                </span>
-                            </span>
-                            <span>&nbsp;&nbsp;</span>
-                            <span class="form-inline">
-                                结束时间:<span ng-hide="isEditing && $index == 0">{{sprint.endDate | date:"yyyy-MM-dd"}}</span>
-                                <span class="input-group camps-datepicker" ng-show="isEditing" ng-if="$index == 0">
-                                    <input type="text" class="form-control" uib-datepicker-popup ng-model="sprint.endDate" datepicker-options="gOptions.datePicker"
-                                           ng-required="true" is-open="isDatePickerOpen2" close-text="关闭"/>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="isDatePickerOpen2 = !isDatePickerOpen2"><i class="glyphicon glyphicon-calendar"></i> </button>
-                                    </span>
-                                </span>
-                            </span>
+                <button class="btn btn-primary" ng-click="onDataEdit(['images'], 'isImagesEditing')" ng-show="allowEditProject()">{{isImagesEditing ? "完成":"编辑"}}</button>
+                <button class="btn btn-default" ng-click="isImagesEditing=false;" ng-show="isImagesEditing">取消</button>
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    项目范围:
+                    <span ng-hide="isScopeEditing"><span ng-bind="theProject.scope"></span></span>
+                    <span ng-show="isScopeEditing">
+                        <textarea class='form-control' cols="30" rows="10" ng-model="form.scope" ></textarea>
+                    </span>
+
+                    <button class="btn btn-primary" ng-click="onDataEdit(['scope'], 'isScopeEditing')" ng-show="allowEditProject()">{{isScopeEditing ? "完成":"编辑"}}</button>
+                    <button class="btn btn-default" ng-click="isScopeEditing=false;" ng-show="isScopeEditing">取消</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                        <span>创意:</span>
+                        <span>
+                            <a ng-click="handleIdeaLink()">{{theProject.relatedIdea.name}}</a>
                         </span>
+                </div>
+            </div>
 
-                    </div>
-                    <div ng-if="$index == 0">
-                        <div ng-repeat="us in sprint.userStories">
-                            <button class="btn btn-warning" ng-click="usCollapsed = !usCollapsed">{{us | nameOfStory}}</button>
-                            <div uib-collapse="usCollapsed">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>任务内容</th>
-                                        <th>截止时间</th>
-                                        <th>责任人</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="task in tasksOfStory(form.tasks, us) track by task.id">
-                                        <td>{{$index + 1}}</td>
-                                        <td>
-                                            <span ng-hide="isEditing">{{task.description}}</span>
-                                            <textarea ng-show="isEditing" rows="2" class="form-control" ng-model="task.description"></textarea>
-                                        </td>
-                                        <td>
-                                            <span ng-hide="isEditing">{{task.dueDate | date:"yyyy-MM-dd"}}</span>
-                                            <span class="input-group camps-datepicker" ng-show="isEditing">
-                                                <input type="text" class="form-control" uib-datepicker-popup ng-model="task.dueDate" datepicker-options="gOptions.datePicker"
-                                                       ng-required="true" is-open="isDatePickerOpen3" close-text="关闭"/>
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" ng-click="isDatePickerOpen3 = !isDatePickerOpen3"><i class="glyphicon glyphicon-calendar"></i> </button>
-                                                </span>
-                                            </span>
-                                        </td>
+            <div class="row camps-project-d-wbs">
 
-                                        <td>
-                                            <span>{{task.assignee.name}}</span>
-                                            <user-typehead ng-show="isEditing"
-                                                           which-role="player"
-                                                           on-selected="task.assignee = user"
-                                                           glyphicon-class="glyphicon-ok">
+                <div class="camps-idea-d-text-section">
+                    功能列表(Backlog):
+                    <button class="btn btn-link" ng-show="isBacklogEditing" ng-click="onAddOrUpdateStory()">
+                        <span>添加</span></button>
+                    <button class="btn btn-primary" ng-click="onBacklogEdit()" ng-show="allowEditProject()">
+                        {{isBacklogEditing ? "完成":"编辑"}}
+                    </button>
+                    <button class="btn btn-default" ng-click="isBacklogEditing=false;" ng-show="isBacklogEditing">取消
+                    </button>
 
-                                            </user-typehead>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div ui-sortable="sortableOptions" ng-model="backlog" class="list-group">
+                                <a ng-repeat="item in backlog" class="list-group-item"
+                                   ng-click="handleStory(item, $event)">
+                                    <div class="row">
+                                        <div ng-class="{'col-md-10':isBacklogEditing, 'col-md-12':!isBacklogEditing}">
+                                            <div class="text-left"
+                                                 ng-style="{'text-decoration':item.deleted ? 'line-through' : 'none'}">
+                                                <span><strong>US {{item._id ? (item | idOfStory) : "新建"}}</strong></span>
+                                                <span>{{item | nameOfStory}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" ng-if="isBacklogEditing">
+                                        <span>
+                                            <button ng-click="onRemoveStory(item)"><span
+                                                    class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateStory(item)"><span
+                                                    class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="camps-project-d-task-panel" ng-show="!!theUserStory">
+                                细化任务(Task):针对 <strong>US {{theUserStory | idOfStory}}</strong>:
+                                <button class="btn btn-link" ng-show="isTaskEditing" ng-click="onAddOrUpdateTask()"><span>添加</span></button>
+                                <button class="btn btn-primary" ng-click="onTaskEdit()" ng-show="allowEditTasks()">{{isTaskEditing ? "完成":"编辑"}}</button>
+                                <button class="btn btn-default" ng-click="isTaskEditing=false;" ng-show="isTaskEditing">取消</button>
+
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-show="!theUserStory.tasks || theUserStory.tasks.length == 0">暂无具体任务</li>
+                                    <li class="list-group-item" ng-repeat="task in theUserStory.tasks">
+                                        <div class="row">
+                                            <div ng-class="{'col-md-10':isTaskEditing, 'col-md-12':!isTaskEditing}">
+                                                <div style="padding-top: 3px;padding-bottom: 3px">
+                                                    <span><strong>Task {{task | idOfTask}}</strong></span>&nbsp; {{task.description}}
+                                                    <small class="pull-right"><i>{{task.assignee.nickname}}</i></small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" ng-if="isTaskEditing">
+                                        <span>
+                                            <button ng-click="onRemoveTask(task)"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateTask(task)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div ng-if="$index != 0">
-                        <div ng-repeat="us in sprint.userStories">
-                            <button class="btn btn-warning" ng-click="usCollapsed = !usCollapsed">{{us | nameOfStory}}</button>
-                            <div uib-collapse="!usCollapsed">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>任务内容</th>
-                                        <th>截止时间</th>
-                                        <th>责任人</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="task in tasksOfStory(form.tasks, us) track by task.id">
-                                        <td>{{$index + 1}}</td>
-                                        <td>{{task.description}}</td>
-                                        <td>{{task.dueDate | date:"yyyy-MM-dd"}}</td>
-                                        <td>{{task.assignee.name}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                        迭代进程(Sprints):
+
+                        <button class="btn btn-link" ng-show="isSprintEditing" ng-click="onAddOrUpdateSprint()"><span>添加</span></button>
+                        <button class="btn btn-primary" ng-click="onSprintEdit()" ng-show="allowEditTasks()">{{isSprintEditing ? "完成":"编辑"}}</button>
+                        <button class="btn btn-default" ng-click="isSprintEditing=false;" ng-show="isSprintEditing">取消</button>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <uib-accordion close-others="true" class="camps-sprint-uib">
+                                <div uib-accordion-group class="panel-default" ng-repeat="item in sprints">
+                                    <uib-accordion-heading>
+                                        <a ng-click="handleSprint(item, $event)">
+                                            <div class="row">
+                                                <div ng-class="{'col-md-10':isSprintEditing, 'col-md-12':!isSprintEditing}">
+                                                    <span>Sprint {{item.startDate | date:'yyyy-MM-dd'}} - {{item.endDate | date:'yyyy-MM-dd'}}</span>
+                                                    <span class="text-danger">{{item.result}}</span>
+                                                    <span class="badge pull-right" ng-show="item.backlog.length > 0">{{item.backlog.length}}</span>
+                                                </div>
+                                                <div class="col-md-2" ng-if="isSprintEditing">
+                                        <span>
+                                            <button ng-click="onRemoveSprint(item)"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button ng-click="onAddOrUpdateSprint(item)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </uib-accordion-heading>
+                                    <ul>
+                                        <li ng-repeat="us in item.backlog">
+                                            <div>
+                                                <div class="text-left">
+                                                    <span><strong>US {{ us| idOfStory}}</strong></span>
+                                                    <ul>
+                                                        <li ng-repeat="task in storyFromBacklogWithId(us).tasks">
+                                                            <span><strong>Task {{task | idOfTask}}</strong></span>&nbsp; {{task.description}}
+                                                            <small class="pull-right"><i>{{task.assignee.nickname}}</i></small>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </uib-accordion>
                         </div>
                     </div>
-                </li>
-            </ul>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    项目文档:
+                    <div class="camps-project-d-attachments">
+                        <a ng-href="{{attachment}}" ng-repeat="attachment in form.attachments">
+                            <div class="thumbnail text-center">
+                                <img src="./images/logo.png" alt="File" width="60px" hight="90px">
+                                <div><span>{{nameFromAttachment(attachment)}}</span></div>
+                                <button class="btn btn-primary" ng-show="isAttachmentsEditing">删除</button>
+                            </div>
+                        </a>
+                        <a ng-click="" ng-show="isAttachmentsEditing">
+                            <div class="thumbnail text-center">
+                                <div ngf-select="uploadFile($file)">
+                                    <img src="./images/logo.png" alt="File" width="60px" hight="80px">
+                                    <div><span>{{fileToUpload ? nameFromAttachment(fileToUpload) : "上传文件"}}</span></div>
+                                    <uib-progressbar max="1" value="percentage"><span style="color:blue; white-space:nowrap;"></span></uib-progressbar>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <button class="btn btn-primary"
+                            ng-click="onDataEdit(['attachments'], 'isAttachmentsEditing')" ng-show="allowEditTasks()">
+                        {{isAttachmentsEditing ? "完成":"编辑"}}
+                    </button>
+                    <button class="btn btn-default" ng-click="isAttachmentsEditing=false;"
+                            ng-show="isAttachmentsEditing">取消
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    <span>项目小组:</span> <a ng-click="handleTeamClicked(theTeam);">{{theTeam.name}}</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    项目经理: &nbsp;
+                    <camps-user-head user="form.manager" width="60" height="60"></camps-user-head>
+                    <span ng-show="isManagerEditing">
+                        <user-typehead which-role="player" on-selected="form.manager = user;" glyphicon-class="glyphicon-ok" max-width="200">
+                        </user-typehead>
+                    </span>
+
+                    <button class="btn btn-primary"
+                            ng-click="onDataEdit(['manager'], 'isManagerEditing')" ng-show="allowEditProject()">
+                        {{isManagerEditing ? "完成":"编辑"}}
+                    </button>
+                    <button class="btn btn-default" ng-click="isManagerEditing=false;"
+                            ng-show="isManagerEditing">取消
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    队长: &nbsp;
+                    <camps-user-head user="theTeam.members[0]" width="60" height="60"></camps-user-head>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    成员: &nbsp;
+                    <span ng-repeat="user in theTeam.members">
+                        <span class="camps-team-d-members" ng-if="$index != 0">
+                            <camps-user-head user="user" width="60" height="60"></camps-user-head>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    教练: &nbsp;
+                    <camps-user-head user="theTeam.coach" width="60" height="60"></camps-user-head>
+                </div>
+            </div>
+
         </div>
-    </uib-accordion>
+        <div class="col-xs-3 camps-panel-space">
+
+        </div>
+    </div>
+
 </div>
-
-
-
-
-
-
 
 
 

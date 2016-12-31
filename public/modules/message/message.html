@@ -1,27 +1,60 @@
-<div class="bg-primary container-fluid camps-head-strip">
-    <div class="camps-parent-width">
-        <h1 class="text-center">私信测试页面 </h1>
-    </div>
-</div>
-
 <div class="container">
-    <input class="form-control" type="text" name="sendtext" value="" placeholder="Text">
-    <br>
-    <button class="btn btn-default" type="button" name="sendbutton" ng-click="sendMessage()">Send message</button>
-    <br><br>
-    <button class="btn btn-default" type="button" name="getbutton" ng-click="getMessage()">Get messages</button>
-    <br><br>
-    <table class="table table-bordered">
-        <thead>
-            <th>Title</th>
-            <th>From</th>
-        </thead>
-        <tbody>
-            <tr ng-repeat="msg in msgs">
-                <td>{{msg.title}}</td>
-                <td>{{msg.from}}</td>
-            </tr>
-        </tbody>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>类别</th><th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>我的团队</td><td><a ui-sref="nav.team-detail({teamId:theTeam._id})">{{theTeam.name}} </a></td>
+                </tr>
+                <tr>
+                    <td>我的项目</td><td><a ui-sref="nav.project-detail({projectId:theProject._id})">{{theProject.name}}</a></td>
+                </tr>
+                <tr>
+                    <td>我的创意</td>
+                    <td>
+                        <div class="list-group">
+                            <a class="list-group-item" ng-repeat="idea in myIdeas" ui-sref="nav.idea-detail({ideaId:idea._id})">
+                                {{idea.name}}
+                            </a>
+                        </div>
+                    </td>
+                </tr>
 
-    </table>
+
+            </tbody>
+        </table>
+    </div>
+
 </div>
+
+<!--<div class="bg-primary container-fluid camps-head-strip">-->
+    <!--<div class="camps-parent-width">-->
+        <!--<h1 class="text-center">私信测试页面 </h1>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+    <!--<input class="form-control" type="text" name="sendtext" value="" placeholder="Text">-->
+    <!--<br>-->
+    <!--<button class="btn btn-default" type="button" name="sendbutton" ng-click="sendMessage()">Send message</button>-->
+    <!--<br><br>-->
+    <!--<button class="btn btn-default" type="button" name="getbutton" ng-click="getMessage()">Get messages</button>-->
+    <!--<br><br>-->
+    <!--<table class="table table-bordered">-->
+        <!--<thead>-->
+            <!--<th>Title</th>-->
+            <!--<th>From</th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+            <!--<tr ng-repeat="msg in msgs">-->
+                <!--<td>{{msg.title}}</td>-->
+                <!--<td>{{msg.from}}</td>-->
+            <!--</tr>-->
+        <!--</tbody>-->
+
+    <!--</table>-->
+<!--</div>-->

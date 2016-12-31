@@ -6,22 +6,24 @@
         <div class="form-group">
             <label for="id-camps-create-project-name" class="col-md-2 control-label ">名字:</label>
             <div class="col-md-10">
-                <input type="text" class="form-control" id="id-camps-create-project-name" placeholder="名字" ng-model="form.name">
+                <input type="text" class="form-control camps-short-field" id="id-camps-create-project-name" placeholder="名字" ng-model="form.name">
             </div>
 
         </div>
         <div class="form-group">
-            <label for="id-camps-create-project-scope" class="control-label col-md-2">项目范围:</label>
+            <label class="control-label col-md-2">项目范围:</label>
             <div class="col-md-10">
-                <summernote class='form-control' id="id-camps-create-project-scope" height="400" ng-model="form.scope" placeholder="请输入详细的项目范围描述, 功能性需求,非功能性需求等等"></summernote>
+                <textarea cols="30" rows="10" ng-model="form.scope" class="form-control"></textarea>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">关联创意:</label>
+            <div>
+                <label class="control-label col-md-2">关联创意:</label>
+            </div>
             <div class="col-md-10">
-                <span>{{ideaName}}</span>
-                <idea-typehead on-selected="form.idea = idea.id;ideaName=idea.name"></idea-typehead>
+                <div><span>{{ideaName ? ideaName : "尚未关联任何创意"}}</span></div>
+                <div><idea-typehead on-selected="onIdeaSelected(idea)" max-width="200"></idea-typehead></div>
             </div>
         </div>
 
@@ -29,7 +31,7 @@
             <div class="col-md-offset-2 col-md-10">
                 <div class="checkbox">
                     <labbel>
-                        <input type="checkbox" ng-model="form.accepted"> 我代表团队,理解并遵守 <a href="#">项目运作协议</a>的内容
+                        <input type="checkbox" ng-model="checked"> 我代表团队,理解并遵守 <a href="#">项目运作协议</a>的内容
                     </labbel>
                 </div>
             </div>

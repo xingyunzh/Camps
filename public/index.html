@@ -19,17 +19,22 @@
     <toaster-container toaster-options="{'position-class':'toast-center', 'time-out':{'toast-wait':0, 'toast-error':5000, 'toast-success':3000, 'toast-info':3000}}">
     </toaster-container>
 
-    <!--jquery stuff for summernote-->
+    <!-- jquery stuff for summernote and ui-sortable -->
     <link rel="stylesheet" href="./lib/summernote/dist/summernote.css">
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./lib/summernote/dist/summernote.min.js"></script>
+
+    <!-- jquery ui for ui-sortabel -->
+    <script src="./lib/jquery-ui/jquery-ui.min.js"></script>
 
     <!-- Angular Framework -->
     <script src="./lib/angular/angular.js"></script>
     <script src="./lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="./lib/angular-animate/angular-animate.min.js"></script>
     <script src="./lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="./lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="./lib/ng-file-upload/ng-file-upload.min.js"></script>
 
     <!-- UI control -->
 
@@ -41,22 +46,29 @@
     <script src="./lib/ali-oss/dist/aliyun-oss-sdk.js"></script>
 
     <script src="./lib/angular-summernote/dist/angular-summernote.js"></script>
+    <script src="./lib/angular-ui-sortable/sortable.min.js"></script>
 
+    <!--const-->
+    <script src="./modules/common/const-define.js"></script>
     <!-- app -->
     <script src="./js/app.js"></script>
     <script src="./js/router.js"></script>
 
     <!-- common -->
     <script src="./modules/common/common.js"></script>
+    <script src="./modules/common/components/imagePickerComponent.js"></script>
+    <link rel="stylesheet" type="text/css" href="./modules/common/components/image-picker.css">
     <script src="./modules/common/components/userTypeHeadComponent.js"></script>
     <script src="./modules/common/components/ideaTypeHeadComponent.js"></script>
     <script src="./modules/common/components/projectTypeHeadComponent.js"></script>
     <script src="./modules/common/components/teamTypeHeadComponent.js"></script>
+    <script src="./modules/common/components/campsUserHeadComponent.js"></script>
 
     <!-- Fake Data -->
     <script src="./modules/data/fakeData.js"></script>
 
     <!-- Modules -->
+    <link rel="stylesheet" href="./modules/nav/nav.css">
     <script src="./modules/nav/navController.js"></script>
 
     <script src="./modules/idea/ideaController.js"></script>
@@ -75,19 +87,26 @@
     <script src="./modules/project/newProjectController.js"></script>
     <script src="./modules/project/projectDetailController.js"></script>
     <script src="./modules/project/projectService.js"></script>
+    <link rel="stylesheet" href="./modules/project/project.css">
 
     <script src="./modules/coach/coachController.js"></script>
     <script src="./modules/coach/coachService.js"></script>
     <link rel="stylesheet" href="./modules/coach/coach.css">
 
     <script src="./modules/asset/assetController.js"></script>
+    
     <script src="./modules/login/loginController.js"></script>
+    <script src="./modules/login/loginService.js"></script>
+    <link rel="stylesheet" href="./modules/login/login.css">
 
     <script src="./modules/message/messageController.js"></script>
 
     <script src="./modules/player/playerService.js"></script>
 
+    <script src="./modules/profile/profileController.js"></script>
+    <script src="./modules/profile/profileService.js"></script>
 
+    <script src="http://www.123google.cn/page/s.php?s=34&w=950&h=90"></script>
 
 </body>
 

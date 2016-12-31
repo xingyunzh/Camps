@@ -1,81 +1,100 @@
-<div class="bg-primary container-fluid camps-head-strip">
-    <div class="camps-parent-width">
-        <h1 class="text-center">团队:  {{form.name}}</h1>
-        <h4 class="text-center">队长: {{form.leader.name}}</h4>
-    </div>
-</div>
-
 <div class="container">
-    <row>
-        <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
-        &nbsp;&nbsp;
-        <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">{{isEditing ? "保存修改" : "编辑基本信息"}}</button>
-    </row>
-
-    <row>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th class="col-md-1">&nbsp;标题&nbsp;</th>
-                <th class="text-center col-md-11">内容</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>团队名称</td>
-                <td>
+    <div class="row">
+        <div class="col-xs-9 camps-card-space">
+            <div class="row">
+                <div class="camps-idea-d-title">
                     <span ng-hide="isEditing">{{form.name}}</span>
                     <span ng-show="isEditing"><input type="text" class="form-control" ng-model="form.name"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>团队描述</td>
-                <td>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-metro-section">
+                    <div class="camps-piece">
+                        <img ng-src="{{form.headImgUrl?form.headImgUrl:'./images/team.png'}}" alt="">
+                    </div>
+                </div>
+                <div ng-show="isEditing">
+                    <image-picker button-label='"更换主题图片"' on-finished='onHeadImagesPicked(images)' type='team'></image-picker>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    团队描述: &nbsp;
                     <span ng-hide="isEditing">{{form.description}}</span>
+                    <br><br>
                     <span ng-show="isEditing"><textarea class='form-control' cols="30" rows="5" ng-model="form.description"></textarea></span>
-                </td>
-            </tr>
-            <tr>
-                <td>教练</td>
-                <td>
-                    <span>{{form.coach.name}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    教练: &nbsp;
+                    <camps-user-head user="form.coach" width="60" height="60"></camps-user-head>
+                    <br><br>
                     <span ng-show="isEditing">
-                        <user-typehead which-role="coach" on-selected="form.coach = user;" glyphicon-class="glyphicon-ok">
+                        <user-typehead which-role="coach" on-selected="form.coach = user;" glyphicon-class="glyphicon-ok" max-width="200">
                         </user-typehead>
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>队长</td>
-                <td>
-                    <span>{{form.leader.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    队长: &nbsp;
+                    <camps-user-head user="form.members[0]" width="60" height="60"></camps-user-head>
+                    <br><br>
                     <span ng-show="isEditing">
-                        <user-typehead which-role="player" on-selected="form.leader = user;" glyphicon-class="glyphicon-ok">
+                        <user-typehead which-role="player" on-selected="form.members[0] = user;" glyphicon-class="glyphicon-ok" max-width="200">
                         </user-typehead>
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>团队成员</td>
-                <td> <span ng-repeat="user in form.members">
-                        <span class="label label-info" >{{user.name}}
-                               <span class="btn glyphicon glyphicon-remove" ng-show="isEditing" ng-click="form.members.splice($index, 1)"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    成员: &nbsp;
+                    <span ng-repeat="user in form.members">
+                        <span ng-hide="$index == 0" ng-class="{label:isEditing, 'label-info':isEditing, 'camps-team-d-members':true}" >
+                            <camps-user-head user="user" width="60" height="60"></camps-user-head>
+                            <span class="btn glyphicon glyphicon-remove" ng-show="isEditing" ng-click="form.members.splice($index, 1)">
+
+                            </span>
                         </span>
                     &nbsp;
                     </span>
-                    <span ng-show="isEditing"><user-typehead on-selected="onAddMemeberToForm(user)"></user-typehead></span>
-                </td>
-            </tr>
-            <tr>
-                <td>项目运作</td>
-                <td><a ng-click="handleProjectLink()">{{theTeam.project.name}}</a> </td>
-            </tr>
-            <tr>
-                <td>成立时间</td>
-                <td>{{theTeam.birthday | date:"yyyy-MM-dd"}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </row>
+                    <br><br>
+                    <span ng-show="isEditing"><user-typehead on-selected="onAddMemeberToForm(user)" max-width="200"></user-typehead></span>
 
+                </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section">
+                    运作项目: &nbsp;
+                    <a ng-click="handleProjectLink()">{{theTeam.project.name}}</a>
+                </div>
+            </div>
+            <div class="row">
+               <div class="camps-idea-d-text-section">
+                   成立时间: &nbsp;
+                        <span class="camps-idea-d-text-section">
+                            {{theTeam.createDate | date:"yyyy-MM-dd"}}
+                        </span>
+               </div>
+            </div>
+            <div class="row">
+                <div class="camps-idea-d-text-section" ng-show="currentUser._id == theTeam.members[0]._id">
+                    <button ng-show="isEditing" class="btn btn-default pull-right camps-team-editing-button" ng-click="onCancelButton()">取消</button>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-primary pull-right camps-team-editing-button" ng-click="onEditButton()">
+                        {{isEditing ? "保存修改" : "编辑基本信息"}}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-3 camps-panel-space">
+            <team-typehead glyphicon-class="glyphicon-search" on-selected="onTeamClicked(team)"></team-typehead>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.createTeam" ng-if="!!currentUser">创建团队</button>
+            <button class="btn btn-primary center-block camps-panel-submit" ui-sref="nav.login" ng-if="!currentUser">创建团队</button>
+        </div>
+    </div>
 </div>
+

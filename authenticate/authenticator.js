@@ -1,38 +1,67 @@
 
 var jwt = require('jsonwebtoken');
+var util = require('../util/util');
+var scr = require('../repositories/systemConfigRepository');
 
-var secret = "xingyunzh-campro-secret";
+var secret = null;
 
-module.exports.verify = function(tokenString,callback){
-	jwt.verify(tokenString,secret,callback);
+function getSecret(){
+	if (secret) {
+		return secret;
+	}else{
+		secret = scr.getTokenSecret().secret;
+		return secret;
+	}
+
 }
 
+// module.exports.verify = function(tokenString,callback){
+// 	jwt.verify(tokenString,getSecret(),callback);
+// };
+
 module.exports.create = function(userId,callback){
-	console.log('userId',userId);
-	
+	generate(userId,callback);
+};
+
+function generate(id,callback){
 	jwt.sign({
-		userId:userId
-	},secret,{
-		expiresIn:3600
+		userId:id
+	},getSecret(),{
+		expiresIn:60 * 60 * 24
 	},callback);
 }
 
 module.exports.authenticate = function(req, res, next) {
-	console.log('inside authenticate');
 
 	var tokenString = req.get('x-access-token');
 
-	if (tokenString == undefined || tokenString == null) {
+	if (!tokenString) {
 		res.send(util.wrapBody('Invalid token','E'));
 	}else{
-		tokenHelper.verify(tokenString,function(err,tokenObject){
+		jwt.verify(tokenString,getSecret(),function(err,tokenObject){
 			if (err) {
+				console.log(err);
 				res.send(util.wrapBody('Invalid token','E'));
 			}else{
 				req.token = tokenObject;
-				console.log('token',tokenObject);
-				next();
+
+				if (tokenObject.exp - Math.floor(Date.now() / 1000) < 6 * 60 * 60) {
+					generate(tokenObject.userId,function(err,newTokenString){
+						if(err){
+							console.log(err);
+							res.send(util.wrapBody('Internal Error','E'));
+						}else{
+							res.setHeader('set-token',newTokenString);
+							next();
+						}
+						
+					});
+
+				}else{
+					next();
+				}
+				
 			}
-		})
+		});
 	}
-}
+};

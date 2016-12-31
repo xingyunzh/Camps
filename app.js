@@ -10,19 +10,22 @@ var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var q = require('q');
 var router = require('./routes/router');
+var scr = require('./repositories/systemConfigRepository');
 
 
 var contextRoot = "/";  //Not set any contextRoot at the moment, but let's make it as easy to config
 
+mongoose.Promise = q.Promise;
+var envMongo = scr.getMongoEnv();
+var	mongoURL = 'mongodb://' + envMongo.user + 
+				":" + envMongo.password + 
+				'@' + envMongo.host + 
+				':' + envMongo.port + 
+				'/' + envMongo.db;
 
-var	mongoURL = 'mongodb://127.0.0.1:27017/camps';
 
-mongoose.connect(mongoURL, function(err) {
-	if (err) {
-		console.log("could not connect mongodb with error message "+ err)
-	}
-});
 
 // create a new express server
 var app = express();
@@ -53,7 +56,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8002');
+var port = normalizePort('8002');
 app.set('port', port);
 
 /**
@@ -66,9 +69,18 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+mongoose
+.connect(mongoURL)
+.then(function() {
+	console.log('Mongodb connected');
+	server.listen(port);
+	server.on('error', onError);
+	server.on('listening', onListening);
+})
+.catch(function(err) {
+	console.log("Could not connect mongodb with error message "+ err);
+});
+
 
 /**
  * Normalize a port into a number, string, or false.

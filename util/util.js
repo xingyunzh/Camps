@@ -5,16 +5,22 @@
 }(this, function () { 
 	var util = {};
 
-	util.checkParam = function(container,params,callback){
+	util.globalNameForFile = function (filename, user, type) {
+        if (user) {
+            return type + user.uid + '_' +filename;
+        }
+        return 'g'+'_'+filename;
+    };
+
+	util.checkParam = function(container,params){
 		for (var i = params.length - 1; i >= 0; i--) {
-			if (!container[params[i]]) {
-				var err = new Error('Invalid Parameter');
-				callback(err);
-				return;
+			if (!(params[i] in container)) {
+				console.log('Miss ' + params[i]);
+				return false;
 			}		
 		}
-		callback(null);
-	}
+		return true;
+	};
 		//convenient methods to contruct uniformat response
 	util.wrapBody = function(obj, statusCode){
 		var statusCode = arguments[1] ? arguments[1] : 'S';

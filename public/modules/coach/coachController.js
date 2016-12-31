@@ -4,60 +4,28 @@
 app.controller("coachController", ["$scope", "$rootScope", function($scope, $rootScope){
     var data = [
         {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
+            headImgUrl:"./images/coach.png",
+            name:"Eric Yan",
+            type:"创意",
+            sector:"文化产业，移动App创意"
         },
         {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
+            headImgUrl:"./images/coach.png",
+            name:"William Yu",
+            type:"项目",
+            sector:"移动App，地图&GIS"
         },
         {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
+            headImgUrl:"./images/coach.png",
+            name:"Ray Guo",
+            type:"项目",
+            sector:"移动App设计，网站设计"
         },
         {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
-        },
-        {
-            name:"Steve Jobs",
-            desc:"Founder, CEO of Apple Inc. The greatest Product Manager of smart phone era."
+            headImgUrl:"./images/coach.png",
+            name:"Ray Zhang",
+            type:"项目",
+            sector:"移动App开发，网站开发"
         },
     ];
 

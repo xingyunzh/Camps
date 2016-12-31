@@ -1,0 +1,26 @@
+.camps-project-d-wbs .list-group {
+    margin-top: 10px;
+}
+
+.camps-project-d-attachments>a {
+    width: 100px;
+    margin: 10px 20px;
+    float: left;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.camps-project-d-attachments .thumbnail .img
+{
+    display: inline-block;
+}
+
+.camps-sprint-uib {
+    margin-top: 10px;
+    width: 100%;
+    display: inline-block;
+}
+
+.camps-sprint-uib uib-accordion-heading {
+    background-color: #1b6d85;
+}
