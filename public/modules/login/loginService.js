@@ -46,10 +46,6 @@ app.service("loginService", ['httpHelper', function (httpHelper) {
 	};
 
 	this.recoverLoginIfPossible = function(rootScope){
-		if (rootScope.currentUser){
-			return;
-		}
-
 		var userId = window.localStorage.getItem(kCampsArchiveKeyUserId);
 		var token = window.localStorage.getItem(kCampsArchiveKeyAuthToken);
 		if(!!userId && !!token){
@@ -60,7 +56,9 @@ app.service("loginService", ['httpHelper', function (httpHelper) {
 
 				rootScope.$emit('CampsDidFinishAutoLogin');
 			}).catch(function(error){
-				rootScope.token = null;
+				this.removeArchivedUserInfo();
+				$rootScope.currentUser = null;
+				$rootScope.token = null;
 			});
 		}
 	};
