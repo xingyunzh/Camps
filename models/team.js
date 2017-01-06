@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var teamSchema = Schema({
+	//name should not be unique,since the name only unique among active ones.
 	name:{
 		type:String,
-		required:true,
-		unique:true
+		required:true
 	},
 
 	alphabetName:[{
