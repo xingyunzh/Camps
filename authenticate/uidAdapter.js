@@ -9,29 +9,9 @@ exports.loginByEmail = function(email,password,callback){
 	postUID('/clduser/login/email',{email:email,password:password},null,callback);
 }
 
-// exports.registerByEmail = function(email,password,callback){
-// 	postUID('/clduser/register',{email:email,password:password},callback);
-// }
-
 exports.getProfile = function(userId,callback){
 	postUID('/clduser/api/profile/' + userId,{},null,callback);
 }
-
-// exports.checkEmailActivated = function(token,callback){
-// 	postUID('/clduser/api/activated/email',{token:token},callback);
-// }
-
-// exports.activateEmail = function(code,token,callback){
-// 	postUID('/clduser/api/activate/email',{activateCode:code,token:token},callback);
-// }
-
-// exports.updatePassword = function(password,token,callback){
-// 	postUID('/clduser/api/activate/email',{password:password,token:token},callback);
-// }
-
-// exports.resetPassword = function(email,callback){
-// 	postUID('/clduser/reset/password',{email:email,token:token},callback);
-// }
 
 var postUID = function(path,body,token,callback){
 	
@@ -61,8 +41,6 @@ var postUID = function(path,body,token,callback){
 		  	if (resJSON.status == 'E'){
 		  		callback(new Error(resJSON.body));
 		  	}else{
-		  		var resBody = resJSON.body;
-		  		resBody.token = null;
 		  		callback(null,resJSON.body);
 		  	}
 		  	
@@ -81,7 +59,7 @@ var postUID = function(path,body,token,callback){
 	// write data to request body
 	req.write(postData);
 	req.end();
-}
+};
 
 
 
