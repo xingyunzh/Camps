@@ -1,0 +1,18 @@
+.meeting-background {
+    background-color: #ffffff;
+}
+
+.meeting-bottom-bar {
+    position: absolute;
+    bottom: 0px;
+}
+
+.meeting-bottom-bar button {
+    width: 50%;
+    border-radius: 0px;
+}
+
+.meeting-conversation-text {
+    font-size: large;
+    color: #ffffff;
+}
