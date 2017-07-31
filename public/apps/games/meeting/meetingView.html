@@ -1,9 +1,5 @@
 <div class="container-fluid">
-    <div>
-        <span>Meeting id is:</span><span>{{id}}</span>
-    </div>
-    <br/>
-
+    <br/><br/><br/><br/>
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
             <span class="meeting-conversation-text">{{text}}</span>
@@ -12,7 +8,11 @@
     <br/>
 
     <div ng-show="player.isEnd()">
-        <button class="btn btn-primary center-block" ng-click="reset()">再来一遍</button>
+        <div class="center-block">
+            <button class="btn btn-primary" ng-click="handleQuiz()">小测验</button> &nbsp;
+            <button class="btn btn-primary" ng-click="reset()">再来一遍</button>
+        </div>
+
     </div>
 
     <div ng-show="candidatePeople && player.seq == 0">

@@ -2,7 +2,7 @@
  * Created by admin on 06/04/17.
  */
 
-app.controller("meetingController", ["$scope", "$rootScope", "$stateParams", "conversationPlayer", "$http",
+app.controller("meetingController", ["$scope", "$rootScope","$stateParams", "conversationPlayer", "$http",
     function ($scope, $rootScope, $stateParams, conversationPlayer,$http) {
         $rootScope.navBar.title = "初次拜访";
         $scope.id = $stateParams.meetingId;
@@ -16,7 +16,14 @@ app.controller("meetingController", ["$scope", "$rootScope", "$stateParams", "co
 
             var path = location.pathname;
             var dataPath = "data/meeting-albert.json";
-            path.endsWith("/") ? path += dataPath : path += "/" + dataPath;
+            var indexOfIndexHMTL = path.indexOf("index.html")
+            if (indexOfIndexHMTL > 0) {
+                path = path.slice(0,indexOfIndexHMTL)
+                path += dataPath
+            }
+            else {
+                path.endsWith("/") ? path += dataPath : path += "/" + dataPath;
+            }
 
             $http.get(path).then(function(response){
                 conversationPlayer.sceneData = response.data;
@@ -60,7 +67,12 @@ app.controller("meetingController", ["$scope", "$rootScope", "$stateParams", "co
             else {
                 conversationPlayer.userData.people.push(cand.name);
             }
-        }
+        };
+
+        $scope.handleQuiz = function(){
+            var json = JSON.stringify(conversationPlayer.sceneData.quiz.judge)
+            $rootScope.$state.go("quiz", {sentences:json})
+        };
 
         $scope.reset();
 

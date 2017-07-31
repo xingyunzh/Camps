@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="text-center">小测试：判断题</h2>
+    </div>
+
+    <div class="">
+        <div class="list-group">
+            <div class="row list-group-item">
+                <div class="col-xs-2">序号</div>
+                <div class="col-xs-7 text-center">内容</div>
+                <div class="col-xs-3">判断</div>
+            </div>
+            <div class="row list-group-item" ng-repeat="item in sentences">
+                <div class="col-xs-2">{{$index + 1}}</div>
+                <div class="col-xs-7 text-center">{{item.sentence}}</div>
+                <div class="col-xs-3">
+                    <button class="btn btn-group-sm" ng-click="writeDownResult(1)">对</button>
+                    <button class="btn btn-group-sm" ng-click="writeDownResult(0)">错</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <button class="btn btn-primary" ng-click="submit()">查看结果</button>
+        </div>
+
+        <div class="row text-center">
+            <h3>{{message}}</h3>
+        </div>
+    </div>
+</div>

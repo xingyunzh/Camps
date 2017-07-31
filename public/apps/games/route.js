@@ -13,14 +13,22 @@ app.config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $u
         controller: "menuController"
     })
         .state("meeting", {
-        url: "/meeting/:meetingId",
-        templateUrl: "meeting/meetingView.html",
-        controller: "meetingController"
-    })
-}]).run(["$rootScope", function($rootScope){
+            url: "/meeting/:meetingId",
+            templateUrl: "meeting/meetingView.html",
+            controller: "meetingController"
+        })
+        .state("quiz", {
+            url: "/quiz/:sentences",
+            templateUrl: "quiz/quizView.html",
+            controller: "quizController"
+        })
+}]).run(["$rootScope", "$state", "$stateParams", function ($rootScope, $state, $stateParams) {
     $rootScope.navBar = {
-        title:"CamproZ",
-        left:null,
-        right:null
+        title: "CamproZ",
+        left: null,
+        right: null
     };
+
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
 }]);

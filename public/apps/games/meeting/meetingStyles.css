@@ -5,6 +5,7 @@
 .meeting-bottom-bar {
     position: absolute;
     bottom: 0px;
+    width: 100%;
 }
 
 .meeting-bottom-bar button {
