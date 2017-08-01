@@ -16,32 +16,32 @@
         },
         {
             "name":"Sam",
-            "role":"Sales",
+            "role":"销售",
             "required":1
         },
         {
             "name":"Philip",
-            "role":"Project Manager",
+            "role":"项目经理",
             "selectable":1
         },
         {
             "name":"Amy",
-            "role":"Architect",
+            "role":"应用架构师",
             "selectable":1
         },
         {
             "name":"Dick",
-            "role":"Web Engineer",
+            "role":"网页工程师",
             "selectable":1
         },
         {
             "name":"Dean",
-            "role":"Sever Engineer",
+            "role":"后台服务器工程师",
             "selectable":1
         },
         {
             "name":"Terry",
-            "role":"Tester",
+            "role":"测试组长",
             "selectable":1
         }
     ],
