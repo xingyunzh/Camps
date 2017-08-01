@@ -4,25 +4,19 @@
 app.controller("quizController", ["$scope", "$rootScope", "$stateParams",
     function ($scope, $rootScope, $stateParams) {
         $scope.sentences = JSON.parse($stateParams.sentences);
-        $scope.message = "Your result is ";
+        $scope.message = "";
 
-        $scope.results = Array($scope.sentences.length)
-
-        $scope.writeDownResult = function (index, result) {
-            if (index < $scope.results.length) {
-                $scope.results[index] = result
-            }
-        };
+        $scope.results = Array($scope.sentences.length).fill(false);
 
         $scope.submit = function() {
             var count = 0;
             $scope.results.forEach(function(item, index){
-                if (item != null && item == $scope.sentences[index].truth) {
+                if (item != null && item == ($scope.sentences[index].truth == 1)) {
                     count++;
                 }
             });
 
-            $scope.message += "" + count + "/" + $scope.sentences.length
+            $scope.message = "Your result is " + count + "/" + $scope.sentences.length
         };
 
     }]);

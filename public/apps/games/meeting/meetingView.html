@@ -1,21 +1,19 @@
 <div class="container-fluid">
-    <br/><br/><br/><br/>
+    <div><br/><br/><br/><br/></div>
+
     <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
+        <div class="text-left col-xs-10 col-xs-offset-1">
             <span class="meeting-conversation-text">{{text}}</span>
         </div>
     </div>
     <br/>
 
-    <div ng-show="player.isEnd()">
-        <div class="center-block">
-            <button class="btn btn-primary" ng-click="handleQuiz()">小测验</button> &nbsp;
-            <button class="btn btn-primary" ng-click="reset()">再来一遍</button>
-        </div>
-
+    <div class="row" ng-show="player.isEnd()">
+        <button class="btn btn-primary col-xs-6" ng-click="handleQuiz()">小测验</button>
+        <button class="btn btn-primary col-xs-6" ng-click="reset()">再来一遍</button>
     </div>
 
-    <div ng-show="candidatePeople && player.seq == 0">
+    <div class="row" ng-show="candidatePeople && player.seq == 0">
         <div class="list-group">
             <a ng-repeat="cand in candidatePeople" ng-class="{'list-group-item':1, disabled:cand.required}" ng-click="handleCandidate(cand)"
                ng-if="cand.selectable || cand.required">
@@ -32,17 +30,17 @@
         </div>
     </div>
 
-    <div>
+    <div class="row">
         <div class="list-group" ng-show="items.length > 0">
             <a class="list-group-item" ng-repeat="item in items" ng-click="handleChoose(item)">{{player.textFromItem(item)}}</a>
         </div>
     </div>
 
-    <div class="meeting-bottom-bar">
-        <button class="btn btn-default" ng-click="player.handleRecord()">
+    <div class="row meeting-bottom-bar">
+        <button class="btn btn-default col-xs-6" ng-click="player.handleRecord()">
             WriteDown
         </button>
-        <button class="btn btn-primary pull-right" ng-click="handleNext()">
+        <button class="btn btn-primary col-xs-6" ng-click="handleNext()">
             Next
         </button>
     </div>
