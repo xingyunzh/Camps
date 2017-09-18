@@ -1,47 +1,92 @@
-<div class="container-fluid">
-    <div><br/><br/><br/><br/></div>
+<div class="container" style="background-color: rgb(221,221,221)">
 
-    <div class="row">
-        <div class="text-left col-xs-10 col-xs-offset-1">
-            <span class="meeting-conversation-text">{{text}}</span>
+    <div class="row" >
+        <div class="col-xs-10 col-xs-offset-1" style="padding: 3vw 0vw 3vw 0vw">
+            <div ng-class="{'text-center':(candidatePeople && player.seq == 0)}"
+                 ng-style="{'background-color':(candidatePeople && player.seq == 0)? 'transparent' : 'white', width:'100%', height:'30vw',padding:'3vw' }">
+                <span class="meeting-conversation-text">{{text}}</span>
+            </div>
+
         </div>
     </div>
-    <br/>
+
+    <div style="height: 18vw">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="text-center">
+                    <img src="images/Chris@2x.png" class="on-table" alt=""/>
+                    <img src="images/Marry@2x.png" class="on-table" alt=""/>
+                    <img src="images/Edwin@2x.png" class="on-table" alt=""/>
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+                <div class="text-center">
+                    <img src="images/Sam@2x.png" class="on-table" alt=""/>
+                    <img src="images/Philip@2x.png" ng-if="player.userData.people.includes('Philip')" class="on-table" alt=""/>
+                    <img src="images/Amy@2x.png" ng-if="player.userData.people.includes('Amy')" class="on-table" alt=""/>
+                    <img src="images/Dean@2x.png" ng-if="player.userData.people.includes('Dean')" class="on-table" alt=""/>
+                    <img src="images/Dick@2x.png" ng-if="player.userData.people.includes('Dick')" class="on-table" alt=""/>
+                    <img src="images/Terry@2x.png" ng-if="player.userData.people.includes('Terry')" class="on-table" alt=""/>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="position: relative; top:-8vw; bottom: 0vw;">
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <img src="images/Table@2x.png" alt=""/>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row" ng-show="player.isEnd()">
         <button class="btn btn-primary col-xs-6" ng-click="handleQuiz()">小测验</button>
         <button class="btn btn-primary col-xs-6" ng-click="reset()">再来一遍</button>
     </div>
 
-    <div class="row" ng-show="candidatePeople && player.seq == 0">
-        <div class="list-group">
-            <a ng-repeat="cand in candidatePeople" ng-class="{'list-group-item':1, disabled:cand.required}" ng-click="handleCandidate(cand)"
-               ng-if="cand.selectable || cand.required">
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-9">
-                        <span>{{cand.name}}</span>
-                        <small>{{cand.role}}</small>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div ng-show="candidatePeople && player.seq == 0" style="margin-left: 15px; margin-right: 15px">
+            <div class="col-xs-4" ng-repeat="cand in candidatePeople" ng-if="cand.selectable || cand.required" style="padding-top: 15px;padding-bottom: 15px;">
+                <a ng-click="handleCandidate(cand)">
+                    <div class="text-center" ng-style="{'background-color':backgroundForCand(cand), 'padding-top': '10px', 'padding-bottom': '10px'}">
+                        <p>
+                            <span style="color: black">{{cand.name}} {{cand.role}}</span>
+                        </p>
+
+                        <p>
+                            <img ng-src="{{cand.img}}" alt="" style="width:10vw; height:24vw" />
+                        </p>
                     </div>
-                    <div class="col-xs-1">
-                        <i class="fa fa-check" aria-hidden="true" ng-show="player.userData.people.includes(cand.name)"></i>
-                    </div>
-                </div>
-            </a>
+
+                    <!--<div class="col-xs-1">-->
+                    <!--<i class="fa fa-check" aria-hidden="true" ng-show="player.userData.people.includes(cand.name)"></i>-->
+                    <!--</div>-->
+                </a>
+            </div>
         </div>
     </div>
 
-    <div class="row">
+
+
+    <div style="margin-top: 8vw">
         <div class="list-group" ng-show="items.length > 0">
             <a class="list-group-item" ng-repeat="item in items" ng-click="handleChoose(item)">{{player.textFromItem(item)}}</a>
         </div>
     </div>
 
-    <div class="row meeting-bottom-bar">
-        <button class="btn btn-default col-xs-6" ng-click="player.handleRecord()">
-            记下这句
-        </button>
-        <button class="btn btn-primary col-xs-6" ng-click="handleNext()">
-            继续
-        </button>
+    <div class="row">
+        <div class="meeting-bottom-bar">
+            <button class="btn btn-default pull-left" style="width: 50vw" ng-click="player.handleRecord()">
+                WriteDown
+            </button>
+            <button class="btn btn-primary pull-right" style="width: 50vw" ng-click="handleNext()">
+                Next
+            </button>
+        </div>
     </div>
+
 </div>

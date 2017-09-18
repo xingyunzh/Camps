@@ -15,5 +15,10 @@
 
 .meeting-conversation-text {
     font-size: large;
-    color: #ffffff;
+    color: #000000;
+}
+
+.on-table {
+    width:5vw;
+
 }

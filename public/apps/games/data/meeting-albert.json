@@ -4,45 +4,54 @@
     "people":[
         {
             "name":"Marry",
-            "role":"NBC Manager"
+            "role":"经理",
+            "img":"images/Marry@2x.png"
         },
         {
             "name":"Chris",
-            "role":"NBC Director"
+            "role":"总监",
+            "img":"images/Chris@2x.png"
         },
         {
             "name":"Edwin",
-            "role":"NBC Engineer"
+            "role":"工程师",
+            "img":"images/Edwin@2x.png"
         },
         {
             "name":"Sam",
             "role":"销售",
-            "required":1
+            "required":1,
+            "img":"images/Sam@2x.png"
         },
         {
             "name":"Philip",
             "role":"项目经理",
-            "selectable":1
+            "selectable":1,
+            "img":"images/Philip@2x.png"
         },
         {
             "name":"Amy",
-            "role":"应用架构师",
-            "selectable":1
+            "role":"架构师",
+            "selectable":1,
+            "img":"images/Amy@2x.png"
         },
         {
             "name":"Dick",
-            "role":"网页工程师",
-            "selectable":1
+            "role":"web开发",
+            "selectable":1,
+            "img":"images/Dick@2x.png"
         },
         {
             "name":"Dean",
-            "role":"后台服务器工程师",
-            "selectable":1
+            "role":"后台开发",
+            "selectable":1,
+            "img":"images/Dean@2x.png"
         },
         {
             "name":"Terry",
-            "role":"测试组长",
-            "selectable":1
+            "role":"测试",
+            "selectable":1,
+            "img":"images/Terry@2x.png"
         }
     ],
     "script":[

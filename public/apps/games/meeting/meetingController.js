@@ -34,6 +34,14 @@ app.controller("meetingController", ["$scope", "$rootScope","$stateParams", "con
             });
         };
 
+        $scope.backgroundForCand = function(cand) {
+            if(cand.required) {
+                return '#666666'
+            }
+
+            return $scope.player.userData.people.includes(cand.name) ? 'rgb(241,196,15)' : '#ffffff'
+        };
+
         $scope.updateUI = function(ret){
             if(angular.isArray(ret)){
                 $scope.items = ret;
